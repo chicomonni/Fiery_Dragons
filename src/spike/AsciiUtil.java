@@ -3,7 +3,7 @@ package spike;
 import javax.swing.*;
 import java.awt.*;
 
-public class AsciiUtil {
+class AsciiUtil {
     private static final char[] ASCII = new char[]{
             '@', '&', '%', '#', '(', '/', '*', ',', '.', ' '
     };
@@ -21,7 +21,7 @@ public class AsciiUtil {
         return ASCII[ASCII.length - 1];
     }
 
-    public static String graphToAscii(int width, int height, Graph graph) {
+    static String graphToAscii(int width, int height, Graph graph) {
         StringBuilder result = new StringBuilder();
 
         for (int j = 0; j < height; j++) {
