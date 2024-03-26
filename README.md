@@ -1,7 +1,7 @@
 # CL_MONDAY06PM_TEAM069
 
-## Team Name: Nothing to See Here
---
-### Team Members
+## Nothing to See Here
 
-..* **Georgia Kanellis** gkan0011@student.monash.edu
+## Team Members:
+
+-  **Georgia Kanellis** <emsp> gkan0011@student.monash.edu
