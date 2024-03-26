@@ -2,4 +2,5 @@
 
 ## Team Members:
 
--  **Georgia Kanellis:** &nbsp; gkan0011@student.monash.edu
+- **Georgia Kanellis:** gkan0011@student.monash.edu
+- **Tye Samuels:** tsam0016@student.monash.edu
