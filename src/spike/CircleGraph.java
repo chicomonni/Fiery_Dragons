@@ -1,9 +1,9 @@
 package spike;
 
-public class CircleGraph implements Graph {
+class CircleGraph implements Graph {
     private final double radius;
 
-    public CircleGraph(double radius) {
+    CircleGraph(double radius) {
         this.radius = radius;
     }
 

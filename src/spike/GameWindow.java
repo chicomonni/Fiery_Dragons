@@ -5,18 +5,18 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GameWindow {
+class GameWindow {
     private final String gameName;
     private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
     private JFrame frame;
     private JLabel label;
 
-    public GameWindow(String gameName) throws IOException, FontFormatException {
+    GameWindow(String gameName) throws IOException, FontFormatException {
         this.gameName = gameName;
         initialise();
     }
 
-    public void setText(String text) {
+    void setText(String text) {
         label.setText(text);
         label.setFont(new Font("MxPlus IBM BIOS", Font.PLAIN, 8));
     }

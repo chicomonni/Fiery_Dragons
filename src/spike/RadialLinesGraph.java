@@ -4,12 +4,12 @@ import java.util.function.Function;
 
 import static java.lang.Math.*;
 
-public class RadialLinesGraph implements Graph {
+class RadialLinesGraph implements Graph {
     private final double radialBound1;
     private final double radialBound2;
     private final int numberOfSegments;
 
-    public RadialLinesGraph(double radialBound1, double radialBound2, int numberOfSegments) {
+    RadialLinesGraph(double radialBound1, double radialBound2, int numberOfSegments) {
         this.radialBound1 = radialBound1;
         this.radialBound2 = radialBound2;
         this.numberOfSegments = numberOfSegments;
