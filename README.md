@@ -7,7 +7,7 @@
 - **Jun Hao Ng:** jngg0122@student.monash.edu
 
 ## Files for Audrey Phommasone's Sprint 2:
-Class Diagram: /docs/Sprint2_UML_Diagram
+Class Diagram: /docs/Sprint_2_Class_Diagram.png
 Key Functionalities: /docs/Sprint2_Rationale
 Design Rationale: /docs/Sprint2_Rationale
 Source Code:
