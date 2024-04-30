@@ -54,8 +54,6 @@ public class ChitCard {
             this.chitNum = random.nextInt(3) + 1;
         }
 
-
-
     }
 
     public void setCardNum(int cardNum) {
@@ -89,7 +87,7 @@ public class ChitCard {
             return ""; //return empty string for out-of-bounds rows
         }
 
-        //replace "xx" with the chit card number in the ASCII representation
+        //replace "xx" with the chit / card number in the ASCII representation
 
         if (cardNumString.length() == 1) {
             chitCardASCII[2] = chitCardASCII[2].replace("xx", cardNumString + " ");

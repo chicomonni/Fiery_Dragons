@@ -4,6 +4,7 @@ import Animals.Characters.Bat;
 import Animals.Characters.Salamander;
 import Animals.Characters.Spider;
 import Animals.Traitors.Pirate;
+import Utils.FancyMessage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,21 +12,31 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class GameBoard {
+    private static GameBoard instance;
+
     private String formattedGameBoard;
     private ChitCard[] chitCardArray;
     private VolcanoTile[] volcanoTileArray;
     private Player[] playerArray;
 
+    //static method to get the singleton instance
+    public static GameBoard getInstance() {
+        if (instance == null) {
+            instance = new GameBoard();
+        }
+        return instance;
+    }
 
     public void printGameBoard() throws IOException {
         StringBuilder gameBoardString = new StringBuilder();
         File gameBoardFile = new File("src/GameBoard.txt");
 
         try (Scanner scanner = new Scanner(gameBoardFile)) {
+//            printTitleCard(gameBoardString);
             skipLines(scanner, 5); // Skip lines 1 to 6
 
             int cardRowCount = 0;
-            for (int i = 6; i <= 88 && scanner.hasNextLine(); i++) {
+            for (int i = 6; i <= 89 && scanner.hasNextLine(); i++) {
                 String gameBoardLine = scanner.nextLine();
                 printMargin(gameBoardString);
                 printChitCardLine(gameBoardString, cardRowCount);
@@ -50,7 +61,13 @@ class GameBoard {
         }
     }
 
-    private void printMargin(StringBuilder gameBoardString) {
+    public void printTitleCard(StringBuilder gameBoardString) {
+        for (String line : FancyMessage.TITLE_CARD) {
+            gameBoardString.append(line).append("\n");
+        }
+    }
+
+    public void printMargin(StringBuilder gameBoardString) {
         gameBoardString.append("    ");
     }
 
@@ -58,17 +75,20 @@ class GameBoard {
         //default chit card size display
         int sizeChitCardHeight = 17;
         int sizeChitCardWidth = 11;
+        int maxCardsPerRow = 4;
 
         double cardRow = (double) cardRowCount / (sizeChitCardHeight);
         int rowModifier = (int) Math.floor(cardRow);
 
-        for (int i = 0; i < 4 && i < chitCardArray.length; i++) {
-            int currentCardIndex = (4*rowModifier) + i;
-            if (rowModifier < Math.ceil((double) chitCardArray.length / 4)) {
+        // need to have a check for if chitNumCards does not cleanly divide into rows
+        // otherwise index error will occur
+        for (int i = 0; i < maxCardsPerRow && i < chitCardArray.length; i++) {
+            int currentCardIndex = (maxCardsPerRow*rowModifier) + i;
+            if (rowModifier < Math.ceil((double) chitCardArray.length / maxCardsPerRow)) {
                 ChitCard chitCard = chitCardArray[currentCardIndex];
 
                 //print covered or uncovered chit card based on its state
-                if (cardRowCount < GameMaster.getNumChitCards() / 4 * sizeChitCardHeight) {
+                if (cardRowCount < GameMaster.getNumChitCards() / maxCardsPerRow * sizeChitCardHeight) {
                     gameBoardString.append(ChitCard.printChitCard(chitCard, cardRowCount % sizeChitCardHeight));
 
                 }
@@ -119,18 +139,37 @@ class GameBoard {
 
     private void initialiseVolcanoTiles() {
         volcanoTileArray = new VolcanoTile[GameMaster.getNumVolcanoTiles()];
+        Animal[] possibleAnimals = {new Spider(), new Salamander(), new Bat(), new BabyDragon()};
         for (int i = 0; i < volcanoTileArray.length; i++) {
-            volcanoTileArray[i] = new VolcanoTile();
+            VolcanoTile volcanoTile = new VolcanoTile();
+
+//            volcanoTile.setVolcanoTileAnimal(possibleAnimals);
+//            volcanoTile.setVolcanoState(false);
+//            volcanoTile.setVolcanoTileNum(i);
+
+            volcanoTileArray[i] = volcanoTile;
 
 
         }
     }
 
     private void initialisePlayers() {
-        int numPlayers = 4; //default number
-        playerArray = new Player[numPlayers];
+        playerArray = new Player[GameMaster.getNumPlayers()];
         for (int i = 0; i < playerArray.length; i++) {
-            playerArray[i] = new Player();
+            Player player = new Player();
+
+//            player.setPlayerCave(i);
+            player.setPlayerName(i);
+
+            playerArray[i] = player;
         }
+    }
+
+    public Player[] getPlayerArray() {
+        return playerArray;
+    }
+
+    public ChitCard[] getChitCardArray() {
+        return chitCardArray;
     }
 }

@@ -1,3 +1,5 @@
+package Utils;
+
 public class FancyMessage {
     public static String[] TITLE_CARD = {
             "    IIOOOO:::ooo...___...___...___...___...___...___...___...___...___..___.......___...___...___...___...___...___...___...___...___...___...ooo:::OOOOII",
