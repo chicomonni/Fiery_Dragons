@@ -58,5 +58,12 @@ public class CardsController {
             card.setUnavailable();
         }
     }
+
+    public void setAllButOneUnavailable() {
+        for (DragonCard card: cards) {
+            card.setUnavailable();
+        }
+        cards.get(0).reset();
+    }
 }
 

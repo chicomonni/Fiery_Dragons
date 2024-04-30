@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +60,18 @@ class Display {
         board = new JLabel("",SwingConstants.CENTER);
         instructions = new JLabel("Enter your move: ");
         input = new JTextField();
+
+        Action action = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String text = input.getText();
+                input.setText("");
+            }
+        };
+
+        input.addActionListener(action);
 
         board.setFont(plainFont);
         cardPanel.setFont(plainFont);

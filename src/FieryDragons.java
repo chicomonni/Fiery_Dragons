@@ -37,17 +37,15 @@ public class FieryDragons {
         try {
             gameboard = ASCIIProcessor.getArt("src/ascii/GameBoard.txt");
             gameWindow.displayBoard(gameboard);
+            totalSquares = 24;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         
-
         setupCards();
         setupPlayers(4);
         playerIterator.getNextPlayer();
 
-        gameWindow.displayCards(cardsController.getCardDisplays());
-        cardsController.setAllUnavailable();
         gameWindow.displayCards(cardsController.getCardDisplays());
     }  
 
@@ -81,5 +79,10 @@ public class FieryDragons {
         }
 
         cardsController.shuffleCards();
+    }
+
+    public void runNextTurnSimulation(Display gameWindow) {
+        cardsController.setAllButOneUnavailable();
+        gameWindow.displayCards(cardsController.getCardDisplays());
     }
 }
