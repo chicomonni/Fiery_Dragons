@@ -5,14 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Typing {
+    private static Timer timer;
 
-    public static void animateTyping(JTextField textField, String text, int delayBetweenChars) {
-//        textField.setText("");
+    public static void animateTyping(String starterText, JTextField textField, String text, int delayBetweenChars) {
+        textField.setText(starterText);
 
 
-        //create a timer with the specified delay between characters
+        //create a timer with delay between characters
         //for fun :))
-        Timer timer = new Timer(delayBetweenChars, new ActionListener() {
+
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+        timer = new Timer(delayBetweenChars, new ActionListener() {
             int currentIndex = 0;
 
             @Override

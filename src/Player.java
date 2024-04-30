@@ -12,7 +12,6 @@ public class Player {
     private int nextLocation;
     private boolean bCanUncover;
     private String playerName;
-    private JTextField inputTextField;
 
 //    public void setPlayerCave(int i) {
 //    this.playerCave =
@@ -35,8 +34,7 @@ public class Player {
         String promptText = "Please select a Chit Card to flip (1 to " + GameMaster.getNumChitCards() + "): ";
 
         // Set initial text to only show the player turn
-        promptField.setText(playerTurnText);
-        Typing.animateTyping(promptField, promptText, 40);
+        Typing.animateTyping(playerTurnText, promptField, promptText, 40);
         GameBoard gameBoard = GameBoard.getInstance();
 
         //save userInput on enter keyboard press
@@ -51,30 +49,26 @@ public class Player {
                 if (userInt >= 1 && userInt <= GameMaster.getNumChitCards()) {
                     //check if already flipped
                     if (gameBoard.getChitCardArray()[userInt - 1].isChitUncovered()) {
-                        promptField.setText(playerTurnText);
                         String flippedPromptText = "This Chit Card has already been flipped. Please select one between 1 and " + GameMaster.getNumChitCards() + ": ";
-                        Typing.animateTyping(promptField, flippedPromptText, 40);
+                        Typing.animateTyping(playerTurnText, promptField, flippedPromptText, 40);
 
                     } else {
-                        promptField.setText(playerTurnText);
+                        String successText = "You picked Chit Card number " + String.valueOf(userInt);
+                        Typing.animateTyping(playerTurnText, promptField, successText, 40);
                         flipChitCard(userInt);
                     }
 
                 }  else {
                     //out of range
-                    promptField.setText(playerTurnText);
                     String rangePromptText = "Out of range. Please select a Chit Card between 1 and " + GameMaster.getNumChitCards() + ": ";
-                    Typing.animateTyping(promptField, rangePromptText, 40);
+                    Typing.animateTyping(playerTurnText, promptField, rangePromptText, 40);
                 }
 
             } catch (NumberFormatException ex) {
                 //not integer
-                promptField.setText(playerTurnText);
                 String typePromptText = "You must enter an integer. Please select a Chit Card between 1 and " + GameMaster.getNumChitCards() + ": ";
-                Typing.animateTyping(promptField, typePromptText, 40);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (FontFormatException ex) {
+                Typing.animateTyping(playerTurnText, promptField, typePromptText, 40);
+            } catch (IOException | FontFormatException ex) {
                 throw new RuntimeException(ex);
             }
 
