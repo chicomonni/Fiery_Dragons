@@ -81,6 +81,7 @@ class Display {
         board.setSize(1200, 600);
 
         instructions.setForeground(Color.WHITE);
+        instructions.setFont(plainFont);
 
         frame.setLayout(new GridBagLayout());
 
@@ -95,7 +96,7 @@ class Display {
         constraints.gridy = 1;
         constraints.gridwidth = 3;
         constraints.insets = new Insets(0,10,0,10);
-        
+
         frame.add(instructions, constraints);
 
         constraints.gridy = 2;
