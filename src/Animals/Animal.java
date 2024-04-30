@@ -1,10 +1,10 @@
 package Animals;
 
 public abstract class Animal {
-    private String animalASCII;
+    private String[] animalASCII;
     private String animalName;
 
-    public String getAnimalASCII() {
+    public String[] getAnimalASCII() {
         return animalASCII;
     }
     public  String getAnimalName() {

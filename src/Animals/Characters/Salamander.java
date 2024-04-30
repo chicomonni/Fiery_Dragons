@@ -2,11 +2,11 @@ package Animals.Characters;
 
 import Animals.AnimalCharacter;
 
-public class Spider extends AnimalCharacter {
+public class Salamander extends AnimalCharacter {
 
     @Override
     public String getAnimalSymbol() {
-        return "*";
+        return "S";
     }
 
     @Override
@@ -16,14 +16,14 @@ public class Spider extends AnimalCharacter {
                 "│┌───────┐│",
                 "││xx     ││",
                 "││       ││",
-                "││  / \\  ││",
-                "││ // \\\\ ││",
-                "││ \\\\●// ││",
-                "││/// \\\\\\││",
-                "││││   ││││",
-                "││││\\_/││││",
-                "││`│   │'││",
-                "││ `   ' ││",
+                "││  .-_  ││",
+                "││ ' ● ‾; │",
+                "││:.-_ ,-<|│",
+                "││`. (    │",
+                "││  \\ \\  ││",
+                "││ .-\\ \\ ││",
+                "││( __. .││",
+                "││\\_ _ .'││",
                 "││       ││",
                 "││     xx││",
                 "│└───────┘│",
@@ -34,6 +34,6 @@ public class Spider extends AnimalCharacter {
 
     @Override
     public String getAnimalName() {
-        return "Spider";
+        return "Salamander";
     }
 }

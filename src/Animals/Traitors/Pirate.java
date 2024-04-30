@@ -7,4 +7,27 @@ public class Pirate extends AnimalTraitor {
     public void betray() {
         int movement = -3;
     }
+
+    @Override
+    public String[] getAnimalASCII() {
+        return new String[] {
+                "┌─────────┐",
+                "│┌───────┐│",
+                "││xx     ││",
+                "││       ││",
+                "││  .-.  ││",
+                "││ /   \\ ││",
+                "││ _   _ ││",
+                "││|█   █|││",
+                "││└‾ ^ ‾┘││",
+                "││ )   ( ││",
+                "││  uuu  ││",
+                "││  └─┘  ││",
+                "││       ││",
+                "││     xx││",
+                "│└───────┘│",
+                "└─────────┘",
+                "           "
+        };
+    }
 }

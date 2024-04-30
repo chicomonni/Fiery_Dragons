@@ -1,11 +1,13 @@
 import Animals.Animal;
+import Animals.Characters.BabyDragon;
+import Animals.Characters.Bat;
+import Animals.Characters.Salamander;
 import Animals.Characters.Spider;
 import Animals.Traitors.Pirate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class GameBoard {
@@ -54,7 +56,7 @@ class GameBoard {
 
     private void printChitCardLine(StringBuilder gameBoardString, int cardRowCount) {
         //default chit card size display
-        int sizeChitCardHeight = 16;
+        int sizeChitCardHeight = 17;
         int sizeChitCardWidth = 11;
 
         double cardRow = (double) cardRowCount / (sizeChitCardHeight);
@@ -65,12 +67,13 @@ class GameBoard {
             if (rowModifier < Math.ceil((double) chitCardArray.length / 4)) {
                 ChitCard chitCard = chitCardArray[currentCardIndex];
 
-                // Print covered or uncovered chit card based on its state
+                //print covered or uncovered chit card based on its state
                 if (cardRowCount < GameMaster.getNumChitCards() / 4 * sizeChitCardHeight) {
-                    gameBoardString.append(ChitCard.printChitCardCovered(chitCard, cardRowCount % sizeChitCardHeight));
+                    gameBoardString.append(ChitCard.printChitCard(chitCard, cardRowCount % sizeChitCardHeight));
+
                 }
             } else {
-                // Print buffer for game board
+                //print buffer for gameBoard
                 String buffer = " ".repeat(sizeChitCardWidth);
                 gameBoardString.append(buffer);
             }
@@ -94,14 +97,14 @@ class GameBoard {
 
 
     public void createGameBoard() {
-        initializeChitCards();
-        initializeVolcanoTiles();
-        initializePlayers();
+        initialiseChitCards();
+        initialiseVolcanoTiles();
+        initialisePlayers();
     }
 
-    private void initializeChitCards() {
+    private void initialiseChitCards() {
         chitCardArray = new ChitCard[GameMaster.getNumChitCards()];
-        Animal[] possibleAnimals = {new Spider(), new Pirate()};
+        Animal[] possibleAnimals = {new Spider(), new Pirate(), new Salamander(), new Bat(), new BabyDragon()};
         for (int i = 0; i < chitCardArray.length; i++) {
             ChitCard chitCard = new ChitCard();
 
@@ -114,7 +117,7 @@ class GameBoard {
         }
     }
 
-    private void initializeVolcanoTiles() {
+    private void initialiseVolcanoTiles() {
         volcanoTileArray = new VolcanoTile[GameMaster.getNumVolcanoTiles()];
         for (int i = 0; i < volcanoTileArray.length; i++) {
             volcanoTileArray[i] = new VolcanoTile();
@@ -123,11 +126,11 @@ class GameBoard {
         }
     }
 
-    private void initializePlayers() {
+    private void initialisePlayers() {
         int numPlayers = 4; //default number
         playerArray = new Player[numPlayers];
         for (int i = 0; i < playerArray.length; i++) {
-            playerArray[i] = new Player(); // Initialize with appropriate parameters if needed
+            playerArray[i] = new Player();
         }
     }
 }
