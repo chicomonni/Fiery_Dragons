@@ -12,42 +12,51 @@ import java.io.IOException;
  */
 
 class GameDisplay {
+    private static GameDisplay instance;
+
     private final String gameName;
     private final Font squareFont;
 
-    private JFrame frame;
-    private JLabel label;
+    private static JFrame frame;
+    private static JLabel label;
     private JTextField inputField;
     private JTextField promptField;
     private JPanel promptPanel;
     private JPanel inputPanel;
 
-    GameDisplay(String gameName) throws IOException, FontFormatException {
+    private GameDisplay(String gameName) throws IOException, FontFormatException {
         this.gameName = gameName;
         this.squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
         initialise();
     }
 
-    void setText(String text) {
+    public static GameDisplay getInstance(String gameName) throws IOException, FontFormatException {
+        if (instance == null) {
+            instance = new GameDisplay(gameName);
+        }
+        return instance;
+    }
+
+    public void setText(String text) {
         label.setText(text);
         label.setFont(new Font("MxPlus IBM BIOS", Font.PLAIN, 8));
     }
 
-    void clearInputField() {
+    public void clearInputField() {
         inputField.setText("");
     }
 
-private void initialise() {
-    createFrame();
-    label = new JLabel();
-    label.setForeground(Color.WHITE);
-    label.setSize(800, 900);
-    createPromptField();
-    createPromptPanel();
-    createInputField();
-    createInputPanel();
-    addComponentsToFrame();
-}
+    private void initialise() {
+        createFrame();
+        label = new JLabel();
+        label.setForeground(Color.WHITE);
+        label.setSize(800, 900);
+        createPromptField();
+        createPromptPanel();
+        createInputField();
+        createInputPanel();
+        addComponentsToFrame();
+    }
 
     private void createFrame() {
         frame = new JFrame(gameName);
@@ -147,4 +156,11 @@ private void initialise() {
     public JTextField getInputField() {
         return inputField;
     }
+
+    public static void clearGameDisplay() {
+        if (instance != null) {
+            instance.label.setText("");
+        }
+    }
+
 }

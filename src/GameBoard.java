@@ -28,6 +28,7 @@ class GameBoard {
     }
 
     public void printGameBoard() throws IOException {
+        clearGameBoard();
         StringBuilder gameBoardString = new StringBuilder();
         File gameBoardFile = new File("src/GameBoard.txt");
 
@@ -49,6 +50,11 @@ class GameBoard {
         }
 
         formattedGameBoard = formatGameBoardHTML(gameBoardString.toString());
+    }
+
+    public void clearGameBoard() {
+        formattedGameBoard = null;
+        GameDisplay.clearGameDisplay();
     }
 
     private void skipLines(Scanner scanner, int numLines) throws IOException {

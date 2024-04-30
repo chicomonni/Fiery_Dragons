@@ -1,6 +1,8 @@
 import javax.swing.*;
 import Utils.Typing;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 public class Player {
@@ -54,6 +56,7 @@ public class Player {
                         Typing.animateTyping(promptField, flippedPromptText, 40);
 
                     } else {
+                        promptField.setText(playerTurnText);
                         flipChitCard(userInt);
                     }
 
@@ -69,6 +72,10 @@ public class Player {
                 promptField.setText(playerTurnText);
                 String typePromptText = "You must enter an integer. Please select a Chit Card between 1 and " + GameMaster.getNumChitCards() + ": ";
                 Typing.animateTyping(promptField, typePromptText, 40);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
             }
 
             //clear inputTextField after processing user input
@@ -77,9 +84,11 @@ public class Player {
     }
 
 
-
-    private void flipChitCard(int userInt) {
-
+    private void flipChitCard(int userInt) throws IOException, FontFormatException {
+        GameBoard.getInstance().getChitCardArray()[userInt - 1].setChitState(true);
+        // reprint gameBoard with new flipped display
+        GameBoard.getInstance().printGameBoard();
+        GameDisplay.getInstance("Fiery Dragons").setText(GameBoard.getInstance().getFormattedGameBoard());
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 class FieryDragons {
     public static void main(String[] args) throws IOException, FontFormatException {
-        GameDisplay gameDisplay = new GameDisplay("Fiery Dragons");
+        GameDisplay gameDisplay = GameDisplay.getInstance("Fiery Dragons");
         GameBoard gameBoard = GameBoard.getInstance();
         GameMaster gameMaster = new GameMaster();
 
@@ -26,18 +26,6 @@ class FieryDragons {
 
     }
 
-//    public static void startGame(GameBoard gameBoard) { //}, JLabel turnLabel) {
-//        StringBuilder gameBoardString = new StringBuilder();
-//        boolean bGameContinues = true;
-//        int playerTurnPointer = 0;
-//        Player[] playerArray = gameBoard.getPlayerArray();
-//        gameBoard.printMargin(gameBoardString);
-//
-//        //get the current player
-//        Player currentPlayer = playerArray[playerTurnPointer];
-//        currentPlayer.startTurn(); //turnLabel);
-//
-//    }
 
     public static void startGame(GameBoard gameBoard, GameDisplay gameDisplay) {
         StringBuilder gameBoardString = new StringBuilder();
