@@ -8,8 +8,6 @@ class Main {
     public static void main(String[] args) throws IOException, FontFormatException {
         Display gameWindow = Display.getInstance();
         FieryDragons game = FieryDragons.getInstance();
-
-        gameWindow.displayBoard(ASCIIProcessor.getArt("src/ascii/GameBoard.txt"));
         
         game.startGame(gameWindow);
     }

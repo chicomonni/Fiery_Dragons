@@ -36,6 +36,7 @@ public class FieryDragons {
         // temporarily hardcoded
         try {
             gameboard = ASCIIProcessor.getArt("src/ascii/GameBoard.txt");
+            gameWindow.displayBoard(gameboard);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
