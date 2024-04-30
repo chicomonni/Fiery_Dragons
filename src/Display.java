@@ -32,10 +32,11 @@ class Display {
         board.setText(text);
     }
 
-    void displayCards(ArrayList<String> cardDisplay) {    
+    void displayCards(ArrayList<String> cardDisplay) {  
+        cardPanel.removeAll();  
         int cols = (int) Math.sqrt(cardDisplay.size());
         int rows = (int) Math.ceil(cardDisplay.size() / (double) cols);
-        cardPanel.setLayout(new GridLayout(cols,rows));
+        cardPanel.setLayout(new GridLayout(rows,cols));
 
         for (String card : cardDisplay) {
             cardPanel.add(getCardLabel(card));

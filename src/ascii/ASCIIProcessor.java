@@ -27,9 +27,6 @@ public class ASCIIProcessor {
 
     public static String getArtWithValue(String filename, int value) throws FileNotFoundException {
         String string = getArt(filename);
-        String.format("My answer is %15.8f",
-                                    47.65734);
- 
         return string.toString().replaceAll("xx", String.format("%02d",value));
     }
 }

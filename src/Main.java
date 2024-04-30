@@ -7,15 +7,13 @@ import dragoncards.PirateCard;
 class Main {
     public static void main(String[] args) throws IOException, FontFormatException {
         Display gameWindow = Display.getInstance();
+        FieryDragons game = FieryDragons.getInstance();
 
         gameWindow.displayBoard(ASCIIProcessor.getArt("src/ascii/gameboard.txt"));
         
-        PirateCard pirateCard = new PirateCard(2);
-    
-        ArrayList<String> cards = new ArrayList<>();
-        for (int i = 1; i < 20; i++) {
-            cards.add(pirateCard.getBackDisplay(i));
-        }
-        gameWindow.displayCards(cards);
+        game.startGame();
+        gameWindow.displayCards(game.cardsController.getCardDisplays());
+        game.cardsController.setAllUnavailable();
+        gameWindow.displayCards(game.cardsController.getCardDisplays());
     }
 }
