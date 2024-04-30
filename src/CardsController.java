@@ -43,8 +43,14 @@ public class CardsController {
         return cardDisplays;
     }
 
-    public DragonCard pickCard() {
-        return cards.get(0);
+    public DragonCard pickCard(int index) {
+        try {
+            DragonCard card = cards.get(index);
+            card.setUnavailable();
+            return card;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     public void resetCards() {
@@ -64,6 +70,15 @@ public class CardsController {
             card.setUnavailable();
         }
         cards.get(0).reset();
+    }
+
+    public boolean checkAnyAvailable() {
+        for (DragonCard card: cards) {
+            if (card.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

@@ -58,7 +58,7 @@ class Display {
         cardPanel = new JPanel();
 
         board = new JLabel("",SwingConstants.CENTER);
-        instructions = new JLabel("Enter your move: ");
+        instructions = new JLabel("Select a card index, x to skip turn or q to quit:  ");
         input = new JTextField();
 
         Action action = new AbstractAction()
@@ -68,6 +68,11 @@ class Display {
             {
                 String text = input.getText();
                 input.setText("");
+                try {
+                    FieryDragons.getInstance().takeInput(Display.getInstance(), text);
+                } catch (IOException | FontFormatException e1) {
+                    e1.printStackTrace();
+                }
             }
         };
 
