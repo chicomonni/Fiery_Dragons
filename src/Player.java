@@ -48,12 +48,17 @@ public class Player {
                 //check if between 0 - numChitCards
                 if (userInt >= 1 && userInt <= GameMaster.getNumChitCards()) {
                     //check if already flipped
-                    if (gameBoard.getChitCardArray()[userInt - 1].isChitUncovered()) {
+                    ChitCard selectedChitCard = gameBoard.getChitCardArray()[userInt - 1];
+                    if (selectedChitCard.isChitUncovered()) {
                         String flippedPromptText = "This Chit Card has already been flipped. Please select one between 1 and " + GameMaster.getNumChitCards() + ": ";
                         Typing.animateTyping(playerTurnText, promptField, flippedPromptText, 40);
 
                     } else {
-                        String successText = "You picked Chit Card number " + String.valueOf(userInt);
+                        //check if multiple chit animals
+                        String successText = "You picked up " + String.valueOf(selectedChitCard.getChitNum()) + " " + selectedChitCard.getChitAnimal().getAnimalName();
+                        if (selectedChitCard.getChitNum() > 1) {
+                            successText = successText + "s";
+                        }
                         Typing.animateTyping(playerTurnText, promptField, successText, 40);
                         flipChitCard(userInt);
                     }
@@ -80,7 +85,7 @@ public class Player {
 
     private void flipChitCard(int userInt) throws IOException, FontFormatException {
         GameBoard.getInstance().getChitCardArray()[userInt - 1].setChitState(true);
-        // reprint gameBoard with new flipped display
+        //reprint gameBoard with new flipped display
         GameBoard.getInstance().printGameBoard();
         GameDisplay.getInstance("Fiery Dragons").setText(GameBoard.getInstance().getFormattedGameBoard());
     }

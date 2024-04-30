@@ -101,4 +101,11 @@ public class ChitCard {
     }
 
 
+    public int getChitNum() {
+        return this.chitNum;
+    }
+
+    public Animal getChitAnimal() {
+        return this.chitAnimal;
+    }
 }

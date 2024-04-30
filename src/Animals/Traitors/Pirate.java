@@ -9,6 +9,11 @@ public class Pirate extends AnimalTraitor {
     }
 
     @Override
+    public String getAnimalName() {
+        return "Pirate";
+    }
+
+    @Override
     public String[] getAnimalASCII() {
         return new String[] {
                 "┌─────────┐",

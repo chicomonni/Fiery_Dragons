@@ -50,7 +50,7 @@ class GameDisplay {
         createFrame();
         label = new JLabel();
         label.setForeground(Color.WHITE);
-        label.setSize(800, 900);
+        label.setSize(900, 900);
         createPromptField();
         createPromptPanel();
         createInputField();
@@ -61,7 +61,7 @@ class GameDisplay {
     private void createFrame() {
         frame = new JFrame(gameName);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1200, 980);
+        frame.setSize(1250, 880);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -86,7 +86,7 @@ class GameDisplay {
 
     private void createInputField() {
         inputField = new JTextField(20);
-        inputField.setPreferredSize(new Dimension(200, 120));
+        inputField.setPreferredSize(new Dimension(200, 90));
         inputField.setBackground(Color.BLACK);
         inputField.setForeground(Color.WHITE);
 
@@ -95,7 +95,7 @@ class GameDisplay {
         Border margin = BorderFactory.createEmptyBorder(20, 20, 20, 20);
         inputField.setBorder(BorderFactory.createCompoundBorder(border, margin));
 
-        inputField.setFont(new Font("MxPlus IBM BIOS", Font.PLAIN, 12));
+        inputField.setFont(new Font("MxPlus IBM BIOS", Font.PLAIN, 13));
 
         inputField.addActionListener(e -> {
             String userInput = getUserInput();

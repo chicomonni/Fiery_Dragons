@@ -20,13 +20,14 @@ class GameBoard {
     private Player[] playerArray;
 
     //static method to get the singleton instance
-    public static GameBoard getInstance() {
+    static GameBoard getInstance() {
         if (instance == null) {
             instance = new GameBoard();
         }
         return instance;
     }
 
+    //collates gameBoard label for the JFrame
     public void printGameBoard() throws IOException {
         clearGameBoard();
         StringBuilder gameBoardString = new StringBuilder();
@@ -41,6 +42,8 @@ class GameBoard {
                 String gameBoardLine = scanner.nextLine();
                 printMargin(gameBoardString);
                 printChitCardLine(gameBoardString, cardRowCount);
+                printMargin(gameBoardString);
+                printMargin(gameBoardString);
                 printMargin(gameBoardString);
                 printGameBoardLine(gameBoardString, gameBoardLine);
                 cardRowCount++;
