@@ -9,11 +9,8 @@ class Main {
         Display gameWindow = Display.getInstance();
         FieryDragons game = FieryDragons.getInstance();
 
-        gameWindow.displayBoard(ASCIIProcessor.getArt("src/ascii/gameboard.txt"));
+        gameWindow.displayBoard(ASCIIProcessor.getArt("src/ascii/GameBoard.txt"));
         
-        game.startGame();
-        gameWindow.displayCards(game.cardsController.getCardDisplays());
-        game.cardsController.setAllUnavailable();
-        gameWindow.displayCards(game.cardsController.getCardDisplays());
+        game.startGame(gameWindow);
     }
 }

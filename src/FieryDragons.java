@@ -1,18 +1,23 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import ascii.ASCIIProcessor;
 import characters.Chit;
 import dragoncards.AnimalCard;
 import dragoncards.PirateCard;
 import locations.Cave;
+import players.Player;
 import players.PlayerIterator;
 
 public class FieryDragons {
     private static FieryDragons instance = null;
     public CardsController cardsController;
-    private ArrayList<Cave> caves;
+    private ArrayList<Cave> caves = new ArrayList<Cave>();
     private int totalSquares;
     private PlayerIterator playerIterator;
+
+    private String gameboard;
 
     private FieryDragons() {
     }
@@ -24,12 +29,38 @@ public class FieryDragons {
         return instance;
     }
 
-    public void startGame() {
+    public void startGame(Display gameWindow) {
+        cardsController = new CardsController();
+        playerIterator = new PlayerIterator();
 
-        // playerIterator = new PlayerIterator();
+        // temporarily hardcoded
+        try {
+            gameboard = ASCIIProcessor.getArt("src/ascii/GameBoard.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+
+        setupCards();
+        setupPlayers(4);
+        playerIterator.getNextPlayer();
+
+        gameWindow.displayCards(cardsController.getCardDisplays());
+        cardsController.setAllUnavailable();
+        gameWindow.displayCards(cardsController.getCardDisplays());
+    }  
+
+    private void setupPlayers(int players) {
+        for (int i = 0; i < players; i++) {
+            Cave cave = new Cave();
+            caves.add(cave);
+            playerIterator.addPlayer(new Player(cave));
+        }
+    }
+
+    private void setupCards() {
         HashMap<Chit, ArrayList<Integer>> animalConfig = CardsConfig.getAnimalConfig();
         HashMap<Chit, ArrayList<Integer>> pirateConfig = CardsConfig.getPirateConfig();
-        cardsController = new CardsController();
 
         for (Map.Entry<Chit, ArrayList<Integer>> entry : animalConfig.entrySet()) {
             Chit chit = entry.getKey();
@@ -49,6 +80,5 @@ public class FieryDragons {
         }
 
         cardsController.shuffleCards();
-        // playerIterator.getNextPlayer();
-    }  
+    }
 }

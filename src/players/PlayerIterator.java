@@ -10,6 +10,14 @@ public class PlayerIterator {
         this.players = players;
     }
 
+    public PlayerIterator() {
+        this.players = new ArrayList<Player>();
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
     public Player getNextPlayer() {
         Player currentPlayer = players.get(currentPlayerIndex);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
