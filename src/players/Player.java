@@ -4,11 +4,13 @@ import locations.Cave;
 import locations.Location;
 
 public class Player {
+    private String name;
     private Cave home;
     private Location location;
     private int totalMoves = 0;
     
-    public Player(Cave home) {
+    public Player(String name, Cave home) {
+        this.name = name;
         this.home = home;
         this.location = home;
     }
@@ -28,4 +30,9 @@ public class Player {
     public boolean checkWin() {
         return location.equals(home);
     }
+
+    public String toString() {
+        return "It is player " + this.name + "'s turn.";
+    }
 }
+

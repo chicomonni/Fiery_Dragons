@@ -23,4 +23,8 @@ public class PlayerIterator {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
         return currentPlayer;
     }
+
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
 }

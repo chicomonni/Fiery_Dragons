@@ -34,11 +34,7 @@ public class CardsController {
         for (int i = 0; i < cards.size(); i++) {
 
             DragonCard card = cards.get(i);
-            if (card.isAvailable()) {
-                cardDisplays.add(card.getBackDisplay(i+1));
-            } else {
-                cardDisplays.add(card.getFrontDisplay());
-            }
+            cardDisplays.add(card.getDisplay(i+1));
         }
         return cardDisplays;
     }

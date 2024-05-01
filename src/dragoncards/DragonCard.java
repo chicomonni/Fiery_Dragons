@@ -37,18 +37,18 @@ public abstract class DragonCard {
         return available;
     }
 
-    final public String getFrontDisplay() {
-        try {
-            return ASCIIProcessor.getArtWithValue(chit.getCardArtSource(), value);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    final public String getDisplay(int index) {
+        if (available) {
+            return getDisplayString(CARD_BACK_DISPLAY_FILE, index);
         }
-        return null;
+        else {
+            return getDisplayString(chit.getCardArtSource(), value);
+        }
     }
 
-    final public String getBackDisplay(int value) {
+    final protected String getDisplayString(String artSource, int value) {
         try {
-            return ASCIIProcessor.getArtWithValue(CARD_BACK_DISPLAY_FILE, value);
+            return ASCIIProcessor.getArtWithValue(artSource, value);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

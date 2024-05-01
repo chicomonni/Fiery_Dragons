@@ -12,12 +12,18 @@ import players.PlayerIterator;
 
 public class FieryDragons {
     private static FieryDragons instance = null;
+
     public CardsController cardsController;
     private ArrayList<Cave> caves = new ArrayList<Cave>();
     private int totalSquares;
     private PlayerIterator playerIterator;
 
+    private String input = "";
+    private boolean displayUpdate = false;
+
     private String gameboard;
+
+    private boolean gameRunning = true;
 
     private FieryDragons() {
     }
@@ -44,7 +50,7 @@ public class FieryDragons {
         
         setupCards();
         setupPlayers(4);
-        playerIterator.getNextPlayer();
+        nextPlayer(gameWindow);
 
         gameWindow.displayCards(cardsController.getCardDisplays());
     }  
@@ -53,7 +59,7 @@ public class FieryDragons {
         for (int i = 0; i < players; i++) {
             Cave cave = new Cave();
             caves.add(cave);
-            playerIterator.addPlayer(new Player(cave));
+            playerIterator.addPlayer(new Player(String.format("%d", i+1), cave));
         }
     }
 
@@ -81,8 +87,64 @@ public class FieryDragons {
         cardsController.shuffleCards();
     }
 
+    public void setInput(String input) {
+        this.input = input;
+    }
+    
+    public void takeInput(Display gameWindow, String text) {
+        text = text.toLowerCase();
+        if (text.equals("x")) {
+            nextPlayer(gameWindow);
+        }
+        else if (text.equals("q")) {
+            gameRunning = false;
+            System.exit(0);
+        }
+        else {
+            pickCard(text);
+        }
+        this.input = ""; // reset input
+    }
+
     public void runNextTurnSimulation(Display gameWindow) {
         cardsController.setAllButOneUnavailable();
         gameWindow.displayCards(cardsController.getCardDisplays());
+    }
+
+    public void playTurn(Display gameWindow) throws InterruptedException {
+        while (cardsController.checkAnyAvailable()) {
+            Thread.sleep(50);
+            takeInput(gameWindow, this.input);
+            
+            if (displayUpdate) {
+                gameWindow.displayCards(cardsController.getCardDisplays());
+                displayUpdate = false;
+            }
+        }
+        gameWindow.displayInstructions("All cards have been picked!!");
+        Thread.sleep(2000);
+        nextPlayer(gameWindow);
+    }
+
+    private void nextPlayer(Display gameWindow) {
+        cardsController.resetCards();
+        gameWindow.displayCurrentPlayer(playerIterator.getNextPlayer().toString());
+        gameWindow.displayInstructions(null);
+        gameWindow.displayCards(cardsController.getCardDisplays());
+    }
+
+    private void pickCard(String string) {
+        try {
+            int index = Integer.parseInt(string);
+            if (cardsController.pickCard(index-1) != null){;
+                playerIterator.getCurrentPlayer(); // set new location here
+                displayUpdate = true;
+            }
+        } catch (NumberFormatException e) {
+        }
+    }
+
+    public boolean isGameRunning() {
+        return gameRunning;
     }
 }

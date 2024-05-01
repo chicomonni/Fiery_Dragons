@@ -1,56 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 class Display {
-    private static Display instance = null;
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
     private final Font plainFont = new Font("MxPlus IBM BIOS", Font.PLAIN, 8);
     private final String gameName = "Fiery Dragons";
+
+    private final FieryDragons game;
 
     private JFrame frame;
     private JLabel board;
     private JPanel cardPanel;
     private JLabel instructions;
+    private JLabel currentPlayer;
     private JTextField input;
     private GridBagConstraints constraints;
 
-    private Display() throws IOException, FontFormatException {
+    public Display(FieryDragons game) throws IOException, FontFormatException {
+        this.game = game;
         initialise();
-    }
-
-    public static Display getInstance() throws IOException, FontFormatException {
-        if (instance == null) {
-            instance = new Display();
-        }
-        return instance;
-    }
-
-    void displayBoard(String text) {
-        board.setText(text);
-    }
-
-    void displayCards(ArrayList<String> cardDisplay) {  
-        cardPanel.removeAll();  
-        int cols = (int) Math.sqrt(cardDisplay.size());
-        int rows = (int) Math.ceil(cardDisplay.size() / (double) cols);
-        cardPanel.setLayout(new GridLayout(rows,cols));
-
-        for (String card : cardDisplay) {
-            cardPanel.add(getCardLabel(card));
-        }
-    }
-
-    public JLabel getCardLabel(String cardDisplay) {
-        JLabel label = new JLabel();
-        label.setText(cardDisplay);
-        label.setFont(plainFont);
-        label.setForeground(Color.WHITE);
-        label.setSize(200, 200);
-        return label;
     }
 
     private void initialise() {
@@ -58,25 +29,16 @@ class Display {
         cardPanel = new JPanel();
 
         board = new JLabel("",SwingConstants.CENTER);
-        instructions = new JLabel("Select a card index, x to skip turn or q to quit:  ");
+        instructions = new JLabel("");
+        displayInstructions(null);
+        currentPlayer = new JLabel("");
         input = new JTextField();
 
-        Action action = new AbstractAction()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                String text = input.getText();
-                input.setText("");
-                try {
-                    FieryDragons.getInstance().takeInput(Display.getInstance(), text);
-                } catch (IOException | FontFormatException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        };
-
-        input.addActionListener(action);
+        input.addActionListener(e -> {
+            String text = input.getText();
+            input.setText("");
+            game.setInput(text);
+        });
 
         board.setFont(plainFont);
         cardPanel.setFont(plainFont);
@@ -102,6 +64,9 @@ class Display {
         instructions.setForeground(Color.WHITE);
         instructions.setFont(plainFont);
 
+        currentPlayer.setForeground(Color.WHITE);
+        currentPlayer.setFont(plainFont);
+
         frame.setLayout(new GridBagLayout());
 
         constraints.gridx = 0;
@@ -119,6 +84,44 @@ class Display {
         frame.add(instructions, constraints);
 
         constraints.gridy = 2;
+        frame.add(currentPlayer, constraints);
+
+        constraints.gridy = 3;
         frame.add(input, constraints);
+    }
+
+    public void displayBoard(String text) {
+        board.setText(text);
+    }
+
+    public void displayCards(ArrayList<String> cardDisplay) {  
+        cardPanel.removeAll();  
+        int cols = (int) Math.sqrt(cardDisplay.size());
+        int rows = (int) Math.ceil(cardDisplay.size() / (double) cols);
+        cardPanel.setLayout(new GridLayout(rows,cols));
+
+        for (String card : cardDisplay) {
+            cardPanel.add(getCardLabel(card));
+        }
+    }
+
+    public JLabel getCardLabel(String cardDisplay) {
+        JLabel label = new JLabel();
+        label.setText(cardDisplay);
+        label.setFont(plainFont);
+        label.setForeground(Color.WHITE);
+        label.setSize(200, 200);
+        return label;
+    }
+
+    public void displayCurrentPlayer(String display) {
+        currentPlayer.setText(display);
+    }
+
+    public void displayInstructions(String display) {
+        if (display == null) {
+            display = "Enter a card index to pick a card, 'X' to skip turn or 'Q' to quit:";
+        }
+        instructions.setText(display);
     }
 }
