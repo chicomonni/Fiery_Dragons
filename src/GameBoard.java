@@ -6,6 +6,7 @@ import Utils.FancyMessage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -41,7 +42,7 @@ class GameBoard {
     public void printGameBoard() throws IOException {
         clearGameBoard();
         StringBuilder gameBoardString = new StringBuilder();
-        File gameBoardFile = new File("src/GameBoard.txt");
+        InputStream gameBoardFile = Objects.requireNonNull(getClass().getResourceAsStream("GameBoard.txt"));
 
         try (Scanner scanner = new Scanner(gameBoardFile)) {
 //            printTitleCard(gameBoardString);
@@ -172,7 +173,7 @@ class GameBoard {
         return formattedGameBoard;
     }
 
-    private String formatGameBoardHTML(String gameBoardString) {
+    public String formatGameBoardHTML(String gameBoardString) {
         return "<html><pre style=\"font-family: MxPlus IBM BIOS\">" + gameBoardString + "</pre></html>";
     }
 
