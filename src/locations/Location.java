@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import characters.Chit;
 
 public abstract class Location {
-    private final Chit chit;
+    public final Chit chit;
     private final int x;
     private final int y;
     private boolean occupied = false;

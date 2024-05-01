@@ -1,9 +1,7 @@
 package dragoncards;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import locations.Location;
-import ascii.ASCIIProcessor;
 import characters.Chit;
 
 public class PirateCard extends DragonCard {
@@ -11,8 +9,11 @@ public class PirateCard extends DragonCard {
         super(chit, value);
     }
     
-    // @Override
-    // public ArrayList<Location> getNext(Location location, int moves) {
-        
-    // }
+    @Override
+    public ArrayList<Location> getNext(Location currentLocation, int moves) {
+        // not fully implemented yet!
+        ArrayList<Location> locations = new ArrayList<>();
+        locations.add(currentLocation);
+        return locations;
+    }
 }

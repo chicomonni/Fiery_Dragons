@@ -9,6 +9,7 @@ import dragoncards.AnimalCard;
 import dragoncards.DragonCard;
 import dragoncards.PirateCard;
 import locations.Cave;
+import locations.Location;
 import players.Player;
 import players.PlayerIterator;
 
@@ -123,9 +124,9 @@ public class FieryDragons {
     public void playTurn(Display gameWindow) throws InterruptedException {
         boolean nextPlayer = false;
         while (cardsController.checkAnyAvailable() && !nextPlayer) {
-            Thread.sleep(50);
-            nextPlayer = takeInput(gameWindow, this.input);
-            
+            Thread.sleep(100);
+            nextPlayer = !takeInput(gameWindow, this.input);
+
             if (displayUpdate) {
                 gameWindow.displayCards(cardsController.getCardDisplays());
                 displayUpdate = false;
@@ -134,6 +135,9 @@ public class FieryDragons {
 
         if (!cardsController.checkAnyAvailable()) {
             gameWindow.displayInstructions("All cards have been picked!!");
+        }
+        else {
+            gameWindow.displayInstructions("This card doesn't match!");
         }
         Thread.sleep(2000);
         nextPlayer(gameWindow);
@@ -153,12 +157,11 @@ public class FieryDragons {
             if (card != null){;
                 // set new location here
                 displayUpdate = true;
-                return playerIterator.getCurrentPlayer().getLocation().matchAnimal(card.getChit()); 
-                // check the stack trace
+                return card.getNext(playerIterator.getCurrentPlayer().getLocation()) == null;
             }
             return true;
         } catch (NumberFormatException e) {
-            return false;
+            return true;
         }
     }
 

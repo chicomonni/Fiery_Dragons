@@ -10,9 +10,14 @@ public class AnimalCard extends DragonCard{
         super(chit, value);
     }
 
-    // // @Override
-    // // public ArrayList<Location> getNext(Location location, int moves) {
-    // //     // TODO Auto-generated method stub
-    // //     throw new UnsupportedOperationException("Unimplemented method 'getNext'");
-    // // }
+    @Override
+    public ArrayList<Location> getNext(Location currentLocation, int moves) {
+        // not fully implemented yet!
+        if (currentLocation.matchAnimal(getChit())) {
+            ArrayList<Location> locations = new ArrayList<>();
+            locations.add(currentLocation);
+            return locations;
+        }
+        return null;
+    }
 }

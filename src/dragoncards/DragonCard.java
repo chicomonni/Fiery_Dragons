@@ -23,8 +23,12 @@ public abstract class DragonCard {
         return value;
     }
 
-    // abstract ArrayList<Location> getNext(Location location, int moves);
+    abstract ArrayList<Location> getNext(Location currentLocation, int moves);
 
+    public ArrayList<Location> getNext(Location currentlLocation) {
+        return getNext(currentlLocation, value);
+    }
+    
     final public void reset() {
         available = true;
     }
