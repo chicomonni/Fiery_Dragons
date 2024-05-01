@@ -9,6 +9,8 @@ class Main {
         Display gameWindow = new Display(game);
         
         game.startGame(gameWindow);
+
+        // specifically runs to illustrate Sprint 2.
         game.runNextTurnSimulation(gameWindow);
 
         while(game.isGameRunning()) {

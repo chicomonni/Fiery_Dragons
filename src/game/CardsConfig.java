@@ -6,6 +6,9 @@ import characters.Chit;
 import characters.ChitFlyweight;
 
 class CardsConfig {
+    /**
+     * The cards that are used in the game.
+     */
     public static ArrayList<Integer> SALAMANDER_CARDS = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
     public static ArrayList<Integer> BAT_CARDS = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
     public static ArrayList<Integer> SPIDER_CARDS = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
@@ -13,7 +16,10 @@ class CardsConfig {
 
     public static ArrayList<Integer> PIRATE_CARDS = new ArrayList<Integer>(Arrays.asList(1, 1, 2, 2));
 
-
+    /**
+     * The animal card configuration.
+     * @return The animal card configuration with the displays and values for each card.
+     */
     public static HashMap<Chit, ArrayList<Integer>> getAnimalConfig() {
         HashMap<Chit, ArrayList<Integer>> config = new HashMap<>();
 
@@ -24,6 +30,10 @@ class CardsConfig {
         return config;
     }
 
+    /**
+     * The pirate card configuration.
+     * @return The pirate card configuration with the displays and values for each card.
+     */
     public static HashMap<Chit, ArrayList<Integer>> getPirateConfig() {
         HashMap<Chit, ArrayList<Integer>> config = new HashMap<>();
 
