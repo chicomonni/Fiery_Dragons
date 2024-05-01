@@ -47,22 +47,63 @@ class GameBoard {
 //            printTitleCard(gameBoardString);
             skipLines(scanner, 5); // Skip lines 1 to 6
 
+            gameBoardString.append("<br>");
+            printKey(gameBoardString);
+            gameBoardString.append("<br><br><br><br>");
+
             int cardRowCount = 0;
             for (int i = 6; i <= 89 && scanner.hasNextLine(); i++) {
                 String gameBoardLine = scanner.nextLine();
                 printMargin(gameBoardString);
+
                 printChitCardLine(gameBoardString, cardRowCount);
                 printMargin(gameBoardString);
                 printMargin(gameBoardString);
                 printMargin(gameBoardString);
                 printGameBoardLine(gameBoardString, gameBoardLine);
+
+
                 cardRowCount++;
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         formattedGameBoard = formatGameBoardHTML(gameBoardString.toString());
+    }
+
+    private void printKey(StringBuilder gameBoardString) {
+
+        String[] animalKey = {
+                "* → SPIDER            ",
+                "S → SALAMANDER        ",
+                "w → BAT               ",
+                "0 → BABY DRAGON       "
+        };
+
+        String[] playerKey = {
+                "<font color='#39aaff'>PLAYER 1 → BLUE (1)   </font>",
+                "<font color='#ff79bb'>PLAYER 2 → PINK (2)   </font>",
+                "<font color='#33f021'>PLAYER 3 → GREEN (3)  </font>",
+                "<font color='yellow'>PLAYER 4 → YELLOW (4) </font>"
+        };
+
+        printMargin(gameBoardString);
+        for (int i = 0; i < animalKey.length; i++) {
+            gameBoardString.append(animalKey[i]);
+        }
+        gameBoardString.append("<br><br>");
+        printMargin(gameBoardString);
+        for (int i = 0; i < animalKey.length; i++) {
+            gameBoardString.append(playerKey[i]);
+        }
+//
+//        int keyIndex = numLines - 86;
+//        gameBoardString.append(animalKey[keyIndex]).append(playerKey[keyIndex]);
+//        printMargin(gameBoardString);
+
+
     }
 
     public void clearGameBoard() {
@@ -112,6 +153,7 @@ class GameBoard {
 
                 }
             } else {
+                //run out of card rows
                 //print buffer for gameBoard
                 String buffer = " ".repeat(sizeChitCardWidth);
                 gameBoardString.append(buffer);
