@@ -7,11 +7,10 @@
 - **Jun Hao Ng:** jngg0122@student.monash.edu
 
 ## Files for Audrey Phommasone's Sprint 2:
-Class Diagram: /docs/Sprint_2_Class_Diagram.png
-Key Functionalities: /docs/Sprint2_Rationale
-Design Rationale: /docs/Sprint2_Rationale
-Source Code:
-Test Cases:
-Executable Deliverable:
-Video Link: 
+Class Diagram: /docs/Sprint 2 Class Diagram.png
+Key Functionalities: /docs/Sprint 2 Documentation.pdf
+Design Rationale: /docs/Sprint 2 Documentation.pdf
+Source Code: /src
+Executable Deliverable: CL_Monday06pm_Team069.jar
+Video Link: None
 
