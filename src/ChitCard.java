@@ -39,11 +39,8 @@ public class ChitCard {
 
 
 
-    public void setChitAnimal(Animal[] possibleAnimals) {
-        // randomise which animal type
-        Random random = new Random();
-        int randomIndex = random.nextInt(possibleAnimals.length);
-        this.chitAnimal = possibleAnimals[randomIndex];
+    public void setChitAnimal(Animal chitAnimal) {
+        this.chitAnimal = chitAnimal;
     }
 
     public void setChitNum() {

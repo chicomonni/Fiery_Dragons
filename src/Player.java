@@ -38,7 +38,7 @@ public class Player {
     private void selectChitCard(JTextField promptField, JTextField inputTextField, String playerTurnText) {
         String promptText = "Please select a Chit Card to flip (1 to " + GameMaster.getNumChitCards() + "): ";
 
-        // Set initial text to only show the player turn
+        //set initial text to only show the player turn
         Typing.animateTyping(playerTurnText, promptField, promptText, 40);
         GameBoard gameBoard = GameBoard.getInstance();
 

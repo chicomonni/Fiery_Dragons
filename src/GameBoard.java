@@ -9,7 +9,7 @@ import Utils.FancyMessage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Contains all the information about the physical board (e.g. the game pieces, tokens cards, etc.)
@@ -140,14 +140,37 @@ class GameBoard {
     private void initialiseChitCards() {
         chitCardArray = new ChitCard[GameMaster.getNumChitCards()];
         Animal[] possibleAnimals = {new Spider(), new Pirate(), new Salamander(), new Bat(), new BabyDragon()};
+
+        //make sure relatively even spread
+        List<Animal> animalTypes = new ArrayList<>();
+        int numCardsPerPlayer = chitCardArray.length / GameMaster.getNumPlayers() - 1;
+        int cardsLeft = chitCardArray.length;
+        Random random = new Random();
+
+        // put in minimum amount of chitAnimals first
+        for (Animal animal : possibleAnimals) {
+            int count = Math.min(numCardsPerPlayer, cardsLeft);
+            for (int i = 0; i < count; i++) {
+                animalTypes.add(animal);
+                cardsLeft--;
+            }
+        }
+
+        while (cardsLeft > 0) {
+            animalTypes.add(possibleAnimals[random.nextInt(possibleAnimals.length)]);
+            cardsLeft--;
+        }
+
+        // randomise chit Cards
+        Collections.shuffle(animalTypes);
+
+        //link chitCard Array to animal types
         for (int i = 0; i < chitCardArray.length; i++) {
             ChitCard chitCard = new ChitCard();
-
-            chitCard.setChitAnimal(possibleAnimals);
+            chitCard.setChitAnimal(animalTypes.get(i));
             chitCard.setChitNum();
             chitCard.setCardNum(i + 1);
             chitCard.setChitState(false);
-
             chitCardArray[i] = chitCard;
         }
     }
