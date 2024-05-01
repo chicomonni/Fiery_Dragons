@@ -1,15 +1,12 @@
-package spike;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 class GameWindow {
-
     private final String gameName;
-    private final InputStream is = getClass().getResourceAsStream("/MxPlus_IBM_BIOS.ttf");
-    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, is);
+    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
     private JFrame frame;
     private JLabel label;
 
