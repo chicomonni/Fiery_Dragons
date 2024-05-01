@@ -1,3 +1,4 @@
+package game;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,15 +50,18 @@ public class FieryDragons {
         }
         
         setupCards();
-        setupPlayers(4);
+        setupPlayers();
         nextPlayer(gameWindow);
 
         gameWindow.displayCards(cardsController.getCardDisplays());
     }  
 
-    private void setupPlayers(int players) {
-        for (int i = 0; i < players; i++) {
-            Cave cave = new Cave();
+    private void setupPlayers() {
+        ArrayList<Chit> cavesConfig = BoardConfig.getCaveConfig();
+
+        for (int i = 0; i < cavesConfig.size(); i++) {
+            Chit chit = cavesConfig.get(i);
+            Cave cave = new Cave(chit, 0, 0);
             caves.add(cave);
             playerIterator.addPlayer(new Player(String.format("%d", i+1), cave));
         }
@@ -146,5 +150,9 @@ public class FieryDragons {
 
     public boolean isGameRunning() {
         return gameRunning;
+    }
+
+    public int getTotalSquares() {
+        return totalSquares;
     }
 }

@@ -1,10 +1,11 @@
+package game;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class Display {
+public class Display {
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
     private final Font plainFont = new Font("MxPlus IBM BIOS", Font.PLAIN, 8);
     private final String gameName = "Fiery Dragons";
