@@ -1,5 +1,7 @@
 package game;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import characters.Chit;
 import characters.ChitFlyweight;
 
@@ -10,13 +12,14 @@ class BoardConfig {
     private final static Chit Spider = ChitFlyweight.getChit("Spider", '*', "src/ascii/CardSpider.txt");
     private final static Chit BabyDragon = ChitFlyweight.getChit("Baby Dragon", '0', "src/ascii/CardBabyDragon.txt");
 
-    public static ArrayList<Chit> getCaveConfig() {
-        ArrayList<Chit> config = new ArrayList<>();
+    public static HashMap<Chit, ArrayList<Integer>> getCaveConfig() {
+        HashMap<Chit, ArrayList<Integer>> config = new HashMap<>();
+        // ArrayList<Chit> config = new ArrayList<>();
 
-        config.add(Salamander);
-        config.add(Bat);
-        config.add(Spider);
-        config.add(BabyDragon);
+        config.put(Salamander, new ArrayList<>(Arrays.asList(9, 17)));
+        config.put(Bat, new ArrayList<>(Arrays.asList(9, 79)));
+        config.put(Spider, new ArrayList<>(Arrays.asList(71, 17)));
+        config.put(BabyDragon, new ArrayList<>(Arrays.asList(71, 79)));
         
         return config;
     }

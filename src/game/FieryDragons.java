@@ -59,13 +59,15 @@ public class FieryDragons {
     }  
 
     private void setupPlayers() {
-        ArrayList<Chit> cavesConfig = BoardConfig.getCaveConfig();
+        HashMap<Chit, ArrayList<Integer>> cavesConfig = BoardConfig.getCaveConfig();
 
-        for (int i = 0; i < cavesConfig.size(); i++) {
-            Chit chit = cavesConfig.get(i);
-            Cave cave = new Cave(chit, 9, 17);
+        int i = 1;
+        for (Map.Entry<Chit, ArrayList<Integer>> entry : cavesConfig.entrySet()) {
+            Chit chit = entry.getKey();
+            Cave cave = new Cave(chit, entry.getValue().get(0), entry.getValue().get(1));
             caves.add(cave);
-            playerIterator.addPlayer(new Player(String.format("%d", i+1).charAt(0), cave));
+            playerIterator.addPlayer(new Player(String.format("%d", i).charAt(0), cave));
+            i++;
         }
     }
 

@@ -42,7 +42,6 @@ public class ASCIIProcessor {
     public static void placePlayer(ArrayList<String> base, char character, int x, int y) {
         StringBuffer buffer = new StringBuffer(base.get(y));
         buffer.replace(x, x+1, String.valueOf(character));
-        System.out.println(buffer.toString());
         base.set(y, buffer.toString());
     }
 }
