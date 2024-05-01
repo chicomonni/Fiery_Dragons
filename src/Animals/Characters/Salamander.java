@@ -12,7 +12,7 @@ import Animals.Loyalty;
  */
 public class Salamander extends Animal {
     public Salamander() {
-        Loyalty loyalty = Loyalty.LOYAL;
+        this.loyalty = Loyalty.LOYAL;
     }
 
     @Override

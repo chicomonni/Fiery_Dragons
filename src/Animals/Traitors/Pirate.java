@@ -14,7 +14,7 @@ import Animals.Loyalty;
 public class Pirate extends Animal implements Traitor {
 
     public Pirate() {
-        Loyalty loyalty = Loyalty.TRAITOR;
+        this.loyalty = Loyalty.TRAITOR;
     }
     @Override
     public void betray() {
