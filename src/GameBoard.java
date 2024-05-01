@@ -92,12 +92,12 @@ class GameBoard {
 
         printMargin(gameBoardString);
         for (int i = 0; i < animalKey.length; i++) {
-            gameBoardString.append(animalKey[i]);
+            gameBoardString.append(playerKey[i]);
         }
         gameBoardString.append("<br><br>");
         printMargin(gameBoardString);
         for (int i = 0; i < animalKey.length; i++) {
-            gameBoardString.append(playerKey[i]);
+            gameBoardString.append(animalKey[i]);
         }
 //
 //        int keyIndex = numLines - 86;
@@ -231,18 +231,34 @@ class GameBoard {
     private void initialiseVolcanoTiles() {
         volcanoTileArray = new VolcanoTile[GameMaster.getNumVolcanoTiles()];
         Animal[] possibleAnimals = {
+                animalFactory.createBat(),
                 animalFactory.createSpider(),
                 animalFactory.createSalamander(),
-                animalFactory.createBat(),
                 animalFactory.createBabyDragon()
         };
+        List<Animal> animalTypes = new ArrayList<>();
+        //numVolcanoTiles will always be a multiple of numPlayers
+        int numTilesPerPlayer = volcanoTileArray.length / GameMaster.getNumPlayers();
+        int cardsLeft = volcanoTileArray.length;
+
+        Random random = new Random();
+
+    for (Animal animal : possibleAnimals) {
+        int count = Math.min(numTilesPerPlayer, cardsLeft);
+        for (int i = 0; i < count; i++) {
+            animalTypes.add(animal);
+            cardsLeft--;
+        }
+    }
+
+    Collections.shuffle(animalTypes);
+
         for (int i = 0; i < volcanoTileArray.length; i++) {
             VolcanoTile volcanoTile = new VolcanoTile();
 
-//            volcanoTile.setVolcanoTileAnimal(possibleAnimals);
-//            volcanoTile.setVolcanoState(false);
-//            volcanoTile.setVolcanoTileNum(i);
-
+            volcanoTile.setVolcanoTileNum(i);
+            volcanoTile.setVolcanoTileAnimal(animalTypes.get(i));
+            volcanoTile.setState(false);
             volcanoTileArray[i] = volcanoTile;
 
 
