@@ -5,3 +5,5 @@
 - **Tye Samuels:** tsam0016@student.monash.edu
 - **Audrey Phommasone:** apho0008@student.monash.edu
 - **Jun Hao Ng:** jngg0122@student.monash.edu
+
+## Sprint 2 installation and run method:

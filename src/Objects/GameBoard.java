@@ -27,6 +27,7 @@ public class GameBoard extends JFrame implements ActionListener, DragonInterface
     private JButton enter;
     private JTextPane res;
 
+
     public GameBoard(String gameName) throws IOException, FontFormatException{
         this.gameName = gameName;
         for (int i = 0; i < 3; i++){
@@ -45,26 +46,32 @@ public class GameBoard extends JFrame implements ActionListener, DragonInterface
             dragonCards.add(new DragonCard(DragonType.DRAGON_PIRATE, i+1));
             dragonCards.add(new DragonCard(DragonType.DRAGON_PIRATE, i+1));
         }
+        addPlayer(new Player("Player 1", DragonType.BAT));
 
         startGame();
     }
+
+
+
 
     private void startGame() {
         DragonCard sample = new DragonCard(DragonType.BAT, 2);
 
         frame = new JFrame(gameName);
-        boardView = new JTextPane();
+        frame.setLayout(new BorderLayout());
+//        GridBagConstraints c = new GridBagConstraints();
+//        c.anchor = GridBagConstraints.FIRST_LINE_START;
 
+        boardView = new JTextPane();
         boardView.setText(getASCII());
         boardView.setFont(squareFont.deriveFont(8f));
-        frame.add(boardView);
+        frame.add(boardView, BorderLayout.WEST);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        frame.setLayout(new GridBagLayout());
-
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,4));
+//        panel.setSize(400, 800);
 
 
         for (int i = 0; i < 16; i++) {
@@ -86,20 +93,21 @@ public class GameBoard extends JFrame implements ActionListener, DragonInterface
         enter = new JButton("Enter");
         enter.addActionListener(this);
         res = new JTextPane();
-        res.setFont(squareFont.deriveFont(8f));
 
+        res.setFont(squareFont.deriveFont(8f));
 
         panel.add(userInput);
         panel.add(enter);
         panel.add(res);
-
-        frame.add(panel);
+        panel.setPreferredSize(new Dimension(400, 800));
+        frame.add(panel, BorderLayout.EAST);
 
         frame.setSize(1200, 800);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
+
         boardView.setBackground(Color.BLACK);
         boardView.setForeground(Color.WHITE);
         boardView.setSize(800, 800);
@@ -134,19 +142,28 @@ public class GameBoard extends JFrame implements ActionListener, DragonInterface
     }
 
     public void endGame() {
+        frame.setVisible(false);
+        frame.dispose();
+
         frame = new JFrame();
+        frame.setLayout(new BorderLayout());
         frame.setSize(1200, 800);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.BLACK);
 
-        JTextPane endMessage = new JTextPane();
-        endMessage.setText("End");
-        endMessage.setFont(squareFont.deriveFont(8f));
+        JLabel endMessage = new JLabel();
+        endMessage.setBackground(Color.BLACK);
+        endMessage.setForeground(Color.WHITE);
+
+        String endText = "Congratulations you are the Winner,"+ playerArrayList.get(0).getName() + "!";
+
+        endMessage.setText(endText);
+        endMessage.setFont(squareFont.deriveFont(20f));
 
 
-        frame.add(endMessage);
+        frame.add(endMessage, BorderLayout.CENTER);
 
     }
 
