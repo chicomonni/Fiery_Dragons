@@ -1,14 +1,20 @@
 package Animals.Traitors;
 
+import Animals.Animal;
+import Animals.Loyalty;
+
 /**
- * Concrete class that extends AnimalTraitor.
+ * Concrete class that extends Animal.
  * Is skully.
  * ASCII art completed by: Tye Samuels
  * @author Georgia Kanellis
  */
-import Animals.AnimalTraitor;
 
-public class Pirate extends AnimalTraitor {
+public class Pirate extends Animal implements Traitor {
+
+    public Pirate() {
+        Loyalty loyalty = Loyalty.TRAITOR;
+    }
     @Override
     public void betray() {
         int movement = -3;
@@ -17,6 +23,11 @@ public class Pirate extends AnimalTraitor {
     @Override
     public String getAnimalName() {
         return "Pirate";
+    }
+
+    @Override
+    public String getAnimalSymbol() {
+        return "x";
     }
 
     @Override

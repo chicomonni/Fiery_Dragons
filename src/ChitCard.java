@@ -1,7 +1,5 @@
 import Animals.Animal;
-import Animals.AnimalCharacter;
-import Animals.AnimalTraitor;
-
+import Animals.Loyalty;
 import java.util.Random;
 
 /**
@@ -48,14 +46,15 @@ public class ChitCard {
         this.chitNum = 1;
 
         Random random = new Random();
-        if (this.chitAnimal instanceof AnimalTraitor) {
-            //randomise number of animalTraitors on chit card 1-2
+        Loyalty loyalty = this.chitAnimal.getLoyalty();
+
+        if (loyalty == Loyalty.TRAITOR) {
+            // Randomize number of traitor animals on chit card 1-2
             this.chitNum = random.nextInt(2) + 1;
-        } else if (this.chitAnimal instanceof AnimalCharacter) {
-            //randomise number of animalCharacters on chit card 1-3
+        } else if (loyalty == Loyalty.LOYAL) {
+            // Randomize number of loyal animals on chit card 1-3
             this.chitNum = random.nextInt(3) + 1;
         }
-
     }
 
     public void setCardNum(int cardNum) {

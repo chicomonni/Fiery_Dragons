@@ -1,14 +1,18 @@
 package Animals.Characters;
 
-import Animals.AnimalCharacter;
+import Animals.Animal;
+import Animals.Loyalty;
 
 /**
- * Concrete class that extends AnimalCharacter.
+ * Concrete class that extends Animal.
  * Nanananananana.
  * ASCII art completed by: Tye Samuels
  * @author Georgia Kanellis
  */
-public class Bat extends AnimalCharacter {
+public class Bat extends Animal {
+    public Bat() {
+        Loyalty loyalty = Loyalty.LOYAL;
+    }
 
     @Override
     public String getAnimalSymbol() {

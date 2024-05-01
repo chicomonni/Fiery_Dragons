@@ -1,9 +1,6 @@
 import Animals.Animal;
-import Animals.Characters.BabyDragon;
-import Animals.Characters.Bat;
-import Animals.Characters.Salamander;
-import Animals.Characters.Spider;
-import Animals.Traitors.Pirate;
+import Animals.Characters.*;
+import Animals.AnimalFactory;
 import Utils.FancyMessage;
 
 import java.io.File;
@@ -19,11 +16,17 @@ import java.util.*;
  */
 class GameBoard {
     private static GameBoard instance;
+    private AnimalFactory animalFactory;
 
     private String formattedGameBoard;
     private ChitCard[] chitCardArray;
     private VolcanoTile[] volcanoTileArray;
     private Player[] playerArray;
+
+    // Initialize AnimalFactory in constructor
+    private GameBoard() {
+        animalFactory = new AnimalFactory();
+    }
 
     //static method to get the singleton instance
     static GameBoard getInstance() {
@@ -139,7 +142,13 @@ class GameBoard {
 
     private void initialiseChitCards() {
         chitCardArray = new ChitCard[GameMaster.getNumChitCards()];
-        Animal[] possibleAnimals = {new Spider(), new Pirate(), new Salamander(), new Bat(), new BabyDragon()};
+        Animal[] possibleAnimals = {
+                animalFactory.createSpider(),
+                animalFactory.createSalamander(),
+                animalFactory.createBat(),
+                animalFactory.createBabyDragon(),
+                animalFactory.createPirate()
+        };
 
         //make sure relatively even spread
         List<Animal> animalTypes = new ArrayList<>();
@@ -177,7 +186,12 @@ class GameBoard {
 
     private void initialiseVolcanoTiles() {
         volcanoTileArray = new VolcanoTile[GameMaster.getNumVolcanoTiles()];
-        Animal[] possibleAnimals = {new Spider(), new Salamander(), new Bat(), new BabyDragon()};
+        Animal[] possibleAnimals = {
+                animalFactory.createSpider(),
+                animalFactory.createSalamander(),
+                animalFactory.createBat(),
+                animalFactory.createBabyDragon()
+        };
         for (int i = 0; i < volcanoTileArray.length; i++) {
             VolcanoTile volcanoTile = new VolcanoTile();
 

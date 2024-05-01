@@ -8,12 +8,15 @@ package Animals;
 public abstract class Animal {
     private String[] animalASCII;
     private String animalName;
+    private String animalSymbol;
+    protected Loyalty loyalty;
 
-    public String[] getAnimalASCII() {
-        return animalASCII;
-    }
-    public  String getAnimalName() {
-        return animalName;
+    public abstract String getAnimalSymbol();
+    public abstract String[] getAnimalASCII();
+    public abstract String getAnimalName();
+
+    public Loyalty getLoyalty() {
+        return loyalty;
     }
 
 }
