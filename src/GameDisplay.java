@@ -1,8 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Holds the JSwing GameDisplay implementation.
@@ -26,7 +26,7 @@ class GameDisplay {
 
     private GameDisplay(String gameName) throws IOException, FontFormatException {
         this.gameName = gameName;
-        this.squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
+        this.squareFont = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(getClass().getResourceAsStream("/res/MxPlus_IBM_BIOS.ttf")));
         initialise();
     }
 
