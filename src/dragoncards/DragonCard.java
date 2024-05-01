@@ -54,4 +54,8 @@ public abstract class DragonCard {
         }
         return null;
     }
+
+    final public Chit getChit() {
+        return chit;
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import ascii.ASCIIProcessor;
 import characters.Chit;
 import dragoncards.AnimalCard;
+import dragoncards.DragonCard;
 import dragoncards.PirateCard;
 import locations.Cave;
 import players.Player;
@@ -99,19 +100,19 @@ public class FieryDragons {
         this.input = input;
     }
     
-    public void takeInput(Display gameWindow, String text) {
+    public boolean takeInput(Display gameWindow, String text) {
+        this.input = ""; // reset input
         text = text.toLowerCase();
         if (text.equals("x")) {
-            nextPlayer(gameWindow);
         }
         else if (text.equals("q")) {
             gameRunning = false;
             System.exit(0);
         }
         else {
-            pickCard(text);
+            return pickCard(text);
         }
-        this.input = ""; // reset input
+        return false;
     }
 
     public void runNextTurnSimulation(Display gameWindow) {
@@ -120,16 +121,20 @@ public class FieryDragons {
     }
 
     public void playTurn(Display gameWindow) throws InterruptedException {
-        while (cardsController.checkAnyAvailable()) {
+        boolean nextPlayer = false;
+        while (cardsController.checkAnyAvailable() && !nextPlayer) {
             Thread.sleep(50);
-            takeInput(gameWindow, this.input);
+            nextPlayer = takeInput(gameWindow, this.input);
             
             if (displayUpdate) {
                 gameWindow.displayCards(cardsController.getCardDisplays());
                 displayUpdate = false;
             }
         }
-        gameWindow.displayInstructions("All cards have been picked!!");
+
+        if (!cardsController.checkAnyAvailable()) {
+            gameWindow.displayInstructions("All cards have been picked!!");
+        }
         Thread.sleep(2000);
         nextPlayer(gameWindow);
     }
@@ -141,14 +146,19 @@ public class FieryDragons {
         gameWindow.displayCards(cardsController.getCardDisplays());
     }
 
-    private void pickCard(String string) {
+    private boolean pickCard(String string) {
         try {
             int index = Integer.parseInt(string);
-            if (cardsController.pickCard(index-1) != null){;
-                playerIterator.getCurrentPlayer(); // set new location here
+            DragonCard card = cardsController.pickCard(index-1);
+            if (card != null){;
+                // set new location here
                 displayUpdate = true;
+                return playerIterator.getCurrentPlayer().getLocation().matchAnimal(card.getChit()); 
+                // check the stack trace
             }
+            return true;
         } catch (NumberFormatException e) {
+            return false;
         }
     }
 

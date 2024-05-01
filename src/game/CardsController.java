@@ -43,11 +43,13 @@ public class CardsController {
     public DragonCard pickCard(int index) {
         try {
             DragonCard card = cards.get(index);
-            card.setUnavailable();
-            return card;
+            if (card.isAvailable()) {
+                card.setUnavailable();
+                return card;
+            }
         } catch (IndexOutOfBoundsException e) {
-            return null;
         }
+        return null;
     }
 
     public void resetCards() {
