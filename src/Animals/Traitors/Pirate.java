@@ -7,6 +7,7 @@ import Animals.Loyalty;
  * Concrete class that extends Animal.
  * Is skully.
  * ASCII art completed by: Tye Samuels
+ *
  * @author Georgia Kanellis
  */
 

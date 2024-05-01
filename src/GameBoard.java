@@ -12,6 +12,7 @@ import java.util.*;
  * Contains all the information about the physical board (e.g. the game pieces, tokens cards, etc.)
  * Responsible for linking the behind the scene and the visual game components together.
  * ASCII art completed by: Tye Samuels
+ *
  * @author Georgia Kanellis
  */
 class GameBoard {

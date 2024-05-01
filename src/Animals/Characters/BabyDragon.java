@@ -7,6 +7,7 @@ import Animals.Loyalty;
  * Concrete class that extends Animal.
  * this one's art is super cool.
  * ASCII art completed by: Tye Samuels
+ *
  * @author Georgia Kanellis
  */
 public class BabyDragon  extends Animal {

@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Holds the JFrame GameDisplay implementation.
+ * Holds the JSwing GameDisplay implementation.
  * Utilises the Singleton Design Pattern.
  *
  * @author Georgia Kanellis

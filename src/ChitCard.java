@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * Holds the information of a single Dragon (chit) Card
  * ASCII art completed by: Tye Samuels
+ *
  * @author Georgia Kanellis
  */
 public class ChitCard {
