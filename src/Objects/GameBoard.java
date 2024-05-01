@@ -19,7 +19,7 @@ public class GameBoard extends JFrame implements ActionListener, DragonInterface
     public ArrayList<CaveCard> caveCards = new ArrayList<>();
 
     private final String gameName;
-    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
+    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/MxPlus_IBM_BIOS.ttf"));
     private JFrame frame;
     private JTextPane boardView;
     private JPanel panel;
