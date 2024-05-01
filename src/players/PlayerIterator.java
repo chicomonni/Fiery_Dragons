@@ -1,5 +1,6 @@
 package players;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PlayerIterator {
@@ -26,5 +27,9 @@ public class PlayerIterator {
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

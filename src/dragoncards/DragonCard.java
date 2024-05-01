@@ -48,7 +48,7 @@ public abstract class DragonCard {
 
     final protected String getDisplayString(String artSource, int value) {
         try {
-            return ASCIIProcessor.getArtWithValue(artSource, value);
+            return ASCIIProcessor.getString(ASCIIProcessor.getArt(artSource, value));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

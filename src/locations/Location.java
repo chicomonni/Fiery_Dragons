@@ -45,4 +45,12 @@ public abstract class Location {
     public final void setNextSquare(Square square) {
         this.nextSquare = square;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }  
 }

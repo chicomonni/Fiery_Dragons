@@ -22,7 +22,7 @@ public class FieryDragons {
     private String input = "";
     private boolean displayUpdate = false;
 
-    private String gameboard;
+    private ArrayList<String> gameboard;
 
     private boolean gameRunning = true;
 
@@ -40,18 +40,20 @@ public class FieryDragons {
         cardsController = new CardsController();
         playerIterator = new PlayerIterator();
 
+        setupCards();
+        setupPlayers();
+        nextPlayer(gameWindow);
+
         // temporarily hardcoded
         try {
             gameboard = ASCIIProcessor.getArt("src/ascii/GameBoard.txt");
-            gameWindow.displayBoard(gameboard);
             totalSquares = 24;
+            displayBoard(gameWindow);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         
-        setupCards();
-        setupPlayers();
-        nextPlayer(gameWindow);
 
         gameWindow.displayCards(cardsController.getCardDisplays());
     }  
@@ -61,9 +63,9 @@ public class FieryDragons {
 
         for (int i = 0; i < cavesConfig.size(); i++) {
             Chit chit = cavesConfig.get(i);
-            Cave cave = new Cave(chit, 0, 0);
+            Cave cave = new Cave(chit, 9, 17);
             caves.add(cave);
-            playerIterator.addPlayer(new Player(String.format("%d", i+1), cave));
+            playerIterator.addPlayer(new Player(String.format("%d", i+1).charAt(0), cave));
         }
     }
 
@@ -148,6 +150,19 @@ public class FieryDragons {
         }
     }
 
+    private void displayBoard(Display gameWindow) {
+        try {
+            gameboard = ASCIIProcessor.getArt("src/ascii/GameBoard.txt");
+
+            for (Player player : playerIterator.getPlayers()) {
+                ASCIIProcessor.placePlayer(gameboard, player.getChar(), player.getLocation().getX(), player.getLocation().getY());
+            }
+            gameWindow.displayBoard(ASCIIProcessor.getString(gameboard));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public boolean isGameRunning() {
         return gameRunning;
     }

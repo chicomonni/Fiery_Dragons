@@ -4,13 +4,13 @@ import locations.Cave;
 import locations.Location;
 
 public class Player {
-    private String name;
+    private char character;
     private Cave home;
     private Location location;
     private int totalMoves = 0;
     
-    public Player(String name, Cave home) {
-        this.name = name;
+    public Player(char character, Cave home) {
+        this.character = character;
         this.home = home;
         this.location = home;
     }
@@ -32,7 +32,11 @@ public class Player {
     }
 
     public String toString() {
-        return "It is player " + this.name + "'s turn.";
+        return "It is player " + this.character + "'s turn.";
+    }
+
+    public char getChar() {
+        return character;
     }
 }
 
