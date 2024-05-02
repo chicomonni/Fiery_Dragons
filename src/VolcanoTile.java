@@ -1,10 +1,5 @@
 import Animals.Animal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 /**
  * The volcanoTile is where the player starts and finishes the game.
  *

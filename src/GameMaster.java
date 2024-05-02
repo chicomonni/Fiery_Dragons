@@ -5,15 +5,15 @@
  */
 public class GameMaster {
     //GameBoard print not working properly if numChit does not divide equally by maxCardPerRow
-    //throws an error
-    private static int numChitCards; //default number of chit cards
-    private static int numVolcanoTiles; //default
-    private static int numPlayers; //default
+    //change for augmented rules when numChit is dynamic
+    private static int numChitCards;
+    private static int numVolcanoTiles;
+    private static int numPlayers;
 
 
     public void pickSettings() {
         //default settings for now
-        //so no implementation
+        //so no implementation of dynamic settings
         defaultSettings();
     }
 

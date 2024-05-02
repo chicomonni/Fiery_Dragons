@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class GameBoardPrinter {
     private static final String[] PLAYER_COLORS = {"#39aaff", "#ff79bb", "#33f021", "yellow"};
 
-
     public static void printGameBoard(GameBoard gameBoard) throws IOException {
         StringBuilder gameBoardString = new StringBuilder();
         InputStream gameBoardFile = Objects.requireNonNull(GameBoard.class.getResourceAsStream("GameBoard.txt"));
@@ -129,7 +128,6 @@ public class GameBoardPrinter {
         gameBoardString.append("    ").append(gameBoardLine).append("<br>");
     }
 
-
     //will change method to fit with dynamic player numbers and dynamic game board
     private static void printCavePlayerSymbol(StringBuilder gameBoardString, String gameBoardLine, int caveNumber1, int caveNumber2) {
         int currentCaveNumber = caveNumber1;
@@ -159,5 +157,8 @@ public class GameBoardPrinter {
         }
     }
 
+    public static String getPlayerColour(int playerNum) {
+        return PLAYER_COLORS[playerNum - 1];
+    }
 
 }

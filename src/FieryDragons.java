@@ -18,7 +18,7 @@ class FieryDragons {
             gameBoard.createGameBoard();
             gameBoard.printGameBoard();
             gameDisplay.setText(gameBoard.getFormattedGameBoard());
-            startGame(gameBoard, gameDisplay); // Pass the inputField object
+            startGame(gameBoard, gameDisplay);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +38,7 @@ class FieryDragons {
 
     }
 
+    //not integrated or fully implemented due to being out of scope (not my key functionality)
     public static Player nextTurn(GameBoard gameBoard, Player[] playerArray, int playerTurnPointer) {
         //increment the playerTurnPointer for the next player's turn
         playerTurnPointer++;
