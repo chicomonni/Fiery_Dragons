@@ -32,7 +32,7 @@ class FieryDragons {
         StringBuilder gameBoardString = new StringBuilder();
         int playerTurnPointer = 0;
         Player[] playerArray = gameBoard.getPlayerArray();
-        gameBoard.printMargin(gameBoardString);
+        GameBoardPrinter.printMargin(gameBoardString);
 
         //get the current player
         Player currentPlayer = playerArray[playerTurnPointer];

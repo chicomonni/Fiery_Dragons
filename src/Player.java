@@ -18,9 +18,9 @@ public class Player {
     private boolean bCanUncover;
     private String playerName;
 
-//    public void setPlayerCave(int i) {
-//    this.playerCave =
-//    }
+    public void setPlayerCave(CaveTile playerCave) {
+    this.playerCave = playerCave;
+    }
 
     public void setPlayerName(int i) {
         this.playerName = "PLAYER " + String.valueOf(i + 1);
