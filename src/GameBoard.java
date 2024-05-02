@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * Contains all the information about the physical board (e.g. the game pieces, tokens cards, etc.)
  * Responsible for linking the behind the scene and the visual game components together.
- * ASCII art completed by: Tye Samuels
  *
  * @author Georgia Kanellis
  */
@@ -163,18 +162,28 @@ class GameBoard {
         for (int i = 0; i < playerArray.length; i++) {
             Player player = new Player();
 
-//            player.setPlayerCave(i);
+            player.setPlayerCave(getCaveTileArray()[i]);
             player.setPlayerName(i);
 
             playerArray[i] = player;
         }
     }
 
-    public Player[] getPlayerArray() {
-        return playerArray;
-    }
-
     public ChitCard[] getChitCardArray() {
         return chitCardArray;
     }
+
+    public VolcanoTile[] getVolcanoTileArray() {
+        return volcanoTileArray;
+    }
+
+    public CaveTile[] getCaveTileArray() {
+        return caveTileArray;
+    }
+
+    public Player[] getPlayerArray() {
+        return playerArray;
+    }
 }
+
+
