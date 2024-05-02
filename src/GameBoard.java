@@ -141,7 +141,21 @@ class GameBoard {
     }
 
     private void initialiseCaveTiles() {
-//        caveArray = new CaveTile[GameMaster.getNumPlayers()];
+        caveTileArray = new CaveTile[GameMaster.getNumPlayers()];
+        for (int i = 0; i < caveTileArray.length; i++) {
+            CaveTile cave = new CaveTile();
+            Animal[] possibleAnimals = {
+                    animalFactory.createBat(),
+                    animalFactory.createSpider(),
+                    animalFactory.createSalamander(),
+                    animalFactory.createBabyDragon()
+            };
+
+            cave.setCaveNum(i);
+            cave.setCaveState(true);
+            cave.setCaveAnimal(possibleAnimals[i]);
+            caveTileArray[i] = cave;
+        }
     }
 
     private void initialisePlayers() {

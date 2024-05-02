@@ -13,16 +13,9 @@ import Animals.Loyalty;
 public class BabyDragon  extends Animal {
     public BabyDragon() {
         this.loyalty = Loyalty.LOYAL;
-    }
-
-    @Override
-    public String getAnimalSymbol() {
-        return "0";
-    }
-
-    @Override
-    public String[] getAnimalASCII() {
-        return new String[] {
+        this.animalName = "Baby Dragon";
+        this.animalSymbol = "0";
+        this.animalASCII = new String[]{
                 "┌─────────┐",
                 "│┌─────   │",
                 "││xx )  ( │",
@@ -43,9 +36,5 @@ public class BabyDragon  extends Animal {
         };
     }
 
-    @Override
-    public String getAnimalName() {
-        return "Baby Dragon";
-    }
 }
 

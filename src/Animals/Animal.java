@@ -6,14 +6,21 @@ package Animals;
  * @author Georgia Kanellis
  */
 public abstract class Animal {
-    private String[] animalASCII;
-    private String animalName;
-    private String animalSymbol;
+    protected String[] animalASCII;
+    protected String animalName;
+    protected String animalSymbol;
     protected Loyalty loyalty;
 
-    public abstract String getAnimalSymbol();
-    public abstract String[] getAnimalASCII();
-    public abstract String getAnimalName();
+    public String getAnimalSymbol() {
+        return animalSymbol;
+    }
+
+    public String[] getAnimalASCII() {
+        return animalASCII;
+    };
+    public String getAnimalName() {
+        return animalName;
+    };
 
     public Loyalty getLoyalty() {
         return loyalty;

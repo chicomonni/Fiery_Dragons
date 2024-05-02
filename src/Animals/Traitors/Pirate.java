@@ -15,25 +15,9 @@ public class Pirate extends Animal implements Traitor {
 
     public Pirate() {
         this.loyalty = Loyalty.TRAITOR;
-    }
-    @Override
-    public void betray() {
-        int movement = -3;
-    }
-
-    @Override
-    public String getAnimalName() {
-        return "Pirate";
-    }
-
-    @Override
-    public String getAnimalSymbol() {
-        return "x";
-    }
-
-    @Override
-    public String[] getAnimalASCII() {
-        return new String[] {
+        this.animalName = "Pirate";
+        this.animalSymbol = "X";
+        this.animalASCII = new String[] {
                 "┌─────────┐",
                 "│┌───────┐│",
                 "││xx     ││",
@@ -53,4 +37,10 @@ public class Pirate extends Animal implements Traitor {
                 "           "
         };
     }
+
+    @Override
+    public void betray() {
+        // make movement backwards
+    }
+
 }
