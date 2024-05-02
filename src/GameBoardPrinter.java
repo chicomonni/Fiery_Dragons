@@ -137,10 +137,10 @@ public class GameBoardPrinter {
 
         for (int i = 0; i < gameBoardLine.length(); i++) {
             if (gameBoardLine.charAt(i) == '●') {
-                // Replace the first occurrence of "●" with the current cave number and color
+                //replace the first occurrence of "●" with the current cave number and color
                 gameBoardLine = gameBoardLine.substring(0, i) + "<font color='" + currentColor + "'>" + currentCaveNumber + "</font>" + gameBoardLine.substring(i + 1);
 
-                // Swap to the next cave number and color
+                //swap to the next cave number and color
                 if (currentCaveNumber == caveNumber1) {
                     currentCaveNumber = caveNumber2;
                 } else {
