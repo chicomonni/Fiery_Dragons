@@ -1,7 +1,5 @@
-import javax.swing.*;
 import java.awt.FontFormatException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * The main class to start the game.

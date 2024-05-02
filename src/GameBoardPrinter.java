@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class GameBoardPrinter {
+    private static final String[] PLAYER_COLORS = {"#39aaff", "#ff79bb", "#33f021", "yellow"};
+
 
     public static void printGameBoard(GameBoard gameBoard) throws IOException {
         StringBuilder gameBoardString = new StringBuilder();
@@ -22,12 +24,20 @@ public class GameBoardPrinter {
             int cardRowCount = 0;
             for (int i = 6; i <= 89 && scanner.hasNextLine(); i++) {
                 String gameBoardLine = scanner.nextLine();
+
                 printMargin(gameBoardString);
+
                 printChitCardLine(gameBoard, gameBoardString, cardRowCount);
                 printMargin(gameBoardString);
                 printMargin(gameBoardString);
                 printMargin(gameBoardString);
-                printGameBoardLine(gameBoardString, gameBoardLine);
+                if (i == 23) {
+                    printCavePlayerSymbol(gameBoardString, gameBoardLine, 4, 1);
+                } else if (i == 85) {
+                    printCavePlayerSymbol(gameBoardString, gameBoardLine, 3, 2);
+                } else {
+                    printGameBoardLine(gameBoardString, gameBoardLine);
+                }
                 cardRowCount++;
             }
 
@@ -49,18 +59,20 @@ public class GameBoardPrinter {
     }
 
     public static void printKey(StringBuilder gameBoardString) {
+        //change to be dynamic when different number of players are introduced in augmented rules
         String[] animalKey = {
-                "* → SPIDER            ",
                 "S → SALAMANDER        ",
+                "0 → BABY DRAGON       ",
                 "w → BAT               ",
-                "0 → BABY DRAGON       "
+                "* → SPIDER            ",
+
         };
 
         String[] playerKey = {
-                "<font color='#39aaff'>PLAYER 1 → BLUE (1)   </font>",
-                "<font color='#ff79bb'>PLAYER 2 → PINK (2)   </font>",
-                "<font color='#33f021'>PLAYER 3 → GREEN (3)  </font>",
-                "<font color='yellow'>PLAYER 4 → YELLOW (4) </font>"
+                "<font color=" + PLAYER_COLORS[0] + ">PLAYER 1 → BLUE (1)   </font>",
+                "<font color=" + PLAYER_COLORS[1] + ">PLAYER 2 → PINK (2)   </font>",
+                "<font color=" + PLAYER_COLORS[2] + ">PLAYER 3 → GREEN (3)  </font>",
+                "<font color=" + PLAYER_COLORS[3] + ">PLAYER 4 → YELLOW (4) </font>"
         };
 
         printMargin(gameBoardString);
@@ -117,10 +129,35 @@ public class GameBoardPrinter {
         gameBoardString.append("    ").append(gameBoardLine).append("<br>");
     }
 
+
+    //will change method to fit with dynamic player numbers and dynamic game board
+    private static void printCavePlayerSymbol(StringBuilder gameBoardString, String gameBoardLine, int caveNumber1, int caveNumber2) {
+        int currentCaveNumber = caveNumber1;
+        String currentColor = PLAYER_COLORS[currentCaveNumber - 1];
+
+        for (int i = 0; i < gameBoardLine.length(); i++) {
+            if (gameBoardLine.charAt(i) == '●') {
+                // Replace the first occurrence of "●" with the current cave number and color
+                gameBoardLine = gameBoardLine.substring(0, i) + "<font color='" + currentColor + "'>" + currentCaveNumber + "</font>" + gameBoardLine.substring(i + 1);
+
+                // Swap to the next cave number and color
+                if (currentCaveNumber == caveNumber1) {
+                    currentCaveNumber = caveNumber2;
+                } else {
+                    currentCaveNumber = caveNumber1;
+                }
+                currentColor = PLAYER_COLORS[currentCaveNumber - 1];
+            }
+        }
+
+        gameBoardString.append("    ").append(gameBoardLine).append("<br>");
+    }
+
     private static void printTitleCard(StringBuilder gameBoardString) {
         for (String line : FancyMessage.TITLE_CARD) {
             gameBoardString.append(line).append("\n");
         }
     }
+
 
 }
