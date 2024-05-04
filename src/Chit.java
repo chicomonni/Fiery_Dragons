@@ -11,9 +11,9 @@ public class Chit {
     /**
      * Constructor used by ChitFactory
      *
-     * @param displayChar the single character representation of the chit, for the Volcano
+     * @param displayChar   the single character representation of the chit, for the Volcano
      * @param displayDetail the detailed representation of the chit, for the ChitCards
-     * @param strategy the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
+     * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
      */
     public Chit(char displayChar, List<String> displayDetail, ChitStrategy strategy) {
         this.displayChar = displayChar;
@@ -23,6 +23,7 @@ public class Chit {
 
     /**
      * Used to check if Chit on card matches Chit on Volcano
+     *
      * @param other the Chit this is being compared to
      * @return {@code true} if Chits are compatible, {@code false} otherwise
      */
@@ -36,7 +37,7 @@ public class Chit {
      * @param value the value to modify
      * @return the modified value
      */
-    public int modifyValue(int value){
+    public int modifyValue(int value) {
         return strategy.modifyValue(value);
     }
 
