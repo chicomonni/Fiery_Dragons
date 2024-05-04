@@ -1,3 +1,5 @@
+package chits;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,8 @@ public class Chit {
      * Constructor used by ChitFactory
      *
      * @param displayChar   the single character representation of the chit, for the Volcano
-     * @param displayDetail the detailed representation of the chit, for the ChitCards
+     * @param displayDetail the detailed representation of the chit, for the ChitCards. Each entry in the List
+     *                      represents a new line of the representation.
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
      */
     public Chit(char displayChar, List<String> displayDetail, ChitStrategy strategy) {

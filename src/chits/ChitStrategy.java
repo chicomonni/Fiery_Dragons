@@ -1,3 +1,5 @@
+package chits;
+
 /**
  * Strategy interface used by ChitStrategy realisations to define Chit methods at run-time
  */
@@ -5,7 +7,7 @@ public interface ChitStrategy {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *
-     * @param self the Chit calling the method
+     * @param self  the Chit calling the method
      * @param other the other Chit being compared
      * @return {@code true} if Chits are compatible, {@code false} otherwise
      */
