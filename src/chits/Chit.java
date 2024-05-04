@@ -18,7 +18,7 @@ public class Chit {
      *                      represents a new line of the representation.
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
      */
-    public Chit(char displayChar, List<String> displayDetail, ChitStrategy strategy) {
+    Chit(char displayChar, List<String> displayDetail, ChitStrategy strategy) {
         this.displayChar = displayChar;
         this.displayDetail = displayDetail;
         this.strategy = strategy;
