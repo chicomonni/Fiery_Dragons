@@ -1,3 +1,4 @@
 public class Player {
-//    TODO: implement
+    //    TODO: implement
+    private Player nextPlayer;
 }
