@@ -1,6 +1,6 @@
-package chits;
+package game.chits;
 
-import chits.strategies.ChitStrategy;
+import game.chits.strategies.ChitStrategy;
 
 import java.io.IOException;
 import java.nio.file.Files;

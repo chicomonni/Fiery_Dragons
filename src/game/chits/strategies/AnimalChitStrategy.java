@@ -1,12 +1,12 @@
-package chits.strategies;
+package game.chits.strategies;
 
-import chits.Chit;
+import game.chits.Chit;
 
 /**
- * Concrete strategy class for a pirate Chit. Game rule: pirate Chits move the Player backwards no matter the Chit
- * they're standing on
+ * Concrete strategy class for an animal Chit. Game rule: animal Chits move the Player forward if the Chit they're
+ * standing on matches the ChitCard flipped
  */
-public class PirateChitStrategy implements ChitStrategy {
+public class AnimalChitStrategy implements ChitStrategy {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *
@@ -16,7 +16,7 @@ public class PirateChitStrategy implements ChitStrategy {
      */
     @Override
     public boolean validate(Chit self, Chit other) {
-        return true;
+        return self == other;
     }
 
     /**
@@ -27,6 +27,6 @@ public class PirateChitStrategy implements ChitStrategy {
      */
     @Override
     public int modifyValue(int value) {
-        return -value;
+        return value;
     }
 }

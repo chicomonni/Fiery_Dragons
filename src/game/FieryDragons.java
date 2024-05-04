@@ -1,6 +1,8 @@
-import chits.ChitFactory;
-import chits.strategies.AnimalChitStrategy;
-import chits.strategies.PirateChitStrategy;
+package game;
+
+import game.chits.ChitFactory;
+import game.chits.strategies.AnimalChitStrategy;
+import game.chits.strategies.PirateChitStrategy;
 
 import java.io.IOException;
 

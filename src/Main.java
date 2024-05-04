@@ -1,3 +1,5 @@
+import game.FieryDragons;
+
 /**
  * Main class of program
  */

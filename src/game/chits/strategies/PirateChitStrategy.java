@@ -1,11 +1,12 @@
-package chits.strategies;
+package game.chits.strategies;
 
-import chits.Chit;
+import game.chits.Chit;
 
 /**
- * Strategy interface used by ChitStrategy realisations to define Chit methods at run-time
+ * Concrete strategy class for a pirate Chit. Game rule: pirate Chits move the Player backwards no matter the Chit
+ * they're standing on
  */
-public interface ChitStrategy {
+public class PirateChitStrategy implements ChitStrategy {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *
@@ -13,7 +14,10 @@ public interface ChitStrategy {
      * @param other the other Chit being compared
      * @return {@code true} if Chits are compatible, {@code false} otherwise
      */
-    boolean validate(Chit self, Chit other);
+    @Override
+    public boolean validate(Chit self, Chit other) {
+        return true;
+    }
 
     /**
      * Used to modify value of ChitCard (e.g. negate the value to move backwards)
@@ -21,5 +25,8 @@ public interface ChitStrategy {
      * @param value the value to modify
      * @return the modified value
      */
-    int modifyValue(int value);
+    @Override
+    public int modifyValue(int value) {
+        return -value;
+    }
 }
