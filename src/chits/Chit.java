@@ -1,5 +1,7 @@
 package chits;
 
+import chits.strategies.ChitStrategy;
+
 import java.util.List;
 
 /**

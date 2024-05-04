@@ -1,4 +1,6 @@
-package chits;
+package chits.strategies;
+
+import chits.Chit;
 
 /**
  * Strategy interface used by ChitStrategy realisations to define Chit methods at run-time

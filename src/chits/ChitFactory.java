@@ -1,5 +1,7 @@
 package chits;
 
+import chits.strategies.ChitStrategy;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
