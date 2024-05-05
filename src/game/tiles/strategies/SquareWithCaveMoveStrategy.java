@@ -1,7 +1,7 @@
 package game.tiles.strategies;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 import game.tiles.Cave;
 import game.tiles.Square;
 
@@ -33,7 +33,7 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
         MoveAction action;
 
         if (dist == 0) {
-            action = square.canEnter(player) ? new MoveAction() : null;
+            action = square.canEnter(player) ? new MoveAction(square, player) : null;
         } else if (dist > 0) {
             if (cave.canEnter(player)) {
                 return cave.move(player, dist - 1);

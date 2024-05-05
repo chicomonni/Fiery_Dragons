@@ -1,7 +1,7 @@
 package game.tiles.strategies;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 
 /**
  * A strategy interface so that Square implementation can change at run-time

@@ -1,7 +1,7 @@
 package game.tiles.strategies;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 import game.tiles.Square;
 
 /**
@@ -29,7 +29,7 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
     @Override
     public MoveAction move(Player player, int dist) {
         if (dist == 0) {
-            return square.canEnter(player) ? new MoveAction() : null;
+            return square.canEnter(player) ? new MoveAction(square, player) : null;
         } else if (dist > 0) {
             return square.getNext().move(player, dist - 1);
         } else {
