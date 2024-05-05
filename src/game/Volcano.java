@@ -72,4 +72,12 @@ public class Volcano {
             throw new RuntimeException(e);
         }
     }
+
+    public int getNoCaves() {
+        return caves.length;
+    }
+
+    public int getNoSquares() {
+        return squares.length;
+    }
 }
