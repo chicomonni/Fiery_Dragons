@@ -18,7 +18,7 @@ public class Cave extends GameTile {
      * @param next the Square connected to the Cave
      * @param chit the Chit associated with this cave
      */
-    public Cave(Square next, Chit chit, int position) {
+    public Cave(int position, Chit chit, Square next) {
         super(position, chit);
         this.next = next;
     }
