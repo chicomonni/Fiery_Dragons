@@ -1,0 +1,1 @@
+Executable requires the latest JDK to run, at least JDK 20
