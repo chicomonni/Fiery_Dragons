@@ -21,11 +21,11 @@ public class FieryDragons {
         ChitFactory chitFactory = new ChitFactory();
 
         try {
-            chitFactory.setChit('w', "res/assets/CardBat.txt", new AnimalChitStrategy());
-            chitFactory.setChit('0', "res/assets/CardDragon.txt", new AnimalChitStrategy());
-            chitFactory.setChit('S', "res/assets/CardSalamander.txt", new AnimalChitStrategy());
-            chitFactory.setChit('*', "res/assets/CardSpider.txt", new AnimalChitStrategy());
-            chitFactory.setChit('P', "res/assets/CardPirate.txt", new PirateChitStrategy());
+            chitFactory.setChit('w', "/assets/CardBat.txt", new AnimalChitStrategy());
+            chitFactory.setChit('0', "/assets/CardDragon.txt", new AnimalChitStrategy());
+            chitFactory.setChit('S', "/assets/CardSalamander.txt", new AnimalChitStrategy());
+            chitFactory.setChit('*', "/assets/CardSpider.txt", new AnimalChitStrategy());
+            chitFactory.setChit('P', "/assets/CardPirate.txt", new PirateChitStrategy());
         } catch (IOException e) {
             e.printStackTrace();
         }
