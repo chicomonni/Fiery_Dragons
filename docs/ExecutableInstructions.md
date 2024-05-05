@@ -1,1 +1,3 @@
-Executable requires the latest JDK to run, at least JDK 20
+- Executable requires the latest JDK to run
+    - At least JDK 20
+- Executable is named FieryDragons.jar and is in the project root
