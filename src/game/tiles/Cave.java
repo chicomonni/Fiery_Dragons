@@ -24,6 +24,22 @@ public class Cave extends GameTile {
     }
 
     /**
+     * Method to get the Player instance that resides in the Cave
+     *
+     * @return the Player instance that resides in the Cave
+     */
+    public Player getResident() {
+        return resident;
+    }
+
+    /**
+     * Method to set the Player instance that resides in the Cave
+     */
+    public void setResident(Player resident) {
+        this.resident = resident;
+    }
+
+    /**
      * Setter to allow/forbid Player from re-entering Cave
      *
      * @param canReturn {@code true} if Player can enter, {@code false} otherwise
