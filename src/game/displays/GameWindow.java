@@ -55,6 +55,7 @@ public class GameWindow {
         constraints.weightx = 400;
         constraints.weighty = 650;
 
+//        TODO: remove colours
         chitCards.setBackground(Color.GREEN);
         JLabel label = new JLabel("Hello World");
         chitCards.add(label);
