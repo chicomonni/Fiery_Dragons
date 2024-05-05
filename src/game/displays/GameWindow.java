@@ -15,16 +15,21 @@ public class GameWindow {
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel input = new JPanel();
+    private final int width;
+    private final int height;
 
     public GameWindow(int width, int height) {
+        this.width = width;
+        this.height = height;
+
         try {
-            initialise(width, height);
+            initialise();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void initialise(int width, int height) throws IOException, FontFormatException {
+    private void initialise() throws IOException, FontFormatException {
         Font font = Font.createFont(
                 Font.TRUETYPE_FONT,
                 Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
