@@ -2,18 +2,48 @@ package game;
 
 import game.chits.ChitFactory;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * Class representing Fiery Dragon Board
  */
 public class Board {
-    //    TODO: fix this
-    private static final String squareSrc = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static final String caveSrc = "S*w0";
-    private static final String cardSrc = "S1S2S3w1w2w3*1*2*3010203P1P2";
-    private Volcano volcano;
+    private final Volcano volcano = new Volcano();
+    private final List<String> boardRep;
 
-    private void createVolcano(ChitFactory factory) {
-        volcano = new Volcano();
+    /**
+     * Constructor
+     *
+     * @param path path to file containing the ASCII Board
+     */
+    public Board(String path) {
+        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        this.boardRep = bufferedReader.lines().collect(Collectors.toList());
+    }
+
+    private void createVolcano(String squareSrc, String caveSrc, ChitFactory factory) {
         volcano.createVolcano(squareSrc, caveSrc, factory);
+    }
+
+    /**
+     * Method to create Board
+     *
+     * @param squareSrc a valid String representing all Squares in order
+     * @param caveSrc   a valid String representing all Caves in order
+     * @param cardSrc   a valid String representing all ChitCards
+     * @param factory   ChitFactory instance used by the game
+     */
+    public void createBoard(String squareSrc, String caveSrc, String cardSrc, ChitFactory factory) {
+        createVolcano(squareSrc, caveSrc, factory);
+    }
+
+    public List<String> getBoardRep() {
+        return boardRep;
     }
 }
