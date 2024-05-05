@@ -18,6 +18,12 @@ public class GameWindow {
     private final int width;
     private final int height;
 
+    /**
+     * Constructor
+     *
+     * @param width  desired width of game window
+     * @param height desired height of game window
+     */
     public GameWindow(int width, int height) {
         this.width = width;
         this.height = height;
@@ -29,6 +35,12 @@ public class GameWindow {
         }
     }
 
+    /**
+     * Method to initialise window and its contents
+     *
+     * @throws IOException         if font file cannot be accessed
+     * @throws FontFormatException if font file doesn't contain correct data
+     */
     private void initialise() throws IOException, FontFormatException {
         Font font = Font.createFont(
                 Font.TRUETYPE_FONT,
