@@ -11,8 +11,8 @@ import game.tiles.strategies.SquareWithCaveMoveStrategy;
  * Class representing a Square on the Volcano
  */
 public class Square extends GameTile {
-    private final Square prev;
-    private final Square next;
+    private Square prev;
+    private Square next;
     private SquareMoveStrategy strategy = new DefaultSquareMoveStrategy(this);
     private boolean isOccupied;
 
@@ -21,13 +21,9 @@ public class Square extends GameTile {
      *
      * @param position an integer representing its position, so it can be located by the Display
      * @param chit     the Chit instance associated with this tile
-     * @param prev     the Square before this one
-     * @param next     the Square after this one
      */
-    protected Square(int position, Chit chit, Square prev, Square next) {
+    public Square(int position, Chit chit) {
         super(position, chit);
-        this.prev = prev;
-        this.next = next;
     }
 
     /**
@@ -40,12 +36,30 @@ public class Square extends GameTile {
     }
 
     /**
+     * Set previous Square
+     *
+     * @param prev previous Square
+     */
+    public void setPrev(Square prev) {
+        this.prev = prev;
+    }
+
+    /**
      * Method to get the Square after this one
      *
      * @return the Square after this one
      */
     public Square getNext() {
         return next;
+    }
+
+    /**
+     * Set next Square
+     *
+     * @param next next Square
+     */
+    public void setNext(Square next) {
+        this.next = next;
     }
 
     /**
