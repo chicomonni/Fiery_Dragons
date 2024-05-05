@@ -10,7 +10,7 @@ import game.chits.Chit;
 public class Cave extends GameTile {
     private final Square next;
     private Player resident;
-    private boolean canReturn = false;
+    private boolean canReturn;
 
     /**
      * Constructor
@@ -62,7 +62,11 @@ public class Cave extends GameTile {
      */
     @Override
     public MoveAction move(Player player, int dist) {
-        if (dist == 0 & canReturn & player == resident) {
+        if (!canEnter(player)) {
+            return null;
+        }
+
+        if (dist == 0) {
 //            TODO: update with correct constructor
             return new MoveAction();
         }
@@ -72,5 +76,16 @@ public class Cave extends GameTile {
         }
 
         return null;
+    }
+
+    /**
+     * Check if a Player can enter this GameTile
+     *
+     * @param player the Player trying to enter
+     * @return {@code true} if the Player can enter, {@code false}
+     */
+    @Override
+    public boolean canEnter(Player player) {
+        return canReturn && player == resident;
     }
 }

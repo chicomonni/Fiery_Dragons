@@ -22,6 +22,11 @@ public abstract class GameTile {
         this.chit = chit;
     }
 
+    /**
+     * Get Chit instance associated with this tile
+     *
+     * @return the Chit instance associated with this tile
+     */
     public Chit getChit() {
         return chit;
     }
@@ -48,4 +53,12 @@ public abstract class GameTile {
      * @return the desired MoveAction or {@code null} if it cannot be performed
      */
     public abstract MoveAction move(Player player, int dist);
+
+    /**
+     * Check if a Player can enter this GameTile
+     *
+     * @param player the Player trying to enter
+     * @return {@code true} if the Player can enter, {@code false}
+     */
+    public abstract boolean canEnter(Player player);
 }
