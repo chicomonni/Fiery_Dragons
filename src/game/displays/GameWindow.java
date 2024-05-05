@@ -11,23 +11,17 @@ import java.util.Objects;
 public class GameWindow {
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
+    private static final int width = 1050;
+    private static final int height = 800;
+    final JLayeredPane volcano = new JLayeredPane();
+    final JPanel chitCards = new JPanel();
+    final JPanel input = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
-    private final JLayeredPane volcano = new JLayeredPane();
-    private final JPanel chitCards = new JPanel();
-    private final JPanel input = new JPanel();
-    private final int width;
-    private final int height;
 
     /**
      * Constructor
-     *
-     * @param width  desired width of game window
-     * @param height desired height of game window
      */
-    public GameWindow(int width, int height) {
-        this.width = width;
-        this.height = height;
-
+    public GameWindow() {
         try {
             initialise();
         } catch (Exception e) {
@@ -47,12 +41,13 @@ public class GameWindow {
                 Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
         );
 
-        UIManager.put("Label.font", font.deriveFont(8f));
-        UIManager.put("TextPane.font", font.deriveFont(8f));
+        UIManager.put("Label.font", font.deriveFont(6.75f));
+        UIManager.put("TextPane.font", font.deriveFont(6.75f));
+        UIManager.put("TextArea.font", font.deriveFont(6.75f));
 
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setSize(new Dimension(width, height));
-        window.setMinimumSize(new Dimension(1050, 800));
+        window.setSize(width, height);
+        window.setResizable(false);
         window.setLocationRelativeTo(null);
 
         Container container = window.getContentPane();
@@ -67,18 +62,13 @@ public class GameWindow {
         constraints.weightx = 400;
         constraints.weighty = 650;
 
-//        TODO: remove colours
-        chitCards.setBackground(Color.GREEN);
-        JLabel label = new JLabel("Hello World");
-        chitCards.add(label);
+        chitCards.setOpaque(false);
         container.add(chitCards, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.weightx = 650;
 
-        volcano.setBackground(Color.BLUE);
-        volcano.setOpaque(true);
         container.add(volcano, constraints);
 
         constraints.gridwidth = GridBagConstraints.REMAINDER;
@@ -86,7 +76,7 @@ public class GameWindow {
         constraints.gridy = 1;
         constraints.weighty = 150;
 
-        input.setBackground(Color.YELLOW);
+        input.setOpaque(false);
         container.add(input, constraints);
 
         window.setVisible(true);
