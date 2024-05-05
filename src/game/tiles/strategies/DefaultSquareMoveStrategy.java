@@ -28,12 +28,8 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
      */
     @Override
     public MoveAction move(Player player, int dist) {
-        if (!square.canEnter(player)) {
-            return null;
-        }
-
         if (dist == 0) {
-            return new MoveAction();
+            return square.canEnter(player) ? new MoveAction() : null;
         } else if (dist > 0) {
             return square.getNext().move(player, dist - 1);
         } else {

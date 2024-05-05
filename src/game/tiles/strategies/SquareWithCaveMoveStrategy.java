@@ -30,14 +30,10 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
      */
     @Override
     public MoveAction move(Player player, int dist) {
-        if (!square.canEnter(player)) {
-            return null;
-        }
-
         MoveAction action;
 
         if (dist == 0) {
-            action = new MoveAction();
+            action = square.canEnter(player) ? new MoveAction() : null;
         } else if (dist > 0) {
             if (cave.canEnter(player)) {
                 return cave.move(player, dist - 1);
