@@ -3,6 +3,8 @@ package game;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
+import game.displays.DisplayManager;
+import game.displays.GameWindow;
 
 import java.io.IOException;
 
@@ -27,7 +29,7 @@ public class FieryDragons {
             chitFactory.setChit('*', "/assets/CardSpider.txt", new AnimalChitStrategy());
             chitFactory.setChit('P', "/assets/CardPirate.txt", new PirateChitStrategy());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -36,5 +38,6 @@ public class FieryDragons {
      */
     public void start() {
         createChits();
+        new DisplayManager(new GameWindow(1050, 800));
     }
 }
