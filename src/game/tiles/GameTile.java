@@ -1,8 +1,9 @@
 package game.tiles;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 import game.chits.Chit;
+import game.displays.PlayerDisplay;
 
 /**
  * Represents the abstract base class for all locations the Player can move to (e.g. Square, Cave)
@@ -10,6 +11,7 @@ import game.chits.Chit;
 public abstract class GameTile {
     protected final int position;
     private final Chit chit;
+    protected boolean isOccupied;
 
     /**
      * Constructor.
@@ -32,20 +34,6 @@ public abstract class GameTile {
     }
 
     /**
-     * Used by the Display to locate where to print the GameTile to the window
-     *
-     * @return the X coordinate of the location to print
-     */
-    public abstract int getX();
-
-    /**
-     * Used by the Display to locate where to print the GameTile to the window
-     *
-     * @return the Y coordinate of the location to print
-     */
-    public abstract int getY();
-
-    /**
      * Returns the desired MoveAction if it can be performed
      *
      * @param player the Player instance moving
@@ -61,4 +49,10 @@ public abstract class GameTile {
      * @return {@code true} if the Player can enter, {@code false}
      */
     public abstract boolean canEnter(Player player);
+
+    public void occupied(boolean state) {
+        isOccupied = state;
+    }
+
+    public abstract int[] calculateLocation(PlayerDisplay playerDisplay);
 }

@@ -1,8 +1,9 @@
 package game.tiles;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 import game.chits.Chit;
+import game.displays.PlayerDisplay;
 import game.tiles.strategies.DefaultSquareMoveStrategy;
 import game.tiles.strategies.SquareMoveStrategy;
 import game.tiles.strategies.SquareWithCaveMoveStrategy;
@@ -14,7 +15,6 @@ public class Square extends GameTile {
     private Square prev;
     private Square next;
     private SquareMoveStrategy strategy = new DefaultSquareMoveStrategy(this);
-    private boolean isOccupied;
 
     /**
      * Constructor.
@@ -63,26 +63,6 @@ public class Square extends GameTile {
     }
 
     /**
-     * Used by the Display to locate where to print the Position to the window
-     *
-     * @return the X coordinate of the location to print
-     */
-    @Override
-    public int getX() {
-        return 0;
-    }
-
-    /**
-     * Used by the Display to locate where to print the Position to the window
-     *
-     * @return the Y coordinate of the location to print
-     */
-    @Override
-    public int getY() {
-        return 0;
-    }
-
-    /**
      * Returns the desired MoveAction if it can be performed
      *
      * @param player the Player instance moving
@@ -103,6 +83,11 @@ public class Square extends GameTile {
     @Override
     public boolean canEnter(Player player) {
         return !isOccupied;
+    }
+
+    @Override
+    public int[] calculateLocation(PlayerDisplay playerDisplay) {
+        return playerDisplay.calculateSquareLocation(position);
     }
 
     public void setCave(Cave cave) {

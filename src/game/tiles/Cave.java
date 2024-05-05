@@ -1,8 +1,9 @@
 package game.tiles;
 
-import game.MoveAction;
 import game.Player;
+import game.actions.MoveAction;
 import game.chits.Chit;
+import game.displays.PlayerDisplay;
 
 /**
  * Class representing a Cave in the Volcano
@@ -49,27 +50,6 @@ public class Cave extends GameTile {
     }
 
     /**
-     * Used by the Display to locate where to print the Position to the window
-     *
-     * @return the X coordinate of the location to print
-     */
-    @Override
-    public int getX() {
-//        TODO: complete (double dispatch)
-        return 0;
-    }
-
-    /**
-     * Used by the Display to locate where to print the Position to the window
-     *
-     * @return the Y coordinate of the location to print
-     */
-    @Override
-    public int getY() {
-        return 0;
-    }
-
-    /**
      * Returns the desired MoveAction if it can be performed
      *
      * @param player the Player instance moving
@@ -83,8 +63,7 @@ public class Cave extends GameTile {
         }
 
         if (dist == 0) {
-//            TODO: update with correct constructor
-            return new MoveAction();
+            return new MoveAction(this, player);
         }
 
         if (dist > 0) {
@@ -103,5 +82,10 @@ public class Cave extends GameTile {
     @Override
     public boolean canEnter(Player player) {
         return canReturn && player == resident;
+    }
+
+    @Override
+    public int[] calculateLocation(PlayerDisplay playerDisplay) {
+        return playerDisplay.calculateCaveLocation(position);
     }
 }
