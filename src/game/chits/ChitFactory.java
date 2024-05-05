@@ -2,13 +2,16 @@ package game.chits;
 
 import game.chits.strategies.ChitStrategy;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.KeyException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Flyweight Factory for creating Chits
@@ -48,7 +51,10 @@ public class ChitFactory {
      *                     is read
      */
     public Chit setChit(char c, String path, ChitStrategy strategy) throws IOException {
-        List<String> detailed = Files.readAllLines(Paths.get(path));
+        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        List<String> detailed = bufferedReader.lines().collect(Collectors.toList());
+
         return setChit(c, detailed, strategy);
     }
 
