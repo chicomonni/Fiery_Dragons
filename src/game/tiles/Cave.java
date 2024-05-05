@@ -24,12 +24,12 @@ public class Cave extends GameTile {
     }
 
     /**
-     * Method to get the Player instance that resides in the Cave
+     * Method to check if a Player is this Cave's resident
      *
-     * @return the Player instance that resides in the Cave
+     * @return {@code true} if the Player instance resides in this Cave, {@code false} otherwise
      */
-    public Player getResident() {
-        return resident;
+    public boolean isResident(Player player) {
+        return player == resident;
     }
 
     /**
