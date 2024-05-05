@@ -32,7 +32,7 @@ public class Volcano {
 
         for (int i = 0; i < squares.length; i++) {
             Square current = Objects.requireNonNull(squares[i]);
-            Square prev = Objects.requireNonNull(squares[(i - 1) % squares.length]);
+            Square prev = Objects.requireNonNull(squares[Math.floorMod(i - 1, squares.length)]);
             Square next = Objects.requireNonNull(squares[(i + 1) % squares.length]);
 
             current.setPrev(prev);
