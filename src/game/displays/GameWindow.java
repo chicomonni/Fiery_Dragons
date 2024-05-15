@@ -24,8 +24,8 @@ public class GameWindow {
     public GameWindow() {
         try {
             initialise();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | FontFormatException e) {
+            throw new RuntimeException(e);
         }
     }
 
