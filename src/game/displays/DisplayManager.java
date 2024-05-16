@@ -16,8 +16,11 @@ public class DisplayManager {
      *
      * @param gameWindow the GameWindow instance controlled by the DisplayManager
      */
-    public DisplayManager(GameWindow gameWindow) {
+    public DisplayManager(GameWindow gameWindow, Board board, Player[] players) {
         this.gameWindow = gameWindow;
+        this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
+        this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
+        this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
     }
 
     public void displayMove(Player player) {
