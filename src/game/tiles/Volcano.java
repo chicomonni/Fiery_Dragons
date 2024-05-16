@@ -1,9 +1,7 @@
-package game;
+package game.tiles;
 
 import game.chits.Chit;
 import game.chits.ChitFactory;
-import game.tiles.Cave;
-import game.tiles.Square;
 
 import java.security.KeyException;
 import java.util.Objects;

@@ -2,6 +2,7 @@ package game;
 
 import game.chitCards.ChitCardArray;
 import game.chits.ChitFactory;
+import game.tiles.Volcano;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
