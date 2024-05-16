@@ -12,25 +12,25 @@ import java.io.InputStreamReader;
 import java.security.KeyException;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Class representing Fiery Dragon Board
  */
 public class Board {
-    private final Volcano volcano = new Volcano();
+    private final Volcano volcano;
     private final ChitCardArray chitCards = new ChitCardArray();
-    private final List<String> boardRep;
 
     /**
      * Constructor
      *
-     * @param path path to file containing the ASCII Board
+     * @param path path to file containing the ASCII Volcano
      */
     public Board(String path) {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        this.boardRep = bufferedReader.lines().collect(Collectors.toList());
+        List<String> volcanoASCII = bufferedReader.lines().toList();
+
+        this.volcano = new Volcano(volcanoASCII);
     }
 
     private void createVolcano(String squareSrc, String caveSrc, ChitFactory factory) {

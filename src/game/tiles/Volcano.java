@@ -10,8 +10,13 @@ import java.util.Objects;
  * Class representing the Volcano
  */
 public class Volcano {
-    private Square[] squares;
-    private Cave[] caves;
+    private final List<String> ASCIIRep;
+    private List<Square> squares;
+    private List<Cave> caves;
+
+    public Volcano(List<String> asciiRep) {
+        ASCIIRep = asciiRep;
+    }
 
     /**
      * Create the Squares on the Volcano from a String
@@ -87,5 +92,14 @@ public class Volcano {
      */
     public Square[] getSquares() {
         return squares.clone();
+    }
+
+    /**
+     * Getter for the ASCII art representing the Volcano, used by the displays
+     *
+     * @return the ASCII art representing the Volcano
+     */
+    public List<String> getASCIIRep() {
+        return ASCIIRep;
     }
 }
