@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Flyweight Factory for creating Chits
@@ -27,17 +26,10 @@ public class ChitFactory {
      * @param strategy the ChitStrategy associated with the Chit
      * @return the corresponding Chit instance
      */
-    public Chit setChit(char c, List<String> detailed, List<String> card, ChitStrategy strategy) {
-        Chit chit = chits.get(c);
-
-        if (chits.get(c) == null) {
-            chit = new Chit(c, detailed, card, strategy);
-            chits.put(c, chit);
-        }
-
-        return chit;
+    public Chit setChit(char c, char[][] detailed, char[][] card, ChitStrategy strategy) {
+        return chits.computeIfAbsent(c, c1 -> new Chit(c1, detailed, card, strategy));
     }
-
+    
     /**
      * If this Chit already exits, it will be returned, otherwise a new Chit is created with the information provided.
      * The detailed representation is read from a file.
