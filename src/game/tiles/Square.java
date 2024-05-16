@@ -1,7 +1,6 @@
 package game.tiles;
 
 import game.Player;
-import game.actions.MoveAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 import game.tiles.strategies.DefaultSquareMoveStrategy;
@@ -70,8 +69,19 @@ public class Square extends GameTile {
      * @return the desired MoveAction or {@code null} if it cannot be performed
      */
     @Override
-    public MoveAction move(Player player, int dist) {
-        return strategy.move(player, dist);
+    public boolean canMove(Player player, int dist) {
+        return strategy.canMove(player, dist);
+    }
+
+    /**
+     * Moves the Player the specified distance
+     *
+     * @param player the Player instance moving
+     * @param dist   how far the Player moves along the Volcano
+     */
+    @Override
+    public void move(Player player, int dist) {
+        strategy.move(player, dist);
     }
 
     /**
@@ -82,7 +92,7 @@ public class Square extends GameTile {
      */
     @Override
     public boolean canEnter(Player player) {
-        return !isOccupied;
+        return vacant;
     }
 
     @Override

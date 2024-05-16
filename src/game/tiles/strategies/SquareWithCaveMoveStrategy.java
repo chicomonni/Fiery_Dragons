@@ -1,7 +1,6 @@
 package game.tiles.strategies;
 
 import game.Player;
-import game.actions.MoveAction;
 import game.tiles.Cave;
 import game.tiles.Square;
 
@@ -22,38 +21,68 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
     }
 
     /**
-     * Returns the desired MoveAction if it can be performed
+     * Checks if Player can move a specified distance
      *
      * @param player the Player instance moving
      * @param dist   how far the Player moves along the Volcano
-     * @return the desired MoveAction or {@code null} if it cannot be performed
+     * @return {@code true} if Player can move, {@code false} otherwise
      */
     @Override
-    public MoveAction move(Player player, int dist) {
-        MoveAction action;
+    public boolean canMove(Player player, int dist) {
+        if (dist == 0) {
+            return square.canEnter(player);
+
+        } else if (dist > 0) {
+            // If they're moving forward, prioritise cave direction
+            if (cave.canEnter(player)) {
+                return cave.canMove(player, dist - 1);
+            }
+
+            return square.getNext().canMove(player, dist - 1);
+
+        } else {
+            return square.getNext().canMove(player, dist + 1);
+        }
+    }
+
+    /**
+     * Moves the Player the specified distance
+     *
+     * @param player the Player instance moving
+     * @param dist   how far the Player moves along the Volcano
+     */
+    @Override
+    public void move(Player player, int dist) {
+        if (player.getPosition() == square) {
+            square.setVacancy(true);
+        }
 
         if (dist == 0) {
-            action = square.canEnter(player) ? new MoveAction(square, player) : null;
+            player.setPosition(square);
+            square.setVacancy(false);
+
         } else if (dist > 0) {
+            // If they're moving forward, prioritise cave direction
             if (cave.canEnter(player)) {
-                return cave.move(player, dist - 1);
+                cave.move(player, dist - 1);
+                return;
+
             } else {
-                action = square.getNext().move(player, dist - 1);
+                square.getNext().move(player, dist - 1);
             }
 
             // If correct Player passes Cave, they should be able to return in the next loop (and win)
-            if (action != null && cave.isResident(player)) {
+            if (cave.isResident(player)) {
                 cave.setCanReturn(true);
             }
+
         } else {
-            action = square.getNext().move(player, dist - 1);
+            square.getNext().move(player, dist + 1);
 
             // If correct Player passes Cave backwards, they need to pass forward again to be allowed access
-            if (action != null && cave.isResident(player)) {
+            if (cave.isResident(player)) {
                 cave.setCanReturn(false);
             }
         }
-
-        return action;
     }
 }

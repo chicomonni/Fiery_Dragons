@@ -1,7 +1,6 @@
 package game.tiles;
 
 import game.Player;
-import game.actions.MoveAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
@@ -57,20 +56,41 @@ public class Cave extends GameTile {
      * @return the desired MoveAction or {@code null} if it cannot be performed
      */
     @Override
-    public MoveAction move(Player player, int dist) {
-        if (!canEnter(player)) {
-            return null;
+    public boolean canMove(Player player, int dist) {
+        // The only case where dist can be > 0 is if the player is currently in the cave
+        // (i.e. the first move to leave the cave)
+        if (dist > 0 && player.getPosition() == this) {
+            return next.canMove(player, dist - 1);
         }
 
+        // Can only enter a cave by exactly landing on it
+        return dist == 0;
+    }
+
+    /**
+     * Moves the Player the specified distance
+     *
+     * @param player the Player instance moving
+     * @param dist   how far the Player moves along the Volcano
+     */
+    @Override
+    public void move(Player player, int dist) {
+        if (player.getPosition() == this) {
+            this.setVacancy(true);
+
+            // The only case where dist can be > 0 is if the player is currently in the cave
+            // (i.e. the first move to leave the cave)
+            if (dist > 0) {
+                next.move(player, dist - 1);
+                return;
+            }
+        }
+
+        // Can only enter a cave by exactly landing on it
         if (dist == 0) {
-            return new MoveAction(this, player);
+            player.setPosition(this);
+            setVacancy(false);
         }
-
-        if (dist > 0) {
-            return next.move(player, dist - 1);
-        }
-
-        return null;
     }
 
     /**

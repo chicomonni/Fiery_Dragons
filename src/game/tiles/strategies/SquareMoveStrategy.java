@@ -1,18 +1,25 @@
 package game.tiles.strategies;
 
 import game.Player;
-import game.actions.MoveAction;
 
 /**
  * A strategy interface so that Square implementation can change at run-time
  */
 public interface SquareMoveStrategy {
     /**
-     * Returns the desired MoveAction if it can be performed
+     * Checks if Player can move a specified distance
      *
      * @param player the Player instance moving
      * @param dist   how far the Player moves along the Volcano
-     * @return the desired MoveAction or {@code null} if it cannot be performed
+     * @return {@code true} if Player can move, {@code false} otherwise
      */
-    MoveAction move(Player player, int dist);
+    boolean canMove(Player player, int dist);
+
+    /**
+     * Moves the Player the specified distance
+     *
+     * @param player the Player instance moving
+     * @param dist   how far the Player moves along the Volcano
+     */
+    void move(Player player, int dist);
 }
