@@ -9,18 +9,15 @@ import game.displays.PlayerDisplay;
  * Represents the abstract base class for all locations the Player can move to (e.g. Square, Cave)
  */
 public abstract class GameTile {
-    protected final int position;
     private final Chit chit;
     protected boolean vacant;
 
     /**
      * Constructor.
      *
-     * @param position an integer representing its position, so it can be located by the Display
-     * @param chit     the Chit instance associated with this tile
+     * @param chit the Chit instance associated with this tile
      */
-    protected GameTile(int position, Chit chit) {
-        this.position = position;
+    protected GameTile(Chit chit) {
         this.chit = chit;
     }
 
@@ -76,5 +73,11 @@ public abstract class GameTile {
         vacant = state;
     }
 
+    /**
+     * Double dispatch to calculate location of a specific GameTile subclass
+     *
+     * @param playerDisplay the playerDisplay initiating the dispatch
+     * @return an int array containing the coordinates (x, y)
+     */
     public abstract int[] calculateLocation(PlayerDisplay playerDisplay);
 }

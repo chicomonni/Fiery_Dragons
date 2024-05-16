@@ -15,11 +15,11 @@ public class Cave extends GameTile {
     /**
      * Constructor
      *
-     * @param next the Square connected to the Cave
      * @param chit the Chit associated with this cave
+     * @param next the Square connected to the Cave
      */
-    public Cave(int position, Chit chit, Square next) {
-        super(position, chit);
+    public Cave(Chit chit, Square next) {
+        super(chit);
         this.next = next;
     }
 
@@ -104,8 +104,14 @@ public class Cave extends GameTile {
         return canReturn && player == resident;
     }
 
+    /**
+     * Double dispatch to calculate location of a specific GameTile subclass
+     *
+     * @param playerDisplay the playerDisplay initiating the dispatch
+     * @return an int array containing the coordinates (x, y)
+     */
     @Override
     public int[] calculateLocation(PlayerDisplay playerDisplay) {
-        return playerDisplay.calculateCaveLocation(position);
+        return playerDisplay.calculateLocation(this);
     }
 }

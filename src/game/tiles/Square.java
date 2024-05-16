@@ -18,11 +18,10 @@ public class Square extends GameTile {
     /**
      * Constructor.
      *
-     * @param position an integer representing its position, so it can be located by the Display
-     * @param chit     the Chit instance associated with this tile
+     * @param chit the Chit instance associated with this tile
      */
-    public Square(int position, Chit chit) {
-        super(position, chit);
+    public Square(Chit chit) {
+        super(chit);
     }
 
     /**
@@ -95,9 +94,15 @@ public class Square extends GameTile {
         return vacant;
     }
 
+    /**
+     * Double dispatch to calculate location of a specific GameTile subclass
+     *
+     * @param playerDisplay the playerDisplay initiating the dispatch
+     * @return an int array containing the coordinates (x, y)
+     */
     @Override
     public int[] calculateLocation(PlayerDisplay playerDisplay) {
-        return playerDisplay.calculateSquareLocation(position);
+        return playerDisplay.calculateLocation(this);
     }
 
     public void setCave(Cave cave) {
