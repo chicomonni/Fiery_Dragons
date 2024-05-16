@@ -21,7 +21,7 @@ public class DisplayManager {
     }
 
     public void createBoard(Board board) {
-        volcanoDisplay = new VolcanoDisplay(board.getBoardRep(), gameWindow);
+        volcanoDisplay = new VolcanoDisplay(board.getASCIIRep(), gameWindow);
         playerDisplay = new PlayerDisplay(board.getNoSquares(), board.getNoCaves());
     }
 
