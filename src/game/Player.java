@@ -39,4 +39,13 @@ public class Player {
     public void setPosition(GameTile position) {
         this.position = position;
     }
+
+    /**
+     * Set the Player who will have their turn after this Player
+     *
+     * @param nextPlayer the next Player instance
+     */
+    public void setNextPlayer(Player nextPlayer) {
+        this.nextPlayer = nextPlayer;
+    }
 }
