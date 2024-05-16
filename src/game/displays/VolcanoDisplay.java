@@ -22,7 +22,8 @@ public class VolcanoDisplay {
     /**
      * Constructor
      *
-     * @param volcano the ASCII art representation of the Volcano
+     * @param volcano    the Volcano instance used by the game
+     * @param gameWindow the GameWindow instance this class affects
      */
     public VolcanoDisplay(Volcano volcano, GameWindow gameWindow) {
         this.volcano = volcano;
