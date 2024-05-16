@@ -61,7 +61,6 @@ public class GameWindow {
 
         // Initialise container for the Volcano and add the component to the window
         volcano.setPreferredSize(new Dimension((int) (107 * FONT_SIZE), (int) (107 * (FONT_SIZE + 1))));
-        volcano.setBackground(Color.RED);
         volcano.setOpaque(true);
         container.add(volcano, constraints);
 
