@@ -15,6 +15,9 @@ import java.util.Map;
 
 import static java.lang.Math.*;
 
+/**
+ * Class used to update the display of the Players
+ */
 public class PlayerDisplay {
     private final Map<Player, JTextArea> playerPlanes = new HashMap<>();
     private final JLayeredPane volcanoContainer;
