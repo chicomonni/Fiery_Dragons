@@ -12,10 +12,10 @@ import java.io.IOException;
  * Class responsible for initiating the game
  */
 public class FieryDragons {
-    public static final DisplayManager display = new DisplayManager(new GameWindow());
     private static final String SQUARE_SRC = "S0w*SSw**w0*0S0*wS0w0S*w";
     private static final String CAVE_SRC = "S*w0";
-    private static final String CARD_SRC = "S1S2S3w1w2w3*1*2*3010203P1P1P2P2";
+    private static final String CARD_SRC = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private final DisplayManager display = new DisplayManager(new GameWindow());
     private final ChitFactory chitFactory = new ChitFactory();
     private Board board;
     private Player player1;
