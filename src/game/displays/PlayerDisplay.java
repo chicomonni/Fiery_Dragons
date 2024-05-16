@@ -28,16 +28,35 @@ public class PlayerDisplay {
         return tile.calculateLocation(this);
     }
 
-    public int[] calculateCaveLocation(int i) {
-//        int x = (int) (44 * sin(i * 2 * PI / noSquare) + 41);
-//        int y = (int) (44 * cos(i * 2 * PI / noSquare) + 41);
+    /**
+     * Double dispatch to calculate location of a specific GameTile subclass (Cave)
+     *
+     * @param cave the Cave to locate
+     * @return an int array containing the coordinates (x, y)
+     */
+    public int[] calculateLocation(Cave cave) {
+        List<Square> squares = volcano.getSquares();
+        List<Cave> caves = volcano.getCaves();
+
+        int numSquares = squares.size();
+        int numCaves = caves.size();
 
         return new int[]{0, 0};
     }
 
-    public int[] calculateSquareLocation(int i) {
-        int x = (int) (-27 * sin(i * 2 * PI / noSquare) + 40);
-        int y = (int) (27 * cos(i * 2 * PI / noSquare) + 40);
+    /**
+     * Double dispatch to calculate location of a specific GameTile subclass (Square)
+     *
+     * @param square the Square to locate
+     * @return an int array containing the coordinates (x, y)
+     */
+    public int[] calculateLocation(Square square) {
+        List<Square> squares = volcano.getSquares();
+        int numSquares = squares.size();
+        int idx = squares.indexOf(square);
+
+        int x = (int) round(27 * cos(idx * 2 * PI / numSquares) + 53);
+        int y = (int) round(-27 * sin(idx * 2 * PI / numSquares) + 53);
 
         return new int[]{x, y};
     }
