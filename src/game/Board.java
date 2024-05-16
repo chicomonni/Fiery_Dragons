@@ -64,7 +64,7 @@ public class Board {
         return volcano.getNoSquares();
     }
 
-    public List<String> getBoardRep() {
+    public List<String> getASCIIRep() {
         return boardRep;
     }
 }
