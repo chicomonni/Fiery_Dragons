@@ -4,12 +4,12 @@ import game.chits.Chit;
 import game.chits.ChitFactory;
 
 import java.security.KeyException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ChitCardArray {
-    private ChitCard[] chitCards;
+    private List<ChitCard> chitCards;
 
     public void createCards(String src, ChitFactory factory) throws KeyException {
         chitCards = new ChitCard[src.length() / 2];
@@ -21,12 +21,10 @@ public class ChitCardArray {
     }
 
     public void flip(int i) {
-        chitCards[i - 1].flip();
+        chitCards.get(i - 1).flip();
     }
 
     public void randomise() {
-        List<ChitCard> list = Arrays.asList(chitCards);
-        Collections.shuffle(list);
-        list.toArray(chitCards);
+        Collections.shuffle(chitCards);
     }
 }

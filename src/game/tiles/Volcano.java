@@ -4,6 +4,8 @@ import game.chits.Chit;
 import game.chits.ChitFactory;
 
 import java.security.KeyException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,17 +28,17 @@ public class Volcano {
      * @throws KeyException if char in src is not recognised by the ChitFactory
      */
     private void createSquares(String src, ChitFactory factory) throws KeyException {
-        squares = new Square[src.length()];
+        squares = new ArrayList<>(src.length());
 
         for (int i = 0; i < src.length(); i++) {
             Chit chit = factory.getChit(src.charAt(i));
-            squares[i] = new Square(i, chit);
+            squares.add(new Square(i, chit));
         }
 
-        for (int i = 0; i < squares.length; i++) {
-            Square current = squares[i];
-            Square prev = squares[Math.floorMod(i - 1, squares.length)];
-            Square next = squares[(i + 1) % squares.length];
+        for (int i = 0; i < squares.size(); i++) {
+            Square current = squares.get(i);
+            Square prev = squares.get(Math.floorMod(i - 1, squares.size()));
+            Square next = squares.get((i + 1) % squares.size());
 
             current.setPrev(prev);
             current.setNext(next);
@@ -51,12 +53,12 @@ public class Volcano {
      * @throws KeyException if char in src is not recognised by the ChitFactory
      */
     private void createCaves(String src, ChitFactory factory) throws KeyException {
-        caves = new Cave[src.length()];
+        caves = new ArrayList<>(src.length());
 
-        for (int i = 0; i < caves.length; i++) {
+        for (int i = 0; i < src.length(); i++) {
             Chit chit = factory.getChit(src.charAt(i));
-            int squareIdx = (i * squares.length) / caves.length;
-            caves[i] = new Cave(i, chit, Objects.requireNonNull(squares[squareIdx]));
+            int squareIdx = (i * squares.size()) / src.length();
+            caves.add(new Cave(i, chit, Objects.requireNonNull(squares.get(squareIdx))));
         }
     }
 
@@ -77,21 +79,21 @@ public class Volcano {
     }
 
     /**
-     * Getter for array of Caves on Volcano
+     * Getter for list of Caves on Volcano
      *
-     * @return an array of all Caves on the Volcano
+     * @return a list of all Caves on the Volcano
      */
-    public Cave[] getCaves() {
-        return caves.clone();
+    public List<Cave> getCaves() {
+        return new ArrayList<>(caves);
     }
 
     /**
-     * Getter for array of Squares on Volcano
+     * Getter for list of Squares on Volcano
      *
-     * @return an array of all Squares on the Volcano
+     * @return a list of all Squares on the Volcano
      */
-    public Square[] getSquares() {
-        return squares.clone();
+    public List<Square> getSquares() {
+        return new ArrayList<>(squares);
     }
 
     /**

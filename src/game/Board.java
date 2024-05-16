@@ -59,20 +59,20 @@ public class Board {
     }
 
     /**
-     * Getter for array of Caves on Volcano
+     * Getter for list of Caves on Volcano
      *
-     * @return an array of all Caves on the Volcano
+     * @return a list of all Caves on the Volcano
      */
-    public Cave[] getCaves() {
+    public List<Cave> getCaves() {
         return volcano.getCaves();
     }
 
     /**
-     * Getter for array of Squares on Volcano
+     * Getter for list of Squares on Volcano
      *
-     * @return an array of all Squares on the Volcano
+     * @return a list of all Squares on the Volcano
      */
-    public Square[] getSquares() {
+    public List<Square> getSquares() {
         return volcano.getSquares();
     }
 

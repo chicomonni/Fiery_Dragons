@@ -8,6 +8,7 @@ import game.displays.GameWindow;
 import game.tiles.Cave;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -44,15 +45,17 @@ public class FieryDragons {
     }
 
     private void createPlayers() {
-        Cave[] caves = board.getCaves();
+        List<Cave> caves = board.getCaves();
         Player[] players = new Player[NUM_PLAYERS];
-        assert players.length <= caves.length : "Not enough caves for all players";
+        assert players.length <= caves.size() : "Not enough caves for all players";
 
+        // Create Players and assign them to Caves
         for (int i = 0; i < players.length; i++) {
-            players[i] = new Player("Player " + (i + 1), Objects.requireNonNull(caves[0]));
-            caves[0].setResident(players[i]);
+            players[i] = new Player("Player " + (i + 1), Objects.requireNonNull(caves.get(0)));
+            caves.get(0).setResident(players[i]);
         }
 
+        // Link Players sequentially so they can have turns
         for (int i = 0; i < players.length; i++) {
             players[i].setNextPlayer(players[(i + 1) % players.length]);
         }
