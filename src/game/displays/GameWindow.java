@@ -14,10 +14,10 @@ public class GameWindow {
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private static final float FONT_SIZE = 5f;
-    final JLayeredPane volcano = new JLayeredPane();
-    final JPanel chitCards = new JPanel();
-    final JPanel input = new JPanel();
-    final JPanel header = new JPanel();
+    private final JLayeredPane volcano = new JLayeredPane();
+    private final JPanel chitCards = new JPanel();
+    private final JPanel input = new JPanel();
+    private final JPanel header = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
 
     /**
