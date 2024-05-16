@@ -56,12 +56,22 @@ public class Board {
         createChitCards(cardSrc, factory);
     }
 
-    public int getNoCaves() {
-        return volcano.getNoCaves();
+    /**
+     * Getter for array of Caves on Volcano
+     *
+     * @return an array of all Caves on the Volcano
+     */
+    public Cave[] getCaves() {
+        return volcano.getCaves();
     }
 
-    public int getNoSquares() {
-        return volcano.getNoSquares();
+    /**
+     * Getter for array of Squares on Volcano
+     *
+     * @return an array of all Squares on the Volcano
+     */
+    public Square[] getSquares() {
+        return volcano.getSquares();
     }
 
     public List<String> getASCIIRep() {

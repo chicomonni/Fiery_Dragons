@@ -29,9 +29,9 @@ public class Volcano {
         }
 
         for (int i = 0; i < squares.length; i++) {
-            Square current = Objects.requireNonNull(squares[i]);
-            Square prev = Objects.requireNonNull(squares[Math.floorMod(i - 1, squares.length)]);
-            Square next = Objects.requireNonNull(squares[(i + 1) % squares.length]);
+            Square current = squares[i];
+            Square prev = squares[Math.floorMod(i - 1, squares.length)];
+            Square next = squares[(i + 1) % squares.length];
 
             current.setPrev(prev);
             current.setNext(next);
@@ -71,11 +71,21 @@ public class Volcano {
         }
     }
 
-    public int getNoCaves() {
-        return caves.length;
+    /**
+     * Getter for array of Caves on Volcano
+     *
+     * @return an array of all Caves on the Volcano
+     */
+    public Cave[] getCaves() {
+        return caves.clone();
     }
 
-    public int getNoSquares() {
-        return squares.length;
+    /**
+     * Getter for array of Squares on Volcano
+     *
+     * @return an array of all Squares on the Volcano
+     */
+    public Square[] getSquares() {
+        return squares.clone();
     }
 }
