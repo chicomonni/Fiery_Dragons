@@ -24,19 +24,35 @@ public class FieryDragons {
     private Board board;
     private Player player1;
 
-    /**
-     * Method for initialising all the Chits in the game
-     */
     private void createChits() {
-        try {
-            chitFactory.setChit('w', "/assets/CardBat.txt", new AnimalChitStrategy());
-            chitFactory.setChit('0', "/assets/CardDragon.txt", new AnimalChitStrategy());
-            chitFactory.setChit('S', "/assets/CardSalamander.txt", new AnimalChitStrategy());
-            chitFactory.setChit('*', "/assets/CardSpider.txt", new AnimalChitStrategy());
-            chitFactory.setChit('P', "/assets/CardPirate.txt", new PirateChitStrategy());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        chitFactory.setChit(
+                'w',
+                "/assets/detailed/Bat.txt",
+                "/assets/cards/Bat.txt",
+                new AnimalChitStrategy()
+        );
+        chitFactory.setChit(
+                '0',
+                "/assets/detailed/Dragon.txt",
+                "/assets/cards/Dragon.txt",
+                new AnimalChitStrategy()
+        );
+        chitFactory.setChit('S',
+                "/assets/detailed/Salamander.txt",
+                "/assets/cards/Salamander.txt",
+                new AnimalChitStrategy()
+        );
+        chitFactory.setChit('*',
+                "/assets/detailed/Spider.txt",
+                "/assets/cards/Spider.txt",
+                new AnimalChitStrategy()
+        );
+        chitFactory.setChit(
+                'P',
+                "/assets/detailed/Pirate.txt",
+                "/assets/cards/Pirate.txt",
+                new PirateChitStrategy()
+        );
     }
 
     private void createBoard() {
