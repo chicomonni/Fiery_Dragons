@@ -2,8 +2,6 @@ package game.chits;
 
 import game.chits.strategies.ChitStrategy;
 
-import java.util.List;
-
 /**
  * Shared flyweight class representing chits
  */
@@ -62,7 +60,7 @@ public class Chit {
      *
      * @return detailed representation of this Chit
      */
-    public List<String> getDisplayDetail() {
+    public char[][] getDisplayDetail() {
         return displayDetail;
     }
 
@@ -71,7 +69,7 @@ public class Chit {
      *
      * @return card representation of this Chit
      */
-    public List<String> getDisplayCard() {
+    public char[][] getDisplayCard() {
         return displayCard;
     }
 }
