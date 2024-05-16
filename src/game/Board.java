@@ -28,9 +28,16 @@ public class Board {
     public Board(String path) {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        List<String> volcanoASCII = bufferedReader.lines().toList();
+        List<String> lines = bufferedReader.lines().toList();
 
-        this.volcano = new Volcano(volcanoASCII);
+        char[][] chars = new char[lines.size()][];
+
+        for (int i = 0; i < lines.size(); i++) {
+            String s = lines.get(i);
+            chars[i] = s.toCharArray();
+        }
+
+        this.volcano = new Volcano(chars);
     }
 
     private void createVolcano(String squareSrc, String caveSrc, ChitFactory factory) {

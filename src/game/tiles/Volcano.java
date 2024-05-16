@@ -12,11 +12,11 @@ import java.util.Objects;
  * Class representing the Volcano
  */
 public class Volcano {
-    private final List<String> ASCIIRep;
+    private final char[][] ASCIIRep;
     private List<Square> squares;
     private List<Cave> caves;
 
-    public Volcano(List<String> asciiRep) {
+    public Volcano(char[][] asciiRep) {
         ASCIIRep = asciiRep;
     }
 
@@ -99,9 +99,16 @@ public class Volcano {
     /**
      * Getter for the ASCII art representing the Volcano, used by the displays
      *
-     * @return the ASCII art representing the Volcano
+     * @return a copy of the ASCII art representing the Volcano
      */
-    public List<String> getASCIIRep() {
-        return ASCIIRep;
+    public char[][] getASCIIRep() {
+        char[][] clone = new char[ASCIIRep.length][];
+
+        for (int i = 0; i < ASCIIRep.length; i++) {
+            char[] chars = ASCIIRep[i];
+            clone[i] = chars.clone();
+        }
+
+        return clone;
     }
 }
