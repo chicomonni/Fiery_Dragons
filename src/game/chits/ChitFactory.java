@@ -52,10 +52,17 @@ public class ChitFactory {
         return setChit(c, getStrings(detailedPath), getStrings(cardPath), strategy);
     }
 
-    private List<String> getStrings(String path) {
+    private char[][] getStrings(String path) {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        return bufferedReader.lines().collect(Collectors.toList());
+        List<String> lines = bufferedReader.lines().toList();
+        char[][] chars = new char[lines.size()][];
+
+        for (int i = 0; i < lines.size(); i++) {
+            String s = lines.get(i);
+            chars[i] = s.toCharArray();
+        }
+        return chars;
     }
 
     /**
