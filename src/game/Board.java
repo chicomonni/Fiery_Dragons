@@ -76,7 +76,12 @@ public class Board {
         return volcano.getSquares();
     }
 
-    public List<String> getASCIIRep() {
-        return boardRep;
+    /**
+     * Getter for Volcano
+     *
+     * @return a Volcano instance
+     */
+    public Volcano getVolcano() {
+        return volcano;
     }
 }
