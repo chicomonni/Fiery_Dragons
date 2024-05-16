@@ -12,11 +12,12 @@ public class ChitCardArray {
     private List<ChitCard> chitCards;
 
     public void createCards(String src, ChitFactory factory) throws KeyException {
-        chitCards = new ChitCard[src.length() / 2];
+        String[] splitSrc = src.split(",");
+        chitCards = new ArrayList<>(splitSrc.length);
 
-        for (int i = 0; i < src.length() - 2; i += 2) {
-            Chit chit = factory.getChit(src.charAt(i));
-            chitCards[i / 2] = new ChitCard(chit, Character.getNumericValue(src.charAt(i + 1)));
+        for (String s : splitSrc) {
+            Chit chit = factory.getChit(s.charAt(0));
+            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
         }
     }
 
