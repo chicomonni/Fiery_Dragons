@@ -91,4 +91,8 @@ public class Board {
     public Volcano getVolcano() {
         return volcano;
     }
+
+    public ChitCardArray getChitCards() {
+        return chitCards;
+    }
 }
