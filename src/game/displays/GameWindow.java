@@ -99,4 +99,13 @@ public class GameWindow {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
+
+    /**
+     * Getter for the swing component that displays the Volcano
+     *
+     * @return swing component that displays the Volcano
+     */
+    public JLayeredPane getVolcanoComponent() {
+        return volcano;
+    }
 }
