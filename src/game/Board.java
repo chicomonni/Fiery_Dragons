@@ -2,6 +2,8 @@ package game;
 
 import game.chitCards.ChitCardArray;
 import game.chits.ChitFactory;
+import game.tiles.Cave;
+import game.tiles.Square;
 import game.tiles.Volcano;
 
 import java.io.BufferedReader;
