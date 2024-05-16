@@ -3,7 +3,6 @@ package game.chits;
 import game.chits.strategies.ChitStrategy;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.KeyException;
@@ -28,11 +27,11 @@ public class ChitFactory {
      * @param strategy the ChitStrategy associated with the Chit
      * @return the corresponding Chit instance
      */
-    public Chit setChit(char c, List<String> detailed, ChitStrategy strategy) {
+    public Chit setChit(char c, List<String> detailed, List<String> card, ChitStrategy strategy) {
         Chit chit = chits.get(c);
 
         if (chits.get(c) == null) {
-            chit = new Chit(c, detailed, strategy);
+            chit = new Chit(c, detailed, card, strategy);
             chits.put(c, chit);
         }
 
@@ -43,19 +42,20 @@ public class ChitFactory {
      * If this Chit already exits, it will be returned, otherwise a new Chit is created with the information provided.
      * The detailed representation is read from a file.
      *
-     * @param c        the character representation of the Chit
-     * @param path     the path to the file containing the detailed representation
-     * @param strategy the ChitStrategy associated with the Chit
+     * @param c            the character representation of the Chit
+     * @param detailedPath the path to the file containing the detailed representation
+     * @param cardPath     the path to the file containing the card representation
+     * @param strategy     the ChitStrategy associated with the Chit
      * @return the corresponding Chit instance
-     * @throws IOException if an I/O error occurs reading from the file or a malformed or unmappable byte sequence
-     *                     is read
      */
-    public Chit setChit(char c, String path, ChitStrategy strategy) throws IOException {
+    public Chit setChit(char c, String detailedPath, String cardPath, ChitStrategy strategy) {
+        return setChit(c, getStrings(detailedPath), getStrings(cardPath), strategy);
+    }
+
+    private List<String> getStrings(String path) {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        List<String> detailed = bufferedReader.lines().collect(Collectors.toList());
-
-        return setChit(c, detailed, strategy);
+        return bufferedReader.lines().collect(Collectors.toList());
     }
 
     /**

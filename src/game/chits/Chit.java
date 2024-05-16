@@ -10,6 +10,7 @@ import java.util.List;
 public class Chit {
     private final char displayChar;
     private final List<String> displayDetail;
+    private final List<String> displayCard;
     private final ChitStrategy strategy;
 
     /**
@@ -20,9 +21,10 @@ public class Chit {
      *                      represents a new line of the representation.
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
      */
-    Chit(char displayChar, List<String> displayDetail, ChitStrategy strategy) {
+    Chit(char displayChar, List<String> displayDetail, List<String> displayCard, ChitStrategy strategy) {
         this.displayChar = displayChar;
         this.displayDetail = displayDetail;
+        this.displayCard = displayCard;
         this.strategy = strategy;
     }
 
@@ -62,5 +64,14 @@ public class Chit {
      */
     public List<String> getDisplayDetail() {
         return displayDetail;
+    }
+
+    /**
+     * Get card representation of this Chit
+     *
+     * @return card representation of this Chit
+     */
+    public List<String> getDisplayCard() {
+        return displayCard;
     }
 }
