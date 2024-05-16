@@ -2,14 +2,16 @@ package game.displays;
 
 import game.Board;
 import game.Player;
+import game.chitCards.ChitCard;
 
 /**
  * A Facade for interacting with the game Displays and Window
  */
 public class DisplayManager {
     private final GameWindow gameWindow;
-    private VolcanoDisplay volcanoDisplay;
-    private PlayerDisplay playerDisplay;
+    private final VolcanoDisplay volcanoDisplay;
+    private final PlayerDisplay playerDisplay;
+    private final ChitCardDisplay cardDisplay;
 
     /**
      * Constructor
@@ -25,5 +27,9 @@ public class DisplayManager {
 
     public void displayMove(Player player) {
         playerDisplay.update(player);
+    }
+
+    public void displayFlip(ChitCard card) {
+        cardDisplay.update(card);
     }
 }
