@@ -6,7 +6,6 @@ import game.chits.ChitFactory;
 import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class representing the Volcano
@@ -32,7 +31,7 @@ public class Volcano {
 
         for (int i = 0; i < src.length(); i++) {
             Chit chit = factory.getChit(src.charAt(i));
-            squares.add(new Square(i, chit));
+            squares.add(new Square(chit));
         }
 
         for (int i = 0; i < squares.size(); i++) {
@@ -57,8 +56,13 @@ public class Volcano {
 
         for (int i = 0; i < src.length(); i++) {
             Chit chit = factory.getChit(src.charAt(i));
+
             int squareIdx = (i * squares.size()) / src.length();
-            caves.add(new Cave(i, chit, Objects.requireNonNull(squares.get(squareIdx))));
+            Square square = squares.get(squareIdx);
+
+            Cave cave = new Cave(chit, square);
+            caves.add(cave);
+            square.setCave(cave);
         }
     }
 
