@@ -54,24 +54,24 @@ public class GameWindow {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.insets = new Insets(5, 10, 5, 5);
+        constraints.insets = new Insets(5, 10, 5, 20);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 1;
 
         // Initialise container for the Volcano and add the component to the window
         volcano.setPreferredSize(new Dimension((int) (107 * FONT_SIZE), (int) (107 * (FONT_SIZE + 1))));
-        volcano.setOpaque(true);
+//        volcano.setBorder(new LineBorder(Color.WHITE, 5));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(5, 5, 5, 10);
+        constraints.insets = new Insets(5, 20, 5, 55);
         constraints.gridx = 1;
         constraints.gridy = 1;
 
         // Initialise container for the Chit Cards and add the component to the window
-//        chitCards.setOpaque(false);
-        chitCards.setPreferredSize(new Dimension((int) ceil(53 * FONT_SIZE), 20));
-        chitCards.setBackground(Color.BLUE);
+        chitCards.setOpaque(false);
+        chitCards.setPreferredSize(new Dimension((int) ceil(11 * FONT_SIZE * 4 + 30 * 3), 20));
+        chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
         constraints.insets = new Insets(5, 10, 10, 10);
@@ -107,5 +107,14 @@ public class GameWindow {
      */
     public JLayeredPane getVolcanoComponent() {
         return volcano;
+    }
+
+    /**
+     * Getter for the swing component that displays the ChitCards
+     *
+     * @return swing component that displays the ChitCards
+     */
+    public JPanel getChitCardsComponent() {
+        return chitCards;
     }
 }
