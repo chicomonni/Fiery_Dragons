@@ -20,12 +20,7 @@ public class DisplayManager {
         this.gameWindow = gameWindow;
     }
 
-    public void createBoard(Board board) {
-        volcanoDisplay = new VolcanoDisplay(board.getASCIIRep(), gameWindow);
-        playerDisplay = new PlayerDisplay(board.getNoSquares(), board.getNoCaves());
-    }
-
     public void displayMove(Player player) {
-//        TODO: implement
+        playerDisplay.update(player);
     }
 }
