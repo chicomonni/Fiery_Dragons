@@ -6,15 +6,16 @@ import java.awt.*;
 import java.util.Random;
 
 public class Player {
-    public final Color colour = new Color(Color.HSBtoRGB(new Random().nextInt(360), 100, 50));
-    public final char displayChar = '@';
+    private final Color colour;
+    private final char displayChar = '@';
     private final String name;
     private GameTile position;
     private Player nextPlayer;
 
-    public Player(String name, GameTile position) {
+    public Player(String name, GameTile position, float hue) {
         this.name = name;
         this.position = position;
+        this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
     }
 
     private void executeAction(Board board) {
@@ -47,5 +48,32 @@ public class Player {
      */
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
+    }
+
+    /**
+     * Get colour associated with this Player
+     *
+     * @return colour associated with this Player
+     */
+    public Color getColour() {
+        return colour;
+    }
+
+    /**
+     * Get this Player's display character
+     *
+     * @return this Player's display character
+     */
+    public char getDisplayChar() {
+        return displayChar;
+    }
+
+    /**
+     * Get this Player's name
+     *
+     * @return this Player's name
+     */
+    public String getName() {
+        return name;
     }
 }
