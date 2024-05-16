@@ -42,7 +42,8 @@ public class GameWindow {
                 Font.TRUETYPE_FONT,
                 Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
         );
-
+        // TODO: remove colours used for testing
+        // Adjust default font on text components
         UIManager.put("Label.font", font.deriveFont(FONT_SIZE));
         UIManager.put("TextPane.font", font.deriveFont(FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(FONT_SIZE));
@@ -58,6 +59,7 @@ public class GameWindow {
         constraints.gridx = 0;
         constraints.gridy = 1;
 
+        // Initialise container for the Volcano and add the component to the window
         volcano.setPreferredSize(new Dimension((int) (107 * FONT_SIZE), (int) (107 * (FONT_SIZE + 1))));
         volcano.setBackground(Color.RED);
         volcano.setOpaque(true);
@@ -67,6 +69,7 @@ public class GameWindow {
         constraints.gridx = 1;
         constraints.gridy = 1;
 
+        // Initialise container for the Chit Cards and add the component to the window
 //        chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension((int) ceil(53 * FONT_SIZE), 20));
         chitCards.setBackground(Color.BLUE);
@@ -77,6 +80,7 @@ public class GameWindow {
         constraints.gridx = 0;
         constraints.gridy = 2;
 
+        // Initialise container for the input and add the component to the window
 //        input.setOpaque(false);
         input.setBackground(Color.YELLOW);
         input.setPreferredSize(new Dimension(32, 32));
@@ -85,6 +89,7 @@ public class GameWindow {
         constraints.insets = new Insets(10, 10, 5, 10);
         constraints.gridy = 0;
 
+        // Initialise container for the header and add the component to the window
         header.setBackground(Color.YELLOW);
         header.setPreferredSize(new Dimension(32, 32));
         container.add(header, constraints);
