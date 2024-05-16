@@ -56,7 +56,7 @@ public class FieryDragons {
     }
 
     private void createBoard() {
-        board = new Board("/assets/Board.txt");
+        board = new Board("/assets/Volcano.txt");
         board.createBoard(SQUARE_SRC, CAVE_SRC, CARD_SRC, chitFactory);
     }
 
