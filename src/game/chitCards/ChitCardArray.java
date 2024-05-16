@@ -19,6 +19,8 @@ public class ChitCardArray {
             Chit chit = factory.getChit(s.charAt(0));
             chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
         }
+
+        randomise();
     }
 
     public void flip(int i) {
@@ -27,5 +29,9 @@ public class ChitCardArray {
 
     public void randomise() {
         Collections.shuffle(chitCards);
+    }
+
+    public List<ChitCard> getChitCards() {
+        return chitCards;
     }
 }
