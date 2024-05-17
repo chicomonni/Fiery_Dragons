@@ -2,12 +2,12 @@ package spike;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 class GameWindow {
     private final String gameName;
-    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, new File("MxPlus_IBM_BIOS.ttf"));
+    private final Font squareFont = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(getClass().getResourceAsStream("/MxPlus_IBM_BIOS.ttf")));
     private JFrame frame;
     private JLabel label;
 
