@@ -7,6 +7,7 @@ import game.chits.strategies.ChitStrategy;
  */
 public class Chit {
     private final char displayChar;
+    private final String name;
     private final char[][] displayDetail;
     private final char[][] displayCard;
     private final ChitStrategy strategy;
@@ -15,12 +16,14 @@ public class Chit {
      * Constructor used by ChitFactory
      *
      * @param displayChar   the single character representation of the chit, for the Volcano
-     * @param displayDetail the detailed representation of the chit, for the ChitCards. Each entry in the List
-     *                      represents a new line of the representation.
+     * @param name          the name of this Chit, for the GameWindow
+     * @param displayDetail the detailed representation of the chit, for the Caves
+     * @param displayCard   the card representation of the chit, for the ChitCards
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
      */
-    Chit(char displayChar, char[][] displayDetail, char[][] displayCard, ChitStrategy strategy) {
+    Chit(char displayChar, String name, char[][] displayDetail, char[][] displayCard, ChitStrategy strategy) {
         this.displayChar = displayChar;
+        this.name = name;
         this.displayDetail = displayDetail;
         this.displayCard = displayCard;
         this.strategy = strategy;
@@ -71,5 +74,14 @@ public class Chit {
      */
     public char[][] getDisplayCard() {
         return displayCard;
+    }
+
+    /**
+     * Get name of this Chit
+     *
+     * @return name of this Chit
+     */
+    public String getName() {
+        return name;
     }
 }
