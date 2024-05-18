@@ -4,7 +4,6 @@ import game.FieryDragons;
 import utils.Typing;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
@@ -24,7 +23,6 @@ public class GameWindow {
     private final JFrame window = new JFrame(GAME_NAME);
     private JTextField prompt = new JTextField();
     private JTextField playerInput = new JTextField();
-
 
 
     /**
@@ -54,6 +52,8 @@ public class GameWindow {
         UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
+//        UIManager.put("FormattedTextField.font", font.deriveFont(FOOTER_FONT_SIZE));
+//        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
         prompt.setFont(font.deriveFont(FOOTER_FONT_SIZE));
         playerInput.setFont(font.deriveFont(FOOTER_FONT_SIZE));
 
@@ -93,7 +93,6 @@ public class GameWindow {
         //add prompt text stuff
 //        prompt.setText("Enter your command...");
         prompt.setEditable(false);
-        prompt.setOpaque(false);
         prompt.setForeground(Color.WHITE);
         prompt.setBackground(Color.BLACK);
 
@@ -116,30 +115,22 @@ public class GameWindow {
 
 
         // Add player input text field
-        JPanel inputPanel = new JPanel(new BorderLayout());
-        playerInput.setPreferredSize(new Dimension(300, 30)); // Adjust dimensions as needed
+        playerInput.setPreferredSize(new Dimension(1, 30)); // Adjust dimensions as needed
         playerInput.setEditable(true);
         playerInput.setOpaque(false);
+        playerInput.setBorder(null);
         playerInput.setForeground(Color.WHITE);
-        playerInput.setBackground(Color.BLACK);
+        playerInput.setToolTipText("Enter Move");
 
-        // Create a matte border with the same color as the background (black)
-        Border border = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK);
-        inputPanel.setBorder(border); // Set the border to the input panel
-
-       // Add player input to the input panel
-        inputPanel.add(playerInput, BorderLayout.SOUTH);
-        footer.add(inputPanel, BorderLayout.SOUTH);
-
+        footer.add(playerInput, BorderLayout.SOUTH);
 
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
 
         // Initialise container for the input and add the component to the window
-        // input.setOpaque(false);
-        footer.setBackground(Color.BLACK);
+        footer.setOpaque(false);
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
