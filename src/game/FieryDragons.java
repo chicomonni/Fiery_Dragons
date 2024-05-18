@@ -68,18 +68,21 @@ public class FieryDragons {
         createBoard();
         createPlayers();
 
-        DisplayManager display = new DisplayManager(new GameWindow(), board, players);
+        GameWindow gameWindow = new GameWindow();
+
+        DisplayManager display = new DisplayManager(gameWindow, board, players);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         Player p = players[0];
-        p.setPosition(board.getVolcano().getSquares().get(10));
-        display.displayMove(p);
+        p.startTurn(gameWindow);
+//        p.setPosition(board.getVolcano().getSquares().get(10));
+//        display.displayMove(p);
 
-        ChitCard card = board.getChitCards().getChitCards().get(3);
-        board.getChitCards().flip(4);
-        display.displayFlip(card);
+//        ChitCard card = board.getChitCards().getChitCards().get(3);
+//        board.getChitCards().flip(4);
+//        display.displayFlip(card);
     }
 }

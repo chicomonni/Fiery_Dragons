@@ -1,6 +1,7 @@
 package game.displays;
 
 import game.FieryDragons;
+import utils.Typing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,10 @@ public class GameWindow {
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
+    private JTextField prompt = new JTextField();
+    private JTextField playerInput = new JTextField();
+
+
 
     /**
      * Constructor
@@ -48,6 +53,8 @@ public class GameWindow {
         UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
+        prompt.setFont(font.deriveFont(FOOTER_FONT_SIZE));
+
 
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
@@ -81,6 +88,7 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
+        // Add line between board and text
         JPanel separator = new JPanel();
         separator.setBackground(Color.WHITE);
         separator.setPreferredSize(new Dimension(1, 12));
@@ -91,6 +99,17 @@ public class GameWindow {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         container.add(separator, constraints);
 
+        //add prompt text stuff
+//        prompt.setText("Enter your command...");
+        prompt.setEditable(false);
+        prompt.setOpaque(false);
+        prompt.setForeground(Color.WHITE);
+        prompt.setBackground(Color.BLACK);
+
+        footer.setLayout(new BorderLayout());
+        footer.add(prompt, BorderLayout.NORTH);
+
+
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
@@ -98,7 +117,7 @@ public class GameWindow {
 
         // Initialise container for the input and add the component to the window
         // input.setOpaque(false);
-        footer.setBackground(Color.YELLOW);
+        footer.setBackground(Color.BLACK);
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 2 + PADDING)));
         container.add(footer, constraints);
 
@@ -125,5 +144,9 @@ public class GameWindow {
      */
     public JPanel getChitCardsComponent() {
         return chitCards;
+    }
+
+    public void setPromptText(String currentPlayer, String promptText) {
+        Typing.animateTyping(currentPlayer, prompt, promptText, 40);
     }
 }

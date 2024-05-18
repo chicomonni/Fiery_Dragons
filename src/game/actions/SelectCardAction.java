@@ -15,6 +15,7 @@ public class SelectCardAction implements Action {
 
     @Override
     public void execute(Board board, DisplayManager display) {
+        //verify if card is valid
 
     }
 
