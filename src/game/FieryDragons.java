@@ -77,7 +77,7 @@ public class FieryDragons {
             throw new RuntimeException(e);
         }
         Player p = players[0];
-        p.startTurn(gameWindow);
+        p.startTurn(board, display);
 //        p.setPosition(board.getVolcano().getSquares().get(10));
 //        display.displayMove(p);
 

@@ -3,7 +3,7 @@ package game.actions;
 import game.Board;
 import game.displays.DisplayManager;
 
-public class flipCardAction implements Action {
+public class FlipCardAction implements Action {
     @Override
     public void execute(Board board, DisplayManager display) {
 

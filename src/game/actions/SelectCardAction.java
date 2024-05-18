@@ -7,16 +7,31 @@ import game.displays.DisplayManager;
 
 public class SelectCardAction implements Action {
     private final Player player;
+    private String playerInput;
     private ChitCard selectedCard;
 
     public SelectCardAction(Player player) {
         this.player = player;
+
     }
 
     @Override
     public void execute(Board board, DisplayManager display) {
-        //verify if card is valid
+        //get player input
+//        playerInput = display.getInput(display.getGameWindow().getInputField());
 
+        //verify if card is valid
+        if(cardIsValid(playerInput)) {
+            new FlipCardAction().execute(board, display);
+        }
+        else {
+            player.selectCard(board, display);
+        }
+
+    }
+
+    private boolean cardIsValid(String playerInput) {
+        return true;
     }
 
     @Override
