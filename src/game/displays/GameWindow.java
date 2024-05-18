@@ -100,6 +100,21 @@ public class GameWindow {
         footer.setLayout(new BorderLayout());
         footer.add(prompt, BorderLayout.NORTH);
 
+        // Add line between board and text
+        JPanel separator = new JPanel();
+        separator.setBackground(Color.WHITE);
+        separator.setPreferredSize(new Dimension(1, 8));
+        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING / 2, PADDING);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        container.add(separator, constraints);
+
+        footer.setLayout(new BorderLayout());
+        footer.add(prompt, BorderLayout.NORTH);
+
+
         // Add player input text field
         JPanel inputPanel = new JPanel(new BorderLayout());
         playerInput.setPreferredSize(new Dimension(300, 30)); // Adjust dimensions as needed
