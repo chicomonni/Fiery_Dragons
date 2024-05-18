@@ -1,7 +1,6 @@
 package game.displays;
 
 import game.FieryDragons;
-import utils.Typing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +20,6 @@ public class GameWindow {
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
-    private JTextField prompt = new JTextField();
-    private JTextField playerInput = new JTextField();
 
 
     /**
@@ -52,10 +49,7 @@ public class GameWindow {
         UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
-//        UIManager.put("FormattedTextField.font", font.deriveFont(FOOTER_FONT_SIZE));
-//        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
-        prompt.setFont(font.deriveFont(FOOTER_FONT_SIZE));
-        playerInput.setFont(font.deriveFont(FOOTER_FONT_SIZE));
+        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
 
 
         Container container = window.getContentPane();
@@ -90,25 +84,6 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        //add prompt text stuff
-//        prompt.setText("Enter your command...");
-        prompt.setEditable(false);
-        prompt.setForeground(Color.WHITE);
-        prompt.setBackground(Color.BLACK);
-
-        footer.setLayout(new BorderLayout());
-        footer.add(prompt, BorderLayout.NORTH);
-
-        // Add player input text field
-        playerInput.setPreferredSize(new Dimension(1, 30)); // Adjust dimensions as needed
-        playerInput.setEditable(true);
-        playerInput.setOpaque(false);
-        playerInput.setBorder(null);
-        playerInput.setForeground(Color.WHITE);
-        playerInput.setToolTipText("Enter Move");
-
-        footer.add(playerInput, BorderLayout.SOUTH);
-
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
@@ -116,6 +91,8 @@ public class GameWindow {
 
         // Initialise container for the input and add the component to the window
         footer.setOpaque(false);
+        footer.setBackground(Color.RED);
+        footer.setLayout(new GridBagLayout());
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
@@ -144,7 +121,12 @@ public class GameWindow {
         return chitCards;
     }
 
-    public void setPromptText(String currentPlayer, String promptText) {
-        Typing.animateTyping(currentPlayer, prompt, promptText, 40);
+    /**
+     * Getter for the swing component that holds the input field
+     *
+     * @return swing component that holds the input field
+     */
+    public JPanel getFooter() {
+        return footer;
     }
 }
