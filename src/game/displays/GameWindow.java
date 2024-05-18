@@ -16,8 +16,7 @@ public class GameWindow {
     private static final float FONT_SIZE = 5f;
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
-    private final JPanel input = new JPanel();
-    private final JPanel header = new JPanel();
+    private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
 
     /**
@@ -80,18 +79,10 @@ public class GameWindow {
         constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
-//        input.setOpaque(false);
-        input.setBackground(Color.YELLOW);
-        input.setPreferredSize(new Dimension(32, 32));
-        container.add(input, constraints);
-
-        constraints.insets = new Insets(10, 10, 5, 10);
-        constraints.gridy = 0;
-
-        // Initialise container for the header and add the component to the window
-        header.setBackground(Color.YELLOW);
-        header.setPreferredSize(new Dimension(32, 32));
-        container.add(header, constraints);
+        // input.setOpaque(false);
+        footer.setBackground(Color.YELLOW);
+        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 2 + PADDING)));
+        container.add(footer, constraints);
 
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
