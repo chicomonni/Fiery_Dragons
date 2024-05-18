@@ -1,23 +1,24 @@
 package game.displays;
 
+import game.FieryDragons;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
-import static java.lang.Math.ceil;
-
 /**
  * The Fiery Dragon game window
  */
 public class GameWindow {
+    public static final float ASCII_FONT_SIZE = 8f;
+    public static final float FOOTER_FONT_SIZE = 16f;
+    public static final int PADDING = 10;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
-    private static final float FONT_SIZE = 5f;
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
-    private final JPanel input = new JPanel();
-    private final JPanel header = new JPanel();
+    private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
 
     /**
@@ -44,9 +45,9 @@ public class GameWindow {
         );
         // TODO: remove colours used for testing
         // Adjust default font on text components
-        UIManager.put("Label.font", font.deriveFont(FONT_SIZE));
-        UIManager.put("TextPane.font", font.deriveFont(FONT_SIZE));
-        UIManager.put("TextArea.font", font.deriveFont(FONT_SIZE));
+        UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
+        UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
+        UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
 
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
@@ -54,44 +55,42 @@ public class GameWindow {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.insets = new Insets(5, 10, 5, 20);
+        constraints.insets = new Insets(PADDING, PADDING, PADDING / 2, PADDING / 2);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 0;
 
         // Initialise container for the Volcano and add the component to the window
-        volcano.setPreferredSize(new Dimension((int) (107 * FONT_SIZE), (int) (107 * (FONT_SIZE + 1))));
+        volcano.setPreferredSize(new Dimension(
+                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
+                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
+        ));
 //        volcano.setBorder(new LineBorder(Color.WHITE, 5));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(5, 20, 5, 55);
+        constraints.insets = new Insets(PADDING, PADDING / 2, PADDING / 2, PADDING);
         constraints.gridx = 1;
-        constraints.gridy = 1;
+        constraints.gridy = 0;
 
         // Initialise container for the Chit Cards and add the component to the window
         chitCards.setOpaque(false);
-        chitCards.setPreferredSize(new Dimension((int) ceil(11 * FONT_SIZE * 4 + 30 * 3), 20));
+        chitCards.setPreferredSize(new Dimension(
+                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5),
+                1
+        ));
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        constraints.insets = new Insets(5, 10, 10, 10);
+        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
 
         // Initialise container for the input and add the component to the window
-//        input.setOpaque(false);
-        input.setBackground(Color.YELLOW);
-        input.setPreferredSize(new Dimension(32, 32));
-        container.add(input, constraints);
-
-        constraints.insets = new Insets(10, 10, 5, 10);
-        constraints.gridy = 0;
-
-        // Initialise container for the header and add the component to the window
-        header.setBackground(Color.YELLOW);
-        header.setPreferredSize(new Dimension(32, 32));
-        container.add(header, constraints);
+        // input.setOpaque(false);
+        footer.setBackground(Color.YELLOW);
+        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 2 + PADDING)));
+        container.add(footer, constraints);
 
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

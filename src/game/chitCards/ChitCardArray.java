@@ -15,9 +15,10 @@ public class ChitCardArray {
         String[] splitSrc = src.split(",");
         chitCards = new ArrayList<>(splitSrc.length);
 
-        for (String s : splitSrc) {
+        for (int i = 0; i < splitSrc.length; i++) {
+            String s = splitSrc[i];
             Chit chit = factory.getChit(s.charAt(0));
-            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
+            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1)), i));
         }
 
         randomise();

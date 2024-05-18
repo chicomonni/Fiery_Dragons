@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.FieryDragons;
 import game.chitCards.ChitCard;
 import game.chitCards.ChitCardArray;
 
@@ -15,7 +16,6 @@ import java.util.Map;
  */
 public class ChitCardDisplay {
     private final Map<ChitCard, JTextArea> chitCardPlanes = new HashMap<>();
-    private final ChitCardArray cardArray;
     private final JPanel cardPane = new JPanel();
 
     /**
@@ -25,8 +25,6 @@ public class ChitCardDisplay {
      * @param gameWindow the GameWindow instance this class affects
      */
     public ChitCardDisplay(ChitCardArray cardArray, GameWindow gameWindow) {
-        this.cardArray = cardArray;
-
         JPanel cardContainer = gameWindow.getChitCardsComponent();
         initialiseComponent();
 
@@ -39,9 +37,12 @@ public class ChitCardDisplay {
     }
 
     private void initialiseComponent() {
-        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
         // TODO: make more extensible
-        cardPane.setPreferredSize(new Dimension(11 * 5 * 4 + 30 * 3, 16 * 6 * 4 + 30 * 3));
+        cardPane.setPreferredSize(new Dimension(
+                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5),
+                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
+        ));
         cardPane.setOpaque(false);
     }
 

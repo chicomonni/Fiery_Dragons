@@ -9,22 +9,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChitCard {
-    private final char[][] cardBack = getCardBack();
+    private final char[][] back = getBack();
+    private final char[][] front;
     private final Chit chit;
-    private final int Value;
+    private final int value;
     private boolean isUncovered;
 
-    public ChitCard(Chit chit, int value) {
+    public ChitCard(Chit chit, int value, int index) {
         this.chit = chit;
-        Value = value;
+        this.value = value;
+        this.front = chit.getDisplayCard();
     }
 
     public void flip() {
         isUncovered = true;
     }
 
-    private char[][] getCardBack() {
-        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream("/assets/cards/Back.txt"));
+    private char[][] getBack() {
+        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream("/assets/cards/back.txt"));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         List<String> lines = bufferedReader.lines().toList();
         char[][] chars = new char[lines.size()][];
@@ -42,6 +44,6 @@ public class ChitCard {
      * @return the ASCII representation of this card
      */
     public char[][] getASCIIRep() {
-        return isUncovered ? chit.getDisplayCard() : cardBack;
+        return isUncovered ? front : back;
     }
 }

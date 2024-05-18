@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.FieryDragons;
 import game.tiles.Cave;
 import game.tiles.Square;
 import game.tiles.Volcano;
@@ -63,9 +64,12 @@ public class VolcanoDisplay {
         int numSquares = squares.size();
         int numCaves = caves.size();
 
-        Function<Integer, Double> angle = (i) -> 2 * PI / numSquares * (2 * i + 1) * numSquares / (2 * numCaves);
-        Function<Integer, Integer> caveX = (i) -> (int) round(44 * cos(angle.apply(i)) + 53);
-        Function<Integer, Integer> caveY = (i) -> (int) round(-44 * sin(angle.apply(i)) + 53);
+        int offset = FieryDragons.VOLCANO_SIZE / 2;
+        int radius = FieryDragons.OUTER_RADIUS + FieryDragons.CAVE_OFFSET;
+
+        Function<Integer, Double> angle = (i) -> 2 * PI / numSquares * (double) ((2 * i + 1) * numSquares / (2 * numCaves));
+        Function<Integer, Integer> caveX = (i) -> (int) round(radius * cos(angle.apply(i)) + offset);
+        Function<Integer, Integer> caveY = (i) -> (int) round(-radius * sin(angle.apply(i)) + offset);
 
         for (int i = 0; i < numCaves; i++) {
             char[][] chit = caves.get(i).getChit().getDisplayDetail();
@@ -83,9 +87,11 @@ public class VolcanoDisplay {
         List<Square> squares = volcano.getSquares();
         int numSquares = squares.size();
 
-        // 53 = 106 / 2
-        Function<Integer, Integer> squareX = (i) -> (int) round(23 * cos(i * 2 * PI / numSquares) + 53);
-        Function<Integer, Integer> squareY = (i) -> (int) round(-23 * sin(i * 2 * PI / numSquares) + 53);
+        int offset = FieryDragons.VOLCANO_SIZE / 2;
+        int radius = FieryDragons.INNER_RADIUS + FieryDragons.VOLCANO_PADDING;
+
+        Function<Integer, Integer> squareX = (i) -> (int) round(radius * cos(i * 2 * PI / numSquares) + offset);
+        Function<Integer, Integer> squareY = (i) -> (int) round(-radius * sin(i * 2 * PI / numSquares) + offset);
 
         for (int i = 0; i < numSquares; i++) {
             char chit = squares.get(i).getChit().getDisplayChar();

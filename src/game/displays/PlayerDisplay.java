@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.FieryDragons;
 import game.Player;
 import game.tiles.Cave;
 import game.tiles.GameTile;
@@ -87,9 +88,12 @@ public class PlayerDisplay {
 
         int idx = caves.indexOf(cave);
 
-        double angle = 2 * PI / numSquares * (2 * idx + 1) * numSquares / (2 * numCaves);
-        int x = (int) round(44 * cos(angle) + 53);
-        int y = (int) round(-44 * sin(angle) + 53 + 7);
+        int offset = FieryDragons.VOLCANO_SIZE / 2;
+        int radius = FieryDragons.OUTER_RADIUS + FieryDragons.CAVE_OFFSET;
+
+        double angle = 2 * PI / numSquares * (double) ((2 * idx + 1) * numSquares / (2 * numCaves));
+        int x = (int) round(radius * cos(angle) + offset);
+        int y = (int) round(-radius * sin(angle) + offset + 7);
 
         return new int[]{x, y};
     }
@@ -105,8 +109,11 @@ public class PlayerDisplay {
         int numSquares = squares.size();
         int idx = squares.indexOf(square);
 
-        int x = (int) round(27 * cos(idx * 2 * PI / numSquares) + 53);
-        int y = (int) round(-27 * sin(idx * 2 * PI / numSquares) + 53);
+        int offset = FieryDragons.VOLCANO_SIZE / 2;
+        int radius = FieryDragons.OUTER_RADIUS - FieryDragons.VOLCANO_PADDING;
+
+        int x = (int) round(radius * cos(idx * 2 * PI / numSquares) + offset);
+        int y = (int) round(-radius * sin(idx * 2 * PI / numSquares) + offset);
 
         return new int[]{x, y};
     }
