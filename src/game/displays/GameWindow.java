@@ -46,8 +46,6 @@ public class GameWindow {
         );
         // TODO: remove colours used for testing
         // Adjust default font on text components
-        UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
-        UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
 
@@ -83,7 +81,7 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        constraints.insets = new Insets(PADDING, PADDING, PADDING, PADDING);
+        constraints.insets = new Insets(PADDING, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
@@ -92,7 +90,7 @@ public class GameWindow {
         separator.setPreferredSize(new Dimension(0, PADDING / 2));
         container.add(separator, constraints);
 
-        constraints.insets = new Insets(0, PADDING, PADDING, PADDING);
+        constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
