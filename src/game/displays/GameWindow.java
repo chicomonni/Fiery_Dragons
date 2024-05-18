@@ -90,16 +90,7 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        //add prompt text stuff
-//        prompt.setText("Enter your command...");
-        prompt.setEditable(false);
-        prompt.setForeground(Color.WHITE);
-        prompt.setBackground(Color.BLACK);
-
-        footer.setLayout(new BorderLayout());
-        footer.add(prompt, BorderLayout.NORTH);
-
-        // Add line between board and text
+// Add line between board and text
         JPanel separator = new JPanel();
         separator.setBackground(Color.WHITE);
         separator.setPreferredSize(new Dimension(1, 8));
@@ -109,6 +100,11 @@ public class GameWindow {
         constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         container.add(separator, constraints);
+
+        //add prompt text stuff
+        prompt.setEditable(false);
+        prompt.setForeground(Color.WHITE);
+        prompt.setBackground(Color.BLACK);
 
         footer.setLayout(new BorderLayout());
         footer.add(prompt, BorderLayout.NORTH);
@@ -127,7 +123,7 @@ public class GameWindow {
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
         footer.setOpaque(false);
