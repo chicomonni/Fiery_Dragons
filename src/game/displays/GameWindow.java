@@ -90,17 +90,6 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        // Add line between board and text
-        JPanel separator = new JPanel();
-        separator.setBackground(Color.WHITE);
-        separator.setPreferredSize(new Dimension(1, 8));
-        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING / 2, PADDING);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        container.add(separator, constraints);
-
         //add prompt text stuff
 //        prompt.setText("Enter your command...");
         prompt.setEditable(false);
