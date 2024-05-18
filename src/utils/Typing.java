@@ -13,16 +13,7 @@ import java.awt.event.ActionListener;
 public class Typing {
     private static Timer timer;
 
-    public static void animateTyping(String starterText, JTextField textField, String text, int delayBetweenChars) {
-        textField.setText(starterText);
-
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-
+    public static void animateTyping(JTextField textField, String text, int delayBetweenChars) {
         //create a timer with delay between characters
         //for fun :))
         if (timer != null && timer.isRunning()) {

@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.Player;
 import utils.Typing;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 
 public class InputDisplay {
     private final JTextField inputField = new JTextField();
-    private final JTextField prompt = new JTextField();
+    private final JPanel promptContainer = new JPanel();
     private final JTextField inputMarker = new JTextField(1);
     private String playerInput;
 
@@ -24,31 +25,21 @@ public class InputDisplay {
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.weighty = 1;
 
-        prompt.setEditable(false);
-        prompt.setForeground(Color.WHITE);
-        prompt.setBackground(Color.BLUE);
-        prompt.setBorder(null);
-        prompt.setOpaque(false);
-        container.add(prompt, constraints);
+        promptContainer.setOpaque(false);
+        promptContainer.setLayout(new BorderLayout());
+        container.add(promptContainer, constraints);
 
         constraints.gridwidth = 1;
         constraints.gridx = 0;
         constraints.gridy = 1;
 
-        inputMarker.setEditable(false);
-        inputMarker.setOpaque(false);
-        inputMarker.setBorder(null);
-        inputMarker.setForeground(Color.WHITE);
+        initialiseTextField(inputMarker);
         container.add(inputMarker, constraints);
 
         constraints.weightx = 1;
         constraints.gridx = 1;
 
-        inputField.setEditable(false);
-        inputField.setOpaque(false);
-        inputField.setBorder(null);
-        inputField.setForeground(Color.WHITE);
-        inputField.setBackground(Color.GREEN);
+        initialiseTextField(inputField);
         inputField.setToolTipText("Enter Your Move");
         inputField.addActionListener(e -> playerInput = inputField.getText());
         container.add(inputField, constraints);
@@ -56,10 +47,31 @@ public class InputDisplay {
         container.revalidate();
     }
 
-    public void setPromptText(String currentPlayer, String promptText) {
-        Typing.animateTyping(currentPlayer, prompt, promptText, 40);
+    private void initialiseTextField(JTextField textField) {
+        textField.setEditable(false);
+        textField.setOpaque(false);
+        textField.setBorder(null);
+        textField.setForeground(Color.WHITE);
+    }
+
+    public void setPromptText(Player player) {
+        JTextField prompt = new JTextField();
+        initialiseTextField(prompt);
+        promptContainer.add(prompt, BorderLayout.CENTER);
+
+        JTextField name = new JTextField(player.getName() + ":", player.getName().length() + 1);
+        initialiseTextField(name);
+        name.setForeground(player.getColour());
+        promptContainer.add(name, BorderLayout.WEST);
+        promptContainer.revalidate();
+
+        String promptText = " FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
+
+        Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
+        inputMarker.setForeground(player.getColour());
         inputField.setEditable(true);
+        inputField.setForeground(player.getColour());
         inputField.requestFocus();
     }
 
