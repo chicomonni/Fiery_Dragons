@@ -4,6 +4,7 @@ import game.FieryDragons;
 import utils.Typing;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class GameWindow {
     public static final float ASCII_FONT_SIZE = 8f;
     public static final float FOOTER_FONT_SIZE = 16f;
-    public static final int PADDING = 10;
+    public static final int PADDING = 8;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private final JLayeredPane volcano = new JLayeredPane();
@@ -54,6 +55,7 @@ public class GameWindow {
         UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         prompt.setFont(font.deriveFont(FOOTER_FONT_SIZE));
+        playerInput.setFont(font.deriveFont(FOOTER_FONT_SIZE));
 
 
         Container container = window.getContentPane();
@@ -91,7 +93,7 @@ public class GameWindow {
         // Add line between board and text
         JPanel separator = new JPanel();
         separator.setBackground(Color.WHITE);
-        separator.setPreferredSize(new Dimension(1, 12));
+        separator.setPreferredSize(new Dimension(1, 8));
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING / 2, PADDING);
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -109,6 +111,22 @@ public class GameWindow {
         footer.setLayout(new BorderLayout());
         footer.add(prompt, BorderLayout.NORTH);
 
+        // Add player input text field
+        JPanel inputPanel = new JPanel(new BorderLayout());
+        playerInput.setPreferredSize(new Dimension(300, 30)); // Adjust dimensions as needed
+        playerInput.setEditable(true);
+        playerInput.setOpaque(false);
+        playerInput.setForeground(Color.WHITE);
+        playerInput.setBackground(Color.BLACK);
+
+        // Create a matte border with the same color as the background (black)
+        Border border = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK);
+        inputPanel.setBorder(border); // Set the border to the input panel
+
+       // Add player input to the input panel
+        inputPanel.add(playerInput, BorderLayout.SOUTH);
+        footer.add(inputPanel, BorderLayout.SOUTH);
+
 
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
@@ -118,7 +136,7 @@ public class GameWindow {
         // Initialise container for the input and add the component to the window
         // input.setOpaque(false);
         footer.setBackground(Color.BLACK);
-        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 2 + PADDING)));
+        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
         window.pack();
