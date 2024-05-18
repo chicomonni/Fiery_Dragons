@@ -2,7 +2,6 @@ package game;
 
 import game.actions.SelectCardAction;
 import game.displays.DisplayManager;
-import game.displays.GameWindow;
 import game.tiles.GameTile;
 
 import java.awt.*;
@@ -86,21 +85,18 @@ public class Player {
         selectCard(board, display);
 
         //if can continue turn
-            //pick turn
-            //if pick to continue
-                // new selectCard Action
+        //pick turn
+        //if pick to continue
+        // new selectCard Action
 
 
         //else
-            //end turn
+        //end turn
 
     }
 
     public void selectCard(Board board, DisplayManager display) {
-        String startingText = getName().toUpperCase() + ": ";
-        String promptText = "FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
-        display.getGameWindow().setPromptText(startingText, promptText);
-
+        display.startTurn(this);
         new SelectCardAction(this).execute(board, display);
     }
 }
