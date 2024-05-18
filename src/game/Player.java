@@ -1,6 +1,7 @@
 package game;
 
 import game.actions.SelectCardAction;
+import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.GameTile;
 
@@ -61,16 +62,6 @@ public class Player {
         return colour;
     }
 
-
-    /**
-     * Get colour as hex string associated with this Player
-     *
-     * @return string hex colour associated with this Player
-     */
-    private String getColourAsHexString() {
-        return String.format("#%06X", (0xFFFFFF & getColour().getRGB()));
-    }
-
     /**
      * Get this Player's display character
      *
@@ -89,12 +80,27 @@ public class Player {
         return name;
     }
 
-    public void startTurn(GameWindow gameWindow) {
-        String startingText = getName().toUpperCase() + ": ";
-        String promptText = "FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
-        gameWindow.setPromptText(startingText, promptText);
+    public void startTurn(Board board, DisplayManager display) {
 
         //select card
-        new SelectCardAction(this);
+        selectCard(board, display);
+
+        //if can continue turn
+            //pick turn
+            //if pick to continue
+                // new selectCard Action
+
+
+        //else
+            //end turn
+
+    }
+
+    public void selectCard(Board board, DisplayManager display) {
+        String startingText = getName().toUpperCase() + ": ";
+        String promptText = "FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
+        display.getGameWindow().setPromptText(startingText, promptText);
+
+        new SelectCardAction(this).execute(board, display);
     }
 }
