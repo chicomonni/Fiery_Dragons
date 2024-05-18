@@ -36,9 +36,6 @@ public class DisplayManager {
     }
 
     public void startTurn(Player player) {
-        System.out.println(3);
-        String startingText = player.getName().toUpperCase() + ": ";
-        String promptText = "FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
-        inputDisplay.setPromptText(startingText, promptText);
+        inputDisplay.setPromptText(player);
     }
 }
