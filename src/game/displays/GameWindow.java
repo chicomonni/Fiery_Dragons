@@ -13,7 +13,7 @@ import java.util.Objects;
 public class GameWindow {
     public static final float ASCII_FONT_SIZE = 8f;
     public static final float FOOTER_FONT_SIZE = 16f;
-    public static final int PADDING = 8;
+    public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private final JLayeredPane volcano = new JLayeredPane();
@@ -58,7 +58,7 @@ public class GameWindow {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.insets = new Insets(PADDING, PADDING, PADDING / 2, PADDING / 2);
+        constraints.insets = new Insets(PADDING, PADDING, 0, PADDING / 2);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -68,10 +68,9 @@ public class GameWindow {
                 (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
                 (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
         ));
-//        volcano.setBorder(new LineBorder(Color.WHITE, 5));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(PADDING, PADDING / 2, PADDING / 2, PADDING);
+        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING);
         constraints.gridx = 1;
         constraints.gridy = 0;
 
@@ -84,10 +83,17 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(PADDING, PADDING, PADDING, PADDING);
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+
+        JPanel separator = new JPanel();
+        separator.setPreferredSize(new Dimension(0, PADDING / 2));
+        container.add(separator, constraints);
+
+        constraints.insets = new Insets(0, PADDING, PADDING, PADDING);
+        constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
         footer.setOpaque(false);
