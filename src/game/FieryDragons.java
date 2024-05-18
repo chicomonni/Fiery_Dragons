@@ -23,34 +23,11 @@ public class FieryDragons {
     private Player[] players;
 
     private void createChits() {
-        chitFactory.setChit(
-                'w',
-                "/assets/detailed/Bat.txt",
-                "/assets/cards/Bat.txt",
-                new AnimalChitStrategy()
-        );
-        chitFactory.setChit(
-                '0',
-                "/assets/detailed/Dragon.txt",
-                "/assets/cards/Dragon.txt",
-                new AnimalChitStrategy()
-        );
-        chitFactory.setChit('S',
-                "/assets/detailed/Salamander.txt",
-                "/assets/cards/Salamander.txt",
-                new AnimalChitStrategy()
-        );
-        chitFactory.setChit('*',
-                "/assets/detailed/Spider.txt",
-                "/assets/cards/Spider.txt",
-                new AnimalChitStrategy()
-        );
-        chitFactory.setChit(
-                'P',
-                "/assets/detailed/Pirate.txt",
-                "/assets/cards/Pirate.txt",
-                new PirateChitStrategy()
-        );
+        chitFactory.setChit('w', "Bat", new AnimalChitStrategy());
+        chitFactory.setChit('0', "Baby Dragon", new AnimalChitStrategy());
+        chitFactory.setChit('S', "Salamander", new AnimalChitStrategy());
+        chitFactory.setChit('*', "Spider", new AnimalChitStrategy());
+        chitFactory.setChit('P', "Pirate", new PirateChitStrategy());
     }
 
     private void createBoard() {

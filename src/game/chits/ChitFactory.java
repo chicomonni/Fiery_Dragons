@@ -21,27 +21,36 @@ public class ChitFactory {
      * If this Chit already exits, it will be returned, otherwise a new Chit is created with the information provided.
      *
      * @param c        the character representation of the Chit
-     * @param detailed the detailed representation of the chit, for the ChitCards. Each entry in the List represents
-     *                 a new line of the representation.
+     * @param name     the name of this Chit
+     * @param detailed the detailed representation of the Chit
+     * @param card     the card representation og the Chit
      * @param strategy the ChitStrategy associated with the Chit
      * @return the corresponding Chit instance
      */
-    public Chit setChit(char c, char[][] detailed, char[][] card, ChitStrategy strategy) {
-        return chits.computeIfAbsent(c, c1 -> new Chit(c1, detailed, card, strategy));
+    public Chit setChit(char c, String name, char[][] detailed, char[][] card, ChitStrategy strategy) {
+        return chits.computeIfAbsent(c, c1 -> new Chit(c1, name, detailed, card, strategy));
     }
-    
+
     /**
      * If this Chit already exits, it will be returned, otherwise a new Chit is created with the information provided.
-     * The detailed representation is read from a file.
+     * The detailed and cards representations are read from a file. File must have the same name as the one provided,
+     * but all lowercase and no spaces (e.g. Chit name is "Hello World", file name is "helloworld.txt").
+     * There must be a file matching this name in both the "detailed" and "cards" folders.
      *
-     * @param c            the character representation of the Chit
-     * @param detailedPath the path to the file containing the detailed representation
-     * @param cardPath     the path to the file containing the card representation
-     * @param strategy     the ChitStrategy associated with the Chit
+     * @param c        the character representation of the Chit
+     * @param name     the name of this Chit, used to locate files
+     * @param strategy the ChitStrategy associated with the Chit
      * @return the corresponding Chit instance
      */
-    public Chit setChit(char c, String detailedPath, String cardPath, ChitStrategy strategy) {
-        return setChit(c, getStrings(detailedPath), getStrings(cardPath), strategy);
+    public Chit setChit(char c, String name, ChitStrategy strategy) {
+        String fileName = name.toLowerCase().replaceAll(" ", "") + ".txt";
+        return setChit(
+                c,
+                name,
+                getStrings("/assets/detailed/" + fileName),
+                getStrings("/assets/cards/" + fileName),
+                strategy
+        );
     }
 
     private char[][] getStrings(String path) {
