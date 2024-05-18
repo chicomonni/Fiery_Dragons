@@ -81,10 +81,20 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
+        JPanel separator = new JPanel();
+        separator.setBackground(Color.WHITE);
+        separator.setPreferredSize(new Dimension(1, 12));
+        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING / 2, PADDING);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        container.add(separator, constraints);
+
         constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
         // input.setOpaque(false);
