@@ -24,7 +24,7 @@ public class ChitCard {
     }
 
     private char[][] getCardBack() {
-        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream("/assets/cards/Back.txt"));
+        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream("/assets/cards/back.txt"));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         List<String> lines = bufferedReader.lines().toList();
         char[][] chars = new char[lines.size()][];
