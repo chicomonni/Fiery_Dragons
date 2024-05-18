@@ -19,8 +19,11 @@ public class ChitCard {
     public ChitCard(Chit chit, int value) { //, int index
         this.chit = chit;
         this.value = value;
-        this.front = chit.getDisplayCard();
         this.back = getBack(cardNum);
+
+        this.front = chit.getDisplayCard();
+        this.replacePlaceHolderNum(this.front, this.value);
+
     }
 
     public void flip() {
@@ -52,21 +55,21 @@ public class ChitCard {
 
     protected void setCardNum(int index) {
         this.cardNum = index + 1;
-        this.replaceBackCardNum();
+        this.replacePlaceHolderNum(back, this.cardNum);
     }
 
     /**
-     * Method to replace the "xx" placeholder with the card number on the ASCII representation of this card
+     * Method to replace the "xx" placeholder with the desired number on the ASCII representation of this card
      *
      */
-    private void replaceBackCardNum() {
-        String cardNumString = String.valueOf(cardNum);
-        if (cardNumString.length() == 1) {
-            back[2] = new String(back[2]).replace("xx", cardNumString + " ").toCharArray();
-            back[13] = new String(back[13]).replace("xx", " " + cardNumString).toCharArray();
+    private void replacePlaceHolderNum(char[][] cardSide, int number) {
+        String numString = String.valueOf(number);
+        if (numString.length() == 1) {
+            cardSide[2] = new String(cardSide[2]).replace("xx", numString + " ").toCharArray();
+            cardSide[13] = new String(cardSide[13]).replace("xx", " " + numString).toCharArray();
         } else {
-            back[2] = new String(back[2]).replace("xx", cardNumString).toCharArray();
-            back[13] = new String(back[13]).replace("xx", cardNumString).toCharArray();
+            cardSide[2] = new String(cardSide[2]).replace("xx", numString).toCharArray();
+            cardSide[13] = new String(cardSide[13]).replace("xx", numString).toCharArray();
         }
     }
 
