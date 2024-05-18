@@ -12,7 +12,7 @@ public class DisplayManager {
     private final VolcanoDisplay volcanoDisplay;
     private final PlayerDisplay playerDisplay;
     private final ChitCardDisplay cardDisplay;
-//    private final InputDisplay inputDisplay;
+    private final InputDisplay inputDisplay;
 
     /**
      * Constructor
@@ -24,7 +24,7 @@ public class DisplayManager {
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
-//        this.inputDisplay = new InputDisplay();
+        this.inputDisplay = new InputDisplay(gameWindow);
     }
 
     public void displayMove(Player player) {
@@ -35,8 +35,10 @@ public class DisplayManager {
         cardDisplay.update(card);
     }
 
-    public GameWindow getGameWindow() {
-        return gameWindow;
+    public void startTurn(Player player) {
+        System.out.println(3);
+        String startingText = player.getName().toUpperCase() + ": ";
+        String promptText = "FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
+        inputDisplay.setPromptText(startingText, promptText);
     }
-
 }
