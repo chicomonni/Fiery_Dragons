@@ -1,7 +1,5 @@
 package game.displays;
 
-import java.awt.FontFormatException;
-import java.io.IOException;
 import game.Board;
 import game.Player;
 import game.chitCards.ChitCard;
@@ -15,6 +13,7 @@ public class DisplayManager {
     private final PlayerDisplay playerDisplay;
     private final ChitCardDisplay cardDisplay;
     private final InputDisplay inputDisplay;
+    private final WinnerDisplay winnerDisplay;
 
     /**
      * Constructor for the DisplayManager.
@@ -29,6 +28,7 @@ public class DisplayManager {
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
         this.inputDisplay = new InputDisplay(gameWindow);
+        this.winnerDisplay = new WinnerDisplay(gameWindow);
     }
 
     /**
@@ -79,10 +79,7 @@ public class DisplayManager {
     }
 
     public void displayWin(Player player) {
-        try {
-            gameWindow.displayWinner(player.getName(), player.getColour());
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
+        winnerDisplay.displayWinner(player);
+        gameWindow.showWinnerLabel();
     }
 }
