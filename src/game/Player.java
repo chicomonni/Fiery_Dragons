@@ -96,7 +96,7 @@ public class Player {
     }
 
     public void selectCard(Board board, DisplayManager display) {
-        display.startTurn(this);
+        display.startTurn(this, board);
         new SelectCardAction(this).execute(board, display);
     }
 }

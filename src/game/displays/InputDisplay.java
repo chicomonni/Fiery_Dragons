@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.Board;
 import game.Player;
 import utils.Typing;
 
@@ -54,7 +55,7 @@ public class InputDisplay {
         textField.setForeground(Color.WHITE);
     }
 
-    public void setPromptText(Player player) {
+    public void setPromptText(Player player, Board board) {
         promptContainer.removeAll();
 
         JTextField prompt = new JTextField();
@@ -67,7 +68,7 @@ public class InputDisplay {
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
-        String promptText = " FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
+        String promptText = " FLIP A CHIT CARD (1 - " + board.getChitCards().length() + ")";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");

@@ -15,8 +15,7 @@ public class ChitCardArray {
         String[] splitSrc = src.split(",");
         chitCards = new ArrayList<>(splitSrc.length);
 
-        for (int i = 0; i < splitSrc.length; i++) {
-            String s = splitSrc[i];
+        for (String s : splitSrc) {
             Chit chit = factory.getChit(s.charAt(0));
             chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
         }
@@ -43,4 +42,13 @@ public class ChitCardArray {
 //    public ChitCard selectCard(int cardNum) {
 //
 //    }
+
+    /**
+     * Get number of cards
+     *
+     * @return number of cards
+     */
+    public int length() {
+        return chitCards.size();
+    }
 }

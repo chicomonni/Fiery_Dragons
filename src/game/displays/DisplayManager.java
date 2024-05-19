@@ -35,7 +35,7 @@ public class DisplayManager {
         cardDisplay.update(card);
     }
 
-    public void startTurn(Player player) {
-        inputDisplay.setPromptText(player);
+    public void startTurn(Player player, Board board) {
+        inputDisplay.setPromptText(player, board);
     }
 }
