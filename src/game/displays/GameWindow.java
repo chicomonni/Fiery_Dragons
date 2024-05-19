@@ -102,6 +102,7 @@ public class GameWindow {
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
+        // Initialise and configure the winner label
         winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
         winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
         winner.setBounds(50, 50, 200, 50);
