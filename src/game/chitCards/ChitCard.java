@@ -73,4 +73,15 @@ public class ChitCard {
         }
     }
 
+    public boolean isCardUncovered() {
+        return isUncovered;
+    }
+
+    public boolean isMatch(GameTile tile) {
+        return chit.validate(tile.getChit());
+    }
+
+    public int getValue() {
+        return chit.modifyValue(value);
+    }
 }
