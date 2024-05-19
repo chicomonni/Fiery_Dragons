@@ -113,6 +113,7 @@ public class Cave extends GameTile {
      */
 
     public boolean winningMove(Player player, int dist) {
+        // Can only win by landing on the cave with the exact number of moves
         if (canEnter(player) && dist == 0 ) {
             return true;
         }
