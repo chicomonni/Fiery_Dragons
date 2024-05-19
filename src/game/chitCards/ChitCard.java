@@ -1,6 +1,7 @@
 package game.chitCards;
 
 import game.chits.Chit;
+import game.tiles.GameTile;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -28,6 +29,10 @@ public class ChitCard {
 
     public void flip() {
         isUncovered = true;
+    }
+
+    public void reset() {
+        isUncovered = false;
     }
 
     private char[][] getBack(int cardNum) {
@@ -60,7 +65,6 @@ public class ChitCard {
 
     /**
      * Method to replace the "xx" placeholder with the desired number on the ASCII representation of this card
-     *
      */
     private void replacePlaceHolderNum(char[][] cardSide, int number) {
         String numString = String.valueOf(number);
