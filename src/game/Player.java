@@ -74,16 +74,35 @@ public class Player {
         return name;
     }
 
+    /**
+     * Initiates the start of the Player's turn.
+     *
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void startTurn(Board board, DisplayManager display) {
         display.startTurn(this, board);
     }
 
+    /**
+     * Executes the Player's turn by performing the provided game action.
+     *
+     * @param action  the game action to be executed
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void playTurn(GameAction action, Board board, DisplayManager display) {
         while (action != null) {
             action = action.execute(board, display);
         }
     }
 
+    /**
+     * Ends the Player's turn and starts the next Player's turn after a delay.
+     *
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void endTurn(Board board, DisplayManager display) {
         Timer timer = new Timer(2000, e -> {
             display.endTurn();
