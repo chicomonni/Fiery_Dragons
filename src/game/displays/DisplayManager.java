@@ -35,7 +35,17 @@ public class DisplayManager {
         cardDisplay.update(card);
     }
 
-    public void startTurn(Player player) {
-        inputDisplay.setPromptText(player);
+    public void startTurn(Player player, Board board) {
+        inputDisplay.setPromptText(player, board);
+        inputDisplay.enableInput(player, board, this);
+    }
+
+    public void displayError(String message) {
+        inputDisplay.printError(message);
+    }
+
+    public void endTurn() {
+        inputDisplay.disableInput();
+        cardDisplay.reset();
     }
 }

@@ -1,7 +1,9 @@
 package game.tiles;
 
 import game.Player;
-import game.actions.MoveAction;
+import game.actions.EndTurnGameAction;
+import game.actions.GameAction;
+import game.actions.MoveGameAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
@@ -10,7 +12,7 @@ import game.displays.PlayerDisplay;
  */
 public abstract class GameTile {
     private final Chit chit;
-    protected boolean vacant;
+    protected boolean vacant = true;
 
     /**
      * Constructor.
@@ -31,17 +33,17 @@ public abstract class GameTile {
     }
 
     /**
-     * Returns the desired MoveAction if it can be performed
+     * Returns a relevant Action if it can be performed
      *
      * @param player the Player instance moving
      * @param dist   how far the Player moves along the Volcano
-     * @return the desired MoveAction or {@code null} if it cannot be performed
+     * @return a relevant Action or EndTurnGameAction if it cannot be performed
      */
-    public MoveAction getMoveAction(Player player, int dist) {
+    public GameAction getAction(Player player, int dist) {
         if (canMove(player, dist)) {
-            return new MoveAction(player, dist);
+            return new MoveGameAction(player, dist);
         }
-        return null;
+        return new EndTurnGameAction(player);
     }
 
     /**

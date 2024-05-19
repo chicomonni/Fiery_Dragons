@@ -1,5 +1,6 @@
 package game;
 
+import game.chitCards.ChitCard;
 import game.chitCards.ChitCardArray;
 import game.chits.ChitFactory;
 import game.tiles.Cave;
@@ -94,5 +95,9 @@ public class Board {
 
     public ChitCardArray getChitCards() {
         return chitCards;
+    }
+
+    public ChitCard getChitCard(int i) {
+        return chitCards.getChitCard(i);
     }
 }

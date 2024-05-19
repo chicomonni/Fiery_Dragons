@@ -1,5 +1,9 @@
 package game.chitCards;
 
+import game.Player;
+import game.actions.FlipCardGameAction;
+import game.actions.GameAction;
+import game.actions.InvalidGameAction;
 import game.chits.Chit;
 import game.chits.ChitFactory;
 
@@ -15,21 +19,20 @@ public class ChitCardArray {
         String[] splitSrc = src.split(",");
         chitCards = new ArrayList<>(splitSrc.length);
 
-        for (int i = 0; i < splitSrc.length; i++) {
-            String s = splitSrc[i];
+        for (String s : splitSrc) {
             Chit chit = factory.getChit(s.charAt(0));
             chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
         }
 
         randomise();
 
-        for (int i = 0; i < chitCards.size(); i++) {
+        for (int i = 0; i < length(); i++) {
             chitCards.get(i).setCardNum(i);
         }
     }
 
-    public void flip(int i) {
-        chitCards.get(i - 1).flip();
+    public ChitCard getChitCard(int i) {
+        return chitCards.get(i - 1);
     }
 
     public void randomise() {
@@ -40,7 +43,32 @@ public class ChitCardArray {
         return chitCards;
     }
 
-//    public ChitCard selectCard(int cardNum) {
-//
-//    }
+    /**
+     * Returns a relevant Action if it can be performed
+     *
+     * @param player  the Player instance who selected the card
+     * @param cardNum the number on the selected card
+     * @return a relevant Action or {@code null} if it cannot be performed
+     */
+    public GameAction getAction(Player player, int cardNum) {
+        if (cardNum < 0 || cardNum >= length()) {
+            return new InvalidGameAction("INVALID CARD NUMBER", player);
+        }
+
+        ChitCard chitCard = getChitCard(cardNum);
+        if (chitCard.isCardUncovered()) {
+            return new InvalidGameAction("CARD ALREADY FLIPPED", player);
+        }
+
+        return new FlipCardGameAction(player, chitCard);
+    }
+
+    /**
+     * Get number of cards
+     *
+     * @return number of cards
+     */
+    public int length() {
+        return chitCards.size();
+    }
 }

@@ -81,5 +81,11 @@ public class ChitCardDisplay {
         return String.join("\n", cardASCIIRep);
     }
 
+    public void reset() {
+        for (ChitCard card : chitCardPlanes.keySet()) {
+            card.reset();
+            update(card);
+        }
+    }
 
 }
