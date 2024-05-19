@@ -99,20 +99,13 @@ public class InputDisplay {
         return new SelectCardAction(player); //TODO: remove later
     }
 
-    public Boolean isSelectedCardNumValid(Player player, String playerInputText) {
+    private boolean validateInput(String input) {
         try {
-            //check if int
-            int playerInputInt = Integer.parseInt(playerInputText);
-
-            //check if in range
-
-            //check if already uncovered
+            Integer.parseInt(input);
             return true;
 
-        }
-        catch (NumberFormatException ex) {
-            String promptNotIntText = " NOT AN INTEGER ";
-            setPromptText(player, promptNotIntText);
+        } catch (NumberFormatException ex) {
+            printError("INPUT AN INTEGER");
             return false;
         }
     }
