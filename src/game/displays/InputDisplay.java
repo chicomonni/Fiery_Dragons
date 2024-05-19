@@ -61,7 +61,7 @@ public class InputDisplay {
         initialiseTextField(prompt);
         promptContainer.add(prompt, BorderLayout.CENTER);
 
-        JTextField name = new JTextField(player.getName() + ":", player.getName().length() + 1);
+        JTextField name = new JTextField(player.getName().toUpperCase() + ":", player.getName().length() + 1);
         initialiseTextField(name);
         name.setForeground(player.getColour());
         promptContainer.add(name, BorderLayout.WEST);
