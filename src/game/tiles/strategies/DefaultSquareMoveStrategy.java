@@ -47,6 +47,8 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
         if (dist > 0) {
             return square.getNext().winningMove(player, dist - 1);
         }
+        // If they're moving backwards, they can't win,
+        // if they're landing on the square, they can't win.
         return false;
     }
 
