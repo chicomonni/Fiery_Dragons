@@ -117,8 +117,12 @@ public class InputDisplay {
         }
     }
 
-    public boolean isInputReady() {
-        return inputReady;
+    private GameAction getActionFromString(String input, Player player, Board board) {
+        if (!validateInput(input)) {
+            return new NextTurnGameAction(player);
+        }
+
+        return board.getChitCards().getAction(player, Integer.parseInt(input));
     }
 
     public void printError(String message) {
