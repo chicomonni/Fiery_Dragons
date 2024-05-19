@@ -15,16 +15,15 @@ public class ChitCard {
     private final Chit chit;
     private final int value;
     private boolean isUncovered;
-    private int cardNum;
 
-    public ChitCard(Chit chit, int value) { //, int index
+    public ChitCard(Chit chit, int value, int index) {
         this.chit = chit;
         this.value = value;
-        this.back = getBack(cardNum);
-
+        this.back = getBack();
         this.front = chit.getDisplayCard();
-        this.replacePlaceHolderNum(this.front, this.value);
 
+        addNumber(back, index + 1);
+        addNumber(front, value);
     }
 
     public void flip() {
@@ -35,7 +34,7 @@ public class ChitCard {
         isUncovered = false;
     }
 
-    private char[][] getBack(int cardNum) {
+    private char[][] getBack() {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream("/assets/cards/back.txt"));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         List<String> lines = bufferedReader.lines().toList();
@@ -55,26 +54,21 @@ public class ChitCard {
      * @return the ASCII representation of this card
      */
     public char[][] getASCIIRep() {
-        return isUncovered ? front : back;
-    }
-
-    protected void setCardNum(int index) {
-        this.cardNum = index + 1;
-        this.replacePlaceHolderNum(back, this.cardNum);
+        return isUncovered ? clone2D(front) : clone2D(back);
     }
 
     /**
-     * Method to replace the "xx" placeholder with the desired number on the ASCII representation of this card
+     * Method to add desired number on the ASCII representation of this card
      */
-    private void replacePlaceHolderNum(char[][] cardSide, int number) {
-        String numString = String.valueOf(number);
-        if (numString.length() == 1) {
-            cardSide[2] = new String(cardSide[2]).replace("xx", numString + " ").toCharArray();
-            cardSide[13] = new String(cardSide[13]).replace("xx", " " + numString).toCharArray();
-        } else {
-            cardSide[2] = new String(cardSide[2]).replace("xx", numString).toCharArray();
-            cardSide[13] = new String(cardSide[13]).replace("xx", numString).toCharArray();
-        }
+    private void addNumber(char[][] card, int number) {
+        String topNum = String.format("%-2s", number);
+        String bottomNum = String.format("%2s", number);
+
+        card[2][2] = topNum.charAt(0);
+        card[2][3] = topNum.charAt(1);
+
+        card[13][7] = bottomNum.charAt(0);
+        card[13][8] = bottomNum.charAt(1);
     }
 
     public boolean isCardUncovered() {
@@ -87,5 +81,16 @@ public class ChitCard {
 
     public int getValue() {
         return chit.modifyValue(value);
+    }
+
+    private char[][] clone2D(char[][] array) {
+        char[][] clone = new char[array.length][];
+
+        for (int i = 0; i < array.length; i++) {
+            char[] chars = array[i];
+            clone[i] = chars.clone();
+        }
+
+        return clone;
     }
 }
