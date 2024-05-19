@@ -12,7 +12,6 @@ public class WinnerDisplay {
     /**
      * Constructor
      *
-     * @param volcano    the Volcano instance used by the game
      * @param gameWindow the GameWindow instance this class affects
      */
     public WinnerDisplay(GameWindow gameWindow) {
