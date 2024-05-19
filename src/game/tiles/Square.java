@@ -100,7 +100,7 @@ public class Square extends GameTile {
      * @param dist the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
-
+    @Override
     public boolean winningMove(Player player, int dist) {
         return strategy.winningMove(player, dist);
     }

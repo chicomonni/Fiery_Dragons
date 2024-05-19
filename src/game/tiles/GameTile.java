@@ -84,7 +84,6 @@ public abstract class GameTile {
      * @param dist the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
-
     public abstract boolean winningMove(Player player, int dist);
 
     /**
