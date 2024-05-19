@@ -84,19 +84,14 @@ public class InputDisplay {
         return playerInputText;
     }
 
-    public Action getInput(Player player, Board board) {
-        if(isSelectedCardNumValid(player, playerInputText)) {
-            return new SelectCardAction(player);
+            player.playTurn(getActionFromString(input, player, board), board, display);
+        });
+    }
+
+    private void removeAllActionListeners(JTextField textField) {
+        for (ActionListener actionListener : textField.getActionListeners()) {
+            textField.removeActionListener(actionListener);
         }
-        else {
-            try {
-                Thread.sleep(100);
-//                return new InvalidAction(player);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return new SelectCardAction(player); //TODO: remove later
     }
 
     private boolean validateInput(String input) {
