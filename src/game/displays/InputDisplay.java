@@ -2,19 +2,18 @@ package game.displays;
 
 import game.Board;
 import game.Player;
-import game.actions.Action;
-import game.actions.SelectCardAction;
+import game.actions.GameAction;
+import game.actions.NextTurnGameAction;
 import utils.Typing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class InputDisplay {
     private final JTextField inputField = new JTextField();
     private final JPanel promptContainer = new JPanel();
     private final JTextField inputMarker = new JTextField(1);
-    private String playerInputText;
-    private boolean inputReady = false;
 
 
     public InputDisplay(GameWindow gameWindow) {
@@ -46,7 +45,6 @@ public class InputDisplay {
 
         initialiseTextField(inputField);
         inputField.setToolTipText("Enter Your Move");
-        inputField.addActionListener(e -> handleInput());
         container.add(inputField, constraints);
 
         container.revalidate();
@@ -59,7 +57,7 @@ public class InputDisplay {
         textField.setForeground(Color.WHITE);
     }
 
-    public void setPromptText(Player player, String promptText) {
+    public void setPromptText(Player player, Board board) {
         promptContainer.removeAll();
 
         JTextField prompt = new JTextField();
@@ -69,13 +67,15 @@ public class InputDisplay {
         JTextField name = new JTextField(player.getName().toUpperCase() + ":", player.getName().length() + 1);
         initialiseTextField(name);
         name.setForeground(player.getColour());
+        name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.FOOTER_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
+
+        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ")";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
         inputMarker.setForeground(player.getColour());
-        inputField.setEditable(true);
         inputField.setForeground(player.getColour());
         inputField.requestFocus();
     }
