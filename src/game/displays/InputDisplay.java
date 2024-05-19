@@ -80,9 +80,16 @@ public class InputDisplay {
         inputField.requestFocus();
     }
 
-    public String getPlayerInputText() {
-        return playerInputText;
-    }
+    public void enableInput(Player player, Board board, DisplayManager display) {
+        inputField.setEditable(true);
+
+        removeAllActionListeners(inputField);
+        inputField.addActionListener((e) -> {
+            String input = inputField.getText();
+            if (!validateInput(input)) {
+                return;
+            }
+            inputField.setEditable(false);
 
             player.playTurn(getActionFromString(input, player, board), board, display);
         });
