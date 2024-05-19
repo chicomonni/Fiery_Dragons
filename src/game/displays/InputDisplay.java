@@ -55,6 +55,8 @@ public class InputDisplay {
     }
 
     public void setPromptText(Player player) {
+        promptContainer.removeAll();
+
         JTextField prompt = new JTextField();
         initialiseTextField(prompt);
         promptContainer.add(prompt, BorderLayout.CENTER);
