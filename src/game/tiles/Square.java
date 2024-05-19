@@ -105,6 +105,11 @@ public class Square extends GameTile {
         return playerDisplay.calculateLocation(this);
     }
 
+    /**
+     * Sets a Cave on this Square and updates the move strategy accordingly.
+     *
+     * @param cave the Cave to be set on this Square
+     */
     public void setCave(Cave cave) {
         strategy = new SquareWithCaveMoveStrategy(this, cave);
     }
