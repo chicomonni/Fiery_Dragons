@@ -43,7 +43,7 @@ public class ChitCardArray {
      * @return a relevant Action or {@code null} if it cannot be performed
      */
     public GameAction getAction(Player player, int cardNum) {
-        if (cardNum < 0 || cardNum >= length()) {
+        if (cardNum < 1 || cardNum >= length() + 1) {
             return new InvalidGameAction("INVALID CARD NUMBER", player);
         }
 
