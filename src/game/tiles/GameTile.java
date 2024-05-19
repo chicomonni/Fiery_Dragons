@@ -31,15 +31,15 @@ public abstract class GameTile {
     }
 
     /**
-     * Returns the desired MoveAction if it can be performed
+     * Returns a relevant Action if it can be performed
      *
      * @param player the Player instance moving
      * @param dist   how far the Player moves along the Volcano
-     * @return the desired MoveAction or {@code null} if it cannot be performed
+     * @return a relevant Action or EndTurnGameAction if it cannot be performed
      */
-    public MoveAction getMoveAction(Player player, int dist) {
+    public GameAction getAction(Player player, int dist) {
         if (canMove(player, dist)) {
-            return new MoveAction(player, dist);
+            return new MoveGameAction(player, dist);
         }
         return null;
     }
