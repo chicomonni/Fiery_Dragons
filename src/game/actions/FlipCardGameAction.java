@@ -17,11 +17,9 @@ public class FlipCardGameAction implements GameAction {
     @Override
     public GameAction execute(Board board, DisplayManager display) {
         card.flip();
-        System.out.println("Value is: " + card.getValue());
         display.displayFlip(card);
 
         if (card.isMatch(player.getPosition())) {
-            System.out.println(1);
             return player.getPosition().getAction(player, card.getValue());
         }
         return new EndTurnGameAction(player);
