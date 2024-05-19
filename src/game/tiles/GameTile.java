@@ -71,6 +71,11 @@ public abstract class GameTile {
      */
     public abstract boolean canEnter(Player player);
 
+    /**
+     * Sets the vacancy state of this GameTile.
+     *
+     * @param state {@code true} if the tile should be marked as vacant, {@code false} otherwise
+     */
     public void setVacancy(boolean state) {
         vacant = state;
     }
