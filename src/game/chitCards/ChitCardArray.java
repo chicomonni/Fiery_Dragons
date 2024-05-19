@@ -15,6 +15,13 @@ import java.util.List;
 public class ChitCardArray {
     private List<ChitCard> chitCards;
 
+    /**
+     * Creates ChitCards from a comma-separated string of Chit representations.
+     *
+     * @param src     the comma-separated string of Chit representations
+     * @param factory the ChitFactory used to create Chit instances
+     * @throws KeyException if a Chit representation in the string is invalid
+     */
     public void createCards(String src, ChitFactory factory) throws KeyException {
         List<String> splitSrc = Arrays.asList(src.split(","));
         chitCards = new ArrayList<>(splitSrc.size());
@@ -27,10 +34,21 @@ public class ChitCardArray {
         }
     }
 
+    /**
+     * Retrieves the ChitCard at the specified index.
+     *
+     * @param i the index of the ChitCard to retrieve
+     * @return the ChitCard at the specified index
+     */
     public ChitCard getChitCard(int i) {
         return chitCards.get(i - 1);
     }
 
+    /**
+     * Retrieves a copy of the list of ChitCards.
+     *
+     * @return a copy of the list of ChitCards
+     */
     public List<ChitCard> getChitCards() {
         return new ArrayList<>(chitCards);
     }
