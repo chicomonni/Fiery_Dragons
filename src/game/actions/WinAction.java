@@ -1,17 +1,22 @@
 package game.actions;
 
 import game.Board;
+import game.Player;
 import game.displays.DisplayManager;
 
 /**
  * Class used to represent a game action to end the game.
  */
-public class WinAction implements GameAction {
+public class WinAction extends MoveGameAction {
 
     /**
      * Constructor
+     *
+     * @param player the player performing the move action
+     * @param dist   the distance to move
      */
-    public WinAction() {
+    public WinAction(Player player, int dist) {
+        super(player, dist);
     }
 
     /**
@@ -23,7 +28,8 @@ public class WinAction implements GameAction {
      */
     @Override
     public GameAction execute(Board board, DisplayManager display) {
-        System.out.println("You win!");
+        super.execute(board, display);
+        System.out.println("A player has won the game!");
         return null;
     }
 }

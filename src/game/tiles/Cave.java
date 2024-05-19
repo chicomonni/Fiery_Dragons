@@ -113,13 +113,9 @@ public class Cave extends GameTile {
      */
 
     public boolean winningMove(Player player, int dist) {
-        System.out.println("cave winningMove? " + (canEnter(player) && dist == 0));
-        System.out.println("dist is " + dist + " and canEnter is " + canEnter(player));
-
         if (canEnter(player) && dist == 0 ) {
             return true;
         }
-
         return false;
     }
 

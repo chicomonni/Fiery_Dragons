@@ -41,10 +41,8 @@ public abstract class GameTile {
      * @return a relevant Action or EndTurnGameAction if it cannot be performed
      */
     public GameAction getAction(Player player, int dist) {
-        System.out.println(player.getPosition());
         if (winningMove(player, dist)) {
-            System.out.println("winning move");
-            return new WinAction();
+            return new WinAction(player, dist);
         } else if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }

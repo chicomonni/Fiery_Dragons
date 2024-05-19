@@ -45,11 +45,9 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
 
     public boolean winningMove(Player player, int dist) {
         if (dist > 0) {
-            System.out.println("dist > 0");
             return square.getNext().winningMove(player, dist - 1);
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
