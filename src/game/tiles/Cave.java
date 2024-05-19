@@ -60,12 +60,12 @@ public class Cave extends GameTile {
     public boolean canMove(Player player, int dist) {
         // The only case where dist can be > 0 is if the player is currently in the cave
         // (i.e. the first move to leave the cave)
-        if (dist > 0 && player.getPosition() == this) {
+        if (dist > 1 && player.getPosition() == this) {
             return next.canMove(player, dist - 1);
         }
 
-        // Can only enter a cave by exactly landing on it
-        return dist == 0;
+        // Can only enter a cave by exactly landing on it in the forwards direction
+        return dist == 1;
     }
 
     /**
@@ -79,16 +79,16 @@ public class Cave extends GameTile {
         if (player.getPosition() == this) {
             this.setVacancy(true);
 
-            // The only case where dist can be > 0 is if the player is currently in the cave
+            // The only case where dist can be > 1 is if the player is currently in the cave
             // (i.e. the first move to leave the cave)
-            if (dist > 0) {
+            if (dist > 1) {
                 next.move(player, dist - 1);
                 return;
             }
         }
 
-        // Can only enter a cave by exactly landing on it
-        if (dist == 0) {
+        // Can only enter a cave by exactly landing on it in the forwards direction
+        if (dist == 1) {
             player.setPosition(this);
             setVacancy(false);
         }
@@ -107,16 +107,14 @@ public class Cave extends GameTile {
 
     /**
      * Check if a Player can win with the given number of moves
+     *
      * @param player the Player trying to win
-     * @param dist the number of moves the Player could move along the Volcano
+     * @param dist   the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
 
     public boolean winningMove(Player player, int dist) {
-        if (canEnter(player) && dist == 0 ) {
-            return true;
-        }
-        return false;
+        return dist == 1 && canEnter(player);
     }
 
     /**
