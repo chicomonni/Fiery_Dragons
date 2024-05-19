@@ -21,7 +21,6 @@ public interface SquareMoveStrategy {
      * @param dist the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
-
     boolean winningMove(Player player, int dist);
     
     /**
