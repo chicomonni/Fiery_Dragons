@@ -7,8 +7,8 @@ public class WinAction implements GameAction {
 
     @Override
     public GameAction execute(Board board, DisplayManager display) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+        System.out.println("You win!");
+        return null;
     }
     
 }
