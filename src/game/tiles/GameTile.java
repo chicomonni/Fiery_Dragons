@@ -41,11 +41,15 @@ public abstract class GameTile {
      * @return a relevant Action or EndTurnGameAction if it cannot be performed
      */
     public GameAction getAction(Player player, int dist) {
+        // If the player can win, return a WinAction immediately
         if (winningMove(player, dist)) {
             return new WinAction(player, dist);
+        
+        // Otherwise if the player can move, return a MoveGameAction
         } else if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }
+        // Otherwise it is the end of their turn
         return new EndTurnGameAction(player);
     }
 
