@@ -53,6 +53,12 @@ public class ChitFactory {
         );
     }
 
+    /**
+     * Retrieves the character array representation of a text file.
+     *
+     * @param path the path to the text file
+     * @return the character array representation of the text file
+     */
     private char[][] getStrings(String path) {
         InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
