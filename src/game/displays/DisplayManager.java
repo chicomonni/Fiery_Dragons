@@ -37,6 +37,7 @@ public class DisplayManager {
 
     public void startTurn(Player player, Board board) {
         inputDisplay.setPromptText(player, board);
+        inputDisplay.disableInput();
         inputDisplay.enableInput(player, board, this);
     }
 
