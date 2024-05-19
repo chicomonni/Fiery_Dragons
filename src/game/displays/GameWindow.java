@@ -21,7 +21,6 @@ public class GameWindow {
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
 
-
     /**
      * Constructor
      */
@@ -135,5 +134,30 @@ public class GameWindow {
      */
     public JPanel getFooter() {
         return footer;
+    }
+
+    public void displayWinner(String winner, Color color) throws IOException, FontFormatException{
+        Font font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
+        );
+        // Clear all components from the container
+        Container container = window.getContentPane();
+        container.removeAll();
+
+
+        // Create a JLabel with your text
+        JLabel label = new JLabel(winner + " wins!");
+        label.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
+        label.setForeground(color); // Set text color
+        label.setHorizontalAlignment(JLabel.CENTER); // Center the text
+        label.setBounds(50, 50, 200, 50);
+
+        // Add the JLabel to the container
+        container.add(label);
+
+        // Refresh the container
+        container.revalidate();
+        container.repaint();
     }
 }

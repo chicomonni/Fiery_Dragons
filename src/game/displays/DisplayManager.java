@@ -1,5 +1,7 @@
 package game.displays;
 
+import java.awt.FontFormatException;
+import java.io.IOException;
 import game.Board;
 import game.Player;
 import game.chitCards.ChitCard;
@@ -74,5 +76,13 @@ public class DisplayManager {
     public void endTurn() {
         inputDisplay.disableInput();
         cardDisplay.reset();
+    }
+
+    public void displayWin(Player player) {
+        try {
+            gameWindow.displayWinner(player.getName(), player.getColour());
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 }
