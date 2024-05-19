@@ -29,6 +29,9 @@ public class FieryDragons {
     private Board board;
     private Player[] players;
 
+    /**
+     * Creates the chits used in the game with specific strategies.
+     */
     private void createChits() {
         chitFactory.setChit('w', "Bat", new AnimalChitStrategy());
         chitFactory.setChit('0', "Baby Dragon", new AnimalChitStrategy());
@@ -37,11 +40,17 @@ public class FieryDragons {
         chitFactory.setChit('P', "Pirate", new PirateChitStrategy());
     }
 
+    /**
+     * Creates the game board using predefined sources and the chit factory.
+     */
     private void createBoard() {
         board = new Board("/assets/volcano.txt");
         board.createBoard(SQUARE_SRC, CAVE_SRC, CARD_SRC, chitFactory);
     }
 
+    /**
+     * Creates the players and assigns them to their starting positions.
+     */
     private void createPlayers() {
         List<Cave> caves = board.getCaves();
         players = new Player[NUM_PLAYERS];
