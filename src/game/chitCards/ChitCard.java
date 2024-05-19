@@ -17,15 +17,14 @@ public class ChitCard {
     private final char[][] front;
     private final Chit chit;
     private final int value;
-    //TODO: remove test
-    private boolean isUncovered = true;
+    private boolean isUncovered;
 
     /**
      * Constructor
      *
-     * @param chit   the Chit associated with the card
-     * @param value  the value of the card
-     * @param index  the index of the card
+     * @param chit  the Chit associated with the card
+     * @param value the value of the card
+     * @param index the index of the card
      */
     public ChitCard(Chit chit, int value, int index) {
         this.chit = chit;

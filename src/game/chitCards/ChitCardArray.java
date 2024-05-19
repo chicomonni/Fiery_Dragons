@@ -10,6 +10,7 @@ import game.chits.ChitFactory;
 import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChitCardArray {
@@ -25,8 +26,7 @@ public class ChitCardArray {
     public void createCards(String src, ChitFactory factory) throws KeyException {
         List<String> splitSrc = Arrays.asList(src.split(","));
         chitCards = new ArrayList<>(splitSrc.size());
-        //TODO: remove tests
-//        Collections.shuffle(splitSrc);
+        Collections.shuffle(splitSrc);
 
         for (int i = 0; i < splitSrc.size(); i++) {
             String s = splitSrc.get(i);
@@ -67,9 +67,9 @@ public class ChitCardArray {
         }
 
         ChitCard chitCard = getChitCard(cardNum);
-//        if (chitCard.isCardUncovered()) {
-//            return new InvalidGameAction("CARD ALREADY FLIPPED", player);
-//        }
+        if (chitCard.isCardUncovered()) {
+            return new InvalidGameAction("CARD ALREADY FLIPPED", player);
+        }
 
         return new FlipCardGameAction(player, chitCard);
     }
