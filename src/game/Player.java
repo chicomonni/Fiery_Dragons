@@ -85,7 +85,7 @@ public class Player {
     }
 
     public void endTurn(Board board, DisplayManager display) {
-        Timer timer = new Timer(1500, e -> {
+        Timer timer = new Timer(2000, e -> {
             display.endTurn();
             nextPlayer.startTurn(board, display);
         });
