@@ -13,13 +13,14 @@ import java.util.Objects;
 public class GameWindow {
     public static final float ASCII_FONT_SIZE = 8f;
     public static final float FOOTER_FONT_SIZE = 16f;
-    public static final int PADDING = 10;
+    public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
+
 
     /**
      * Constructor
@@ -45,9 +46,9 @@ public class GameWindow {
         );
         // TODO: remove colours used for testing
         // Adjust default font on text components
-        UIManager.put("Label.font", font.deriveFont(ASCII_FONT_SIZE));
-        UIManager.put("TextPane.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
+        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
+
 
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
@@ -55,7 +56,7 @@ public class GameWindow {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.insets = new Insets(PADDING, PADDING, PADDING / 2, PADDING / 2);
+        constraints.insets = new Insets(PADDING, PADDING, 0, PADDING / 2);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -65,10 +66,9 @@ public class GameWindow {
                 (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
                 (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
         ));
-//        volcano.setBorder(new LineBorder(Color.WHITE, 5));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(PADDING, PADDING / 2, PADDING / 2, PADDING);
+        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING);
         constraints.gridx = 1;
         constraints.gridy = 0;
 
@@ -81,15 +81,23 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
-        constraints.insets = new Insets(PADDING / 2, PADDING, PADDING, PADDING);
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(PADDING, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+
+        JPanel separator = new JPanel();
+        separator.setPreferredSize(new Dimension(0, PADDING / 2));
+        container.add(separator, constraints);
+
+        constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
+        constraints.gridy = 2;
 
         // Initialise container for the input and add the component to the window
-        // input.setOpaque(false);
-        footer.setBackground(Color.YELLOW);
-        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 2 + PADDING)));
+        footer.setOpaque(false);
+        footer.setBackground(Color.RED);
+        footer.setLayout(new GridBagLayout());
+        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
         window.pack();
@@ -115,5 +123,14 @@ public class GameWindow {
      */
     public JPanel getChitCardsComponent() {
         return chitCards;
+    }
+
+    /**
+     * Getter for the swing component that holds the input field
+     *
+     * @return swing component that holds the input field
+     */
+    public JPanel getFooter() {
+        return footer;
     }
 }

@@ -1,5 +1,7 @@
 package game;
 
+import game.actions.SelectCardAction;
+import game.displays.DisplayManager;
 import game.tiles.GameTile;
 
 import java.awt.*;
@@ -75,5 +77,26 @@ public class Player {
      */
     public String getName() {
         return name;
+    }
+
+    public void startTurn(Board board, DisplayManager display) {
+
+        //select card
+        selectCard(board, display);
+
+        //if can continue turn
+        //pick turn
+        //if pick to continue
+        // new selectCard Action
+
+
+        //else
+        //end turn
+
+    }
+
+    public void selectCard(Board board, DisplayManager display) {
+        display.startTurn(this);
+        new SelectCardAction(this).execute(board, display);
     }
 }

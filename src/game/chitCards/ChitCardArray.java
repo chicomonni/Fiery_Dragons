@@ -18,10 +18,14 @@ public class ChitCardArray {
         for (int i = 0; i < splitSrc.length; i++) {
             String s = splitSrc[i];
             Chit chit = factory.getChit(s.charAt(0));
-            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1)), i));
+            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
         }
 
         randomise();
+
+        for (int i = 0; i < chitCards.size(); i++) {
+            chitCards.get(i).setCardNum(i);
+        }
     }
 
     public void flip(int i) {
@@ -35,4 +39,8 @@ public class ChitCardArray {
     public List<ChitCard> getChitCards() {
         return chitCards;
     }
+
+//    public ChitCard selectCard(int cardNum) {
+//
+//    }
 }

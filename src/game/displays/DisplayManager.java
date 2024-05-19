@@ -12,6 +12,7 @@ public class DisplayManager {
     private final VolcanoDisplay volcanoDisplay;
     private final PlayerDisplay playerDisplay;
     private final ChitCardDisplay cardDisplay;
+    private final InputDisplay inputDisplay;
 
     /**
      * Constructor
@@ -23,6 +24,7 @@ public class DisplayManager {
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
+        this.inputDisplay = new InputDisplay(gameWindow);
     }
 
     public void displayMove(Player player) {
@@ -31,5 +33,9 @@ public class DisplayManager {
 
     public void displayFlip(ChitCard card) {
         cardDisplay.update(card);
+    }
+
+    public void startTurn(Player player) {
+        inputDisplay.setPromptText(player);
     }
 }
