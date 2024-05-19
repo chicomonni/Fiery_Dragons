@@ -9,25 +9,21 @@ import game.chits.ChitFactory;
 
 import java.security.KeyException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChitCardArray {
     private List<ChitCard> chitCards;
 
     public void createCards(String src, ChitFactory factory) throws KeyException {
-        String[] splitSrc = src.split(",");
-        chitCards = new ArrayList<>(splitSrc.length);
+        List<String> splitSrc = Arrays.asList(src.split(","));
+        chitCards = new ArrayList<>(splitSrc.size());
+//        Collections.shuffle(splitSrc);
 
-        for (String s : splitSrc) {
+        for (int i = 0; i < splitSrc.size(); i++) {
+            String s = splitSrc.get(i);
             Chit chit = factory.getChit(s.charAt(0));
-            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
-        }
-
-        randomise();
-
-        for (int i = 0; i < length(); i++) {
-            chitCards.get(i).setCardNum(i);
+            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1)), i));
         }
     }
 
@@ -35,12 +31,8 @@ public class ChitCardArray {
         return chitCards.get(i - 1);
     }
 
-    public void randomise() {
-        Collections.shuffle(chitCards);
-    }
-
     public List<ChitCard> getChitCards() {
-        return chitCards;
+        return new ArrayList<>(chitCards);
     }
 
     /**
