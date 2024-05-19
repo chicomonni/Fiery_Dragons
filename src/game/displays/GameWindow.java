@@ -68,7 +68,7 @@ public class GameWindow {
         ));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING);
+        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING + 20);
         constraints.gridx = 1;
         constraints.gridy = 0;
 
