@@ -36,9 +36,9 @@ public class DisplayManager {
         cardDisplay.update(card);
     }
 
-    public void playTurn(Player player) {
-        String promptFlipText = " FLIP A CHIT CARD (1 - 16)"; //TODO: change to get number of cards later
-        inputDisplay.setPromptText(player, promptFlipText);
+    public void startTurn(Player player, Board board) {
+        inputDisplay.setPromptText(player, board);
+        inputDisplay.enableInput(player, board, this);
     }
 
     public Action getInput(Player player, Board board) {
