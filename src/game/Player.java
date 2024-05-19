@@ -17,6 +17,12 @@ public class Player {
     private Player nextPlayer;
     private Timer playTurnTimer;
 
+    /**
+     * Constructor
+     * @param name      the name of the player
+     * @param position  the starting position of the player
+     * @param hue       the hue of the player's colour
+     */
     public Player(String name, GameTile position, float hue) {
         this.name = name;
         this.position = position;

@@ -15,6 +15,11 @@ public class Volcano {
     private List<Square> squares;
     private List<Cave> caves;
 
+    /**
+     * Constructor
+     * 
+     * @param asciiRep  a 2D char array representing the Volcano
+     */
     public Volcano(char[][] asciiRep) {
         ASCIIRep = asciiRep;
     }
