@@ -1,12 +1,11 @@
 package game;
 
-import game.actions.Action;
-import game.actions.SelectCardAction;
+import game.actions.GameAction;
 import game.displays.DisplayManager;
 import game.tiles.GameTile;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class Player {
     private final Color colour;
@@ -19,11 +18,6 @@ public class Player {
         this.name = name;
         this.position = position;
         this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
-    }
-
-    private void executeAction(Board board) {
-        int cardChoice = new Random().nextInt(1, 17);
-        System.out.println("Card chosen was number " + cardChoice);
     }
 
     /**
@@ -81,40 +75,21 @@ public class Player {
     }
 
     public void startTurn(Board board, DisplayManager display) {
-        //no choice to player
-        playTurn(board, display);
-
-
-        //if can continue turn
-        //pick turn
-        //if pick to continue
-        // new selectCard Action
-
-
-        //else
-        //end turn
-
+        display.startTurn(this, board);
     }
 
-    public void playTurn(Board board, DisplayManager display) {
-        selectCard(board, display);
-    }
-
-    public void pickTurn(Board board, DisplayManager display) {
-        //choose between selecting a card or passing
-        //playTurn(board, display);
-
-        //else
-        //endTurn(board, display);
-    }
-
-    public void selectCard(Board board, DisplayManager display) {
-        display.playTurn(this);
-        Action inputAction = display.getInput(this, board);
-//        new SelectCardAction(this).execute(board, display);
+    public void playTurn(GameAction action, Board board, DisplayManager display) {
+        while (action != null) {
+            action = action.execute(board, display);
+        }
     }
 
     public void endTurn(Board board, DisplayManager display) {
-        nextPlayer.startTurn(board, display);
+        Timer timer = new Timer(1500, e -> {
+            display.endTurn();
+            nextPlayer.startTurn(board, display);
+        });
+        timer.start();
+        timer.setRepeats(false);
     }
 }
