@@ -1,7 +1,9 @@
 package game.tiles;
 
 import game.Player;
-import game.actions.MoveAction;
+import game.actions.EndTurnGameAction;
+import game.actions.GameAction;
+import game.actions.MoveGameAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
@@ -10,7 +12,7 @@ import game.displays.PlayerDisplay;
  */
 public abstract class GameTile {
     private final Chit chit;
-    protected boolean vacant;
+    protected boolean vacant = true;
 
     /**
      * Constructor.
@@ -41,7 +43,7 @@ public abstract class GameTile {
         if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }
-        return null;
+        return new EndTurnGameAction(player);
     }
 
     /**
