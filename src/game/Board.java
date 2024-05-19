@@ -97,7 +97,7 @@ public class Board {
         return chitCards;
     }
 
-//    public ChitCard getCardFromArray(int selectedCardNum) {
-//        return getChitCards().get(selectedCardNum - 1);
-//    }
+    public ChitCard getChitCard(int i) {
+        return chitCards.getChitCard(i);
+    }
 }
