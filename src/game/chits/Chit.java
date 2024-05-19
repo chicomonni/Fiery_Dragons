@@ -64,7 +64,14 @@ public class Chit {
      * @return detailed representation of this Chit
      */
     public char[][] getDisplayDetail() {
-        return displayDetail;
+        char[][] clone = new char[displayDetail.length][];
+
+        for (int i = 0; i < displayDetail.length; i++) {
+            char[] chars = displayDetail[i];
+            clone[i] = chars.clone();
+        }
+
+        return clone;
     }
 
     /**
@@ -73,7 +80,14 @@ public class Chit {
      * @return card representation of this Chit
      */
     public char[][] getDisplayCard() {
-        return displayCard;
+        char[][] clone = new char[displayCard.length][];
+
+        for (int i = 0; i < displayCard.length; i++) {
+            char[] chars = displayCard[i];
+            clone[i] = chars.clone();
+        }
+
+        return clone;
     }
 
     /**
