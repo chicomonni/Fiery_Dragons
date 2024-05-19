@@ -40,7 +40,5 @@ public class ChitCardArray {
         return chitCards;
     }
 
-//    public ChitCard selectCard(int cardNum) {
-//
-//    }
+
 }

@@ -7,7 +7,7 @@ import game.displays.DisplayManager;
 
 public class SelectCardAction implements Action {
     private final Player player;
-    private String playerInput;
+    private Action playerInput;
     private ChitCard selectedCard;
 
     public SelectCardAction(Player player) {
@@ -17,16 +17,16 @@ public class SelectCardAction implements Action {
 
     @Override
     public void execute(Board board, DisplayManager display) {
-        //get player input
-//        playerInput = display.getInput(display.getGameWindow().getInputField());
-
-        //verify if card is valid
-        if(cardIsValid(playerInput)) {
-            new FlipCardAction().execute(board, display);
-        }
-        else {
-            player.selectCard(board, display);
-        }
+//        //get player input
+//        playerInput = display.getInput(player, board);
+//
+//        //verify if card is valid
+//        if(cardIsValid(playerInput)) {
+//            new FlipCardAction().execute(board, display);
+//        }
+//        else {
+//            player.selectCard(board, display);
+//        }
 
     }
 

@@ -1,5 +1,6 @@
 package game;
 
+import game.actions.Action;
 import game.actions.SelectCardAction;
 import game.displays.DisplayManager;
 import game.tiles.GameTile;
@@ -80,9 +81,9 @@ public class Player {
     }
 
     public void startTurn(Board board, DisplayManager display) {
+        //no choice to player
+        playTurn(board, display);
 
-        //select card
-        selectCard(board, display);
 
         //if can continue turn
         //pick turn
@@ -95,8 +96,25 @@ public class Player {
 
     }
 
+    public void playTurn(Board board, DisplayManager display) {
+        selectCard(board, display);
+    }
+
+    public void pickTurn(Board board, DisplayManager display) {
+        //choose between selecting a card or passing
+        //playTurn(board, display);
+
+        //else
+        //endTurn(board, display);
+    }
+
     public void selectCard(Board board, DisplayManager display) {
-        display.startTurn(this);
-        new SelectCardAction(this).execute(board, display);
+        display.playTurn(this);
+        Action inputAction = display.getInput(this, board);
+//        new SelectCardAction(this).execute(board, display);
+    }
+
+    public void endTurn(Board board, DisplayManager display) {
+        nextPlayer.startTurn(board, display);
     }
 }

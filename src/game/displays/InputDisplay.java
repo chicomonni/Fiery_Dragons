@@ -1,6 +1,9 @@
 package game.displays;
 
+import game.Board;
 import game.Player;
+import game.actions.Action;
+import game.actions.SelectCardAction;
 import utils.Typing;
 
 import javax.swing.*;
@@ -10,7 +13,9 @@ public class InputDisplay {
     private final JTextField inputField = new JTextField();
     private final JPanel promptContainer = new JPanel();
     private final JTextField inputMarker = new JTextField(1);
-    private String playerInput;
+    private String playerInputText;
+    private boolean inputReady = false;
+
 
     public InputDisplay(GameWindow gameWindow) {
         initialise(gameWindow.getFooter());
@@ -41,7 +46,7 @@ public class InputDisplay {
 
         initialiseTextField(inputField);
         inputField.setToolTipText("Enter Your Move");
-        inputField.addActionListener(e -> playerInput = inputField.getText());
+        inputField.addActionListener(e -> handleInput());
         container.add(inputField, constraints);
 
         container.revalidate();
@@ -54,7 +59,7 @@ public class InputDisplay {
         textField.setForeground(Color.WHITE);
     }
 
-    public void setPromptText(Player player) {
+    public void setPromptText(Player player, String promptText) {
         promptContainer.removeAll();
 
         JTextField prompt = new JTextField();
@@ -67,8 +72,6 @@ public class InputDisplay {
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
-        String promptText = " FLIP A CHIT CARD (1 - 16)"; // change to get number of cards later
-
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
         inputMarker.setForeground(player.getColour());
@@ -77,7 +80,57 @@ public class InputDisplay {
         inputField.requestFocus();
     }
 
-    public String getPlayerInput() {
-        return playerInput;
+    public String getPlayerInputText() {
+        return playerInputText;
     }
+
+    public Action getInput(Player player, Board board) {
+        if(isSelectedCardNumValid(player, playerInputText)) {
+            return new SelectCardAction(player);
+        }
+        else {
+            try {
+                Thread.sleep(100);
+//                return new InvalidAction(player);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return new SelectCardAction(player); //TODO: remove later
+    }
+
+    public Boolean isSelectedCardNumValid(Player player, String playerInputText) {
+        try {
+            //check if int
+            int playerInputInt = Integer.parseInt(playerInputText);
+
+            //check if in range
+
+            //check if already uncovered
+            return true;
+
+        }
+        catch (NumberFormatException ex) {
+            String promptNotIntText = " NOT AN INTEGER ";
+            setPromptText(player, promptNotIntText);
+            return false;
+        }
+    }
+
+    public boolean isInputReady() {
+        return inputReady;
+    }
+
+    public void resetInput() {
+        playerInputText = "";
+        inputReady = false;
+        inputField.setText("");
+    }
+
+    private void handleInput() {
+        playerInputText = inputField.getText();
+        inputReady = true;
+        inputField.setEditable(false);
+    }
+
 }

@@ -2,6 +2,7 @@ package game.displays;
 
 import game.Board;
 import game.Player;
+import game.actions.Action;
 import game.chitCards.ChitCard;
 
 /**
@@ -35,7 +36,22 @@ public class DisplayManager {
         cardDisplay.update(card);
     }
 
-    public void startTurn(Player player) {
-        inputDisplay.setPromptText(player);
+    public void playTurn(Player player) {
+        String promptFlipText = " FLIP A CHIT CARD (1 - 16)"; //TODO: change to get number of cards later
+        inputDisplay.setPromptText(player, promptFlipText);
+    }
+
+    public Action getInput(Player player, Board board) {
+        while (!inputDisplay.isInputReady()) {
+            // Waiting for the input to be ready (after pressing Enter)
+            try {
+                Thread.sleep(100); // Sleep briefly to avoid busy-waiting
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Action action = inputDisplay.getInput(player, board);
+        inputDisplay.resetInput(); // Reset input after reading
+        return action;
     }
 }
