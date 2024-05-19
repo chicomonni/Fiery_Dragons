@@ -26,7 +26,7 @@ public class ChitCardArray {
     public void createCards(String src, ChitFactory factory) throws KeyException {
         List<String> splitSrc = Arrays.asList(src.split(","));
         chitCards = new ArrayList<>(splitSrc.size());
-        Collections.shuffle(splitSrc);
+        // Collections.shuffle(splitSrc);
 
         for (int i = 0; i < splitSrc.size(); i++) {
             String s = splitSrc.get(i);

@@ -95,6 +95,17 @@ public class Square extends GameTile {
     }
 
     /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        return strategy.winningMove(player, dist);
+    }
+
+    /**
      * Double dispatch to calculate location of a specific GameTile subclass
      *
      * @param playerDisplay the playerDisplay initiating the dispatch

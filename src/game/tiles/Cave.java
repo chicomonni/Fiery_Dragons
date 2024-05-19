@@ -106,6 +106,24 @@ public class Cave extends GameTile {
     }
 
     /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        System.out.println("cave winningMove? " + (canEnter(player) && dist == 0));
+        System.out.println("dist is " + dist + " and canEnter is " + canEnter(player));
+
+        if (canEnter(player) && dist == 0 ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Double dispatch to calculate location of a specific GameTile subclass
      *
      * @param playerDisplay the playerDisplay initiating the dispatch

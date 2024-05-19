@@ -37,6 +37,22 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
     }
 
     /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        if (dist > 0) {
+            System.out.println("dist > 0");
+            return square.getNext().winningMove(player, dist - 1);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Moves the Player the specified distance
      *
      * @param player the Player instance moving
