@@ -127,10 +127,9 @@ public class InputDisplay {
         inputField.setText("");
     }
 
-    private void handleInput() {
-        playerInputText = inputField.getText();
-        inputReady = true;
+    public void disableInput() {
         inputField.setEditable(false);
+        inputField.setText("");
     }
 
 }
