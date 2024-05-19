@@ -14,7 +14,8 @@ public class ChitCard {
     private final char[][] front;
     private final Chit chit;
     private final int value;
-    private boolean isUncovered;
+    //TODO: remove test
+    private boolean isUncovered = true;
 
     public ChitCard(Chit chit, int value, int index) {
         this.chit = chit;
