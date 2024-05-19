@@ -41,10 +41,23 @@ public class Board {
         this.volcano = new Volcano(chars);
     }
 
+    /**
+     * Creates the volcano on the board using the given sources and chit factory.
+     *
+     * @param squareSrc a valid String representing all Squares in order
+     * @param caveSrc   a valid String representing all Caves in order
+     * @param factory   ChitFactory instance used by the game
+     */
     private void createVolcano(String squareSrc, String caveSrc, ChitFactory factory) {
         volcano.createVolcano(squareSrc, caveSrc, factory);
     }
 
+    /**
+     * Creates the chit cards on the board using the given source and chit factory.
+     *
+     * @param cardSrc a valid String representing all ChitCards
+     * @param factory ChitFactory instance used by the game
+     */
     private void createChitCards(String cardSrc, ChitFactory factory) {
         try {
             chitCards.createCards(cardSrc, factory);
@@ -93,10 +106,21 @@ public class Board {
         return volcano;
     }
 
+    /**
+     * Getter for the ChitCardArray.
+     *
+     * @return the ChitCardArray instance
+     */
     public ChitCardArray getChitCards() {
         return chitCards;
     }
 
+    /**
+     * Getter for a specific ChitCard.
+     *
+     * @param i the index of the ChitCard
+     * @return the ChitCard at the specified index
+     */
     public ChitCard getChitCard(int i) {
         return chitCards.getChitCard(i);
     }
