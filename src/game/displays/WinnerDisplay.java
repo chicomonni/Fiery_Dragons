@@ -15,7 +15,7 @@ public class WinnerDisplay {
     public WinnerDisplay(GameWindow gameWindow) {
         winnerPane = gameWindow.getWinnerDisplay();
     }
-
+    
     public void displayWinner(Player player) {
         winnerPane.setText(player.getName() + " wins!");
         winnerPane.setForeground(player.getColour());

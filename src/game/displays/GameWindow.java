@@ -142,15 +142,25 @@ public class GameWindow {
         return footer;
     }
 
+    /**
+     * Getter for the winner JLabel
+     * 
+     * @return the winner JLabel
+     */
     public JLabel getWinnerDisplay() {
         return winner;
     }
 
+    /**
+     * Method to display the winner of the game
+     */
     public void showWinnerLabel() {
         Container container = window.getContentPane();
         container.removeAll();
         container.add(winner);
+
         winner.setVisible(true);
+        
         container.revalidate();
         container.repaint();
     }
