@@ -61,7 +61,6 @@ public class Cave extends GameTile {
         // The only case where dist can be > 0 is if the player is currently in the cave
         // (i.e. the first move to leave the cave)
         if (dist > 0 && player.getPosition() == this) {
-            System.out.println(3);
             return next.canMove(player, dist - 1);
         }
 
