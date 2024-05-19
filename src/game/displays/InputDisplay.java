@@ -121,10 +121,16 @@ public class InputDisplay {
         return inputReady;
     }
 
-    public void resetInput() {
-        playerInputText = "";
-        inputReady = false;
-        inputField.setText("");
+    public void printError(String message) {
+        inputField.setText("!!! " + message + " !!!");
+        inputField.setEditable(false);
+
+        Timer timer = new Timer(1000, e -> {
+            inputField.setText("");
+            inputField.setEditable(true);
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     public void disableInput() {
