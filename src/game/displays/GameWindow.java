@@ -49,13 +49,14 @@ public class GameWindow {
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
 
-
+        // Configure the window container
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
         GridBagConstraints constraints = new GridBagConstraints();
 
+        // Configure and add the Volcano component to the window
         constraints.insets = new Insets(PADDING, PADDING, 0, PADDING / 2);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
@@ -81,6 +82,7 @@ public class GameWindow {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
 
+        // Add a separator panel
         constraints.insets = new Insets(PADDING, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -100,6 +102,7 @@ public class GameWindow {
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
+        // Finalize window setup
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
