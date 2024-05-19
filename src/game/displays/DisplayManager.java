@@ -78,6 +78,10 @@ public class DisplayManager {
         cardDisplay.reset();
     }
 
+    /**
+     * Displays the winner of the game.
+     * @param player the Player who has won the game
+     */
     public void displayWin(Player player) {
         winnerDisplay.displayWinner(player);
         gameWindow.showWinnerLabel();
