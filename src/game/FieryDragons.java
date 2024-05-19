@@ -1,6 +1,5 @@
 package game;
 
-import game.chitCards.ChitCard;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
@@ -71,18 +70,6 @@ public class FieryDragons {
         GameWindow gameWindow = new GameWindow();
 
         DisplayManager display = new DisplayManager(gameWindow, board, players);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Player p = players[0];
-        p.startTurn(board, display);
-//        p.setPosition(board.getVolcano().getSquares().get(10));
-//        display.displayMove(p);
-
-//        ChitCard card = board.getChitCards().getChitCards().get(3);
-//        board.getChitCards().flip(4);
-//        display.displayFlip(card);
+        players[0].startTurn(board, display);
     }
 }
