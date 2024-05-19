@@ -36,6 +36,9 @@ public class ChitCardDisplay {
         }
     }
 
+    /**
+     * Initializes the display component for the ChitCards.
+     */
     private void initialiseComponent() {
         cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
         // TODO: make more extensible
@@ -46,11 +49,22 @@ public class ChitCardDisplay {
         cardPane.setOpaque(false);
     }
 
+    /**
+     * Updates the display of a ChitCard.
+     *
+     * @param card the ChitCard to be updated
+     */
     public void update(ChitCard card) {
         JTextArea cardPlane = getCardPlane(card);
         cardPlane.setText(getCardForDisplay(card));
     }
 
+    /**
+     * Retrieves the JTextArea associated with a ChitCard.
+     *
+     * @param card the ChitCard
+     * @return the JTextArea associated with the ChitCard
+     */
     private JTextArea getCardPlane(ChitCard card) {
         JTextArea cardPlane = chitCardPlanes.get(card);
 
@@ -70,6 +84,12 @@ public class ChitCardDisplay {
         return cardPlane;
     }
 
+    /**
+     * Generates the ASCII representation of a ChitCard for display.
+     *
+     * @param card the ChitCard
+     * @return the ASCII representation of the ChitCard
+     */
     private String getCardForDisplay(ChitCard card) {
         char[][] chars = card.getASCIIRep();
 
@@ -81,6 +101,9 @@ public class ChitCardDisplay {
         return String.join("\n", cardASCIIRep);
     }
 
+    /**
+     * Resets the display of all ChitCards.
+     */
     public void reset() {
         for (ChitCard card : chitCardPlanes.keySet()) {
             card.reset();

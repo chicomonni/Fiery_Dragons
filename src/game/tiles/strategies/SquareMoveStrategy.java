@@ -16,6 +16,15 @@ public interface SquareMoveStrategy {
     boolean canMove(Player player, int dist);
 
     /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    boolean winningMove(Player player, int dist);
+    
+    /**
      * Moves the Player the specified distance
      *
      * @param player the Player instance moving

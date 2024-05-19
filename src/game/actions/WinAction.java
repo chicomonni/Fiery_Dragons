@@ -5,22 +5,22 @@ import game.Player;
 import game.displays.DisplayManager;
 
 /**
- * Class used to represent a game action to proceed to the next turn.
+ * Class used to represent a game action to end the game.
  */
-public class NextTurnGameAction implements GameAction {
-    private final Player player;
+public class WinAction extends MoveGameAction {
 
     /**
      * Constructor
      *
-     * @param player the player for whom the next turn action is being executed
+     * @param player the player performing the move action
+     * @param dist   the distance to move
      */
-    public NextTurnGameAction(Player player) {
-        this.player = player;
+    public WinAction(Player player, int dist) {
+        super(player, dist);
     }
 
     /**
-     * Executes the action to proceed to the next turn for the player.
+     * Executes the action to end the game.
      *
      * @param board   the game board
      * @param display the display manager for updating the game interface
@@ -28,7 +28,9 @@ public class NextTurnGameAction implements GameAction {
      */
     @Override
     public GameAction execute(Board board, DisplayManager display) {
-        player.startTurn(board, display);
+        super.execute(board, display);
+        System.out.println("Player " + player.getName() + "has won the game!");
+        
         return null;
     }
 }

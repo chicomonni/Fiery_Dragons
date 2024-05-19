@@ -41,10 +41,29 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             return square.getNext().canMove(player, dist - 1);
 
         } else {
-            return square.getNext().canMove(player, dist + 1);
+            return square.getPrev().canMove(player, dist + 1);
         }
     }
 
+    /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        if (dist > 0) {
+            // If they're moving forward, prioritise cave direction
+            if (cave.canEnter(player)) {
+                return cave.winningMove(player, dist - 1);
+            }
+            return square.getNext().winningMove(player, dist - 1);
+        }
+        
+        return false;
+    }
+    
     /**
      * Moves the Player the specified distance
      *
@@ -77,7 +96,7 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             }
 
         } else {
-            square.getNext().move(player, dist + 1);
+            square.getPrev().move(player, dist + 1);
 
             // If correct Player passes Cave backwards, they need to pass forward again to be allowed access
             if (cave.isResident(player)) {

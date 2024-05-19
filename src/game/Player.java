@@ -6,6 +6,8 @@ import game.tiles.GameTile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Player {
     private final Color colour;
@@ -13,6 +15,7 @@ public class Player {
     private final String name;
     private GameTile position;
     private Player nextPlayer;
+    private Timer playTurnTimer;
 
     public Player(String name, GameTile position, float hue) {
         this.name = name;
@@ -74,22 +77,57 @@ public class Player {
         return name;
     }
 
+    /**
+     * Initiates the start of the Player's turn.
+     *
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void startTurn(Board board, DisplayManager display) {
         display.startTurn(this, board);
     }
 
+    /**
+     * Executes the Player's turn by performing the provided game action.
+     *
+     * @param action  the game action to be executed
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void playTurn(GameAction action, Board board, DisplayManager display) {
-        while (action != null) {
-            action = action.execute(board, display);
+        //create a timer with delay between characters
+        //for fun :))
+        if (playTurnTimer != null && playTurnTimer.isRunning()) {
+            playTurnTimer.stop();
         }
+        playTurnTimer = new Timer(1000, new ActionListener() {
+            GameAction currentAction = action;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //stop timer once whole string is printed
+                if (currentAction == null) {
+                    ((Timer) e.getSource()).stop();
+                    return;
+                }
+
+                currentAction = currentAction.execute(board, display);
+            }
+        });
+
+        //start the timer
+        playTurnTimer.start();
+
     }
 
+    /**
+     * Ends the Player's turn and starts the next Player's turn after a delay.
+     *
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void endTurn(Board board, DisplayManager display) {
-        Timer timer = new Timer(1500, e -> {
-            display.endTurn();
-            nextPlayer.startTurn(board, display);
-        });
-        timer.start();
-        timer.setRepeats(false);
+        display.endTurn();
+        nextPlayer.startTurn(board, display);
     }
 }

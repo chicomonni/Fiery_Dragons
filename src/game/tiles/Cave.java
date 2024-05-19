@@ -61,7 +61,6 @@ public class Cave extends GameTile {
         // The only case where dist can be > 0 is if the player is currently in the cave
         // (i.e. the first move to leave the cave)
         if (dist > 0 && player.getPosition() == this) {
-            System.out.println(3);
             return next.canMove(player, dist - 1);
         }
 
@@ -104,6 +103,20 @@ public class Cave extends GameTile {
     @Override
     public boolean canEnter(Player player) {
         return vacant && canReturn && player == resident;
+    }
+
+    /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        if (canEnter(player) && dist == 0 ) {
+            return true;
+        }
+        return false;
     }
 
     /**

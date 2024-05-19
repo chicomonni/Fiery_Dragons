@@ -57,7 +57,7 @@ public class Volcano {
         for (int i = 0; i < src.length(); i++) {
             Chit chit = factory.getChit(src.charAt(i));
 
-            int squareIdx = (i * squares.size()) / src.length();
+            int squareIdx = (2 * i + 1) * squares.size() / (2 * src.length());
             Square square = squares.get(squareIdx);
 
             Cave cave = new Cave(chit, square);

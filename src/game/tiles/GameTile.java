@@ -4,6 +4,7 @@ import game.Player;
 import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
 import game.actions.MoveGameAction;
+import game.actions.WinAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
@@ -40,7 +41,9 @@ public abstract class GameTile {
      * @return a relevant Action or EndTurnGameAction if it cannot be performed
      */
     public GameAction getAction(Player player, int dist) {
-        if (canMove(player, dist)) {
+        if (winningMove(player, dist)) {
+            return new WinAction(player, dist);
+        } else if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }
         return new EndTurnGameAction(player);
@@ -71,6 +74,20 @@ public abstract class GameTile {
      */
     public abstract boolean canEnter(Player player);
 
+    /**
+     * Check if a Player can win with the given number of moves
+     * @param player the Player trying to win
+     * @param dist the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public abstract boolean winningMove(Player player, int dist);
+
+    /**
+     * Sets the vacancy state of this GameTile.
+     *
+     * @param state {@code true} if the tile should be marked as vacant, {@code false} otherwise
+     */
     public void setVacancy(boolean state) {
         vacant = state;
     }
