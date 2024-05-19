@@ -2,6 +2,7 @@ package game.displays;
 
 import game.Board;
 import game.Player;
+import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
 import game.actions.NextTurnGameAction;
 import utils.Typing;
@@ -92,7 +93,7 @@ public class InputDisplay {
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
-        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ")";
+        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ") OR 'END TURN'";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
@@ -142,11 +143,15 @@ public class InputDisplay {
      */
     private boolean validateInput(String input) {
         try {
+            if (input.toLowerCase().strip().equals("end turn")) {
+                return true;
+            }
+
             Integer.parseInt(input);
             return true;
 
         } catch (NumberFormatException ex) {
-            printError("INPUT AN INTEGER");
+            printError("INPUT A VALID MOVE");
             return false;
         }
     }
@@ -162,6 +167,10 @@ public class InputDisplay {
     private GameAction getActionFromString(String input, Player player, Board board) {
         if (!validateInput(input)) {
             return new NextTurnGameAction(player);
+        }
+
+        if (input.toLowerCase().strip().equals("end turn")) {
+            return new EndTurnGameAction(player);
         }
 
         return board.getChitCards().getAction(player, Integer.parseInt(input));
