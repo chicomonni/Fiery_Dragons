@@ -41,7 +41,7 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             return square.getNext().canMove(player, dist - 1);
 
         } else {
-            return square.getNext().canMove(player, dist + 1);
+            return square.getPrev().canMove(player, dist + 1);
         }
     }
 
@@ -77,7 +77,7 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             }
 
         } else {
-            square.getNext().move(player, dist + 1);
+            square.getPrev().move(player, dist + 1);
 
             // If correct Player passes Cave backwards, they need to pass forward again to be allowed access
             if (cave.isResident(player)) {
