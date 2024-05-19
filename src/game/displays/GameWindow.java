@@ -105,7 +105,6 @@ public class GameWindow {
         winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
         winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
         winner.setBounds(50, 50, 200, 50);
-        winner.setVisible(false);
 
         // Finalize window setup
         window.pack();
@@ -156,11 +155,11 @@ public class GameWindow {
      */
     public void showWinnerLabel() {
         Container container = window.getContentPane();
+        // Remove all components from the container and add the winner label
         container.removeAll();
         container.add(winner);
 
-        winner.setVisible(true);
-        
+        // Revalidate and repaint the container
         container.revalidate();
         container.repaint();
     }
