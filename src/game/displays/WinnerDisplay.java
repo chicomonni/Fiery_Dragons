@@ -3,6 +3,9 @@ package game.displays;
 import javax.swing.JLabel;
 import game.Player;
 
+/**
+ * Class used to display the winner of the game
+ */
 public class WinnerDisplay {
     
     private final JLabel winnerPane;
