@@ -29,7 +29,8 @@ public class WinAction extends MoveGameAction {
     @Override
     public GameAction execute(Board board, DisplayManager display) {
         super.execute(board, display);
-        System.out.println("A player has won the game!");
+        System.out.println("Player " + player.getName() + "has won the game!");
+        
         return null;
     }
 }
