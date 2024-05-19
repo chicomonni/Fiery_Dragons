@@ -18,6 +18,7 @@ public class ChitCardArray {
     public void createCards(String src, ChitFactory factory) throws KeyException {
         List<String> splitSrc = Arrays.asList(src.split(","));
         chitCards = new ArrayList<>(splitSrc.size());
+        //TODO: remove tests
 //        Collections.shuffle(splitSrc);
 
         for (int i = 0; i < splitSrc.size(); i++) {
@@ -48,9 +49,9 @@ public class ChitCardArray {
         }
 
         ChitCard chitCard = getChitCard(cardNum);
-        if (chitCard.isCardUncovered()) {
-            return new InvalidGameAction("CARD ALREADY FLIPPED", player);
-        }
+//        if (chitCard.isCardUncovered()) {
+//            return new InvalidGameAction("CARD ALREADY FLIPPED", player);
+//        }
 
         return new FlipCardGameAction(player, chitCard);
     }
