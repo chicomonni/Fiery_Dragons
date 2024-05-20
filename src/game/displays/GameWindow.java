@@ -69,14 +69,14 @@ public class GameWindow {
         ));
         container.add(volcano, constraints);
 
-        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING + 20);
+        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING);
         constraints.gridx = 1;
         constraints.gridy = 0;
 
         // Initialise container for the Chit Cards and add the component to the window
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5),
+                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5 + 14),
                 (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
@@ -113,6 +113,7 @@ public class GameWindow {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
     }
 
     /**
