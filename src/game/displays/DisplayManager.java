@@ -13,6 +13,7 @@ public class DisplayManager {
     private final PlayerDisplay playerDisplay;
     private final ChitCardDisplay cardDisplay;
     private final InputDisplay inputDisplay;
+    private final WinnerDisplay winnerDisplay;
 
     /**
      * Constructor for the DisplayManager.
@@ -27,6 +28,7 @@ public class DisplayManager {
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
         this.inputDisplay = new InputDisplay(gameWindow);
+        this.winnerDisplay = new WinnerDisplay(gameWindow);
     }
 
     /**
@@ -74,5 +76,14 @@ public class DisplayManager {
     public void endTurn() {
         inputDisplay.disableInput();
         cardDisplay.reset();
+    }
+
+    /**
+     * Displays the winner of the game.
+     * @param player the Player who has won the game
+     */
+    public void displayWin(Player player) {
+        winnerDisplay.displayWinner(player);
+        gameWindow.showWinnerLabel();
     }
 }

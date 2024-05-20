@@ -8,7 +8,7 @@ import game.displays.DisplayManager;
  * Class used to represent a game action to move the player.
  */
 public class MoveGameAction implements GameAction {
-    private final Player player;
+    protected final Player player;
     private final int dist;
 
     /**

@@ -42,12 +42,17 @@ public abstract class GameTile {
      */
     public GameAction getAction(Player player, int dist) {
         dist = dist + Integer.signum(dist);
-
+        
+        // If the player can win, return a WinAction immediately
         if (winningMove(player, dist)) {
             return new WinAction(player, dist);
+
+        // Otherwise if the player can move, return a MoveGameAction
         } else if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }
+
+        // Otherwise it is the end of their turn
         return new EndTurnGameAction(player);
     }
 
@@ -83,7 +88,6 @@ public abstract class GameTile {
      * @param dist   the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
-
     public abstract boolean winningMove(Player player, int dist);
 
     /**

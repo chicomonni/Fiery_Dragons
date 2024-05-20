@@ -62,7 +62,8 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             }
             return square.getNext().winningMove(player, dist - 1);
         }
-
+        // If they're moving backwards, they can't win,
+        // if they're landing on the square, they can't win.
         return false;
     }
 

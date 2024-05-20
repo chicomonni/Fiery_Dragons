@@ -20,7 +20,7 @@ public class GameWindow {
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
-
+    private final JLabel winner = new JLabel();
 
     /**
      * Constructor
@@ -102,6 +102,11 @@ public class GameWindow {
         footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
         container.add(footer, constraints);
 
+        // Initialise and configure the winner label
+        winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
+        winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
+        winner.setBounds(50, 50, 200, 50);
+
         // Finalize window setup
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -135,5 +140,28 @@ public class GameWindow {
      */
     public JPanel getFooter() {
         return footer;
+    }
+
+    /**
+     * Getter for the winner JLabel
+     * 
+     * @return the winner JLabel
+     */
+    public JLabel getWinnerDisplay() {
+        return winner;
+    }
+
+    /**
+     * Method to display the winner of the game
+     */
+    public void showWinnerLabel() {
+        Container container = window.getContentPane();
+        // Remove all components from the container and add the winner label
+        container.removeAll();
+        container.add(winner);
+
+        // Revalidate and repaint the container
+        container.revalidate();
+        container.repaint();
     }
 }
