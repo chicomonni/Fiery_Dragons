@@ -1,6 +1,5 @@
 package game.displays;
 
-import game.FieryDragons;
 import game.chitCards.ChitCard;
 import game.chitCards.ChitCardArray;
 
@@ -26,7 +25,9 @@ public class ChitCardDisplay {
      */
     public ChitCardDisplay(ChitCardArray cardArray, GameWindow gameWindow) {
         JPanel cardContainer = gameWindow.getChitCardsComponent();
-        initialiseComponent();
+        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
+        cardPane.setPreferredSize(cardContainer.getPreferredSize());
+        cardPane.setOpaque(false);
 
         cardContainer.add(cardPane);
 
@@ -34,19 +35,6 @@ public class ChitCardDisplay {
             ChitCard chitCard = cardArray.getChitCards().get(i);
             update(chitCard);
         }
-    }
-
-    /**
-     * Initializes the display component for the ChitCards.
-     */
-    private void initialiseComponent() {
-        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
-        // TODO: make more extensible
-        cardPane.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5),
-                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
-        ));
-        cardPane.setOpaque(false);
     }
 
     /**

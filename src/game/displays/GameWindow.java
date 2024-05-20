@@ -77,7 +77,7 @@ public class GameWindow {
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
                 (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5),
-                1
+                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
@@ -144,7 +144,7 @@ public class GameWindow {
 
     /**
      * Getter for the winner JLabel
-     * 
+     *
      * @return the winner JLabel
      */
     public JLabel getWinnerDisplay() {
