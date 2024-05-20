@@ -5,7 +5,7 @@ import game.Player;
 import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
 import game.actions.NextTurnGameAction;
-import utils.Typing;
+import game.utils.Typing;
 
 import javax.swing.*;
 import java.awt.*;
