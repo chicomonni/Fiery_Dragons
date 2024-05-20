@@ -2,6 +2,7 @@ package game.displays;
 
 import game.Board;
 import game.Player;
+import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
 import game.actions.NextTurnGameAction;
 import utils.Typing;
@@ -10,16 +11,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
 public class InputDisplay {
     private final JTextField inputField = new JTextField();
     private final JPanel promptContainer = new JPanel();
     private final JTextField inputMarker = new JTextField(1);
 
-
+    /**
+     * Initializes the InputDisplay and sets it up within the specified GameWindow.
+     *
+     * @param gameWindow the game window to attach this input display to
+     */
     public InputDisplay(GameWindow gameWindow) {
         initialise(gameWindow.getFooter());
     }
 
+    /**
+     * Initializes the components of the input display and adds them to the specified container.
+     *
+     * @param container the container to which the input display components will be added
+     */
     private void initialise(JPanel container) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(3, 3, 3, 3);
@@ -50,6 +61,11 @@ public class InputDisplay {
         container.revalidate();
     }
 
+    /**
+     * Configures the appearance of a JTextField to be used within the input display.
+     *
+     * @param textField the JTextField to be configured
+     */
     private void initialiseTextField(JTextField textField) {
         textField.setEditable(false);
         textField.setOpaque(false);
@@ -57,6 +73,12 @@ public class InputDisplay {
         textField.setForeground(Color.WHITE);
     }
 
+    /**
+     * Sets the prompt text for the current player and board state, and animates the typing effect.
+     *
+     * @param player the current player
+     * @param board  the current game board
+     */
     public void setPromptText(Player player, Board board) {
         promptContainer.removeAll();
 
@@ -71,7 +93,7 @@ public class InputDisplay {
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
-        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ")";
+        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ") OR 'END TURN'";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
@@ -80,6 +102,13 @@ public class InputDisplay {
         inputField.requestFocus();
     }
 
+    /**
+     * Enables user input, allowing the current player to make a move based on their input.
+     *
+     * @param player  the current player
+     * @param board   the current game board
+     * @param display the display manager handling game displays
+     */
     public void enableInput(Player player, Board board, DisplayManager display) {
         inputField.setEditable(true);
 
@@ -95,31 +124,63 @@ public class InputDisplay {
         });
     }
 
+    /**
+     * Removes all action listeners from a specified JTextField.
+     *
+     * @param textField the JTextField from which to remove all action listeners
+     */
     private void removeAllActionListeners(JTextField textField) {
         for (ActionListener actionListener : textField.getActionListeners()) {
             textField.removeActionListener(actionListener);
         }
     }
 
+    /**
+     * Validates the user input to ensure it is an integer.
+     *
+     * @param input the user input to validate
+     * @return true if the input is a valid integer, false otherwise
+     */
     private boolean validateInput(String input) {
         try {
+            if (input.toLowerCase().strip().equals("end turn")) {
+                return true;
+            }
+
             Integer.parseInt(input);
             return true;
 
         } catch (NumberFormatException ex) {
-            printError("INPUT AN INTEGER");
+            printError("INPUT A VALID MOVE");
             return false;
         }
     }
 
+    /**
+     * Creates a GameAction based on the user input, or returns a NextTurnGameAction if the input is invalid.
+     *
+     * @param input  the user input
+     * @param player the current player
+     * @param board  the current game board
+     * @return a GameAction representing the user's move
+     */
     private GameAction getActionFromString(String input, Player player, Board board) {
         if (!validateInput(input)) {
             return new NextTurnGameAction(player);
         }
 
+        if (input.toLowerCase().strip().equals("end turn")) {
+            return new EndTurnGameAction(player);
+        }
+
         return board.getChitCards().getAction(player, Integer.parseInt(input));
     }
 
+    /**
+     * Displays an error message to the user and temporarily disables input.
+     *
+     * @param message the error message to display
+     */
     public void printError(String message) {
         inputField.setText("!!! " + message + " !!!");
         inputField.setEditable(false);
@@ -132,6 +193,9 @@ public class InputDisplay {
         timer.start();
     }
 
+    /**
+     * Disables user input and clears the input field.
+     */
     public void disableInput() {
         inputField.setEditable(false);
         inputField.setText("");

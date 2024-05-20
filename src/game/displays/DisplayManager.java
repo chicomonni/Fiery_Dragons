@@ -15,9 +15,11 @@ public class DisplayManager {
     private final InputDisplay inputDisplay;
 
     /**
-     * Constructor
+     * Constructor for the DisplayManager.
      *
      * @param gameWindow the GameWindow instance controlled by the DisplayManager
+     * @param board      the Board instance representing the game board
+     * @param players    an array of Player instances representing the players in the game
      */
     public DisplayManager(GameWindow gameWindow, Board board, Player[] players) {
         this.gameWindow = gameWindow;
@@ -27,23 +29,48 @@ public class DisplayManager {
         this.inputDisplay = new InputDisplay(gameWindow);
     }
 
+    /**
+     * Displays the movement of a player.
+     *
+     * @param player the Player whose movement is to be displayed
+     */
     public void displayMove(Player player) {
         playerDisplay.update(player);
     }
 
+    /**
+     * Displays the flipping of a ChitCard.
+     *
+     * @param card the ChitCard to be displayed after flipping
+     */
     public void displayFlip(ChitCard card) {
         cardDisplay.update(card);
     }
 
+    /**
+     * Starts the turn of a player, enabling input for the player.
+     *
+     * @param player the Player whose turn is starting
+     * @param board  the Board instance representing the game board
+     */
     public void startTurn(Player player, Board board) {
         inputDisplay.setPromptText(player, board);
+        inputDisplay.disableInput();
         inputDisplay.enableInput(player, board, this);
     }
 
+    /**
+     * Displays an error message.
+     *
+     * @param message the error message to be displayed
+     */
     public void displayError(String message) {
         inputDisplay.printError(message);
     }
 
+    /**
+     * Ends the turn, disabling input and resetting the card display.
+     */
     public void endTurn() {
         inputDisplay.disableInput();
         cardDisplay.reset();

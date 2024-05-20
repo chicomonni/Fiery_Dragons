@@ -9,38 +9,49 @@ import game.chits.ChitFactory;
 
 import java.security.KeyException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ChitCardArray {
     private List<ChitCard> chitCards;
 
+    /**
+     * Creates ChitCards from a comma-separated string of Chit representations.
+     *
+     * @param src     the comma-separated string of Chit representations
+     * @param factory the ChitFactory used to create Chit instances
+     * @throws KeyException if a Chit representation in the string is invalid
+     */
     public void createCards(String src, ChitFactory factory) throws KeyException {
-        String[] splitSrc = src.split(",");
-        chitCards = new ArrayList<>(splitSrc.length);
+        List<String> splitSrc = Arrays.asList(src.split(","));
+        chitCards = new ArrayList<>(splitSrc.size());
+        Collections.shuffle(splitSrc);
 
-        for (String s : splitSrc) {
+        for (int i = 0; i < splitSrc.size(); i++) {
+            String s = splitSrc.get(i);
             Chit chit = factory.getChit(s.charAt(0));
-            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1))));
-        }
-
-        randomise();
-
-        for (int i = 0; i < length(); i++) {
-            chitCards.get(i).setCardNum(i);
+            chitCards.add(new ChitCard(chit, Integer.parseInt(s.substring(1)), i));
         }
     }
 
+    /**
+     * Retrieves the ChitCard at the specified index.
+     *
+     * @param i the index of the ChitCard to retrieve
+     * @return the ChitCard at the specified index
+     */
     public ChitCard getChitCard(int i) {
         return chitCards.get(i - 1);
     }
 
-    public void randomise() {
-        Collections.shuffle(chitCards);
-    }
-
+    /**
+     * Retrieves a copy of the list of ChitCards.
+     *
+     * @return a copy of the list of ChitCards
+     */
     public List<ChitCard> getChitCards() {
-        return chitCards;
+        return new ArrayList<>(chitCards);
     }
 
     /**
@@ -51,7 +62,7 @@ public class ChitCardArray {
      * @return a relevant Action or {@code null} if it cannot be performed
      */
     public GameAction getAction(Player player, int cardNum) {
-        if (cardNum < 0 || cardNum >= length()) {
+        if (cardNum < 1 || cardNum >= length() + 1) {
             return new InvalidGameAction("INVALID CARD NUMBER", player);
         }
 

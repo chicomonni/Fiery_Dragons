@@ -3,6 +3,8 @@ package game.tiles.strategies;
 import game.Player;
 import game.tiles.Square;
 
+import static java.lang.Math.abs;
+
 /**
  * The default implementation of move for a Square not connected to a Cave
  */
@@ -27,13 +29,28 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
      */
     @Override
     public boolean canMove(Player player, int dist) {
-        if (dist == 0) {
+        if (abs(dist) == 1) {
             return square.canEnter(player);
-        } else if (dist > 0) {
+        } else if (dist > 1) {
             return square.getNext().canMove(player, dist - 1);
         } else {
             return square.getPrev().canMove(player, dist + 1);
         }
+    }
+
+    /**
+     * Check if a Player can win with the given number of moves
+     *
+     * @param player the Player trying to win
+     * @param dist   the number of moves the Player could move along the Volcano
+     * @return {@code true} if the Player can win, {@code false} otherwise
+     */
+
+    public boolean winningMove(Player player, int dist) {
+        if (dist > 1) {
+            return square.getNext().winningMove(player, dist - 1);
+        }
+        return false;
     }
 
     /**
@@ -48,10 +65,10 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
             square.setVacancy(true);
         }
 
-        if (dist == 0) {
+        if (abs(dist) == 1) {
             player.setPosition(square);
             square.setVacancy(false);
-        } else if (dist > 0) {
+        } else if (dist > 1) {
             square.getNext().move(player, dist - 1);
         } else {
             square.getPrev().move(player, dist + 1);

@@ -34,6 +34,12 @@ public class VolcanoDisplay {
         volcanoContainer.add(volcanoPane, Integer.valueOf(volcanoContainer.highestLayer() + 1));
     }
 
+    /**
+     * Initialize the display component with specified width and height.
+     *
+     * @param width  the width of the component
+     * @param height the height of the component
+     */
     private void initialiseComponent(int width, int height) {
         volcanoPane.setBounds(0, 0, width, height);
         volcanoPane.setEditable(false);
@@ -43,6 +49,11 @@ public class VolcanoDisplay {
         volcanoPane.setText(getVolcanoForDisplay());
     }
 
+    /**
+     * Generates the ASCII representation of the volcano for display.
+     *
+     * @return a string representing the volcano in ASCII
+     */
     private String getVolcanoForDisplay() {
         char[][] chars = volcano.getASCIIRep();
 
@@ -57,6 +68,11 @@ public class VolcanoDisplay {
         return String.join("\n", volcanoASCIIRep);
     }
 
+    /**
+     * Places the cave characters on the ASCII representation of the volcano.
+     *
+     * @param chars the ASCII representation of the volcano
+     */
     private void initialiseCaves(char[][] chars) {
         List<Square> squares = volcano.getSquares();
         List<Cave> caves = volcano.getCaves();
@@ -83,6 +99,11 @@ public class VolcanoDisplay {
         }
     }
 
+    /**
+     * Places the square characters on the ASCII representation of the volcano.
+     *
+     * @param chars the ASCII representation of the volcano
+     */
     private void initialiseSquares(char[][] chars) {
         List<Square> squares = volcano.getSquares();
         int numSquares = squares.size();

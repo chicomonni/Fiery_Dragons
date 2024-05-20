@@ -24,6 +24,13 @@ public class PlayerDisplay {
     private final JLayeredPane volcanoContainer;
     private final Volcano volcano;
 
+    /**
+     * Constructor
+     *
+     * @param players    the array of players in the game
+     * @param volcano    the Volcano instance used by the game
+     * @param gameWindow the GameWindow instance this class affects
+     */
     public PlayerDisplay(Player[] players, Volcano volcano, GameWindow gameWindow) {
         this.volcano = volcano;
         this.volcanoContainer = gameWindow.getVolcanoComponent();
@@ -33,6 +40,11 @@ public class PlayerDisplay {
         }
     }
 
+    /**
+     * Updates the display of a given player.
+     *
+     * @param player the player whose display is being updated
+     */
     public void update(Player player) {
         int[] location = calculateLocation(player.getPosition());
 
@@ -44,6 +56,12 @@ public class PlayerDisplay {
         playerPlane.setText(String.join("\n", Arrays.asList(strings)));
     }
 
+    /**
+     * Gets the JTextArea associated with a player, creating it if necessary.
+     *
+     * @param player the player whose JTextArea is being retrieved
+     * @return the JTextArea associated with the player
+     */
     private JTextArea getPlayerPlane(Player player) {
         JTextArea playerPlane = playerPlanes.get(player);
 
