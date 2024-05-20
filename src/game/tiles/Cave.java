@@ -4,6 +4,8 @@ import game.Player;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
+import java.awt.*;
+
 /**
  * Class representing a Cave in the Volcano
  */
@@ -126,5 +128,14 @@ public class Cave extends GameTile {
     @Override
     public int[] calculateLocation(PlayerDisplay playerDisplay) {
         return playerDisplay.calculateLocation(this);
+    }
+
+    /**
+     * Get the colour of the Cave, same as the colour of the Player resident
+     *
+     * @return the colour of the Cave
+     */
+    public Color getColour() {
+        return resident.getColour();
     }
 }

@@ -8,6 +8,7 @@ import game.tiles.Volcano;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -19,6 +20,7 @@ import static java.lang.Math.*;
 public class VolcanoDisplay {
     private final Volcano volcano;
     private final JTextArea volcanoPane = new JTextArea();
+    private final JLayeredPane volcanoContainer;
 
     /**
      * Constructor
@@ -28,25 +30,41 @@ public class VolcanoDisplay {
      */
     public VolcanoDisplay(Volcano volcano, GameWindow gameWindow) {
         this.volcano = volcano;
+        this.volcanoContainer = gameWindow.getVolcanoComponent();
 
-        JLayeredPane volcanoContainer = gameWindow.getVolcanoComponent();
-        initialiseComponent(volcanoContainer.getWidth(), volcanoContainer.getHeight());
+        initialiseComponent(volcanoPane, volcanoContainer.getWidth(), volcanoContainer.getHeight());
+        volcanoPane.setText(getVolcanoForDisplay());
         volcanoContainer.add(volcanoPane, Integer.valueOf(volcanoContainer.highestLayer() + 1));
+    }
+
+    /**
+     * Method to convert ASCII art in the form of char[][] into a String, so it can be printed using Swing
+     *
+     * @param chars ASCII art represented as char[][]
+     * @return String representation of ASCII art
+     */
+    private static String ASCIItoString(char[][] chars) {
+        List<String> ASCIIRep = new ArrayList<>(chars.length);
+        for (char[] aChar : chars) {
+            ASCIIRep.add(String.copyValueOf(aChar));
+        }
+
+        return String.join("\n", ASCIIRep);
     }
 
     /**
      * Initialize the display component with specified width and height.
      *
-     * @param width  the width of the component
-     * @param height the height of the component
+     * @param textArea the JTextArea to be initialised
+     * @param width    the width of the component
+     * @param height   the height of the component
      */
-    private void initialiseComponent(int width, int height) {
-        volcanoPane.setBounds(0, 0, width, height);
-        volcanoPane.setEditable(false);
-        volcanoPane.setOpaque(false);
-        volcanoPane.setForeground(Color.WHITE);
-        volcanoPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        volcanoPane.setText(getVolcanoForDisplay());
+    private void initialiseComponent(JTextArea textArea, int width, int height) {
+        textArea.setBounds(0, 0, width, height);
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+        textArea.setForeground(Color.WHITE);
+        textArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     }
 
     /**
@@ -58,22 +76,15 @@ public class VolcanoDisplay {
         char[][] chars = volcano.getASCIIRep();
 
         initialiseSquares(chars);
-        initialiseCaves(chars);
+        initialiseCaves();
 
-        List<String> volcanoASCIIRep = new ArrayList<>(chars.length);
-        for (char[] aChar : chars) {
-            volcanoASCIIRep.add(String.copyValueOf(aChar));
-        }
-
-        return String.join("\n", volcanoASCIIRep);
+        return ASCIItoString(chars);
     }
 
     /**
      * Places the cave characters on the ASCII representation of the volcano.
-     *
-     * @param chars the ASCII representation of the volcano
      */
-    private void initialiseCaves(char[][] chars) {
+    private void initialiseCaves() {
         List<Square> squares = volcano.getSquares();
         List<Cave> caves = volcano.getCaves();
 
@@ -88,15 +99,38 @@ public class VolcanoDisplay {
         Function<Integer, Integer> caveY = (i) -> (int) round(-radius * sin(angle.apply(i)) + offset);
 
         for (int i = 0; i < numCaves; i++) {
-            char[][] chit = caves.get(i).getChit().getDisplayDetail();
-
-            // TODO: find way to force inner array to always be length 9
-            for (int y = 0; y < chit.length; y++) {
-                for (int x = 0; x < chit[y].length; x++) {
-                    chars[caveY.apply(i) + y - chit.length / 2][caveX.apply(i) + x - 9 / 2] = chit[y][x];
-                }
-            }
+            Cave cave = caves.get(i);
+            createColouredCave(cave, caveX.apply(i), caveY.apply(i));
         }
+    }
+
+    /**
+     * Method to create coloured caves with detailed Chit in the center
+     *
+     * @param cave a Cave instance
+     * @param x    the center x position to print the detailed Chit
+     * @param y    the center y position to print the detailed Chit
+     */
+    private void createColouredCave(Cave cave, int x, int y) {
+        char[][] chars = new char[FieryDragons.VOLCANO_SIZE][FieryDragons.VOLCANO_SIZE];
+
+        for (char[] row : chars) {
+            Arrays.fill(row, ' ');
+        }
+
+        char[][] chit = cave.getChit().getDisplayDetail();
+
+        for (int i = 0; i < chit.length; i++) {
+            if (chit[i].length - 1 >= 0)
+                System.arraycopy(chit[i], 0, chars[y + i - chit.length / 2], x - (chit[i].length - 1) / 2, chit[i].length - 1);
+        }
+
+        JTextArea textArea = new JTextArea();
+        initialiseComponent(textArea, volcanoPane.getWidth(), volcanoPane.getHeight());
+        textArea.setText(ASCIItoString(chars));
+        textArea.setForeground(cave.getColour());
+
+        volcanoContainer.add(textArea, Integer.valueOf(volcanoContainer.highestLayer() + 1));
     }
 
     /**
