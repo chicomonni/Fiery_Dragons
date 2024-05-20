@@ -114,7 +114,7 @@ public class InputDisplay {
 
         removeAllActionListeners(inputField);
         inputField.addActionListener((e) -> {
-            String input = inputField.getText();
+            String input = inputField.getText().strip();
             if (!validateInput(input)) {
                 return;
             }
