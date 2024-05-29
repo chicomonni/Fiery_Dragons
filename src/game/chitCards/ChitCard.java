@@ -2,6 +2,7 @@ package game.chitCards;
 
 import game.chits.Chit;
 import game.tiles.GameTile;
+import game.Player;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -112,6 +113,16 @@ public class ChitCard {
      */
     public boolean isMatch(GameTile tile) {
         return chit.validate(tile.getChit());
+    }
+
+
+    /**
+     * Checks if the card matches the Chit of the given Player.
+     * @param player
+     * @return
+     */
+    public boolean isMatch(Player player) {
+        return chit.directValidate(player.getChit());
     }
 
     /**
