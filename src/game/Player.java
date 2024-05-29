@@ -1,6 +1,7 @@
 package game;
 
 import game.actions.GameAction;
+import game.chits.Chit;
 import game.displays.DisplayManager;
 import game.tiles.GameTile;
 
@@ -16,6 +17,7 @@ public class Player {
     private GameTile position;
     private Player nextPlayer;
     private Timer playTurnTimer;
+    private Chit chit;
 
     /**
      * Constructor
@@ -26,6 +28,7 @@ public class Player {
     public Player(String name, GameTile position, float hue) {
         this.name = name;
         this.position = position;
+        this.chit = position.getChit();
         this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
     }
 
