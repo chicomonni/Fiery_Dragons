@@ -69,6 +69,15 @@ public class Player {
     }
 
     /**
+     * Get the Chit associated with this Player
+     *
+     * @return the Chit associated with this Player
+     */
+    public Chit getChit() {
+        return chit;
+    }
+
+    /**
      * Get this Player's display character
      *
      * @return this Player's display character
