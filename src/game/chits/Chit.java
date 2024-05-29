@@ -30,7 +30,8 @@ public class Chit {
     }
 
     /**
-     * Used to check if Chit on card matches Chit on Volcano
+     * Used to check if Chit on card will allow a player to move
+     * based on a Chit on the Volcano
      *
      * @param other the Chit this is being compared to
      * @return {@code true} if Chits are compatible, {@code false} otherwise
@@ -39,6 +40,15 @@ public class Chit {
         return strategy.validate(this, other);
     }
 
+    /**
+     * Used to check if Chit on card matches given Chit
+     * @param other the Chit this is being compared to
+     * @return
+     */
+    public boolean directValidate(Chit other) {
+        return this == other;
+    }
+    
     /**
      * Used to modify value of ChitCard (e.g. negate the value to move backwards)
      *
