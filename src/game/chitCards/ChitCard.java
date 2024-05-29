@@ -118,7 +118,7 @@ public class ChitCard {
 
     /**
      * Checks if the card matches the Chit of the given Player.
-     * @param player
+     * @param player the player to check against
      * @return
      */
     public boolean isMatch(Player player) {
@@ -131,6 +131,18 @@ public class ChitCard {
      * @return the modified value of the card
      */
     public int getValue() {
+        return chit.modifyValue(value);
+    }
+
+    /**
+     * Retrieves the modified value of the card based on its Chit and the given player.
+     * @param player the player to check against
+     * @return
+     */
+    public int getValue(Player player) {
+        if (isMatch(player)) {
+            return chit.modifyValue(value) * 2;
+        }
         return chit.modifyValue(value);
     }
 
