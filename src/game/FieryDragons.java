@@ -7,6 +7,8 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -71,14 +73,40 @@ public class FieryDragons {
     /**
      * This method should be called to start a new game of Fiery Dragons
      */
-    public void start() {
+    public void newGame(GameWindow gameWindow, DisplayManager display) throws IOException {
+//        gameWindow.newGame();
+        players[0].startTurn(board, display);
+    }
+
+    public void continueGame(GameWindow gameWindow, DisplayManager display) {
+        //load existing game
+    }
+
+    public static void exitGame(GameWindow gameWindow, DisplayManager display) {
+        //choose to save game?
+        //saveGame()
+
+        //exit JFrame
+    }
+
+    public void start() throws IOException, FontFormatException {
+        //initialise game board components
         createChits();
         createBoard();
         createPlayers();
 
         GameWindow gameWindow = new GameWindow();
-
         DisplayManager display = new DisplayManager(gameWindow, board, players);
-        players[0].startTurn(board, display);
+
+        //start new game
+//        newGame(gameWindow, display);
+
+
+        //load existing game
+        //continueGame()
+
+        //exit game
+        //exitGame()
+
     }
 }

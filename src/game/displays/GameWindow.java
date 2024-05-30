@@ -5,7 +5,9 @@ import game.FieryDragons;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * The Fiery Dragon game window
@@ -16,16 +18,26 @@ public class GameWindow {
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
+    private static final String LOGO_PATH = "/assets/logo.txt";
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
     private final JLabel winner = new JLabel();
+    private final JPanel titlePane = new JPanel();
+    private final JTextArea logo = new JTextArea();
+    private final JPanel titleScreen = new JPanel();
+
+    Font font = Font.createFont(
+            Font.TRUETYPE_FONT,
+            Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
+    );
+
 
     /**
      * Constructor
      */
-    public GameWindow() {
+    public GameWindow() throws IOException, FontFormatException {
         try {
             initialise();
         } catch (IOException | FontFormatException e) {
@@ -40,16 +52,72 @@ public class GameWindow {
      * @throws FontFormatException if font file doesn't contain correct data
      */
     private void initialise() throws IOException, FontFormatException {
-        Font font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
-        );
+
         // TODO: remove colours used for testing
         // Adjust default font on text components
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
 
         // Configure the window container
+        Container container = window.getContentPane();
+        container.setLayout(new GridBagLayout());
+        container.setBackground(Color.BLACK);
+
+        initialiseTitleScreen();
+
+        // Finalize window setup
+        window.pack();
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+    }
+
+        /**
+         * Method to initialise the title screen
+         */
+        private void initialiseTitleScreen() throws IOException {
+            titleScreen.setLayout(new BorderLayout());
+            titleScreen.setBackground(Color.BLACK);
+
+            // Initialize and configure the logo label
+            logo.setFont(font.deriveFont(FOOTER_FONT_SIZE - 2)); // Use the same font
+            logo.setEditable(false);
+            logo.setBackground(Color.BLACK);
+            logo.setForeground(Color.WHITE);
+            logo.setText(getLogoDisplay());
+            titleScreen.add(new JScrollPane(logo), BorderLayout.NORTH);
+
+            // Initialise buttons
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+            buttonPanel.setBackground(Color.BLACK);
+
+            JButton newGameButton = new JButton("New Game");
+            JButton continueGameButton = new JButton("Continue Game");
+            JButton exitGameButton = new JButton("Exit Game");
+
+            // Add action listeners
+            newGameButton.addActionListener(e -> {
+                try {
+                    newGame();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            continueGameButton.addActionListener(e -> continueGame());
+            exitGameButton.addActionListener(e -> exitGame());
+
+            buttonPanel.add(newGameButton);
+            buttonPanel.add(continueGameButton);
+            buttonPanel.add(exitGameButton);
+
+            titleScreen.add(buttonPanel, BorderLayout.CENTER);
+
+            window.getContentPane().add(titleScreen);
+        }
+
+    private void initialiseGameComponents() throws IOException {
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
@@ -164,5 +232,53 @@ public class GameWindow {
         // Revalidate and repaint the container
         container.revalidate();
         container.repaint();
+    }
+
+    public String getLogoDisplay() throws IOException {
+        StringBuilder logoText = new StringBuilder();
+        try (InputStream is = getClass().getResourceAsStream(LOGO_PATH);
+             Scanner scanner = new Scanner(Objects.requireNonNull(is))) {
+            while (scanner.hasNextLine()) {
+                logoText.append(scanner.nextLine()).append("\n");
+            }
+        }
+        return logoText.toString();
+    }
+
+//    public void showLogoDisplay() {
+//        Container container = window.getContentPane();
+//        // Remove all components from the container and add the winner label
+//        container.removeAll();
+//        container.add(logo);
+//
+//        // Revalidate and repaint the container
+//        container.revalidate();
+//        container.repaint();
+//    }
+
+    public JPanel getTitleScreen() {
+        return titleScreen;
+    }
+
+    public void newGame() throws IOException {
+        titleScreen.setVisible(false);
+        Container container = window.getContentPane();
+        // Remove all components from the container and add the winner label
+        container.remove(titleScreen);
+
+
+        // Initialize or reset the game board components
+        initialiseGameComponents();
+
+//        container.add();
+
+        window.revalidate();
+        window.repaint();
+    }
+
+    public void continueGame() {
+    }
+
+    public void exitGame() {
     }
 }

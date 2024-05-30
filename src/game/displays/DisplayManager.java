@@ -9,6 +9,7 @@ import game.chitCards.ChitCard;
  */
 public class DisplayManager {
     private final GameWindow gameWindow;
+    private final TitleDisplay titleDisplay;
     private final VolcanoDisplay volcanoDisplay;
     private final PlayerDisplay playerDisplay;
     private final ChitCardDisplay cardDisplay;
@@ -24,6 +25,7 @@ public class DisplayManager {
      */
     public DisplayManager(GameWindow gameWindow, Board board, Player[] players) {
         this.gameWindow = gameWindow;
+        this.titleDisplay = new TitleDisplay(gameWindow);
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
