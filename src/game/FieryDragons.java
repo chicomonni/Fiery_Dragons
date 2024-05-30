@@ -81,4 +81,8 @@ public class FieryDragons {
         DisplayManager display = new DisplayManager(gameWindow, board, players);
         players[0].startTurn(board, display);
     }
+
+    public void continueGame() {
+
+    }
 }

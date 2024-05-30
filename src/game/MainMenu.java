@@ -1,9 +1,15 @@
 package game;
 
+import game.displays.GameWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class MainMenu {
     public static final float ASCII_FONT_SIZE = 8f;
@@ -12,6 +18,7 @@ public class MainMenu {
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private final JFrame window = new JFrame(GAME_NAME);
+    private static FieryDragons fieryDragons = new FieryDragons();
 
 
     public MainMenu() {
@@ -27,7 +34,6 @@ public class MainMenu {
                 Font.TRUETYPE_FONT,
                 Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
         );
-        // TODO: remove colours used for testing
         // Adjust default font on text components
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
@@ -38,21 +44,51 @@ public class MainMenu {
         container.setBackground(Color.BLACK);
 
         GridBagConstraints constraints = new GridBagConstraints();
+
+
     }
 
-    public static void newGame() {
-
+    public void newGame() {
+        window.dispose();
+        fieryDragons.start();
     }
 
     public static boolean saveGame() {
-        return true;
+        try {
+            FileOutputStream fileOut = new FileOutputStream("gameData.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(fieryDragons);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized data is saved in gameData.ser");
+            return true;
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        return false;
     }
 
     private void loadGame() {
+        try {
+            FileInputStream fileIn = new FileInputStream("gameData.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            fieryDragons = (FieryDragons) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Game Data not found");
+            c.printStackTrace();
+            return;
+        }
 
     }
 
     public void startGameFromSave() {
+        loadGame();
 
+        fieryDragons.continueGame();
     }
 }
