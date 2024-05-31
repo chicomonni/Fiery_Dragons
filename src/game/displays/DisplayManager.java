@@ -28,7 +28,7 @@ public class DisplayManager {
      */
     public DisplayManager(GameWindow gameWindow, Board board, Player[] players) throws IOException {
         this.gameWindow = gameWindow;
-        this.titleDisplay = new TitleDisplay(this, gameWindow);
+        this.titleDisplay = new TitleDisplay(this, gameWindow, board);
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);

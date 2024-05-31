@@ -29,7 +29,7 @@ public class FieryDragons {
     private static final int NUM_PLAYERS = 4;
     private final ChitFactory chitFactory = new ChitFactory();
     private Board board;
-    private Player[] players;
+    private static Player[] players;
 
     /**
      * Creates the chits used in the game with specific strategies.
@@ -70,25 +70,6 @@ public class FieryDragons {
         }
     }
 
-    /**
-     * This method should be called to start a new game of Fiery Dragons
-     */
-    public void newGame(GameWindow gameWindow, DisplayManager display) {
-//        display.displayGameScreen(gameWindow.getWindow());
-        players[0].startTurn(board, display);
-    }
-
-    public void continueGame(GameWindow gameWindow, DisplayManager display) {
-        //load existing game
-    }
-
-    public static void exitGame(GameWindow gameWindow, DisplayManager display) {
-        //choose to save game?
-        //saveGame()
-
-        //exit JFrame
-    }
-
     public void start() throws IOException, FontFormatException {
         //initialise game board components
         createChits();
@@ -100,14 +81,10 @@ public class FieryDragons {
 
         //start new game
         display.displayTitleScreen(gameWindow.getWindow());
-        newGame(gameWindow, display);
 
+    }
 
-        //load existing game
-        //continueGame()
-
-        //exit game
-        //exitGame()
-
+    public static Player[] getPlayers() {
+        return players;
     }
 }

@@ -1,5 +1,9 @@
 package game.displays;
 
+import game.Board;
+import game.FieryDragons;
+import game.actions.PlayGameAction;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -18,17 +22,16 @@ public class TitleDisplay {
     private final JPanel titleScreenSeparator = new JPanel();
     private final JTextArea logo = new JTextArea();
 
-
     /**
      * Constructor
      *
      * @param gameWindow the GameWindow instance this class affects
      */
-    public TitleDisplay(DisplayManager display, GameWindow gameWindow) throws IOException {
-        initialise(display, gameWindow);
+    public TitleDisplay(DisplayManager display, GameWindow gameWindow, Board board) throws IOException {
+        initialise(display, gameWindow, board);
     }
 
-    private void initialise(DisplayManager display, GameWindow gameWindow) throws IOException {
+    private void initialise(DisplayManager display, GameWindow gameWindow, Board board) throws IOException {
 
         JFrame window = gameWindow.getWindow();
         titleScreen.setLayout(new BorderLayout());
@@ -68,9 +71,10 @@ public class TitleDisplay {
         customiseButton(gameWindow.getFont(), exitGameButton);
 
         // Add action listeners
-        //TODO: new newGameAction instead of showGameScreen()
-        newGameButton.addActionListener(e -> display.displayGameScreen(window)); //newGame()
-//        continueGameButton.addActionListener(e -> continueGame());
+        //TODO: change to pickSettingsAction later
+        newGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
+        //TODO: change to consider current player and current board setup
+        continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
         exitGameButton.addActionListener(e -> gameWindow.closeWindow()); //change to exitGame() method??
 
         buttonPanel.add(newGameButton);
