@@ -99,7 +99,7 @@ public class FieryDragons {
         DisplayManager display = new DisplayManager(gameWindow, board, players);
 
         //start new game
-//        newGame(gameWindow, display);
+        newGame(gameWindow, display);
 
 
         //load existing game

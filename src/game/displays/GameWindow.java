@@ -3,7 +3,10 @@ package game.displays;
 import game.FieryDragons;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -19,6 +22,7 @@ public class GameWindow {
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
     private static final String LOGO_PATH = "/assets/logo.txt";
+
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
@@ -26,7 +30,8 @@ public class GameWindow {
     private final JLabel winner = new JLabel();
     private final JTextArea logo = new JTextArea();
     private final JPanel titleScreen = new JPanel();
-    JPanel separator = new JPanel();
+    private final JPanel gameScreenSeparator = new JPanel();
+    private final JPanel titleScreenSeparator = new JPanel();
 
     Font font = Font.createFont(
             Font.TRUETYPE_FONT,
@@ -52,8 +57,6 @@ public class GameWindow {
      * @throws FontFormatException if font file doesn't contain correct data
      */
     private void initialise() throws IOException, FontFormatException {
-
-        // TODO: remove colours used for testing
         // Adjust default font on text components
         UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
@@ -73,34 +76,107 @@ public class GameWindow {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        //TODO: move to newGame / startGame in FieryDragons
         showTitleScreen();
     }
 
     /**
          * Method to initialise the title screen
          */
+//    private void initialiseTitleScreen() throws IOException {
+//        titleScreen.setLayout(new BorderLayout());
+//        titleScreen.setBackground(Color.BLACK);
+//
+//        // Initialize and configure the logo label
+//        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE));
+//        logo.setEditable(false);
+//        logo.setBackground(Color.BLACK);
+//        logo.setForeground(Color.WHITE);
+//        logo.setText(readTitleDisplay());
+//
+//        JScrollPane logoPane = new JScrollPane(logo);
+////        logoPane.setPreferredSize(new Dimension(1000, 600));
+//        logoPane.setBorder(BorderFactory.createEmptyBorder());
+//
+//        titleScreenSeparator.setPreferredSize(new Dimension(0, 2));
+//        titleScreenSeparator.setBackground(Color.WHITE);
+////        logoPane.add(titleScreenSeparator, BorderLayout.SOUTH);
+//
+//        JPanel titlePanel = new JPanel();
+//        titlePanel.setBorder(BorderFactory.createEmptyBorder());
+//        titlePanel.add(logoPane, BorderLayout.NORTH);
+//        titlePanel.add(titleScreenSeparator, BorderLayout.SOUTH);
+//        titleScreen.add(titlePanel, BorderLayout.CENTER);
+//
+//
+//        // Initialise buttons
+//        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
+//        buttonPanel.setBackground(Color.BLACK);
+//        buttonPanel.setOpaque(false);
+//
+//        JButton newGameButton = new JButton("NEW GAME");
+//        JButton continueGameButton = new JButton("CONTINUE GAME");
+//        JButton exitGameButton = new JButton("EXIT GAME");
+//
+//        customiseButton(newGameButton);
+//        customiseButton(continueGameButton);
+//        customiseButton(exitGameButton);
+//
+//        // Add action listeners
+//        newGameButton.addActionListener(e -> showGameScreen());
+//        continueGameButton.addActionListener(e -> continueGame());
+//        exitGameButton.addActionListener(e -> exitGame());
+//
+//        buttonPanel.add(newGameButton);
+//        buttonPanel.add(continueGameButton);
+//        buttonPanel.add(exitGameButton);
+//
+//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
+//
+//        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
+//
+//        window.getContentPane().add(titleScreen);
+//    }
+
     private void initialiseTitleScreen() throws IOException {
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
 
         // Initialize and configure the logo label
-        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE - 2)); // Use the same font
+        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE));
         logo.setEditable(false);
         logo.setBackground(Color.BLACK);
         logo.setForeground(Color.WHITE);
-        logo.setText(getTitleDisplay());
-        titleScreen.add(new JScrollPane(logo), BorderLayout.NORTH);
+        logo.setText(readTitleDisplay());
+
+        JScrollPane logoPane = new JScrollPane(logo);
+        logoPane.setBorder(BorderFactory.createEmptyBorder());
+
+        titleScreenSeparator.setPreferredSize(new Dimension(0, 6));
+        titleScreenSeparator.setBackground(Color.WHITE);
+
+        // Create titlePanel and add components to it
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(Color.BLACK);
+        titlePanel.add(logoPane, BorderLayout.CENTER);
+        titlePanel.add(titleScreenSeparator, BorderLayout.SOUTH);
+        titleScreen.add(titlePanel, BorderLayout.CENTER);
 
         // Initialise buttons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
         buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.setOpaque(false);
 
-        JButton newGameButton = new JButton("New Game");
-        JButton continueGameButton = new JButton("Continue Game");
-        JButton exitGameButton = new JButton("Exit Game");
+        JButton newGameButton = new JButton("NEW GAME");
+        JButton continueGameButton = new JButton("CONTINUE GAME");
+        JButton exitGameButton = new JButton("EXIT GAME");
+
+        customiseButton(newGameButton);
+        customiseButton(continueGameButton);
+        customiseButton(exitGameButton);
 
         // Add action listeners
+        //TODO: new newGameAction instead of showGameScreen()
         newGameButton.addActionListener(e -> showGameScreen());
         continueGameButton.addActionListener(e -> continueGame());
         exitGameButton.addActionListener(e -> exitGame());
@@ -109,12 +185,13 @@ public class GameWindow {
         buttonPanel.add(continueGameButton);
         buttonPanel.add(exitGameButton);
 
-        titleScreen.add(buttonPanel, BorderLayout.CENTER);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
+        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
         window.getContentPane().add(titleScreen);
     }
 
-    private void initialiseGameComponents() throws IOException {
+    private void initialiseGameComponents() {
         Container container = window.getContentPane();
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
@@ -153,8 +230,8 @@ public class GameWindow {
         constraints.gridy = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        separator.setPreferredSize(new Dimension(0, PADDING / 2));
-        container.add(separator, constraints);
+        gameScreenSeparator.setPreferredSize(new Dimension(0, PADDING / 2));
+        container.add(gameScreenSeparator, constraints);
 
         constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridy = 2;
@@ -223,7 +300,7 @@ public class GameWindow {
         container.repaint();
     }
 
-    public String getTitleDisplay() throws IOException {
+    public String readTitleDisplay() throws IOException {
         StringBuilder logoText = new StringBuilder();
         try (InputStream is = getClass().getResourceAsStream(LOGO_PATH);
              Scanner scanner = new Scanner(Objects.requireNonNull(is))) {
@@ -239,9 +316,11 @@ public class GameWindow {
     }
 
     public void continueGame() {
+        //placeholder
     }
 
     public void exitGame() {
+        //placeholder
     }
 
     public void showGameScreen() {
@@ -249,7 +328,7 @@ public class GameWindow {
 
         volcano.setVisible(true);
         chitCards.setVisible(true);
-        separator.setVisible(true);
+        gameScreenSeparator.setVisible(true);
         footer.setVisible(true);
 
         window.revalidate();
@@ -261,10 +340,33 @@ public class GameWindow {
 
         volcano.setVisible(false);
         chitCards.setVisible(false);
-        separator.setVisible(false);
+        gameScreenSeparator.setVisible(false);
         footer.setVisible(false);
 
         window.revalidate();
         window.repaint();
+    }
+
+    private void customiseButton(JButton button) {
+        button.setFont(font.deriveFont(FOOTER_FONT_SIZE + 10));
+        button.setForeground(Color.WHITE);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
+        button.setBorder(emptyBorder);
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
+                button.setBorder(lineBorder);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                button.setBorder(emptyBorder);
+            }
+        });
     }
 }

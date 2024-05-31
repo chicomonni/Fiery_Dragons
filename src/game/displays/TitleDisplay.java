@@ -15,8 +15,6 @@ public class TitleDisplay {
      */
     public TitleDisplay(GameWindow gameWindow) {
         initialise(gameWindow.getTitleScreen());
-
-//        gameWindow.showLogoDisplay();
     }
 
     private void initialise(JPanel container) {

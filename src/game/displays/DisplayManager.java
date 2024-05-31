@@ -4,6 +4,8 @@ import game.Board;
 import game.Player;
 import game.chitCards.ChitCard;
 
+import java.io.IOException;
+
 /**
  * A Facade for interacting with the game Displays and Window
  */
@@ -23,7 +25,7 @@ public class DisplayManager {
      * @param board      the Board instance representing the game board
      * @param players    an array of Player instances representing the players in the game
      */
-    public DisplayManager(GameWindow gameWindow, Board board, Player[] players) {
+    public DisplayManager(GameWindow gameWindow, Board board, Player[] players) throws IOException {
         this.gameWindow = gameWindow;
         this.titleDisplay = new TitleDisplay(gameWindow);
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
@@ -88,12 +90,11 @@ public class DisplayManager {
         winnerDisplay.displayWinner(player);
         gameWindow.showWinnerLabel();
     }
-//
-//    public void displayTitleScreen() {
-//        titleDisplay.displayTitleScreen();
-//        gameWindow.showTitleScreen();
-//
-//    }
+
+    public void displayTitleScreen() {
+        gameWindow.showTitleScreen();
+
+    }
 
     public void displayGameScreen() {
         gameWindow.showGameScreen();
