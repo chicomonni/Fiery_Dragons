@@ -205,4 +205,8 @@ public class GameWindow {
     public Font getFont() {
         return font;
     }
+
+    public void closeWindow() {
+        window.dispose();
+    }
 }

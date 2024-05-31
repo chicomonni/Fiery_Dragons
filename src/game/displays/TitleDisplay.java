@@ -71,7 +71,7 @@ public class TitleDisplay {
         //TODO: new newGameAction instead of showGameScreen()
         newGameButton.addActionListener(e -> display.displayGameScreen(window)); //newGame()
 //        continueGameButton.addActionListener(e -> continueGame());
-//        exitGameButton.addActionListener(e -> exitGame());
+        exitGameButton.addActionListener(e -> gameWindow.closeWindow()); //change to exitGame() method??
 
         buttonPanel.add(newGameButton);
         buttonPanel.add(continueGameButton);
