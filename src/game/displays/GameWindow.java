@@ -23,7 +23,7 @@ public class GameWindow {
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
     private final JLabel winner = new JLabel();
-    private final JPanel gameScreenSeparator = new JPanel();
+    private final JPanel separator = new JPanel();
 
     Font font = Font.createFont(
             Font.TRUETYPE_FONT,
@@ -108,8 +108,8 @@ public class GameWindow {
         constraints.gridy = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        gameScreenSeparator.setPreferredSize(new Dimension(0, PADDING / 2));
-        container.add(gameScreenSeparator, constraints);
+        separator.setPreferredSize(new Dimension(0, PADDING / 2));
+        container.add(separator, constraints);
 
         constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
         constraints.gridy = 2;
@@ -181,7 +181,7 @@ public class GameWindow {
     public void showScreen() {
         volcano.setVisible(true);
         chitCards.setVisible(true);
-        gameScreenSeparator.setVisible(true);
+        separator.setVisible(true);
         footer.setVisible(true);
 
         window.revalidate();
@@ -191,7 +191,7 @@ public class GameWindow {
     public void hideScreen() {
         volcano.setVisible(false);
         chitCards.setVisible(false);
-        gameScreenSeparator.setVisible(false);
+        separator.setVisible(false);
         footer.setVisible(false);
 
         window.revalidate();

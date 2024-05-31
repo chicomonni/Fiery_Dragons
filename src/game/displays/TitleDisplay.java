@@ -19,8 +19,12 @@ public class TitleDisplay {
     private static final float LOGO_FONT_SIZE = 14f;
     public static final float BUTTON_FONT_SIZE = 26f;
     private final JPanel titleScreen = new JPanel();
-    private final JPanel titleScreenSeparator = new JPanel();
+    private final JPanel separator = new JPanel();
     private final JTextArea logo = new JTextArea();
+
+    private final JButton newGameButton = new JButton("NEW GAME");
+    private final JButton continueGameButton = new JButton("CONTINUE GAME");
+    private final JButton exitGameButton = new JButton("EXIT GAME");
 
     /**
      * Constructor
@@ -47,14 +51,14 @@ public class TitleDisplay {
         JScrollPane logoPane = new JScrollPane(logo);
         logoPane.setBorder(BorderFactory.createEmptyBorder());
 
-        titleScreenSeparator.setPreferredSize(new Dimension(0, 6));
-        titleScreenSeparator.setBackground(Color.WHITE);
+        separator.setPreferredSize(new Dimension(0, 5));
+        separator.setBackground(Color.WHITE);
 
         // Create titlePanel and add components to it
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
         titlePanel.add(logoPane, BorderLayout.CENTER);
-        titlePanel.add(titleScreenSeparator, BorderLayout.SOUTH);
+        titlePanel.add(separator, BorderLayout.SOUTH);
         titleScreen.add(titlePanel, BorderLayout.CENTER);
 
         // Initialise buttons
@@ -62,17 +66,13 @@ public class TitleDisplay {
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        JButton newGameButton = new JButton("NEW GAME");
-        JButton continueGameButton = new JButton("CONTINUE GAME");
-        JButton exitGameButton = new JButton("EXIT GAME");
-
-        customiseButton(gameWindow.getFont(), newGameButton);
-        customiseButton(gameWindow.getFont(), continueGameButton);
-        customiseButton(gameWindow.getFont(), exitGameButton);
+        display.customiseButton(gameWindow.getFont(), newGameButton, BUTTON_FONT_SIZE);
+        display.customiseButton(gameWindow.getFont(), continueGameButton, BUTTON_FONT_SIZE);
+        display.customiseButton(gameWindow.getFont(), exitGameButton, BUTTON_FONT_SIZE);
 
         // Add action listeners
         //TODO: change to pickSettingsAction later
-        newGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(window));//new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
         //TODO: change to consider current player and current board setup
         continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
         exitGameButton.addActionListener(e -> gameWindow.closeWindow()); //change to exitGame() method??
@@ -98,28 +98,7 @@ public class TitleDisplay {
         return logoText.toString();
     }
 
-    private void customiseButton(Font font, JButton button) {
-        button.setFont(font.deriveFont(BUTTON_FONT_SIZE));
-        button.setForeground(Color.WHITE);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
-        button.setBorder(emptyBorder);
 
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
-                button.setBorder(lineBorder);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                button.setBorder(emptyBorder);
-            }
-        });
-    }
 
     public void showScreen(JFrame window) {
         titleScreen.setVisible(true);
