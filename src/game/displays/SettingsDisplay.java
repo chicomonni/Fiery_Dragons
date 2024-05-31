@@ -9,9 +9,10 @@ import java.awt.*;
 import java.util.Hashtable;
 
 public class SettingsDisplay {
-    private static final float TITLE_FONT_SIZE = 40f;
-    private static final float SETTINGS_FONT_SIZE = 24f;
+    private static final float TITLE_FONT_SIZE = 50f;
+    private static final float SETTINGS_FONT_SIZE = 28f;
     private static final float SLIDER_FONT_SIZE = 16f;
+
     private final JPanel settingsScreen = new JPanel();
     private final JLabel titleLabel = new JLabel("SETTINGS");
     private final JPanel separator = new JPanel();
@@ -19,8 +20,8 @@ public class SettingsDisplay {
     private final JButton backButton = new JButton("BACK");
     private final JSlider playerSlider = new JSlider(2, 8);
     private final JSlider squareSlider = new JSlider();
-    private final JCheckBox dragonPirateCheckbox = new JCheckBox("Dragon Pirate", true);
-    private final JCheckBox ratRascalCheckbox = new JCheckBox("Rat Rascal", false);
+    private final JCheckBox dragonPirateCheckbox = new JCheckBox("  Dragon Pirate", true);
+    private final JCheckBox ratRascalCheckbox = new JCheckBox("  Rat Rascal", false);
 
     public SettingsDisplay(DisplayManager display, GameWindow gameWindow, Board board) {
         initialise(display, gameWindow);
@@ -44,6 +45,7 @@ public class SettingsDisplay {
 
     public void initialise(DisplayManager display, GameWindow gameWindow) {
         JFrame window = gameWindow.getWindow();
+        settingsScreen.setPreferredSize(new Dimension(1200, 800));
         settingsScreen.setLayout(new GridBagLayout());
         settingsScreen.setBackground(Color.BLACK);
 
@@ -109,11 +111,13 @@ public class SettingsDisplay {
         constraints.gridy++;
         dragonPirateCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(dragonPirateCheckbox, constraints);
+        dragonPirateCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         dragonPirateCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
 
         constraints.gridy++;
         ratRascalCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(ratRascalCheckbox, constraints);
+        ratRascalCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         ratRascalCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
 
 
@@ -122,12 +126,12 @@ public class SettingsDisplay {
         constraints.gridwidth = 1;
         constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.WEST;
-        display.customiseButton(gameWindow.getFont(), backButton, 24f);
+        display.customiseButton(gameWindow.getFont(), backButton, SETTINGS_FONT_SIZE);
         settingsScreen.add(backButton, constraints);
 
         constraints.gridx = 1;
         constraints.anchor = GridBagConstraints.EAST;
-        display.customiseButton(gameWindow.getFont(), startButton, 24f);
+        display.customiseButton(gameWindow.getFont(), startButton, SETTINGS_FONT_SIZE);
         settingsScreen.add(startButton, constraints);
 
         window.add(settingsScreen);
