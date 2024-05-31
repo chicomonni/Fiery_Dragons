@@ -2,6 +2,7 @@ package game.displays;
 
 import game.Board;
 import game.FieryDragons;
+import game.actions.PickSettingsAction;
 import game.actions.PlayGameAction;
 
 import javax.swing.*;
@@ -72,7 +73,7 @@ public class TitleDisplay {
 
         // Add action listeners
         //TODO: change to pickSettingsAction later
-        newGameButton.addActionListener(e -> display.displaySettingsScreen(window));//new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(window)); //new PickSettingsAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
         //TODO: change to consider current player and current board setup
         continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
         exitGameButton.addActionListener(e -> gameWindow.closeWindow()); //change to exitGame() method??

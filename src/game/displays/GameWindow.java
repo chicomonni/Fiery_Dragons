@@ -37,6 +37,7 @@ public class GameWindow {
     public GameWindow() throws IOException, FontFormatException {
         try {
             initialise();
+            hideScreen();
         } catch (IOException | FontFormatException e) {
             throw new RuntimeException(e);
         }
