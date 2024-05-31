@@ -7,12 +7,13 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Class responsible for initiating the game
  */
-public class FieryDragons {
+public class FieryDragons implements Serializable {
     public static final int OUTER_RADIUS = 25;
     public static final int INNER_RADIUS = 17;
     public static final int CAVE_RADIUS = 9;
@@ -25,7 +26,7 @@ public class FieryDragons {
     private static final String CAVE_SRC = "S*w0";
     private static final String CARD_SRC = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
     private static final int NUM_PLAYERS = 4;
-    private final ChitFactory chitFactory = new ChitFactory();
+    private ChitFactory chitFactory = new ChitFactory();
     private Board board;
     private Player[] players;
 
@@ -82,7 +83,9 @@ public class FieryDragons {
         players[0].startTurn(board, display);
     }
 
-    public void continueGame() {
-
+    public void continueGame(FieryDragons data) {
+        this.board = data.board;
+        this.players = data.players;
+        this.chitFactory = data.chitFactory;
     }
 }

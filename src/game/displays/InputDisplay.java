@@ -1,6 +1,7 @@
 package game.displays;
 
 import game.Board;
+import game.MainMenu;
 import game.Player;
 import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
@@ -147,6 +148,14 @@ public class InputDisplay {
                 return true;
             }
 
+            if (input.toLowerCase().strip().equals("save game")) {
+                return true;
+            }
+
+            if (input.toLowerCase().strip().equals("continue game")) {
+                return true;
+            }
+
             Integer.parseInt(input);
             return true;
 
@@ -171,6 +180,16 @@ public class InputDisplay {
 
         if (input.toLowerCase().strip().equals("end turn")) {
             return new EndTurnGameAction(player);
+        }
+
+        if (input.toLowerCase().strip().equals("save game")) {
+            MainMenu.saveGame();
+            return new NextTurnGameAction(player);
+        }
+
+        if (input.toLowerCase().strip().equals("continue game")) {
+            MainMenu.startGameFromSave();
+            return new NextTurnGameAction(player);
         }
 
         return board.getChitCards().getAction(player, Integer.parseInt(input));

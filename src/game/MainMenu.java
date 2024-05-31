@@ -17,6 +17,8 @@ public class MainMenu {
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
+    private final JButton newGame = new JButton("New Game");
+    private final JButton loadGame = new JButton("Load Game");
     private final JFrame window = new JFrame(GAME_NAME);
     private static FieryDragons fieryDragons = new FieryDragons();
 
@@ -45,6 +47,15 @@ public class MainMenu {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
+        container.add(newGame);
+        container.add(loadGame);
+
+
+        window.pack();
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
 
     }
 
@@ -68,27 +79,29 @@ public class MainMenu {
         return false;
     }
 
-    private void loadGame() {
+    private static FieryDragons loadGame() {
         try {
             FileInputStream fileIn = new FileInputStream("gameData.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             fieryDragons = (FieryDragons) in.readObject();
             in.close();
             fileIn.close();
+            System.out.println(fieryDragons);
+            return fieryDragons;
         } catch (IOException i) {
             i.printStackTrace();
-            return;
         } catch (ClassNotFoundException c) {
             System.out.println("Game Data not found");
             c.printStackTrace();
-            return;
         }
+        return null;
 
     }
 
-    public void startGameFromSave() {
-        loadGame();
-
-        fieryDragons.continueGame();
+    public static void startGameFromSave() {
+        FieryDragons data = loadGame();
+//        fieryDragons.continueGame(data);
     }
+
+
 }

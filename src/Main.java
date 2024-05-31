@@ -1,4 +1,5 @@
 import game.FieryDragons;
+import game.MainMenu;
 
 /**
  * Main class of program
