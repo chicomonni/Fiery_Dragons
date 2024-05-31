@@ -73,8 +73,8 @@ public class FieryDragons {
     /**
      * This method should be called to start a new game of Fiery Dragons
      */
-    public void newGame(GameWindow gameWindow, DisplayManager display) throws IOException {
-//        gameWindow.newGame();
+    public void newGame(GameWindow gameWindow, DisplayManager display) {
+//        display.displayGameScreen(gameWindow.getWindow());
         players[0].startTurn(board, display);
     }
 
@@ -99,6 +99,7 @@ public class FieryDragons {
         DisplayManager display = new DisplayManager(gameWindow, board, players);
 
         //start new game
+        display.displayTitleScreen(gameWindow.getWindow());
         newGame(gameWindow, display);
 
 

@@ -4,6 +4,7 @@ import game.Board;
 import game.Player;
 import game.chitCards.ChitCard;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -27,7 +28,7 @@ public class DisplayManager {
      */
     public DisplayManager(GameWindow gameWindow, Board board, Player[] players) throws IOException {
         this.gameWindow = gameWindow;
-        this.titleDisplay = new TitleDisplay(gameWindow);
+        this.titleDisplay = new TitleDisplay(this, gameWindow);
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
@@ -91,13 +92,22 @@ public class DisplayManager {
         gameWindow.showWinnerLabel();
     }
 
-    public void displayTitleScreen() {
-        gameWindow.showTitleScreen();
+    public void displayTitleScreen(JFrame window) {
+        gameWindow.hideScreen();
+        titleDisplay.showScreen(window);
 
     }
 
-    public void displayGameScreen() {
-        gameWindow.showGameScreen();
+    public void displayGameScreen(JFrame window) {
+        titleDisplay.hideScreen(window);
+        gameWindow.showScreen();
+    }
+
+    public void displaySettingsScreen(JFrame window) {
+        titleDisplay.hideScreen(window);
+        gameWindow.hideScreen();
+        //TODO: add settings window
+//        settingsDisplay.showScreen(window);
     }
 
 }

@@ -3,14 +3,10 @@ package game.displays;
 import game.FieryDragons;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
-import java.util.Scanner;
+
 
 /**
  * The Fiery Dragon game window
@@ -21,17 +17,13 @@ public class GameWindow {
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
-    private static final String LOGO_PATH = "/assets/logo.txt";
 
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
     private final JLabel winner = new JLabel();
-    private final JTextArea logo = new JTextArea();
-    private final JPanel titleScreen = new JPanel();
     private final JPanel gameScreenSeparator = new JPanel();
-    private final JPanel titleScreenSeparator = new JPanel();
 
     Font font = Font.createFont(
             Font.TRUETYPE_FONT,
@@ -66,10 +58,10 @@ public class GameWindow {
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
-        initialiseTitleScreen();
         initialiseGameComponents();
 
         // Finalize window setup
+//        window.setPreferredSize(new Dimension(1400, 900));
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
@@ -77,61 +69,7 @@ public class GameWindow {
         window.setVisible(true);
 
         //TODO: move to newGame / startGame in FieryDragons
-        showTitleScreen();
-    }
-
-
-    private void initialiseTitleScreen() throws IOException {
-        titleScreen.setLayout(new BorderLayout());
-        titleScreen.setBackground(Color.BLACK);
-
-        // Initialize and configure the logo label
-        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE));
-        logo.setEditable(false);
-        logo.setBackground(Color.BLACK);
-        logo.setForeground(Color.WHITE);
-        logo.setText(readTitleDisplay());
-
-        JScrollPane logoPane = new JScrollPane(logo);
-        logoPane.setBorder(BorderFactory.createEmptyBorder());
-
-        titleScreenSeparator.setPreferredSize(new Dimension(0, 6));
-        titleScreenSeparator.setBackground(Color.WHITE);
-
-        // Create titlePanel and add components to it
-        JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(Color.BLACK);
-        titlePanel.add(logoPane, BorderLayout.CENTER);
-        titlePanel.add(titleScreenSeparator, BorderLayout.SOUTH);
-        titleScreen.add(titlePanel, BorderLayout.CENTER);
-
-        // Initialise buttons
-        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
-        buttonPanel.setBackground(Color.BLACK);
-        buttonPanel.setOpaque(false);
-
-        JButton newGameButton = new JButton("NEW GAME");
-        JButton continueGameButton = new JButton("CONTINUE GAME");
-        JButton exitGameButton = new JButton("EXIT GAME");
-
-        customiseButton(newGameButton);
-        customiseButton(continueGameButton);
-        customiseButton(exitGameButton);
-
-        // Add action listeners
-        //TODO: new newGameAction instead of showGameScreen()
-        newGameButton.addActionListener(e -> showGameScreen());
-        continueGameButton.addActionListener(e -> continueGame());
-        exitGameButton.addActionListener(e -> exitGame());
-
-        buttonPanel.add(newGameButton);
-        buttonPanel.add(continueGameButton);
-        buttonPanel.add(exitGameButton);
-
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
-        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
-
-        window.getContentPane().add(titleScreen);
+//        showTitleScreen();
     }
 
     private void initialiseGameComponents() {
@@ -243,32 +181,7 @@ public class GameWindow {
         container.repaint();
     }
 
-    public String readTitleDisplay() throws IOException {
-        StringBuilder logoText = new StringBuilder();
-        try (InputStream is = getClass().getResourceAsStream(LOGO_PATH);
-             Scanner scanner = new Scanner(Objects.requireNonNull(is))) {
-            while (scanner.hasNextLine()) {
-                logoText.append(scanner.nextLine()).append("\n");
-            }
-        }
-        return logoText.toString();
-    }
-
-    public JPanel getTitleScreen() {
-        return titleScreen;
-    }
-
-    public void continueGame() {
-        //placeholder
-    }
-
-    public void exitGame() {
-        //placeholder
-    }
-
-    public void showGameScreen() {
-        titleScreen.setVisible(false);
-
+    public void showScreen() {
         volcano.setVisible(true);
         chitCards.setVisible(true);
         gameScreenSeparator.setVisible(true);
@@ -278,9 +191,7 @@ public class GameWindow {
         window.repaint();
     }
 
-    public void showTitleScreen() {
-        titleScreen.setVisible(true);
-
+    public void hideScreen() {
         volcano.setVisible(false);
         chitCards.setVisible(false);
         gameScreenSeparator.setVisible(false);
@@ -290,26 +201,11 @@ public class GameWindow {
         window.repaint();
     }
 
-    private void customiseButton(JButton button) {
-        button.setFont(font.deriveFont(FOOTER_FONT_SIZE + 10));
-        button.setForeground(Color.WHITE);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
-        button.setBorder(emptyBorder);
+    public JFrame getWindow() {
+        return window;
+    }
 
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
-                button.setBorder(lineBorder);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                button.setBorder(emptyBorder);
-            }
-        });
+    public Font getFont() {
+        return font;
     }
 }
