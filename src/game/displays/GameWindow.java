@@ -61,15 +61,12 @@ public class GameWindow {
         initialiseGameComponents();
 
         // Finalize window setup
-//        window.setPreferredSize(new Dimension(1400, 900));
+        window.setPreferredSize(new Dimension(1400, 900));
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-        //TODO: move to newGame / startGame in FieryDragons
-//        showTitleScreen();
     }
 
     private void initialiseGameComponents() {

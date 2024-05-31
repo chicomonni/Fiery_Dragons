@@ -28,7 +28,6 @@ public class TitleDisplay {
         initialise(display, gameWindow);
     }
 
-
     private void initialise(DisplayManager display, GameWindow gameWindow) throws IOException {
 
         JFrame window = gameWindow.getWindow();
@@ -94,7 +93,6 @@ public class TitleDisplay {
         }
         return logoText.toString();
     }
-
 
     private void customiseButton(Font font, JButton button) {
         button.setFont(font.deriveFont(BUTTON_FONT_SIZE));
