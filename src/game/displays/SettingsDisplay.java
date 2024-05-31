@@ -105,7 +105,7 @@ public class SettingsDisplay {
 
         // Add checkboxes
         constraints.gridy++;
-        settingsScreen.add(createLabel(gameWindow, "INCLUDE EVIL CHITS: "), constraints);
+        settingsScreen.add(createLabel(gameWindow, "INCLUDE: "), constraints);
 
         constraints.insets = new Insets(15, 20, 15, 0);
         constraints.gridy++;
