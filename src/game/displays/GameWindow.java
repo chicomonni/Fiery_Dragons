@@ -80,63 +80,6 @@ public class GameWindow {
         showTitleScreen();
     }
 
-    /**
-         * Method to initialise the title screen
-         */
-//    private void initialiseTitleScreen() throws IOException {
-//        titleScreen.setLayout(new BorderLayout());
-//        titleScreen.setBackground(Color.BLACK);
-//
-//        // Initialize and configure the logo label
-//        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE));
-//        logo.setEditable(false);
-//        logo.setBackground(Color.BLACK);
-//        logo.setForeground(Color.WHITE);
-//        logo.setText(readTitleDisplay());
-//
-//        JScrollPane logoPane = new JScrollPane(logo);
-////        logoPane.setPreferredSize(new Dimension(1000, 600));
-//        logoPane.setBorder(BorderFactory.createEmptyBorder());
-//
-//        titleScreenSeparator.setPreferredSize(new Dimension(0, 2));
-//        titleScreenSeparator.setBackground(Color.WHITE);
-////        logoPane.add(titleScreenSeparator, BorderLayout.SOUTH);
-//
-//        JPanel titlePanel = new JPanel();
-//        titlePanel.setBorder(BorderFactory.createEmptyBorder());
-//        titlePanel.add(logoPane, BorderLayout.NORTH);
-//        titlePanel.add(titleScreenSeparator, BorderLayout.SOUTH);
-//        titleScreen.add(titlePanel, BorderLayout.CENTER);
-//
-//
-//        // Initialise buttons
-//        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
-//        buttonPanel.setBackground(Color.BLACK);
-//        buttonPanel.setOpaque(false);
-//
-//        JButton newGameButton = new JButton("NEW GAME");
-//        JButton continueGameButton = new JButton("CONTINUE GAME");
-//        JButton exitGameButton = new JButton("EXIT GAME");
-//
-//        customiseButton(newGameButton);
-//        customiseButton(continueGameButton);
-//        customiseButton(exitGameButton);
-//
-//        // Add action listeners
-//        newGameButton.addActionListener(e -> showGameScreen());
-//        continueGameButton.addActionListener(e -> continueGame());
-//        exitGameButton.addActionListener(e -> exitGame());
-//
-//        buttonPanel.add(newGameButton);
-//        buttonPanel.add(continueGameButton);
-//        buttonPanel.add(exitGameButton);
-//
-//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
-//
-//        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
-//
-//        window.getContentPane().add(titleScreen);
-//    }
 
     private void initialiseTitleScreen() throws IOException {
         titleScreen.setLayout(new BorderLayout());
