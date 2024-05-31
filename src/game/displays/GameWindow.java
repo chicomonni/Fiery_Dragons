@@ -24,9 +24,9 @@ public class GameWindow {
     private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
     private final JLabel winner = new JLabel();
-    private final JPanel titlePane = new JPanel();
     private final JTextArea logo = new JTextArea();
     private final JPanel titleScreen = new JPanel();
+    JPanel separator = new JPanel();
 
     Font font = Font.createFont(
             Font.TRUETYPE_FONT,
@@ -64,6 +64,7 @@ public class GameWindow {
         container.setBackground(Color.BLACK);
 
         initialiseTitleScreen();
+        initialiseGameComponents();
 
         // Finalize window setup
         window.pack();
@@ -71,51 +72,47 @@ public class GameWindow {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        showTitleScreen();
     }
 
-        /**
+    /**
          * Method to initialise the title screen
          */
-        private void initialiseTitleScreen() throws IOException {
-            titleScreen.setLayout(new BorderLayout());
-            titleScreen.setBackground(Color.BLACK);
+    private void initialiseTitleScreen() throws IOException {
+        titleScreen.setLayout(new BorderLayout());
+        titleScreen.setBackground(Color.BLACK);
 
-            // Initialize and configure the logo label
-            logo.setFont(font.deriveFont(FOOTER_FONT_SIZE - 2)); // Use the same font
-            logo.setEditable(false);
-            logo.setBackground(Color.BLACK);
-            logo.setForeground(Color.WHITE);
-            logo.setText(getLogoDisplay());
-            titleScreen.add(new JScrollPane(logo), BorderLayout.NORTH);
+        // Initialize and configure the logo label
+        logo.setFont(font.deriveFont(FOOTER_FONT_SIZE - 2)); // Use the same font
+        logo.setEditable(false);
+        logo.setBackground(Color.BLACK);
+        logo.setForeground(Color.WHITE);
+        logo.setText(getTitleDisplay());
+        titleScreen.add(new JScrollPane(logo), BorderLayout.NORTH);
 
-            // Initialise buttons
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-            buttonPanel.setBackground(Color.BLACK);
+        // Initialise buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setBackground(Color.BLACK);
 
-            JButton newGameButton = new JButton("New Game");
-            JButton continueGameButton = new JButton("Continue Game");
-            JButton exitGameButton = new JButton("Exit Game");
+        JButton newGameButton = new JButton("New Game");
+        JButton continueGameButton = new JButton("Continue Game");
+        JButton exitGameButton = new JButton("Exit Game");
 
-            // Add action listeners
-            newGameButton.addActionListener(e -> {
-                try {
-                    newGame();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-            continueGameButton.addActionListener(e -> continueGame());
-            exitGameButton.addActionListener(e -> exitGame());
+        // Add action listeners
+        newGameButton.addActionListener(e -> showGameScreen());
+        continueGameButton.addActionListener(e -> continueGame());
+        exitGameButton.addActionListener(e -> exitGame());
 
-            buttonPanel.add(newGameButton);
-            buttonPanel.add(continueGameButton);
-            buttonPanel.add(exitGameButton);
+        buttonPanel.add(newGameButton);
+        buttonPanel.add(continueGameButton);
+        buttonPanel.add(exitGameButton);
 
-            titleScreen.add(buttonPanel, BorderLayout.CENTER);
+        titleScreen.add(buttonPanel, BorderLayout.CENTER);
 
-            window.getContentPane().add(titleScreen);
-        }
+        window.getContentPane().add(titleScreen);
+    }
 
     private void initialiseGameComponents() throws IOException {
         Container container = window.getContentPane();
@@ -156,7 +153,6 @@ public class GameWindow {
         constraints.gridy = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        JPanel separator = new JPanel();
         separator.setPreferredSize(new Dimension(0, PADDING / 2));
         container.add(separator, constraints);
 
@@ -174,13 +170,6 @@ public class GameWindow {
         winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
         winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
         winner.setBounds(50, 50, 200, 50);
-
-        // Finalize window setup
-        window.pack();
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
 
     }
 
@@ -234,7 +223,7 @@ public class GameWindow {
         container.repaint();
     }
 
-    public String getLogoDisplay() throws IOException {
+    public String getTitleDisplay() throws IOException {
         StringBuilder logoText = new StringBuilder();
         try (InputStream is = getClass().getResourceAsStream(LOGO_PATH);
              Scanner scanner = new Scanner(Objects.requireNonNull(is))) {
@@ -245,40 +234,37 @@ public class GameWindow {
         return logoText.toString();
     }
 
-//    public void showLogoDisplay() {
-//        Container container = window.getContentPane();
-//        // Remove all components from the container and add the winner label
-//        container.removeAll();
-//        container.add(logo);
-//
-//        // Revalidate and repaint the container
-//        container.revalidate();
-//        container.repaint();
-//    }
-
     public JPanel getTitleScreen() {
         return titleScreen;
-    }
-
-    public void newGame() throws IOException {
-        titleScreen.setVisible(false);
-        Container container = window.getContentPane();
-        // Remove all components from the container and add the winner label
-        container.remove(titleScreen);
-
-
-        // Initialize or reset the game board components
-        initialiseGameComponents();
-
-//        container.add();
-
-        window.revalidate();
-        window.repaint();
     }
 
     public void continueGame() {
     }
 
     public void exitGame() {
+    }
+
+    public void showGameScreen() {
+        titleScreen.setVisible(false);
+
+        volcano.setVisible(true);
+        chitCards.setVisible(true);
+        separator.setVisible(true);
+        footer.setVisible(true);
+
+        window.revalidate();
+        window.repaint();
+    }
+
+    public void showTitleScreen() {
+        titleScreen.setVisible(true);
+
+        volcano.setVisible(false);
+        chitCards.setVisible(false);
+        separator.setVisible(false);
+        footer.setVisible(false);
+
+        window.revalidate();
+        window.repaint();
     }
 }

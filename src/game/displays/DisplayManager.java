@@ -88,4 +88,15 @@ public class DisplayManager {
         winnerDisplay.displayWinner(player);
         gameWindow.showWinnerLabel();
     }
+//
+//    public void displayTitleScreen() {
+//        titleDisplay.displayTitleScreen();
+//        gameWindow.showTitleScreen();
+//
+//    }
+
+    public void displayGameScreen() {
+        gameWindow.showGameScreen();
+    }
+
 }

@@ -1,7 +1,6 @@
 package game.displays;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TitleDisplay {
     private final JTextArea logo = new JTextArea();
@@ -21,6 +20,6 @@ public class TitleDisplay {
     }
 
     private void initialise(JPanel container) {
-
     }
+
 }
