@@ -111,12 +111,14 @@ public class SettingsDisplay {
         constraints.gridy++;
         dragonPirateCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(dragonPirateCheckbox, constraints);
+        customiseCheckbox(dragonPirateCheckbox, gameWindow);
         dragonPirateCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         dragonPirateCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
 
         constraints.gridy++;
         ratRascalCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(ratRascalCheckbox, constraints);
+        customiseCheckbox(ratRascalCheckbox, gameWindow);
         ratRascalCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         ratRascalCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
 
@@ -177,6 +179,55 @@ public class SettingsDisplay {
 
         squareSlider.setLabelTable(labelSlider(gameWindow, numPlayers * 3, 27, stepSize));
 
+    }
+
+    private void customiseCheckbox(JCheckBox checkbox, GameWindow gameWindow) {
+        checkbox.setForeground(Color.WHITE);
+        checkbox.setBackground(Color.BLACK);
+        checkbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE + 2f));
+        checkbox.setIcon(createCheckboxIcon(false));
+        checkbox.setSelectedIcon(createCheckboxIcon(true));
+    }
+
+    private Icon createCheckboxIcon(boolean selected) {
+        return new Icon() {
+            private final int size = 24;
+
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Draw background
+                g2.setColor(Color.BLACK);
+                g2.fillRoundRect(x, y, size, size, 8, 8);
+
+                // Draw border
+                g2.setColor(Color.WHITE);
+                g2.setStroke(new BasicStroke(3)); // Thicker border
+                g2.drawRoundRect(x, y, size - 1, size - 1, 8, 8);
+
+                if (selected) {
+                    // Draw checkmark
+                    g2.setColor(Color.WHITE);
+                    g2.setStroke(new BasicStroke(3));
+                    g2.drawLine(x + 4, y + 12, x + 10, y + 18);
+                    g2.drawLine(x + 10, y + 18, x + 20, y + 6);
+                }
+
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return size;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return size;
+            }
+        };
     }
 
     public void showScreen(JFrame window) {
