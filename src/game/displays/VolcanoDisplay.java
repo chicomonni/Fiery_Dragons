@@ -26,11 +26,11 @@ public class VolcanoDisplay {
      * Constructor
      *
      * @param volcano    the Volcano instance used by the game
-     * @param gameWindow the GameWindow instance this class affects
+     * @param gameDisplay the GameDisplay instance this class affects
      */
-    public VolcanoDisplay(Volcano volcano, GameWindow gameWindow) {
+    public VolcanoDisplay(Volcano volcano, GameDisplay gameDisplay) {
         this.volcano = volcano;
-        this.volcanoContainer = gameWindow.getVolcanoComponent();
+        this.volcanoContainer = gameDisplay.getVolcanoComponent();
 
         initialiseComponent(volcanoPane, volcanoContainer.getWidth(), volcanoContainer.getHeight());
         volcanoPane.setText(getVolcanoForDisplay());

@@ -21,10 +21,10 @@ public class ChitCardDisplay {
      * Constructor
      *
      * @param cardArray  the ChitCardArray instance used by the game
-     * @param gameWindow the GameWindow instance this class affects
+     * @param gameDisplay the GameDisplay instance this class affects
      */
-    public ChitCardDisplay(ChitCardArray cardArray, GameWindow gameWindow) {
-        JPanel cardContainer = gameWindow.getChitCardsComponent();
+    public ChitCardDisplay(ChitCardArray cardArray, GameDisplay gameDisplay) {
+        JPanel cardContainer = gameDisplay.getChitCardsComponent();
         cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
         cardPane.setPreferredSize(cardContainer.getPreferredSize());
         cardPane.setOpaque(false);

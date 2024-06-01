@@ -18,12 +18,12 @@ public class InputDisplay {
     private final JTextField inputMarker = new JTextField(1);
 
     /**
-     * Initializes the InputDisplay and sets it up within the specified GameWindow.
+     * Initializes the InputDisplay and sets it up within the specified GameDisplay.
      *
-     * @param gameWindow the game window to attach this input display to
+     * @param gameDisplay the game window to attach this input display to
      */
-    public InputDisplay(GameWindow gameWindow) {
-        initialise(gameWindow.getFooter());
+    public InputDisplay(GameDisplay gameDisplay) {
+        initialise(gameDisplay.getFooter());
     }
 
     /**
@@ -89,7 +89,7 @@ public class InputDisplay {
         JTextField name = new JTextField(player.getName().toUpperCase() + ":", player.getName().length() + 1);
         initialiseTextField(name);
         name.setForeground(player.getColour());
-        name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.FOOTER_FONT_SIZE));
+        name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameDisplay.FOOTER_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
