@@ -10,6 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Player class represents a player in the game, managing their
+ * position, color, name, and associated game chit. It also handles
+ * the player's turn actions within the game.
+ */
 public class Player {
     private final Color colour;
     private final char displayChar = '@';
