@@ -10,6 +10,10 @@ import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The TitleDisplay class is responsible for displaying the title screen of the game.
+ * It includes options for starting a new game, continuing a game, and exiting the game.
+ */
 public class TitleDisplay {
     private static final String LOGO_PATH = "/assets/logo.txt";
     private static final float LOGO_FONT_SIZE = 14f;
@@ -25,12 +29,25 @@ public class TitleDisplay {
     /**
      * Constructor
      *
-     * @param window the GameWindow instance this class affects
+     * @param fieryDragons the FieryDragons instance to start the game
+     * @param display      the DisplayManager handling game displays
+     * @param window       the GameWindow instance this class affects
+     * @param board        the game board instance
+     * @throws IOException if the logo file cannot be read
      */
     public TitleDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
         initialise(fieryDragons, display, window, board);
     }
 
+    /**
+     * Initializes the title screen with logo and buttons.
+     *
+     * @param fieryDragons the FieryDragons instance to start the game
+     * @param display      the DisplayManager handling game displays
+     * @param window       the GameWindow instance this class affects
+     * @param board        the game board instance
+     * @throws IOException if the logo file cannot be read
+     */
     private void initialise(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
 
         JFrame frame = window.getFrame();
@@ -83,6 +100,12 @@ public class TitleDisplay {
         frame.getContentPane().add(titleScreen);
     }
 
+    /**
+     * Reads the title display from a file.
+     *
+     * @return the title display as a String
+     * @throws IOException if the logo file cannot be read
+     */
     public String readTitleDisplay() throws IOException {
         StringBuilder logoText = new StringBuilder();
         try (InputStream is = getClass().getResourceAsStream(LOGO_PATH);
@@ -94,6 +117,11 @@ public class TitleDisplay {
         return logoText.toString();
     }
 
+    /**
+     * Shows the title screen.
+     *
+     * @param window the JFrame to display the title screen on
+     */
     public void showScreen(JFrame window) {
         titleScreen.setVisible(true);
 
@@ -101,6 +129,11 @@ public class TitleDisplay {
         window.repaint();
     }
 
+    /**
+     * Hides the title screen.
+     *
+     * @param window the JFrame to hide the title screen from
+     */
     public void hideScreen(JFrame window) {
         titleScreen.setVisible(false);
 
