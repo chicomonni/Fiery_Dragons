@@ -2,7 +2,6 @@ package game.displays;
 
 import game.Board;
 import game.FieryDragons;
-import game.actions.PlayGameAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,11 +27,11 @@ public class TitleDisplay {
      *
      * @param window the GameWindow instance this class affects
      */
-    public TitleDisplay(DisplayManager display, GameWindow window, Board board) throws IOException {
-        initialise(display, window, board);
+    public TitleDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
+        initialise(fieryDragons, display, window, board);
     }
 
-    private void initialise(DisplayManager display, GameWindow window, Board board) throws IOException {
+    private void initialise(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
 
         JFrame frame = window.getFrame();
         titleScreen.setLayout(new BorderLayout());
@@ -63,15 +62,15 @@ public class TitleDisplay {
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        window.customiseButton(newGameButton, window.getFont(), BUTTON_FONT_SIZE);
-        window.customiseButton(continueGameButton, window.getFont(), BUTTON_FONT_SIZE);
-        window.customiseButton(exitGameButton, window.getFont(), BUTTON_FONT_SIZE);
+        window.customiseButton(newGameButton, BUTTON_FONT_SIZE);
+        window.customiseButton(continueGameButton, BUTTON_FONT_SIZE);
+        window.customiseButton(exitGameButton, BUTTON_FONT_SIZE);
 
         // Add action listeners
-        //TODO: change to pickSettingsAction later
-        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame)); //new PickSettingsAction(FieryDragons.getPlayers()[0], board, display, gameDisplay).execute(board, display));
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
+
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, window).execute(board, display));
+        continueGameButton.addActionListener(e -> fieryDragons.playGame(display, window));
         exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
 
         buttonPanel.add(newGameButton);

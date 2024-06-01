@@ -1,14 +1,12 @@
 package game.displays;
 
 import game.Board;
+import game.FieryDragons;
 import game.Player;
 import game.chitCards.ChitCard;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 /**
@@ -16,14 +14,15 @@ import java.io.IOException;
  */
 public class DisplayManager {
     private final GameWindow window;
-    private final GameDisplay gameDisplay;
+
     private final TitleDisplay titleDisplay;
     private final SettingsDisplay settingsDisplay;
-    private final VolcanoDisplay volcanoDisplay;
-    private final PlayerDisplay playerDisplay;
-    private final ChitCardDisplay cardDisplay;
-    private final InputDisplay inputDisplay;
-    private final WinnerDisplay winnerDisplay;
+    private final GameDisplay gameDisplay;
+    private VolcanoDisplay volcanoDisplay;
+    private PlayerDisplay playerDisplay;
+    private ChitCardDisplay cardDisplay;
+    private InputDisplay inputDisplay;
+    private WinnerDisplay winnerDisplay;
 
     /**
      * Constructor for the DisplayManager.
@@ -31,15 +30,18 @@ public class DisplayManager {
      * @param board      the Board instance representing the game board
      * @param players    an array of Player instances representing the players in the game
      */
-    public DisplayManager(GameWindow window, Board board, Player[] players) throws IOException, FontFormatException {
+    public DisplayManager(FieryDragons fieryDragons, GameWindow window, Board board, Player[] players) throws IOException, FontFormatException {
         this.window = window;
+        this.titleDisplay = new TitleDisplay(fieryDragons, this, window, board);
+        this.settingsDisplay = new SettingsDisplay(fieryDragons,this, window, board);
         this.gameDisplay = new GameDisplay(window);
-        this.titleDisplay = new TitleDisplay(this, window, board);
+    }
+
+    public void createGameComponents(GameWindow window, Board board, Player[] players) {
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameDisplay);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
         this.inputDisplay = new InputDisplay(gameDisplay);
-        this.settingsDisplay = new SettingsDisplay(this, window, board);
         this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
@@ -103,7 +105,6 @@ public class DisplayManager {
         gameDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
         titleDisplay.showScreen(frame);
-
     }
 
     public void displayGameScreen(JFrame frame) {

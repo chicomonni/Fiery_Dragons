@@ -2,7 +2,6 @@ package game.displays;
 
 import game.Board;
 import game.FieryDragons;
-import game.actions.PickSettingsAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +22,7 @@ public class SettingsDisplay {
     private final JCheckBox dragonPirateCheckbox = new JCheckBox("  Dragon Pirate", true);
     private final JCheckBox ratRascalCheckbox = new JCheckBox("  Rat Rascal", false);
 
-    public SettingsDisplay(DisplayManager display, GameWindow window, Board board) {
+    public SettingsDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) {
         initialise(display, window);
 
         //default values
@@ -35,25 +34,15 @@ public class SettingsDisplay {
         playerSlider.addChangeListener(e -> updateSquareSlider(window, playerSlider.getValue()));
         backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
         startButton.addActionListener(e ->
-            new PickSettingsAction(
-                    FieryDragons.getPlayers()[0],
-                    board,
-                    display,
-                    window,
-                    playerSlider.getValue(),
-                    squareSlider.getValue(),
-                    dragonPirateCheckbox.isSelected(),
-                    ratRascalCheckbox.isSelected()
-            ).execute(board, display)
+            fieryDragons.pickSettings(
+                display,
+                window,
+                playerSlider.getValue(),
+                squareSlider.getValue(),
+                dragonPirateCheckbox.isSelected(),
+                ratRascalCheckbox.isSelected()
+            )
         );
-//                new PlayGameAction(
-//                    FieryDragons.getPlayers()[0],
-//                    board,
-//                    display,
-//                    window)
-//                .execute(board, display));
-
-
     }
 
     public void initialise(DisplayManager display, GameWindow window) {
@@ -126,16 +115,14 @@ public class SettingsDisplay {
         constraints.gridy++;
         dragonPirateCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(dragonPirateCheckbox, constraints);
-        window.customiseCheckbox(dragonPirateCheckbox, window.getFont(), SETTINGS_FONT_SIZE);
+        window.customiseCheckbox(dragonPirateCheckbox, SLIDER_FONT_SIZE);
         dragonPirateCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        dragonPirateCheckbox.setFont(frame.getFont().deriveFont(SLIDER_FONT_SIZE));
 
         constraints.gridy++;
         ratRascalCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(ratRascalCheckbox, constraints);
-        window.customiseCheckbox(ratRascalCheckbox, window.getFont(), SETTINGS_FONT_SIZE);
+        window.customiseCheckbox(ratRascalCheckbox, SLIDER_FONT_SIZE);
         ratRascalCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        ratRascalCheckbox.setFont(frame.getFont().deriveFont(SLIDER_FONT_SIZE));
 
 
         // Add buttons
@@ -143,12 +130,12 @@ public class SettingsDisplay {
         constraints.gridwidth = 1;
         constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.WEST;
-        window.customiseButton(backButton, window.getFont(), SETTINGS_FONT_SIZE);
+        window.customiseButton(backButton, SETTINGS_FONT_SIZE);
         settingsScreen.add(backButton, constraints);
 
         constraints.gridx = 1;
         constraints.anchor = GridBagConstraints.EAST;
-        window.customiseButton(startButton, window.getFont(), SETTINGS_FONT_SIZE);
+        window.customiseButton(startButton, SETTINGS_FONT_SIZE);
         settingsScreen.add(startButton, constraints);
 
         frame.add(settingsScreen);

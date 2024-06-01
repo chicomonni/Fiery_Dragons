@@ -41,7 +41,7 @@ public class GameWindow {
         return font;
     }
 
-    public void customiseButton(JButton button, Font font, float fontSize) {
+    public void customiseButton(JButton button, float fontSize) {
         button.setFont(font.deriveFont(fontSize));
         button.setForeground(Color.WHITE);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -64,11 +64,11 @@ public class GameWindow {
         });
     }
 
-    public void customiseCheckbox(JCheckBox checkbox, Font font, float fontSize) {
+    public void customiseCheckbox(JCheckBox checkbox, float fontSize) {
+        checkbox.setFont(font.deriveFont(fontSize));
         checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         checkbox.setForeground(Color.WHITE);
         checkbox.setBackground(Color.BLACK);
-        checkbox.setFont(font.deriveFont(fontSize));
         checkbox.setIcon(createCheckboxIcon(false));
         checkbox.setSelectedIcon(createCheckboxIcon(true));
     }

@@ -4,7 +4,6 @@ import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
 import game.displays.DisplayManager;
-import game.displays.GameDisplay;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
@@ -36,7 +35,7 @@ public class FieryDragons {
     /**
      * Creates the chits used in the game with specific strategies.
      */
-    private void createChits() {
+    public void createChits() {
         chitFactory.setChit('w', "Bat", new AnimalChitStrategy());
         chitFactory.setChit('0', "Baby Dragon", new AnimalChitStrategy());
         chitFactory.setChit('S', "Salamander", new AnimalChitStrategy());
@@ -47,7 +46,7 @@ public class FieryDragons {
     /**
      * Creates the game board using predefined sources and the chit factory.
      */
-    private void createBoard() {
+    public void createBoard() {
         board = new Board("/assets/volcano.txt");
         board.createBoard(SQUARE_SRC, CAVE_SRC, CARD_SRC, chitFactory);
     }
@@ -55,7 +54,7 @@ public class FieryDragons {
     /**
      * Creates the players and assigns them to their starting positions.
      */
-    private void createPlayers() {
+    public void createPlayers() {
         List<Cave> caves = board.getCaves();
         players = new Player[NUM_PLAYERS];
         assert players.length <= caves.size() : "Not enough caves for all players";
@@ -73,25 +72,19 @@ public class FieryDragons {
     }
 
     public void start() throws IOException, FontFormatException {
-        //initialise game board components
-        createChits();
-        createBoard();
-        createPlayers();
-
-//        GameDisplay gameDisplay = new GameDisplay();
         GameWindow window = new GameWindow();
-        DisplayManager display = new DisplayManager(window, board, players);
+        DisplayManager display = new DisplayManager(this, window, board, players);
 
         //start new game
         display.displayTitleScreen(window.getFrame());
 
     }
 
-    public static Player[] getPlayers() {
+    public Player[] getPlayers() {
         return players;
     }
 
-    public static void setPlayers(int numPlayers) {
+    private static void setPlayers(int numPlayers) {
         NUM_PLAYERS = numPlayers;
         CAVE_SRC = "";
         StringBuilder caveSrcBuilder = new StringBuilder();
@@ -102,5 +95,29 @@ public class FieryDragons {
         CAVE_SRC = caveSrcBuilder.toString();
 
     }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void playGame(DisplayManager display, GameWindow window) {
+        createChits();
+        createBoard();
+        createPlayers();
+
+        display.createGameComponents(window, board, players);
+
+        display.displayGameScreen(window.getFrame());
+        players[0].startTurn(board, display);
+    }
+
+    public void pickSettings(DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
+        setPlayers(numPlayers);
+
+        //TODO: set others
+
+        playGame(display, window);
+    }
+
 
 }
