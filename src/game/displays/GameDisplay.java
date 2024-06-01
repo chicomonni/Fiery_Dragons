@@ -7,7 +7,9 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * The Fiery Dragon game window
+ * The GameDisplay class is responsible for setting up and managing the display
+ * elements of the Fiery Dragons game, including the volcano, chit cards, footer,
+ * and the winner label.
  */
 public class GameDisplay {
     public static final float ASCII_FONT_SIZE = 8f;
@@ -19,7 +21,11 @@ public class GameDisplay {
     private final JPanel separator = new JPanel();
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param window the GameWindow instance
+     * @throws IOException if the font file cannot be accessed
+     * @throws FontFormatException if the font file contains incorrect data
      */
     public GameDisplay(GameWindow window) throws IOException, FontFormatException {
         try {
@@ -31,10 +37,11 @@ public class GameDisplay {
     }
 
     /**
-     * Method to initialise window and its contents
+     * Initializes the game window and its components.
      *
-     * @throws IOException         if font file cannot be accessed
-     * @throws FontFormatException if font file doesn't contain correct data
+     * @param window the GameWindow instance
+     * @throws IOException         if the font file cannot be accessed
+     * @throws FontFormatException if the font file contains incorrect data
      */
     private void initialise(GameWindow window) throws IOException, FontFormatException {
         // Adjust default font on text components
@@ -168,7 +175,9 @@ public class GameDisplay {
     }
 
     /**
-     * Method to display the winner of the game
+     * Displays the winner label, removing all other components from the frame.
+     *
+     * @param frame the JFrame to show the winner label on
      */
     public void showWinnerLabel(JFrame frame) {
         Container container = frame.getContentPane();
@@ -181,6 +190,11 @@ public class GameDisplay {
         container.repaint();
     }
 
+    /**
+     * Shows the game screen components.
+     *
+     * @param frame the JFrame to show the game screen components on
+     */
     public void showScreen(JFrame frame) {
         volcano.setVisible(true);
         chitCards.setVisible(true);
@@ -191,6 +205,11 @@ public class GameDisplay {
         frame.repaint();
     }
 
+    /**
+     * Hides the game screen components.
+     *
+     * @param frame the JFrame to hide the game screen components on
+     */
     public void hideScreen(JFrame frame) {
         volcano.setVisible(false);
         chitCards.setVisible(false);
@@ -200,6 +219,5 @@ public class GameDisplay {
         frame.revalidate();
         frame.repaint();
     }
-
 
 }

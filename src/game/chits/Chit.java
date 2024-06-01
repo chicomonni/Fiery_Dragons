@@ -41,9 +41,10 @@ public class Chit {
     }
 
     /**
-     * Used to check if Chit on card matches given Chit
+     * Used to check if Chit on card matches given Chit.
+     *
      * @param other the Chit this is being compared to
-     * @return
+     * @return {@code true} if Chits are the same, {@code false} otherwise
      */
     public boolean directValidate(Chit other) {
         return this == other;
@@ -108,4 +109,5 @@ public class Chit {
     public String getName() {
         return name;
     }
+
 }
