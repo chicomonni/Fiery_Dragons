@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class representing Fiery Dragon Board
+ * The Board class represents the game board for Fiery Dragons.
+ * It handles the creation of the volcano and chit cards on the board.
  */
 public class Board {
     private final Volcano volcano;
