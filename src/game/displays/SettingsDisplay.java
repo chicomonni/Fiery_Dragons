@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Hashtable;
 
+/**
+ * The SettingsDisplay class is responsible for displaying the settings screen
+ * where players can configure game options before starting the game.
+ */
 public class SettingsDisplay {
     private static final float TITLE_FONT_SIZE = 50f;
     private static final float SETTINGS_FONT_SIZE = 28f;
@@ -22,6 +26,14 @@ public class SettingsDisplay {
     private final JCheckBox dragonPirateCheckbox = new JCheckBox("  Dragon Pirate", true);
     private final JCheckBox ratRascalCheckbox = new JCheckBox("  Rat Rascal", false);
 
+    /**
+     * Constructor.
+     *
+     * @param fieryDragons the FieryDragons instance to start the game
+     * @param display      the DisplayManager handling game displays
+     * @param window       the GameWindow instance this class affects
+     * @param board        the game board instance
+     */
     public SettingsDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) {
         initialise(display, window);
 
@@ -45,6 +57,12 @@ public class SettingsDisplay {
         );
     }
 
+    /**
+     * Initializes the settings screen with title, sliders, checkboxes, and buttons.
+     *
+     * @param display the DisplayManager handling game displays
+     * @param window  the GameWindow instance this class affects
+     */
     public void initialise(DisplayManager display, GameWindow window) {
         JFrame frame = window.getFrame();
         settingsScreen.setPreferredSize(new Dimension(1200, 800));
@@ -141,6 +159,13 @@ public class SettingsDisplay {
         frame.add(settingsScreen);
     }
 
+    /**
+     * Creates a label with the specified text and font.
+     *
+     * @param text the text for the label
+     * @param font the font for the label
+     * @return the created JLabel
+     */
     private JLabel createLabel(String text, Font font) {
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE);
@@ -148,6 +173,15 @@ public class SettingsDisplay {
         return label;
     }
 
+    /**
+     * Creates a hashtable of labels for a slider.
+     *
+     * @param window the GameWindow instance
+     * @param min    the minimum value of the slider
+     * @param max    the maximum value of the slider
+     * @param step   the step value for the slider
+     * @return a hashtable of labels for the slider
+     */
     private Hashtable<Integer, JLabel> labelSlider(GameWindow window, int min, int max, int step) {
         Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
 
@@ -163,6 +197,12 @@ public class SettingsDisplay {
         return labelTable;
     }
 
+    /**
+     * Updates the range and labels of the square slider based on the number of players.
+     *
+     * @param window     the GameWindow instance
+     * @param numPlayers the number of players
+     */
     private void updateSquareSlider(GameWindow window, int numPlayers) {
         // Update the range of the square slider based on the number of players
         squareSlider.setMinimum(numPlayers * 3);
@@ -182,17 +222,26 @@ public class SettingsDisplay {
 
     }
 
+    /**
+     * Shows the settings screen.
+     *
+     * @param window the JFrame to display the settings screen on
+     */
     public void showScreen(JFrame window) {
         settingsScreen.setVisible(true);
         window.revalidate();
         window.repaint();
     }
 
+    /**
+     * Hides the settings screen.
+     *
+     * @param window the JFrame to hide the settings screen from
+     */
     public void hideScreen(JFrame window) {
         settingsScreen.setVisible(false);
         window.revalidate();
         window.repaint();
     }
-
 
 }
