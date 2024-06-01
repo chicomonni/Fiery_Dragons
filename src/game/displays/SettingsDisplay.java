@@ -2,6 +2,7 @@ package game.displays;
 
 import game.Board;
 import game.FieryDragons;
+import game.actions.PickSettingsAction;
 import game.actions.PlayGameAction;
 
 import javax.swing.*;
@@ -34,11 +35,24 @@ public class SettingsDisplay {
 
         playerSlider.addChangeListener(e -> updateSquareSlider(gameWindow, playerSlider.getValue()));
         backButton.addActionListener(e -> display.displayTitleScreen(gameWindow.getWindow()));
-        startButton.addActionListener(e -> new PlayGameAction(
-                FieryDragons.getPlayers()[0],
-                board,
-                display,
-                gameWindow).execute(board, display));
+        startButton.addActionListener(e ->
+            new PickSettingsAction(
+                    FieryDragons.getPlayers()[0],
+                    board,
+                    display,
+                    gameWindow,
+                    playerSlider.getValue(),
+                    squareSlider.getValue(),
+                    dragonPirateCheckbox.isSelected(),
+                    ratRascalCheckbox.isSelected()
+            ).execute(board, display)
+        );
+//                new PlayGameAction(
+//                    FieryDragons.getPlayers()[0],
+//                    board,
+//                    display,
+//                    gameWindow)
+//                .execute(board, display));
 
 
     }
@@ -204,7 +218,7 @@ public class SettingsDisplay {
 
                 // Draw border
                 g2.setColor(Color.WHITE);
-                g2.setStroke(new BasicStroke(3)); // Thicker border
+                g2.setStroke(new BasicStroke(3));
                 g2.drawRoundRect(x, y, size - 1, size - 1, 8, 8);
 
                 if (selected) {

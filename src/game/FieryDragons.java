@@ -24,9 +24,10 @@ public class FieryDragons {
     public static final int CARD_WIDTH = 11;
     public static final int CARD_HEIGHT = 16;
     private static final String SQUARE_SRC = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static final String CAVE_SRC = "S*w0";
+    private static final String MAX_CAVE_SRC = "S*w0S*w0";
+    private static String CAVE_SRC = "S*w0";
     private static final String CARD_SRC = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
-    private static final int NUM_PLAYERS = 4;
+    private static int NUM_PLAYERS = 4;
     private final ChitFactory chitFactory = new ChitFactory();
     private Board board;
     private static Player[] players;
@@ -87,4 +88,17 @@ public class FieryDragons {
     public static Player[] getPlayers() {
         return players;
     }
+
+    public static void setPlayers(int numPlayers) {
+        NUM_PLAYERS = numPlayers;
+        CAVE_SRC = "";
+        StringBuilder caveSrcBuilder = new StringBuilder();
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            caveSrcBuilder.append(MAX_CAVE_SRC.charAt(i % MAX_CAVE_SRC.length()));
+        }
+        CAVE_SRC = caveSrcBuilder.toString();
+
+    }
+
 }

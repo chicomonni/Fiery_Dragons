@@ -7,13 +7,26 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 
 public class PickSettingsAction implements GameAction{
+    private final int numPlayers;
+    private final int numSquares;
+    private final boolean isPirateChecked;
+    private final boolean isRascalChecked;
 
-    public PickSettingsAction(Player player, Board board, DisplayManager display, GameWindow gameWindow) {
-        display.displaySettingsScreen(gameWindow.getWindow());
+
+    public PickSettingsAction(Player player, Board board, DisplayManager display, GameWindow gameWindow, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
+        this.numPlayers = numPlayers;
+        this.numSquares = numSquares;
+        this.isPirateChecked = isPirateChecked;
+        this.isRascalChecked = isRascalChecked;
+        FieryDragons.setPlayers(numPlayers);
+        //TODO: add board updates for others
+
+        //re-create board
+        display.displayGameScreen(gameWindow.getWindow());
     }
 
     @Override
     public GameAction execute(Board board, DisplayManager display) {
-        return null; //new PlayGameAction(FieryDragons.getPlayers()[0], board, display, display.getWindow()).execute(board, display);
+        return null;
     }
 }
