@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Class responsible for initiating the game
+ * The FieryDragons class is responsible for initiating and managing the game.
+ * It handles the creation of chits, the game board, players, and the game flow.
  */
 public class FieryDragons {
     public static final int OUTER_RADIUS = 25;
@@ -77,6 +78,12 @@ public class FieryDragons {
         }
     }
 
+    /**
+     * Starts the game by initializing the game window, display manager, and displaying the title screen.
+     *
+     * @throws IOException if an input or output exception occurs
+     * @throws FontFormatException if a font format exception occurs
+     */
     public void start() throws IOException, FontFormatException {
         GameWindow window = new GameWindow();
         DisplayManager display = new DisplayManager(this, window, board, players);
@@ -86,10 +93,11 @@ public class FieryDragons {
 
     }
 
-    public Player[] getPlayers() {
-        return players;
-    }
-
+    /**
+     * Sets the number of players and adjusts the cave source string accordingly.
+     *
+     * @param numPlayers the number of players
+     */
     private static void setPlayers(int numPlayers) {
         NUM_PLAYERS = numPlayers;
         CAVE_SRC = "";
@@ -102,10 +110,12 @@ public class FieryDragons {
 
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
+    /**
+     * Initializes the game components and starts the game.
+     *
+     * @param display the display manager handling game displays
+     * @param window the game window
+     */
     public void playGame(DisplayManager display, GameWindow window) {
         createChits();
         createBoard();
@@ -117,6 +127,16 @@ public class FieryDragons {
         players[0].startTurn(board, display);
     }
 
+    /**
+     * Configures game settings based on user selections and starts the game.
+     *
+     * @param display the display manager handling game displays
+     * @param window the game window
+     * @param numPlayers the number of players
+     * @param numSquares the number of squares on the board
+     * @param isPirateChecked whether the pirate option is selected
+     * @param isRascalChecked whether the rascal option is selected
+     */
     public void pickSettings(DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
         setPlayers(numPlayers);
 
