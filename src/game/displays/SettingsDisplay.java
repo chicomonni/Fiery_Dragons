@@ -3,7 +3,6 @@ package game.displays;
 import game.Board;
 import game.FieryDragons;
 import game.actions.PickSettingsAction;
-import game.actions.PlayGameAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,23 +23,23 @@ public class SettingsDisplay {
     private final JCheckBox dragonPirateCheckbox = new JCheckBox("  Dragon Pirate", true);
     private final JCheckBox ratRascalCheckbox = new JCheckBox("  Rat Rascal", false);
 
-    public SettingsDisplay(DisplayManager display, GameWindow gameWindow, Board board) {
-        initialise(display, gameWindow);
+    public SettingsDisplay(DisplayManager display, GameWindow window, Board board) {
+        initialise(display, window);
 
         //default values
         playerSlider.setValue(4);
         squareSlider.setValue(24);
 
-        updateSquareSlider(gameWindow, playerSlider.getValue());
+        updateSquareSlider(window, playerSlider.getValue());
 
-        playerSlider.addChangeListener(e -> updateSquareSlider(gameWindow, playerSlider.getValue()));
-        backButton.addActionListener(e -> display.displayTitleScreen(gameWindow.getWindow()));
+        playerSlider.addChangeListener(e -> updateSquareSlider(window, playerSlider.getValue()));
+        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
         startButton.addActionListener(e ->
             new PickSettingsAction(
                     FieryDragons.getPlayers()[0],
                     board,
                     display,
-                    gameWindow,
+                    window,
                     playerSlider.getValue(),
                     squareSlider.getValue(),
                     dragonPirateCheckbox.isSelected(),
@@ -51,21 +50,21 @@ public class SettingsDisplay {
 //                    FieryDragons.getPlayers()[0],
 //                    board,
 //                    display,
-//                    gameWindow)
+//                    window)
 //                .execute(board, display));
 
 
     }
 
-    public void initialise(DisplayManager display, GameWindow gameWindow) {
-        JFrame window = gameWindow.getWindow();
+    public void initialise(DisplayManager display, GameWindow window) {
+        JFrame frame = window.getFrame();
         settingsScreen.setPreferredSize(new Dimension(1200, 800));
         settingsScreen.setLayout(new GridBagLayout());
         settingsScreen.setBackground(Color.BLACK);
 
         // Add title label
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(gameWindow.getFont().deriveFont(TITLE_FONT_SIZE));
+        titleLabel.setFont(window.getFont().deriveFont(TITLE_FONT_SIZE));
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -91,13 +90,15 @@ public class SettingsDisplay {
         playerSlider.setPaintTicks(true);
         playerSlider.setPaintLabels(true);
         playerSlider.setSnapToTicks(true);
-        playerSlider.setLabelTable(labelSlider(gameWindow, 2, 8, 1));
+        playerSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        playerSlider.setLabelTable(labelSlider(window, 2, 8, 1));
 
         squareSlider.setMajorTickSpacing(1);
         squareSlider.setPaintTicks(true);
         squareSlider.setPaintLabels(true);
         squareSlider.setSnapToTicks(true);
-        squareSlider.setLabelTable(labelSlider(gameWindow, playerSlider.getValue() * 3, 27, 1));
+        squareSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
 
         // Add components to the settings screen
         constraints.fill = GridBagConstraints.BOTH;
@@ -107,34 +108,34 @@ public class SettingsDisplay {
         constraints.gridy++;
 
         constraints.gridy++;
-        settingsScreen.add(createLabel(gameWindow, "NUMBER OF PLAYERS: "), constraints);
+        settingsScreen.add(createLabel("NUMBER OF PLAYERS: ", window.getFont()), constraints);
         constraints.gridy++;
         settingsScreen.add(playerSlider, constraints);
 
         // Add square slider with label
         constraints.gridy++;
-        settingsScreen.add(createLabel(gameWindow, "SIZE OF THE VOLCANO: "), constraints);
+        settingsScreen.add(createLabel("SIZE OF THE VOLCANO: ", window.getFont()), constraints);
         constraints.gridy++;
         settingsScreen.add(squareSlider, constraints);
 
         // Add checkboxes
         constraints.gridy++;
-        settingsScreen.add(createLabel(gameWindow, "INCLUDE: "), constraints);
+        settingsScreen.add(createLabel("INCLUDE: ", window.getFont()), constraints);
 
         constraints.insets = new Insets(15, 20, 15, 0);
         constraints.gridy++;
         dragonPirateCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(dragonPirateCheckbox, constraints);
-        customiseCheckbox(dragonPirateCheckbox, gameWindow);
+        window.customiseCheckbox(dragonPirateCheckbox, window.getFont(), SETTINGS_FONT_SIZE);
         dragonPirateCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        dragonPirateCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
+        dragonPirateCheckbox.setFont(frame.getFont().deriveFont(SLIDER_FONT_SIZE));
 
         constraints.gridy++;
         ratRascalCheckbox.setForeground(Color.WHITE);
         settingsScreen.add(ratRascalCheckbox, constraints);
-        customiseCheckbox(ratRascalCheckbox, gameWindow);
+        window.customiseCheckbox(ratRascalCheckbox, window.getFont(), SETTINGS_FONT_SIZE);
         ratRascalCheckbox.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        ratRascalCheckbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
+        ratRascalCheckbox.setFont(frame.getFont().deriveFont(SLIDER_FONT_SIZE));
 
 
         // Add buttons
@@ -142,32 +143,31 @@ public class SettingsDisplay {
         constraints.gridwidth = 1;
         constraints.gridx = 0;
         constraints.anchor = GridBagConstraints.WEST;
-        display.customiseButton(gameWindow.getFont(), backButton, SETTINGS_FONT_SIZE);
+        window.customiseButton(backButton, window.getFont(), SETTINGS_FONT_SIZE);
         settingsScreen.add(backButton, constraints);
 
         constraints.gridx = 1;
         constraints.anchor = GridBagConstraints.EAST;
-        display.customiseButton(gameWindow.getFont(), startButton, SETTINGS_FONT_SIZE);
+        window.customiseButton(startButton, window.getFont(), SETTINGS_FONT_SIZE);
         settingsScreen.add(startButton, constraints);
 
-        window.add(settingsScreen);
+        frame.add(settingsScreen);
     }
 
-    private JLabel createLabel(GameWindow gameWindow, String text) {
+    private JLabel createLabel(String text, Font font) {
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE);
-        label.setFont(gameWindow.getFont().deriveFont(SETTINGS_FONT_SIZE));
+        label.setFont(font.deriveFont(SETTINGS_FONT_SIZE));
         return label;
     }
 
-
-    private Hashtable<Integer, JLabel> labelSlider(GameWindow gameWindow, int min, int max, int step) {
+    private Hashtable<Integer, JLabel> labelSlider(GameWindow window, int min, int max, int step) {
         Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
 
         for (int i = min; i <= max; i += step) {
             JLabel label = new JLabel(String.valueOf(i));
             label.setForeground(Color.WHITE);
-            label.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE));
+            label.setFont(window.getFont().deriveFont(SLIDER_FONT_SIZE));
             label.setHorizontalTextPosition(JLabel.CENTER);
             label.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
@@ -176,7 +176,7 @@ public class SettingsDisplay {
         return labelTable;
     }
 
-    private void updateSquareSlider(GameWindow gameWindow, int numPlayers) {
+    private void updateSquareSlider(GameWindow window, int numPlayers) {
         // Update the range of the square slider based on the number of players
         squareSlider.setMinimum(numPlayers * 3);
         squareSlider.setMaximum(27);
@@ -191,57 +191,8 @@ public class SettingsDisplay {
         }
 
 
-        squareSlider.setLabelTable(labelSlider(gameWindow, numPlayers * 3, 27, stepSize));
+        squareSlider.setLabelTable(labelSlider(window, numPlayers * 3, 27, stepSize));
 
-    }
-
-    private void customiseCheckbox(JCheckBox checkbox, GameWindow gameWindow) {
-        checkbox.setForeground(Color.WHITE);
-        checkbox.setBackground(Color.BLACK);
-        checkbox.setFont(gameWindow.getFont().deriveFont(SLIDER_FONT_SIZE + 2f));
-        checkbox.setIcon(createCheckboxIcon(false));
-        checkbox.setSelectedIcon(createCheckboxIcon(true));
-    }
-
-    private Icon createCheckboxIcon(boolean selected) {
-        return new Icon() {
-            private final int size = 24;
-
-            @Override
-            public void paintIcon(Component c, Graphics g, int x, int y) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                // Draw background
-                g2.setColor(Color.BLACK);
-                g2.fillRoundRect(x, y, size, size, 8, 8);
-
-                // Draw border
-                g2.setColor(Color.WHITE);
-                g2.setStroke(new BasicStroke(3));
-                g2.drawRoundRect(x, y, size - 1, size - 1, 8, 8);
-
-                if (selected) {
-                    // Draw checkmark
-                    g2.setColor(Color.WHITE);
-                    g2.setStroke(new BasicStroke(3));
-                    g2.drawLine(x + 4, y + 12, x + 10, y + 18);
-                    g2.drawLine(x + 10, y + 18, x + 20, y + 6);
-                }
-
-                g2.dispose();
-            }
-
-            @Override
-            public int getIconWidth() {
-                return size;
-            }
-
-            @Override
-            public int getIconHeight() {
-                return size;
-            }
-        };
     }
 
     public void showScreen(JFrame window) {

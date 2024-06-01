@@ -13,20 +13,23 @@ public class PickSettingsAction implements GameAction{
     private final boolean isRascalChecked;
 
 
-    public PickSettingsAction(Player player, Board board, DisplayManager display, GameWindow gameWindow, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
+    public PickSettingsAction(Player player, Board board, DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
         this.numPlayers = numPlayers;
         this.numSquares = numSquares;
         this.isPirateChecked = isPirateChecked;
         this.isRascalChecked = isRascalChecked;
-        FieryDragons.setPlayers(numPlayers);
-        //TODO: add board updates for others
+
 
         //re-create board
-        display.displayGameScreen(gameWindow.getWindow());
+//        display.displayGameScreen(window.getFrame());
+        new PlayGameAction(player, board, display, window).execute(board, display);
     }
 
     @Override
     public GameAction execute(Board board, DisplayManager display) {
+        FieryDragons.setPlayers(numPlayers);
+        //TODO: add board updates for others
+
         return null;
     }
 }

@@ -15,7 +15,8 @@ import java.io.IOException;
  * A Facade for interacting with the game Displays and Window
  */
 public class DisplayManager {
-    private final GameWindow gameWindow;
+    private final GameWindow window;
+    private final GameDisplay gameDisplay;
     private final TitleDisplay titleDisplay;
     private final SettingsDisplay settingsDisplay;
     private final VolcanoDisplay volcanoDisplay;
@@ -27,19 +28,19 @@ public class DisplayManager {
     /**
      * Constructor for the DisplayManager.
      *
-     * @param gameWindow the GameWindow instance controlled by the DisplayManager
      * @param board      the Board instance representing the game board
      * @param players    an array of Player instances representing the players in the game
      */
-    public DisplayManager(GameWindow gameWindow, Board board, Player[] players) throws IOException {
-        this.gameWindow = gameWindow;
-        this.titleDisplay = new TitleDisplay(this, gameWindow, board);
-        this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
-        this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
-        this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
-        this.inputDisplay = new InputDisplay(gameWindow);
-        this.settingsDisplay = new SettingsDisplay(this, gameWindow, board);
-        this.winnerDisplay = new WinnerDisplay(gameWindow);
+    public DisplayManager(GameWindow window, Board board, Player[] players) throws IOException, FontFormatException {
+        this.window = window;
+        this.gameDisplay = new GameDisplay(window);
+        this.titleDisplay = new TitleDisplay(this, window, board);
+        this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameDisplay);
+        this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
+        this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
+        this.inputDisplay = new InputDisplay(gameDisplay);
+        this.settingsDisplay = new SettingsDisplay(this, window, board);
+        this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
     /**
@@ -95,53 +96,28 @@ public class DisplayManager {
      */
     public void displayWin(Player player) {
         winnerDisplay.displayWinner(player);
-        gameWindow.showWinnerLabel();
+        gameDisplay.showWinnerLabel(window.getFrame());
     }
 
-    public void displayTitleScreen(JFrame window) {
-        gameWindow.hideScreen();
-        settingsDisplay.hideScreen(window);
-        titleDisplay.showScreen(window);
+    public void displayTitleScreen(JFrame frame) {
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        titleDisplay.showScreen(frame);
 
     }
 
-    public void displayGameScreen(JFrame window) {
-        titleDisplay.hideScreen(window);
-        settingsDisplay.hideScreen(window);
-        gameWindow.showScreen();
+    public void displayGameScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        gameDisplay.showScreen(frame);
     }
 
-    public void displaySettingsScreen(JFrame window) {
-        titleDisplay.hideScreen(window);
-        gameWindow.hideScreen();
-        settingsDisplay.showScreen(window);
+    public void displaySettingsScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.showScreen(frame);
     }
 
-    public void customiseButton(Font font, JButton button, float fontSize) {
-        button.setFont(font.deriveFont(fontSize));
-        button.setForeground(Color.WHITE);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
-        button.setBorder(emptyBorder);
 
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
-                button.setBorder(lineBorder);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                button.setBorder(emptyBorder);
-            }
-        });
-    }
-
-//    public GameWindow getWindow() {
-//        return gameWindow;
-//    }
 
 }

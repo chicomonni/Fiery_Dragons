@@ -16,7 +16,7 @@ public class Chit {
      * Constructor used by ChitFactory
      *
      * @param displayChar   the single character representation of the chit, for the Volcano
-     * @param name          the name of this Chit, for the GameWindow
+     * @param name          the name of this Chit, for the GameDisplay
      * @param displayDetail the detailed representation of the chit, for the Caves
      * @param displayCard   the card representation of the chit, for the ChitCards
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)

@@ -4,6 +4,7 @@ import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
 import game.displays.DisplayManager;
+import game.displays.GameDisplay;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
@@ -77,11 +78,12 @@ public class FieryDragons {
         createBoard();
         createPlayers();
 
-        GameWindow gameWindow = new GameWindow();
-        DisplayManager display = new DisplayManager(gameWindow, board, players);
+//        GameDisplay gameDisplay = new GameDisplay();
+        GameWindow window = new GameWindow();
+        DisplayManager display = new DisplayManager(window, board, players);
 
         //start new game
-        display.displayTitleScreen(gameWindow.getWindow());
+        display.displayTitleScreen(window.getFrame());
 
     }
 

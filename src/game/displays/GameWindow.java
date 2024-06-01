@@ -1,29 +1,19 @@
 package game.displays;
 
-import game.FieryDragons;
-
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
-
-/**
- * The Fiery Dragon game window
- */
 public class GameWindow {
-    public static final float ASCII_FONT_SIZE = 8f;
-    public static final float FOOTER_FONT_SIZE = 16f;
+
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
-
-    private final JLayeredPane volcano = new JLayeredPane();
-    private final JPanel chitCards = new JPanel();
-    private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
-    private final JLabel winner = new JLabel();
-    private final JPanel separator = new JPanel();
 
     Font font = Font.createFont(
             Font.TRUETYPE_FONT,
@@ -31,183 +21,97 @@ public class GameWindow {
     );
 
 
-    /**
-     * Constructor
-     */
     public GameWindow() throws IOException, FontFormatException {
-        try {
-            initialise();
-            hideScreen();
-        } catch (IOException | FontFormatException e) {
-            throw new RuntimeException(e);
-        }
+        initialise();
     }
 
-    /**
-     * Method to initialise window and its contents
-     *
-     * @throws IOException         if font file cannot be accessed
-     * @throws FontFormatException if font file doesn't contain correct data
-     */
-    private void initialise() throws IOException, FontFormatException {
-        // Adjust default font on text components
-        UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
-        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
-
-        // Configure the window container
-        Container container = window.getContentPane();
-        container.setLayout(new GridBagLayout());
-        container.setBackground(Color.BLACK);
-
-        initialiseGameComponents();
-
-        // Finalize window setup
-        window.setPreferredSize(new Dimension(1400, 900));
-        window.pack();
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-    }
-
-    private void initialiseGameComponents() {
-        Container container = window.getContentPane();
-        container.setLayout(new GridBagLayout());
-        container.setBackground(Color.BLACK);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-
-        // Configure and add the Volcano component to the window
-        constraints.insets = new Insets(PADDING, PADDING, 0, PADDING / 2);
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-
-        // Initialise container for the Volcano and add the component to the window
-        volcano.setPreferredSize(new Dimension(
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
-        ));
-        container.add(volcano, constraints);
-
-        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING + 20);
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-
-        // Initialise container for the Chit Cards and add the component to the window
-        chitCards.setOpaque(false);
-        chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5 + 14), // extra padding required for windows
-                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
-        ));
-        chitCards.setLayout(new GridBagLayout());
-        container.add(chitCards, constraints);
-
-        // Add a separator panel
-        constraints.insets = new Insets(PADDING, 4 * PADDING, PADDING, 4 * PADDING);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
-
-        separator.setPreferredSize(new Dimension(0, PADDING / 2));
-        container.add(separator, constraints);
-
-        constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
-        constraints.gridy = 2;
-
-        // Initialise container for the input and add the component to the window
-        footer.setOpaque(false);
-        footer.setBackground(Color.RED);
-        footer.setLayout(new GridBagLayout());
-        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
-        container.add(footer, constraints);
-
-        // Initialise and configure the winner label
-        winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
-        winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
-        winner.setBounds(50, 50, 200, 50);
+    private void initialise() {
 
     }
 
-    /**
-     * Getter for the swing component that displays the Volcano
-     *
-     * @return swing component that displays the Volcano
-     */
-    public JLayeredPane getVolcanoComponent() {
-        return volcano;
-    }
-
-    /**
-     * Getter for the swing component that displays the ChitCards
-     *
-     * @return swing component that displays the ChitCards
-     */
-    public JPanel getChitCardsComponent() {
-        return chitCards;
-    }
-
-    /**
-     * Getter for the swing component that holds the input field
-     *
-     * @return swing component that holds the input field
-     */
-    public JPanel getFooter() {
-        return footer;
-    }
-
-    /**
-     * Getter for the winner JLabel
-     *
-     * @return the winner JLabel
-     */
-    public JLabel getWinnerDisplay() {
-        return winner;
-    }
-
-    /**
-     * Method to display the winner of the game
-     */
-    public void showWinnerLabel() {
-        Container container = window.getContentPane();
-        // Remove all components from the container and add the winner label
-        container.removeAll();
-        container.add(winner);
-
-        // Revalidate and repaint the container
-        container.revalidate();
-        container.repaint();
-    }
-
-    public void showScreen() {
-        volcano.setVisible(true);
-        chitCards.setVisible(true);
-        separator.setVisible(true);
-        footer.setVisible(true);
-
-        window.revalidate();
-        window.repaint();
-    }
-
-    public void hideScreen() {
-        volcano.setVisible(false);
-        chitCards.setVisible(false);
-        separator.setVisible(false);
-        footer.setVisible(false);
-
-        window.revalidate();
-        window.repaint();
-    }
-
-    public JFrame getWindow() {
+    public JFrame getFrame() {
         return window;
+    }
+
+    public void closeWindow() {
+        window.dispose();
     }
 
     public Font getFont() {
         return font;
     }
 
-    public void closeWindow() {
-        window.dispose();
+    public void customiseButton(JButton button, Font font, float fontSize) {
+        button.setFont(font.deriveFont(fontSize));
+        button.setForeground(Color.WHITE);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
+        button.setBorder(emptyBorder);
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
+                button.setBorder(lineBorder);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                button.setBorder(emptyBorder);
+            }
+        });
     }
+
+    public void customiseCheckbox(JCheckBox checkbox, Font font, float fontSize) {
+        checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        checkbox.setForeground(Color.WHITE);
+        checkbox.setBackground(Color.BLACK);
+        checkbox.setFont(font.deriveFont(fontSize));
+        checkbox.setIcon(createCheckboxIcon(false));
+        checkbox.setSelectedIcon(createCheckboxIcon(true));
+    }
+
+    private Icon createCheckboxIcon(boolean selected) {
+        return new Icon() {
+            private final int size = 24;
+
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Draw background
+                g2.setColor(Color.BLACK);
+                g2.fillRoundRect(x, y, size, size, 8, 8);
+
+                // Draw border
+                g2.setColor(Color.WHITE);
+                g2.setStroke(new BasicStroke(3));
+                g2.drawRoundRect(x, y, size - 1, size - 1, 8, 8);
+
+                if (selected) {
+                    // Draw checkmark
+                    g2.setColor(Color.WHITE);
+                    g2.setStroke(new BasicStroke(3));
+                    g2.drawLine(x + 4, y + 12, x + 10, y + 18);
+                    g2.drawLine(x + 10, y + 18, x + 20, y + 6);
+                }
+
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return size;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return size;
+            }
+        };
+    }
+
 }

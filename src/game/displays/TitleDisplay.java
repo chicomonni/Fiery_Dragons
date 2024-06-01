@@ -2,14 +2,10 @@ package game.displays;
 
 import game.Board;
 import game.FieryDragons;
-import game.actions.PickSettingsAction;
 import game.actions.PlayGameAction;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -30,20 +26,20 @@ public class TitleDisplay {
     /**
      * Constructor
      *
-     * @param gameWindow the GameWindow instance this class affects
+     * @param window the GameWindow instance this class affects
      */
-    public TitleDisplay(DisplayManager display, GameWindow gameWindow, Board board) throws IOException {
-        initialise(display, gameWindow, board);
+    public TitleDisplay(DisplayManager display, GameWindow window, Board board) throws IOException {
+        initialise(display, window, board);
     }
 
-    private void initialise(DisplayManager display, GameWindow gameWindow, Board board) throws IOException {
+    private void initialise(DisplayManager display, GameWindow window, Board board) throws IOException {
 
-        JFrame window = gameWindow.getWindow();
+        JFrame frame = window.getFrame();
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
 
         // Initialize and configure the logo label
-        logo.setFont(gameWindow.getFont().deriveFont(LOGO_FONT_SIZE));
+        logo.setFont(window.getFont().deriveFont(LOGO_FONT_SIZE));
         logo.setEditable(false);
         logo.setBackground(Color.BLACK);
         logo.setForeground(Color.WHITE);
@@ -67,16 +63,16 @@ public class TitleDisplay {
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        display.customiseButton(gameWindow.getFont(), newGameButton, BUTTON_FONT_SIZE);
-        display.customiseButton(gameWindow.getFont(), continueGameButton, BUTTON_FONT_SIZE);
-        display.customiseButton(gameWindow.getFont(), exitGameButton, BUTTON_FONT_SIZE);
+        window.customiseButton(newGameButton, window.getFont(), BUTTON_FONT_SIZE);
+        window.customiseButton(continueGameButton, window.getFont(), BUTTON_FONT_SIZE);
+        window.customiseButton(exitGameButton, window.getFont(), BUTTON_FONT_SIZE);
 
         // Add action listeners
         //TODO: change to pickSettingsAction later
-        newGameButton.addActionListener(e -> display.displaySettingsScreen(window)); //new PickSettingsAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame)); //new PickSettingsAction(FieryDragons.getPlayers()[0], board, display, gameDisplay).execute(board, display));
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, gameWindow).execute(board, display));
-        exitGameButton.addActionListener(e -> gameWindow.closeWindow()); //change to exitGame() method??
+        continueGameButton.addActionListener(e -> new PlayGameAction(FieryDragons.getPlayers()[0], board, display, window).execute(board, display));
+        exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
 
         buttonPanel.add(newGameButton);
         buttonPanel.add(continueGameButton);
@@ -85,7 +81,7 @@ public class TitleDisplay {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
-        window.getContentPane().add(titleScreen);
+        frame.getContentPane().add(titleScreen);
     }
 
     public String readTitleDisplay() throws IOException {
@@ -98,8 +94,6 @@ public class TitleDisplay {
         }
         return logoText.toString();
     }
-
-
 
     public void showScreen(JFrame window) {
         titleScreen.setVisible(true);

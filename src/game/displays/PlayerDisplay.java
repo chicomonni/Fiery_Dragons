@@ -29,11 +29,11 @@ public class PlayerDisplay {
      *
      * @param players    the array of players in the game
      * @param volcano    the Volcano instance used by the game
-     * @param gameWindow the GameWindow instance this class affects
+     * @param gameDisplay the GameDisplay instance this class affects
      */
-    public PlayerDisplay(Player[] players, Volcano volcano, GameWindow gameWindow) {
+    public PlayerDisplay(Player[] players, Volcano volcano, GameDisplay gameDisplay) {
         this.volcano = volcano;
-        this.volcanoContainer = gameWindow.getVolcanoComponent();
+        this.volcanoContainer = gameDisplay.getVolcanoComponent();
 
         for (Player player : players) {
             update(player);
