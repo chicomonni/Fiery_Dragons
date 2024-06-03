@@ -27,7 +27,7 @@ public class GameWindow {
     /**
      * Constructor for GameWindow.
      *
-     * @throws IOException          if the font file cannot be read
+     * @throws IOException         if the font file cannot be read
      * @throws FontFormatException if the font format is incorrect
      */
     public GameWindow() throws IOException, FontFormatException {
@@ -65,17 +65,23 @@ public class GameWindow {
      * @param fontSize the font size for the button text
      */
     public void customiseButton(JButton button, float fontSize) {
+        int padding = 15;
         button.setFont(font.deriveFont(fontSize));
         button.setForeground(Color.WHITE);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        Border emptyBorder = BorderFactory.createEmptyBorder(15, 0, 15, 0);
+        Border emptyBorder = BorderFactory.createEmptyBorder(padding, padding, padding, padding);
         button.setBorder(emptyBorder);
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                Border lineBorder = BorderFactory.createLineBorder(Color.WHITE, 4, true);
+                int thickness = 3;
+                int rem_padding = padding - thickness;
+                Border lineBorder = BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(Color.WHITE, thickness, false),
+                        BorderFactory.createEmptyBorder(rem_padding, rem_padding, rem_padding, rem_padding)
+                );
                 button.setBorder(lineBorder);
             }
 
@@ -97,7 +103,6 @@ public class GameWindow {
         checkbox.setFont(font.deriveFont(fontSize));
         checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         checkbox.setForeground(Color.WHITE);
-        checkbox.setBackground(Color.BLACK);
         checkbox.setIcon(createCheckboxIcon(false));
         checkbox.setSelectedIcon(createCheckboxIcon(true));
     }
@@ -110,28 +115,19 @@ public class GameWindow {
      */
     private Icon createCheckboxIcon(boolean selected) {
         return new Icon() {
-            private final int size = 24;
+            private final int font_size = 16;
 
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Graphics g2 = g.create();
 
-                // Draw background
-                g2.setColor(Color.BLACK);
-                g2.fillRoundRect(x, y, size, size, 8, 8);
-
-                // Draw border
                 g2.setColor(Color.WHITE);
-                g2.setStroke(new BasicStroke(3));
-                g2.drawRoundRect(x, y, size - 1, size - 1, 8, 8);
+                g2.setFont(font.deriveFont((float) font_size));
 
                 if (selected) {
-                    // Draw checkmark
-                    g2.setColor(Color.WHITE);
-                    g2.setStroke(new BasicStroke(3));
-                    g2.drawLine(x + 4, y + 12, x + 10, y + 18);
-                    g2.drawLine(x + 10, y + 18, x + 20, y + 6);
+                    g2.drawString("[X]", x, y + font_size);
+                } else {
+                    g2.drawString("[ ]", x, y + font_size);
                 }
 
                 g2.dispose();
@@ -139,12 +135,12 @@ public class GameWindow {
 
             @Override
             public int getIconWidth() {
-                return size;
+                return font_size * 3;
             }
 
             @Override
             public int getIconHeight() {
-                return size;
+                return font_size;
             }
         };
     }
