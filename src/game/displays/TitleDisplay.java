@@ -1,6 +1,5 @@
 package game.displays;
 
-import game.Board;
 import game.FieryDragons;
 
 import javax.swing.*;
@@ -30,11 +29,10 @@ public class TitleDisplay {
      * @param fieryDragons the FieryDragons instance to start the game
      * @param display      the DisplayManager handling game displays
      * @param window       the GameWindow instance this class affects
-     * @param board        the game board instance
      * @throws IOException if the logo file cannot be read
      */
-    public TitleDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
-        initialise(fieryDragons, display, window, board);
+    public TitleDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) throws IOException {
+        initialise(fieryDragons, display, window);
     }
 
     /**
@@ -43,32 +41,28 @@ public class TitleDisplay {
      * @param fieryDragons the FieryDragons instance to start the game
      * @param display      the DisplayManager handling game displays
      * @param window       the GameWindow instance this class affects
-     * @param board        the game board instance
      * @throws IOException if the logo file cannot be read
      */
-    private void initialise(FieryDragons fieryDragons, DisplayManager display, GameWindow window, Board board) throws IOException {
-
+    private void initialise(FieryDragons fieryDragons, DisplayManager display, GameWindow window) throws IOException {
         JFrame frame = window.getFrame();
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
 
         // Initialize and configure the logo label
-        logo.setFont(window.getFont().deriveFont(LOGO_FONT_SIZE));
+        logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
         logo.setEditable(false);
         logo.setBackground(Color.BLACK);
         logo.setForeground(Color.WHITE);
         logo.setText(readTitleDisplay());
 
-        JScrollPane logoPane = new JScrollPane(logo);
-        logoPane.setBorder(BorderFactory.createEmptyBorder());
-
-        separator.setPreferredSize(new Dimension(0, 5));
+        separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
 
         // Create titlePanel and add components to it
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
-        titlePanel.add(logoPane, BorderLayout.CENTER);
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
+        titlePanel.add(logo, BorderLayout.CENTER);
         titlePanel.add(separator, BorderLayout.SOUTH);
         titleScreen.add(titlePanel, BorderLayout.CENTER);
 
@@ -77,9 +71,9 @@ public class TitleDisplay {
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        window.customiseButton(newGameButton, BUTTON_FONT_SIZE);
-        window.customiseButton(continueGameButton, BUTTON_FONT_SIZE);
-        window.customiseButton(exitGameButton, BUTTON_FONT_SIZE);
+        window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
 
         // Add action listeners
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
