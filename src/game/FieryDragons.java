@@ -26,12 +26,29 @@ public class FieryDragons {
     public static final int CARD_HEIGHT = 16;
     private static final String SQUARE_SRC = "S0w*SSw**w0*0S0*wS0w0S*w";
     private static final String MAX_CAVE_SRC = "S*w0f39a";
-    private static String CAVE_SRC = "S*w0";
     private static final String CARD_SRC = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private static String CAVE_SRC = "S*w0";
     private static int NUM_PLAYERS = 4;
+    private static Player[] players;
     private final ChitFactory chitFactory = new ChitFactory();
     private Board board;
-    private static Player[] players;
+
+    /**
+     * Sets the number of players and adjusts the cave source string accordingly.
+     *
+     * @param numPlayers the number of players
+     */
+    private static void setPlayers(int numPlayers) {
+        NUM_PLAYERS = numPlayers;
+        CAVE_SRC = "";
+        StringBuilder caveSrcBuilder = new StringBuilder();
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            caveSrcBuilder.append(MAX_CAVE_SRC.charAt(i % MAX_CAVE_SRC.length()));
+        }
+        CAVE_SRC = caveSrcBuilder.toString();
+
+    }
 
     /**
      * Creates the chits used in the game with specific strategies.
@@ -81,12 +98,12 @@ public class FieryDragons {
     /**
      * Starts the game by initializing the game window, display manager, and displaying the title screen.
      *
-     * @throws IOException if an input or output exception occurs
+     * @throws IOException         if an input or output exception occurs
      * @throws FontFormatException if a font format exception occurs
      */
     public void start() throws IOException, FontFormatException {
         GameWindow window = new GameWindow();
-        DisplayManager display = new DisplayManager(this, window, board, players);
+        DisplayManager display = new DisplayManager(this, window);
 
         //start new game
         display.displayTitleScreen(window.getFrame());
@@ -94,27 +111,10 @@ public class FieryDragons {
     }
 
     /**
-     * Sets the number of players and adjusts the cave source string accordingly.
-     *
-     * @param numPlayers the number of players
-     */
-    private static void setPlayers(int numPlayers) {
-        NUM_PLAYERS = numPlayers;
-        CAVE_SRC = "";
-        StringBuilder caveSrcBuilder = new StringBuilder();
-
-        for (int i = 0; i < NUM_PLAYERS; i++) {
-            caveSrcBuilder.append(MAX_CAVE_SRC.charAt(i % MAX_CAVE_SRC.length()));
-        }
-        CAVE_SRC = caveSrcBuilder.toString();
-
-    }
-
-    /**
      * Initializes the game components and starts the game.
      *
      * @param display the display manager handling game displays
-     * @param window the game window
+     * @param window  the game window
      */
     public void playGame(DisplayManager display, GameWindow window) {
         createChits();
@@ -130,10 +130,10 @@ public class FieryDragons {
     /**
      * Configures game settings based on user selections and starts the game.
      *
-     * @param display the display manager handling game displays
-     * @param window the game window
-     * @param numPlayers the number of players
-     * @param numSquares the number of squares on the board
+     * @param display         the display manager handling game displays
+     * @param window          the game window
+     * @param numPlayers      the number of players
+     * @param numSquares      the number of squares on the board
      * @param isPirateChecked whether the pirate option is selected
      * @param isRascalChecked whether the rascal option is selected
      */

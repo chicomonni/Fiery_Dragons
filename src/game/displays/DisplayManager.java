@@ -29,15 +29,13 @@ public class DisplayManager {
      *
      * @param fieryDragons the FieryDragons instance representing the game
      * @param window       the GameWindow instance representing the game window
-     * @param board        the Board instance representing the game board
-     * @param players      an array of Player instances representing the players in the game
      * @throws IOException         if there is an error accessing the font file
      * @throws FontFormatException if the font file does not contain valid data
      */
-    public DisplayManager(FieryDragons fieryDragons, GameWindow window, Board board, Player[] players) throws IOException, FontFormatException {
+    public DisplayManager(FieryDragons fieryDragons, GameWindow window) throws IOException, FontFormatException {
         this.window = window;
-        this.titleDisplay = new TitleDisplay(fieryDragons, this, window, board);
-        this.settingsDisplay = new SettingsDisplay(fieryDragons,this, window, board);
+        this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
+        this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
         this.gameDisplay = new GameDisplay(window);
     }
 
@@ -105,6 +103,7 @@ public class DisplayManager {
 
     /**
      * Displays the winner of the game.
+     *
      * @param player the Player who has won the game
      */
     public void displayWin(Player player) {
