@@ -12,8 +12,6 @@ import java.io.IOException;
  * and the winner label.
  */
 public class GameDisplay {
-    public static final float ASCII_FONT_SIZE = 8f;
-    public static final float FOOTER_FONT_SIZE = 16f;
     private final JLayeredPane volcano = new JLayeredPane();
     private final JPanel chitCards = new JPanel();
     private final JPanel footer = new JPanel();
@@ -44,11 +42,6 @@ public class GameDisplay {
      * @throws FontFormatException if the font file contains incorrect data
      */
     private void initialise(GameWindow window) throws IOException, FontFormatException {
-        // Adjust default font on text components
-        UIManager.put("TextArea.font", window.getFont().deriveFont(ASCII_FONT_SIZE));
-        UIManager.put("TextField.font", window.getFont().deriveFont(FOOTER_FONT_SIZE));
-
-
         // Configure the window container
         Container container = window.getFrame().getContentPane();
         container.setLayout(new GridBagLayout());
@@ -69,8 +62,8 @@ public class GameDisplay {
 
         // Initialise container for the Volcano and add the component to the window
         volcano.setPreferredSize(new Dimension(
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
+                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
+                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
         ));
         container.add(volcano, constraints);
 
@@ -86,8 +79,8 @@ public class GameDisplay {
         // Initialise container for the Chit Cards and add the component to the window
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
-                (int) (FieryDragons.CARD_HEIGHT * ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
+                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
+                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
@@ -117,22 +110,13 @@ public class GameDisplay {
         footer.setOpaque(false);
         footer.setBackground(Color.RED);
         footer.setLayout(new GridBagLayout());
-        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + GameWindow.PADDING)));
+        footer.setPreferredSize(new Dimension(1, (int) (GameWindow.BODY_FONT_SIZE * 3 + GameWindow.PADDING)));
         container.add(footer, constraints);
 
         // Initialise and configure the winner label
-        winner.setFont(window.getFont().deriveFont(FOOTER_FONT_SIZE)); // Use the same font
+        winner.setFont(window.getFont().deriveFont(GameWindow.BODY_FONT_SIZE)); // Use the same font
         winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
         winner.setBounds(50, 50, 200, 50);
-
-        // Finalize window setup
-        JFrame frame = window.getFrame();
-        frame.setPreferredSize(new Dimension(1400, 900));
-        frame.pack();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 
     /**

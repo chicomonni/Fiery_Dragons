@@ -12,10 +12,6 @@ import java.util.Hashtable;
  * where players can configure game options before starting the game.
  */
 public class SettingsDisplay {
-    private static final float TITLE_FONT_SIZE = 50f;
-    private static final float SETTINGS_FONT_SIZE = 28f;
-    private static final float SLIDER_FONT_SIZE = 16f;
-
     private final JPanel settingsScreen = new JPanel();
     private final JLabel titleLabel = new JLabel("SETTINGS");
     private final JPanel separator = new JPanel();

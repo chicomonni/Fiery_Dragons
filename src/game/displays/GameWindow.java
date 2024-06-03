@@ -13,6 +13,10 @@ import java.util.Objects;
  * including the customization of buttons and checkboxes used in the game interface.
  */
 public class GameWindow {
+    public static final float ASCII_FONT_SIZE = 8f;
+    public static final float TITLE_FONT_SIZE = 32f;
+    public static final float HEADING_FONT_SIZE = 18f;
+    public static final float BODY_FONT_SIZE = 16f;
 
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";

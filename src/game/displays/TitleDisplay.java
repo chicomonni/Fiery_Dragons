@@ -16,8 +16,6 @@ import java.util.Scanner;
  */
 public class TitleDisplay {
     private static final String LOGO_PATH = "/assets/logo.txt";
-    private static final float LOGO_FONT_SIZE = 14f;
-    public static final float BUTTON_FONT_SIZE = 26f;
     private final JPanel titleScreen = new JPanel();
     private final JPanel separator = new JPanel();
     private final JTextArea logo = new JTextArea();

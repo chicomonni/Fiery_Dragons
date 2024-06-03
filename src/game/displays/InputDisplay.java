@@ -89,7 +89,7 @@ public class InputDisplay {
         JTextField name = new JTextField(player.getName().toUpperCase() + ":", player.getName().length() + 1);
         initialiseTextField(name);
         name.setForeground(player.getColour());
-        name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameDisplay.FOOTER_FONT_SIZE));
+        name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.BODY_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
         promptContainer.revalidate();
 
