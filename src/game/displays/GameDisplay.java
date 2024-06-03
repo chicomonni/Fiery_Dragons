@@ -24,7 +24,7 @@ public class GameDisplay {
      * Constructor.
      *
      * @param window the GameWindow instance
-     * @throws IOException if the font file cannot be accessed
+     * @throws IOException         if the font file cannot be accessed
      * @throws FontFormatException if the font file contains incorrect data
      */
     public GameDisplay(GameWindow window) throws IOException, FontFormatException {
@@ -51,9 +51,6 @@ public class GameDisplay {
 
         // Configure the window container
         Container container = window.getFrame().getContentPane();
-        container.setLayout(new GridBagLayout());
-        container.setBackground(Color.BLACK);
-
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
