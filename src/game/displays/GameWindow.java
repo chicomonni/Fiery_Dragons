@@ -116,31 +116,31 @@ public class GameWindow {
         checkbox.setFont(font.deriveFont(fontSize));
         checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         checkbox.setForeground(Color.WHITE);
-        checkbox.setIcon(createCheckboxIcon(false));
-        checkbox.setSelectedIcon(createCheckboxIcon(true));
+        checkbox.setIcon(createCheckboxIcon(false, fontSize));
+        checkbox.setSelectedIcon(createCheckboxIcon(true, fontSize));
     }
 
     /**
      * Creates an Icon for a checkbox with a custom appearance.
      *
-     * @param selected true if the checkbox is selected, false otherwise
+     * @param selected  true if the checkbox is selected, false otherwise
+     * @param font_size the font size of the checkbox
      * @return the customized Icon for the checkbox
      */
-    private Icon createCheckboxIcon(boolean selected) {
+    private Icon createCheckboxIcon(boolean selected, float font_size) {
         return new Icon() {
-            private final int font_size = 16;
-
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 Graphics g2 = g.create();
 
                 g2.setColor(Color.WHITE);
-                g2.setFont(font.deriveFont((float) font_size));
+                g2.setFont(font.deriveFont(font_size));
 
                 if (selected) {
-                    g2.drawString("[X]", x, y + font_size);
+                    // -2 for visual adjustment
+                    g2.drawString("[X]", x, (int) (y + font_size - 2));
                 } else {
-                    g2.drawString("[ ]", x, y + font_size);
+                    g2.drawString("[ ]", x, (int) (y + font_size - 2));
                 }
 
                 g2.dispose();
@@ -148,12 +148,12 @@ public class GameWindow {
 
             @Override
             public int getIconWidth() {
-                return font_size * 3;
+                return (int) (font_size * 3);
             }
 
             @Override
             public int getIconHeight() {
-                return font_size;
+                return (int) font_size - 2;
             }
         };
     }
