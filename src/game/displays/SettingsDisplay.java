@@ -229,6 +229,8 @@ public class SettingsDisplay {
      */
     public void showScreen(JFrame window) {
         settingsScreen.setVisible(true);
+        window.pack();
+        window.setLocationRelativeTo(null);
         window.revalidate();
         window.repaint();
     }

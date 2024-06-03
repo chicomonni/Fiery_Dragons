@@ -124,7 +124,8 @@ public class TitleDisplay {
      */
     public void showScreen(JFrame window) {
         titleScreen.setVisible(true);
-
+        window.pack();
+        window.setLocationRelativeTo(null);
         window.revalidate();
         window.repaint();
     }

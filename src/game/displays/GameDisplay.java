@@ -198,6 +198,8 @@ public class GameDisplay {
         separator.setVisible(true);
         footer.setVisible(true);
 
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.revalidate();
         frame.repaint();
     }
