@@ -188,7 +188,7 @@ public class InputDisplay {
         }
 
         if (input.toLowerCase().strip().equals("continue game")) {
-            MainMenu.startGameFromSave();
+            MainMenu.continueGame();
             return new NextTurnGameAction(player);
         }
 

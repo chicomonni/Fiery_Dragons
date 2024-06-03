@@ -9,8 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable {
     private final Color colour;
     private final char displayChar = '@';
     private final String name;

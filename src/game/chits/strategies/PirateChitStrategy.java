@@ -2,11 +2,13 @@ package game.chits.strategies;
 
 import game.chits.Chit;
 
+import java.io.Serializable;
+
 /**
  * Concrete strategy class for a pirate Chit. Game rule: pirate Chits move the Player backwards no matter the Chit
  * they're standing on
  */
-public class PirateChitStrategy implements ChitStrategy {
+public class PirateChitStrategy implements ChitStrategy, Serializable {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *

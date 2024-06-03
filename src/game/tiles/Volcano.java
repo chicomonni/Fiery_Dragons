@@ -3,6 +3,7 @@ package game.tiles;
 import game.chits.Chit;
 import game.chits.ChitFactory;
 
+import java.io.Serializable;
 import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Class representing the Volcano
  */
-public class Volcano {
+public class Volcano implements Serializable {
     private final char[][] ASCIIRep;
     private List<Square> squares;
     private List<Cave> caves;

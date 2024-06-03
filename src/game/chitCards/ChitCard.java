@@ -7,13 +7,14 @@ import game.Player;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Class used to represent a ChitCard in the game.
  */
-public class ChitCard {
+public class ChitCard implements Serializable {
     private final char[][] back;
     private final char[][] front;
     private final Chit chit;

@@ -7,13 +7,14 @@ import game.actions.InvalidGameAction;
 import game.chits.Chit;
 import game.chits.ChitFactory;
 
+import java.io.Serializable;
 import java.security.KeyException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ChitCardArray {
+public class ChitCardArray implements Serializable {
     private List<ChitCard> chitCards;
 
     /**

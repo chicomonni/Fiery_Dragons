@@ -84,8 +84,21 @@ public class FieryDragons implements Serializable {
     }
 
     public void continueGame(FieryDragons data) {
-        this.board = data.board;
-        this.players = data.players;
-        this.chitFactory = data.chitFactory;
+        System.out.println(data.getPlayers()[0].getPosition());
+        this.board = data.getBoard();
+        this.players = data.getPlayers();
+        this.chitFactory = data.getChitFactory();
+    }
+
+    public ChitFactory getChitFactory() {
+        return chitFactory;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Player[] getPlayers() {
+        return players;
     }
 }

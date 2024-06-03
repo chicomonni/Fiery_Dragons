@@ -10,6 +10,7 @@ import game.tiles.Volcano;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.security.KeyException;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,7 @@ import java.util.Objects;
 /**
  * Class representing Fiery Dragon Board
  */
-public class Board {
+public class Board implements Serializable {
     private final Volcano volcano;
     private final ChitCardArray chitCards = new ChitCardArray();
 

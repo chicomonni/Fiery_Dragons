@@ -1,7 +1,5 @@
 package game;
 
-import game.displays.GameWindow;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -24,11 +22,11 @@ public class MainMenu {
 
 
     public MainMenu() {
-        try {
-            initialise();
-        } catch (IOException | FontFormatException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            initialise();
+//        } catch (IOException | FontFormatException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     private void initialise() throws IOException, FontFormatException {
@@ -60,7 +58,6 @@ public class MainMenu {
     }
 
     public void newGame() {
-        window.dispose();
         fieryDragons.start();
     }
 
@@ -98,9 +95,10 @@ public class MainMenu {
 
     }
 
-    public static void startGameFromSave() {
+    public static void continueGame() {
         FieryDragons data = loadGame();
-//        fieryDragons.continueGame(data);
+//        System.out.println(data);
+        fieryDragons.continueGame(data);
     }
 
 
