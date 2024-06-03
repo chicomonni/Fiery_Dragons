@@ -35,6 +35,15 @@ public class GameWindow {
      * @throws FontFormatException if the font format is incorrect
      */
     public GameWindow() throws IOException, FontFormatException {
+        // Adjust default font on text components
+        UIManager.put("TextArea.font", font.deriveFont(GameWindow.ASCII_FONT_SIZE));
+        UIManager.put("TextField.font", font.deriveFont(GameWindow.BODY_FONT_SIZE));
+
+        window.pack();
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setResizable(true);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     /**
