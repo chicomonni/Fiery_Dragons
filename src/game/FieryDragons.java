@@ -176,6 +176,14 @@ public class FieryDragons implements Serializable {
         playGame(display, window);
     }
 
+    /**
+     * Continues the game from a saved state.
+     * @param display the display manager handling game displays
+     * @param window the game window
+     * @param saveNumber the save file number to load
+     * @throws IOException
+     * @throws FontFormatException
+     */
     public void continueGame(DisplayManager display, GameWindow window, int saveNumber) throws IOException, FontFormatException {
         FieryDragons data = loadGame(saveNumber);
 
@@ -189,6 +197,9 @@ public class FieryDragons implements Serializable {
         players[playerTurn].startTurn(board, display);
     }
 
+    /**
+     * Saves the game state to a file.
+     */
     public void saveGame() {
         int saveNumber = 0;
         String saveName = "saveData" + saveNumber + ".ser";
@@ -215,6 +226,11 @@ public class FieryDragons implements Serializable {
         }
     }
 
+    /**
+     * Loads the game state from a file.
+     * @param saveNumber the save file number to load
+     * @return the FieryDragons instance representing the game
+     */
     private FieryDragons loadGame(int saveNumber) {
         try {
             FieryDragons data;
@@ -231,7 +247,6 @@ public class FieryDragons implements Serializable {
             c.printStackTrace();
         }
         return null;
-
     }
 
     public File[] checkSaveFolder() {
