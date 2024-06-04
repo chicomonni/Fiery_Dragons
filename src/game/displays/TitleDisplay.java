@@ -55,12 +55,7 @@ public class TitleDisplay {
         separator.setBackground(Color.WHITE);
 
         // Create titlePanel and add components to it
-        JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(Color.BLACK);
-        titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
-        titlePanel.add(logo, BorderLayout.CENTER);
-        titlePanel.add(separator, BorderLayout.SOUTH);
-        titleScreen.add(titlePanel, BorderLayout.CENTER);
+        initaliseTitlePanel();
 
         // Initialise buttons
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
@@ -96,6 +91,14 @@ public class TitleDisplay {
          logo.setText(readTitleDisplay());
     }
 
+    private void initaliseTitlePanel() {
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(Color.BLACK);
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
+        titlePanel.add(logo, BorderLayout.CENTER);
+        titlePanel.add(separator, BorderLayout.SOUTH);
+        titleScreen.add(titlePanel, BorderLayout.CENTER);
+    }
     /**
      * Reads the title display from a file.
      *
