@@ -248,8 +248,8 @@ public class FieryDragons implements Serializable {
             out.writeObject(this);
             out.close();
             fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -260,50 +260,42 @@ public class FieryDragons implements Serializable {
      * @return the FieryDragons instance representing the game
      */
     private FieryDragons loadGame(int saveNumber) {
+        FieryDragons data;
+
         try {
-            FieryDragons data;
             FileInputStream fileIn = new FileInputStream(CONFIG_SAVES_FILE + "saveData" + saveNumber + ".ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             data = (FieryDragons) in.readObject();
             in.close();
             fileIn.close();
-            return data;
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Game Data not found");
-            c.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return null;
+        return data;
     }
 
     /**
      * Checks the save folder for save files.
      *
-     * @return the list of save files
+     * @return the array of save files
      */
     public File[] checkSaveFolder() {
         File folder = new File(CONFIG_SAVES_FILE);
         folder.mkdirs();
-        File[] listOfFiles = folder.listFiles();
-        if (listOfFiles != null) {
-            return listOfFiles;
-        }
-
-        return null;
+        return folder.listFiles();
     }
 
     /**
      * Finds the oldest file in the save folder.
      *
      * @param list the list of files in the save folder
-     * @return
+     * @return the name of the oldest file
      */
     private String findOldestFile(File[] list) {
         File oldest = list[0];
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].lastModified() < oldest.lastModified()) {
-                oldest = list[i];
+        for (File file : list) {
+            if (file.lastModified() < oldest.lastModified()) {
+                oldest = file;
             }
         }
 
