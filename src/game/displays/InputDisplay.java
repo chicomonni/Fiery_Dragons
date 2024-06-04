@@ -102,7 +102,7 @@ public class InputDisplay {
         name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.BODY_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
 
-        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + "), 'END TURN' OR 'SAVE GAME'";
+        String promptText = "[1-" + board.getChitCards().length() + "] FLIP CARD -- [x/X] END TURN -- [s/S] SAVE GAME";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
@@ -152,11 +152,11 @@ public class InputDisplay {
      */
     private boolean validateInput(String input) {
         try {
-            if (input.toLowerCase().strip().equals("end turn")) {
+            if (input.toLowerCase().strip().equals("x")) {
                 return true;
             }
 
-            if (input.toLowerCase().strip().equals("save game")) {
+            if (input.toLowerCase().strip().equals("s")) {
                 return true;
             }
 
@@ -182,11 +182,11 @@ public class InputDisplay {
             return new NextTurnGameAction(player);
         }
 
-        if (input.toLowerCase().strip().equals("end turn")) {
+        if (input.toLowerCase().strip().equals("x")) {
             return new EndTurnGameAction(player);
         }
 
-        if (input.toLowerCase().strip().equals("save game")) {
+        if (input.toLowerCase().strip().equals("s")) {
             return new SaveGameAction(gameData, player);
         }
 
