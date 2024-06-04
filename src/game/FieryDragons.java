@@ -1,7 +1,6 @@
 package game;
 
 import boardGenerator.BoardGenerator;
-import com.sun.tools.javac.Main;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
@@ -10,19 +9,17 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
-import java.io.*;
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
 import java.util.List;
 
 /**
  * The FieryDragons class is responsible for initiating and managing the game.
  * It handles the creation of chits, the game board, players, and the game flow.
  */
-public class FieryDragons implements Serializable{
+public class FieryDragons implements Serializable {
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
     private static final int CARD_PER_ANIMAL = 3;
@@ -199,7 +196,7 @@ public class FieryDragons implements Serializable{
         String saveName = "saveData" + saveNumber + ".ser";
         File[] listOfFiles = checkSaveFolder();
         assert listOfFiles != null;
-        if(listOfFiles.length >= 3){
+        if (listOfFiles.length >= 3) {
             saveName = findOldestFile(listOfFiles);
         } else {
             for (File file : listOfFiles) {
@@ -210,7 +207,7 @@ public class FieryDragons implements Serializable{
             }
         }
         try {
-            FileOutputStream fileOut = new FileOutputStream("saves/"+saveName);
+            FileOutputStream fileOut = new FileOutputStream("config/saves/" + saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();
@@ -223,7 +220,7 @@ public class FieryDragons implements Serializable{
     private FieryDragons loadGame(int saveNumber) {
         try {
             FieryDragons data;
-            FileInputStream fileIn = new FileInputStream("saves/saveData"+saveNumber+".ser");
+            FileInputStream fileIn = new FileInputStream("config/saves/saveData" + saveNumber + ".ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             data = (FieryDragons) in.readObject();
             in.close();
@@ -240,10 +237,12 @@ public class FieryDragons implements Serializable{
     }
 
     public File[] checkSaveFolder() {
-        File folder = new File("saves/");
+//        TODO: make file name a constant
+        File folder = new File("config/saves/");
+        folder.mkdirs();
         File[] listOfFiles = folder.listFiles();
-        if(listOfFiles != null) {
-            return  listOfFiles;
+        if (listOfFiles != null) {
+            return listOfFiles;
         }
 
         return null;
