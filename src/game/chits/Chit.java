@@ -1,5 +1,7 @@
 package game.chits;
 
+import game.Player;
+import game.actions.GameAction;
 import game.chits.strategies.ChitStrategy;
 
 /**
@@ -49,15 +51,16 @@ public class Chit {
     public boolean directValidate(Chit other) {
         return this == other;
     }
-    
+
     /**
-     * Used to modify value of ChitCard (e.g. negate the value to move backwards)
+     * Used to get the action performed after flipping a card with this chit
      *
-     * @param value the value to modify
-     * @return the modified value
+     * @param player the player whose turn it is
+     * @param value  the value on the card
+     * @return the Action to be performed
      */
-    public int modifyValue(int value) {
-        return strategy.modifyValue(value);
+    public GameAction getAction(Player player, int value) {
+        return strategy.getAction(player, value);
     }
 
     /**
