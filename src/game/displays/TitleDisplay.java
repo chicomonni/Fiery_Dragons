@@ -64,15 +64,16 @@ public class TitleDisplay {
 
     /**
      * Initialises the logo text area.
+     *
      * @param window the GameWindow to add the logo to
      * @throws IOException
      */
     private void initialiseLogo(GameWindow window) throws IOException {
-         logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
-         logo.setEditable(false);
-         logo.setBackground(Color.BLACK);
-         logo.setForeground(Color.WHITE);
-         logo.setText(readTitleDisplay());
+        logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
+        logo.setEditable(false);
+        logo.setBackground(Color.BLACK);
+        logo.setForeground(Color.WHITE);
+        logo.setText(readTitleDisplay());
     }
 
     /**
@@ -89,6 +90,7 @@ public class TitleDisplay {
 
     /**
      * Initialises the buttons.
+     *
      * @param window the GameWindow to add the buttons to
      * @return the JPanel containing the buttons
      */
@@ -113,10 +115,11 @@ public class TitleDisplay {
 
     /**
      * Adds action listeners to the buttons.
+     *
      * @param fieryDragons the FieryDragons instance to start the game
-     * @param display the DisplayManager handling game displays
-     * @param window the GameWindow instance this class affects
-     * @param frame the JFrame to add the action listeners to
+     * @param display      the DisplayManager handling game displays
+     * @param window       the GameWindow instance this class affects
+     * @param frame        the JFrame to add the action listeners to
      */
     private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
         // Add action listeners
