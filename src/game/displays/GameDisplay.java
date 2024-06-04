@@ -120,6 +120,11 @@ public class GameDisplay {
         container.add(chitCards, constraints);
     }
 
+    /**
+     * Initialise separator panel and add it to the window
+     * @param constraints the constraints for the GridBagLayout
+     * @param container the container to add the separator to
+     */
     private void initialiseSeparator(GridBagConstraints constraints, Container container){
         // Add a separator panel
         constraints.insets = new Insets(
@@ -143,6 +148,11 @@ public class GameDisplay {
         constraints.gridy = 2;
     }
 
+    /**
+     * Initialise container for the input and add the component to the window
+     * @param constraints the constraints for the GridBagLayout
+     * @param container the container to add the footer to
+     */
     private void initialiseFooter(GridBagConstraints constraints, Container container){
         // Initialise container for the input and add the component to the window
         footer.setOpaque(false);
@@ -154,7 +164,7 @@ public class GameDisplay {
         container.revalidate();
         container.repaint();
     }
-    
+
     /**
      * Getter for the swing component that displays the Volcano
      *
