@@ -30,7 +30,7 @@ public class WinAction extends MoveGameAction {
     public GameAction execute(Board board, DisplayManager display) {
         super.execute(board, display);
         display.displayWinScreen(player);
-        System.out.println("Player " + player.getName() + " has won the game!");
+
         return null;
     }
 }
