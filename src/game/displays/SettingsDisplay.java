@@ -183,6 +183,11 @@ public class SettingsDisplay {
         settingsScreen.add(playerSlider, constraints);
     }
 
+    /**
+     * Adds the square slider to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
     private void initaliseSquareSlider(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
