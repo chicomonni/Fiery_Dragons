@@ -1,6 +1,6 @@
 package game.displays;
 
-import game.FieryDragons;
+import boardGenerator.BoardGenerator;
 import game.Player;
 import game.tiles.Cave;
 import game.tiles.GameTile;
@@ -108,8 +108,8 @@ public class PlayerDisplay {
 
         int idx = caves.indexOf(cave);
 
-        int offset = FieryDragons.VOLCANO_SIZE / 2;
-        int radius = FieryDragons.OUTER_RADIUS + FieryDragons.CAVE_OFFSET;
+        int offset = BoardGenerator.VOLCANO_SIZE / 2;
+        int radius = BoardGenerator.OUTER_RADIUS + BoardGenerator.CAVE_PADDING;
 
         double angle = 2 * PI / numSquares * (double) ((2 * idx + 1) * numSquares / (2 * numCaves));
         int x = (int) round(radius * cos(angle) + offset);
@@ -129,8 +129,8 @@ public class PlayerDisplay {
         int numSquares = squares.size();
         int idx = squares.indexOf(square);
 
-        int offset = FieryDragons.VOLCANO_SIZE / 2;
-        int radius = FieryDragons.OUTER_RADIUS - FieryDragons.VOLCANO_PADDING;
+        int offset = BoardGenerator.VOLCANO_SIZE / 2;
+        int radius = BoardGenerator.OUTER_RADIUS - BoardGenerator.VOLCANO_PADDING;
 
         int x = (int) round(radius * cos(idx * 2 * PI / numSquares) + offset);
         int y = (int) round(-radius * sin(idx * 2 * PI / numSquares) + offset);

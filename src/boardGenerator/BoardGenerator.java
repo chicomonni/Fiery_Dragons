@@ -9,23 +9,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BoardGenerator {
-    private static final int INNER_RADIUS = 17;
-    private static final int OUTER_RADIUS = 25;
-    private static final int CAVE_PADDING = 13;
+    public static final int INNER_RADIUS = 17;
+    public static final int OUTER_RADIUS = 25;
+    public static final int CAVE_PADDING = 13;
+    public static final int CAVE_RADIUS = 9;
+    public static final int VOLCANO_SIZE = 2 * (OUTER_RADIUS + CAVE_PADDING + CAVE_RADIUS) + 1;
+    public static final int VOLCANO_PADDING = 3;
     private final CircleGraph innerCircle;
     private final CircleGraph outerCircle;
     private final RadialCirclesGraph caves;
     private final RadialLinesGraph sqaures;
-    private final int dimensions;
 
 
-    public BoardGenerator(int numSqaure, int numCave) {
+    public BoardGenerator(int numSquare, int numCave) {
         this.innerCircle = new CircleGraph(INNER_RADIUS);
         this.outerCircle = new CircleGraph(OUTER_RADIUS);
-        this.sqaures = new RadialLinesGraph(INNER_RADIUS, OUTER_RADIUS, numSqaure);
-        this.caves = new RadialCirclesGraph(numCave, numSqaure, OUTER_RADIUS + CAVE_PADDING);
-
-        this.dimensions = 2 * (caves.getOffset() + caves.getRadius()) + 1;
+        this.sqaures = new RadialLinesGraph(INNER_RADIUS, OUTER_RADIUS, numSquare);
+        this.caves = new RadialCirclesGraph(CAVE_RADIUS, OUTER_RADIUS + CAVE_PADDING, numCave, numSquare);
     }
 
     public void make(Path fileName) throws IOException {
@@ -40,7 +40,7 @@ public class BoardGenerator {
             return false;
         };
 
-        String outS = ASCIIGaussianBlur.graphToASCII(board, dimensions, dimensions, 2);
+        String outS = ASCIIGaussianBlur.graphToASCII(board, VOLCANO_SIZE, VOLCANO_SIZE, 2);
         File file = new File(String.valueOf(fileName));
         file.getParentFile().mkdirs();
         file.createNewFile();

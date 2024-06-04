@@ -1,6 +1,6 @@
 package game.displays;
 
-import game.FieryDragons;
+import boardGenerator.BoardGenerator;
 import game.tiles.Cave;
 import game.tiles.Square;
 import game.tiles.Volcano;
@@ -91,8 +91,8 @@ public class VolcanoDisplay {
         int numSquares = squares.size();
         int numCaves = caves.size();
 
-        int offset = FieryDragons.VOLCANO_SIZE / 2;
-        int radius = FieryDragons.OUTER_RADIUS + FieryDragons.CAVE_OFFSET;
+        int offset = BoardGenerator.VOLCANO_SIZE / 2;
+        int radius = BoardGenerator.OUTER_RADIUS + BoardGenerator.CAVE_PADDING;
 
         Function<Integer, Double> angle = (i) -> 2 * PI / numSquares * (double) ((2 * i + 1) * numSquares / (2 * numCaves));
         Function<Integer, Integer> caveX = (i) -> (int) round(radius * cos(angle.apply(i)) + offset);
@@ -112,7 +112,7 @@ public class VolcanoDisplay {
      * @param y    the center y position to print the detailed Chit
      */
     private void createColouredCave(Cave cave, int x, int y) {
-        char[][] chars = new char[FieryDragons.VOLCANO_SIZE][FieryDragons.VOLCANO_SIZE];
+        char[][] chars = new char[BoardGenerator.VOLCANO_SIZE][BoardGenerator.VOLCANO_SIZE];
 
         for (char[] row : chars) {
             Arrays.fill(row, ' ');
@@ -145,8 +145,8 @@ public class VolcanoDisplay {
         List<Square> squares = volcano.getSquares();
         int numSquares = squares.size();
 
-        int offset = FieryDragons.VOLCANO_SIZE / 2;
-        int radius = FieryDragons.INNER_RADIUS + FieryDragons.VOLCANO_PADDING;
+        int offset = BoardGenerator.VOLCANO_SIZE / 2;
+        int radius = BoardGenerator.INNER_RADIUS + BoardGenerator.VOLCANO_PADDING;
 
         Function<Integer, Integer> squareX = (i) -> (int) round(radius * cos(i * 2 * PI / numSquares) + offset);
         Function<Integer, Integer> squareY = (i) -> (int) round(-radius * sin(i * 2 * PI / numSquares) + offset);
