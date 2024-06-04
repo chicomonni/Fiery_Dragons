@@ -99,6 +99,7 @@ public class DisplayManager {
      * Ends the turn, disabling input and resetting the card display.
      */
     public void endTurn() {
+        gameData.incrementPlayerTurn();
         inputDisplay.disableInput();
         cardDisplay.reset();
     }

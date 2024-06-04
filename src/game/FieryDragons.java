@@ -35,6 +35,7 @@ public class FieryDragons implements Serializable {
     private Player[] players;
     private ChitFactory chitFactory = new ChitFactory();
     private Board board;
+    private int playerTurn = 0;
 
     /**
      * Creates the chits used in the game with specific strategies.
@@ -109,7 +110,7 @@ public class FieryDragons implements Serializable {
         display.createGameComponents(window, board, players);
 
         display.displayGameScreen(window.getFrame());
-        players[0].startTurn(board, display);
+        players[playerTurn].startTurn(board, display);
     }
 
     /**
@@ -165,11 +166,12 @@ public class FieryDragons implements Serializable {
         this.board = data.getBoard();
         this.players = data.getPlayers();
         this.chitFactory = data.getChitFactory();
+        this.playerTurn = data.getPlayerTurn();
 
         display.createGameComponents(window, board, players);
 
         display.displayGameScreen(window.getFrame());
-        players[0].startTurn(board, display);
+        players[playerTurn].startTurn(board, display);
     }
 
     public void saveGame() {
@@ -204,6 +206,16 @@ public class FieryDragons implements Serializable {
 
     }
 
+    public void incrementPlayerTurn() {
+        this.playerTurn += 1;
+        if (this.playerTurn > players.length - 1) {
+            this.playerTurn = 0;
+        }
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
 
     public ChitFactory getChitFactory() {
         return chitFactory;
