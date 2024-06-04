@@ -4,6 +4,7 @@ import boardGenerator.BoardGenerator;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
+import game.chits.strategies.RascalChitStrategy;
 import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
@@ -28,7 +29,7 @@ public class FieryDragons {
     public static final int CARD_HEIGHT = 16;
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
     private static String squareSrc = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private static String cardSrc = "R1";
     private static String caveSrc = "S*w0";
     private static int NUM_PLAYERS = 4;
     private static Player[] players;
@@ -49,7 +50,7 @@ public class FieryDragons {
         chitFactory.setChit('a', "Cat", new AnimalChitStrategy());
 
         chitFactory.setChit('P', "Pirate", new PirateChitStrategy());
-        chitFactory.setChit('R', "Rascal", new PirateChitStrategy()); //TODO: change to rascalChitStrategy later
+        chitFactory.setChit('R', "Rascal", new RascalChitStrategy());
     }
 
     /**
@@ -105,9 +106,9 @@ public class FieryDragons {
         createBoard();
         createPlayers();
 
+        display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
-        display.displayGameScreen(window.getFrame());
         players[0].startTurn(board, display);
     }
 
