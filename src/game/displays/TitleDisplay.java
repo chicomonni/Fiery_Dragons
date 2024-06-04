@@ -1,7 +1,5 @@
 package game.displays;
 
-import game.FieryDragons;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -26,24 +24,22 @@ public class TitleDisplay {
     /**
      * Constructor
      *
-     * @param fieryDragons the FieryDragons instance to start the game
-     * @param display      the DisplayManager handling game displays
-     * @param window       the GameWindow instance this class affects
+     * @param display the DisplayManager handling game displays
+     * @param window  the GameWindow instance this class affects
      * @throws IOException if the logo file cannot be read
      */
-    public TitleDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) throws IOException {
-        initialise(fieryDragons, display, window);
+    public TitleDisplay(DisplayManager display, GameWindow window) throws IOException {
+        initialise(display, window);
     }
 
     /**
      * Initializes the title screen with logo and buttons.
      *
-     * @param fieryDragons the FieryDragons instance to start the game
-     * @param display      the DisplayManager handling game displays
-     * @param window       the GameWindow instance this class affects
+     * @param display the DisplayManager handling game displays
+     * @param window  the GameWindow instance this class affects
      * @throws IOException if the logo file cannot be read
      */
-    private void initialise(FieryDragons fieryDragons, DisplayManager display, GameWindow window) throws IOException {
+    private void initialise(DisplayManager display, GameWindow window) throws IOException {
         JFrame frame = window.getFrame();
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
@@ -55,7 +51,7 @@ public class TitleDisplay {
 
         initialiseTitlePanel();
         JPanel buttonPanel = initialiseButtons(window);
-        addListeners(fieryDragons, display, window, frame);
+        addListeners(display, window);
 
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -66,7 +62,7 @@ public class TitleDisplay {
      * Initialises the logo text area.
      *
      * @param window the GameWindow to add the logo to
-     * @throws IOException
+     * @throws IOException if the logo file cannot be read
      */
     private void initialiseLogo(GameWindow window) throws IOException {
         logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
@@ -116,16 +112,14 @@ public class TitleDisplay {
     /**
      * Adds action listeners to the buttons.
      *
-     * @param fieryDragons the FieryDragons instance to start the game
-     * @param display      the DisplayManager handling game displays
-     * @param window       the GameWindow instance this class affects
-     * @param frame        the JFrame to add the action listeners to
+     * @param display the DisplayManager handling game displays
+     * @param window  the GameWindow instance this class affect
      */
-    private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+    private void addListeners(DisplayManager display, GameWindow window) {
         // Add action listeners
-        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(window.getFrame()));
 
-        continueGameButton.addActionListener(e -> display.displayLoadScreen(frame));
+        continueGameButton.addActionListener(e -> display.displayLoadScreen(window.getFrame()));
         exitGameButton.addActionListener(e -> display.closeGame());
     }
 
