@@ -64,10 +64,7 @@ public class SettingsDisplay {
 
         GridBagConstraints constraints = initialiseConstraints();
 
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
-        settingsScreen.add(titleLabel, constraints);
+        initaliseTitleLabel(window, constraints);
 
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 50, 100);
@@ -163,6 +160,10 @@ public class SettingsDisplay {
         frame.add(settingsScreen);
     }
 
+    /**
+     * Initializes the constraints for the settings screen layout.
+     * @return the constraints for the layout
+     */
     private GridBagConstraints initialiseConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -174,6 +175,18 @@ public class SettingsDisplay {
         constraints.insets = new Insets(50, 100, 15, 100);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         return constraints;
+    }
+
+    /**
+     * Initializes the title label for the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseTitleLabel(GameWindow window, GridBagConstraints constraints) {
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
+        settingsScreen.add(titleLabel, constraints);
     }
 
     /**
