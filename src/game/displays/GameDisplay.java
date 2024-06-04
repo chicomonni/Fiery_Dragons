@@ -132,6 +132,11 @@ public class GameDisplay {
         constraints.gridy = 0;
     }
 
+    /**
+     * Initialise container for the Chit Cards and add the component to the window
+     * @param container the container to add the chit cards to
+     * @param constraints the constraints for the GridBagLayout
+     */
     private void initialiseChitCardDisplay(Container container, GridBagConstraints constraints){
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
@@ -141,7 +146,7 @@ public class GameDisplay {
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
     }
-    
+
     /**
      * Getter for the swing component that displays the Volcano
      *
