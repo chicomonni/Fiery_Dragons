@@ -1,9 +1,8 @@
 package game.displays;
 
-import javax.swing.*;
-
 import game.Player;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -18,9 +17,9 @@ public class WinnerDisplay {
 
     /**
      * Constructor
-     * 
+     *
      * @param display the DisplayManager handling game displays
-     * @param window the GameWindow instance this class affects
+     * @param window  the GameWindow instance this class affects
      */
     public WinnerDisplay(DisplayManager display, GameWindow window) {
         initialise(window);
@@ -30,7 +29,7 @@ public class WinnerDisplay {
 
     /**
      * Initialises the winner screen
-     * 
+     *
      * @param window the GameWindow instance
      */
     private void initialise(GameWindow window) {
@@ -50,8 +49,8 @@ public class WinnerDisplay {
 
     /**
      * Initialises the separator for the display
-     * 
-     * @param constraints
+     *
+     * @param constraints the constraints for the layout
      */
     private void initialiseSeparator(GridBagConstraints constraints) {
         constraints.gridy++;
@@ -63,7 +62,8 @@ public class WinnerDisplay {
 
     /**
      * Initialises the winner label
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseWinnerLabel(GameWindow window, GridBagConstraints constraints) {
@@ -74,8 +74,8 @@ public class WinnerDisplay {
 
     /**
      * Initialises the buttons for the display
-     * 
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseButtons(GameWindow window, GridBagConstraints constraints) {
@@ -90,7 +90,7 @@ public class WinnerDisplay {
 
     /**
      * Initialises the constraints for the layout
-     * 
+     *
      * @return the constraints for the layout
      */
     private GridBagConstraints initialiseConstraints() {
@@ -108,11 +108,11 @@ public class WinnerDisplay {
 
     /**
      * Displays the winner of the game
-     * 
+     *
      * @param player the Player that won the game
      */
     public void setWinnerText(Player player) {
-        winnerLabel.setText(player.getName() + " wins!");
+        winnerLabel.setText(player.getName().toUpperCase() + " WINS!");
         winnerLabel.setForeground(player.getColour());
         separator.setBackground(player.getColour());
 
