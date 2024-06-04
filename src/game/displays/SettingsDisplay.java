@@ -62,15 +62,7 @@ public class SettingsDisplay {
         settingsScreen.setLayout(new GridBagLayout());
         settingsScreen.setBackground(Color.BLACK);
 
-        GridBagConstraints constraints = new GridBagConstraints();
-
-        // Add title label
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 2;
-        constraints.weightx = 1;
-        constraints.insets = new Insets(50, 100, 15, 100);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        GridBagConstraints constraints = initialiseConstraints();
 
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -169,6 +161,19 @@ public class SettingsDisplay {
         settingsScreen.add(startButton, constraints);
 
         frame.add(settingsScreen);
+    }
+
+    private GridBagConstraints initialiseConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        // Add title label
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.weightx = 1;
+        constraints.insets = new Insets(50, 100, 15, 100);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        return constraints;
     }
 
     /**
