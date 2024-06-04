@@ -178,6 +178,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Continues the game from a saved state.
+     * 
      * @param display the display manager handling game displays
      * @param window the game window
      * @param saveNumber the save file number to load
@@ -228,6 +229,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Loads the game state from a file.
+     * 
      * @param saveNumber the save file number to load
      * @return the FieryDragons instance representing the game
      */
@@ -251,7 +253,8 @@ public class FieryDragons implements Serializable {
 
     /**
      * Checks the save folder for save files.
-     * @return
+     * 
+     * @return the list of save files
      */
     public File[] checkSaveFolder() {
         File folder = new File(CONFIG_SAVES_FILE);
@@ -266,6 +269,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Finds the oldest file in the save folder.
+     * 
      * @param list the list of files in the save folder
      * @return
      */
@@ -292,6 +296,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the current player turn.
+     * 
      * @return the player turn
      */
     public int getPlayerTurn() {
@@ -300,6 +305,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the chit factory used in the game.
+     * 
      * @return the chit factory
      */
     public ChitFactory getChitFactory() {
@@ -308,6 +314,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the game board.
+     * 
      * @return the game board
      */
     public Board getBoard() {
@@ -316,7 +323,8 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the players in the game. 
-     * @return  the players
+     * 
+     * @return the game's players
      */
     public Player[] getPlayers() {
         return players;
