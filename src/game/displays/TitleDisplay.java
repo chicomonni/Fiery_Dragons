@@ -53,8 +53,8 @@ public class TitleDisplay {
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
 
-        initaliseTitlePanel();
-        JPanel buttonPanel = initaliseButtons(window);
+        initialiseTitlePanel();
+        JPanel buttonPanel = initialiseButtons(window);
         addListeners(fieryDragons, display, window, frame);
         
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
@@ -78,7 +78,7 @@ public class TitleDisplay {
     /**
      * Initialises the title panel.
      */
-    private void initaliseTitlePanel() {
+    private void initialiseTitlePanel() {
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
         titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
@@ -92,14 +92,15 @@ public class TitleDisplay {
      * @param window the GameWindow to add the buttons to
      * @return the JPanel containing the buttons
      */
-    private JPanel initaliseButtons(GameWindow window) {
+    private JPanel initialiseButtons(GameWindow window) {
+        int padding = 15;
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE);
-        window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
-        window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE, padding);
+        window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE, padding);
+        window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE, padding);
 
         buttonPanel.add(newGameButton);
         buttonPanel.add(continueGameButton);
@@ -121,8 +122,8 @@ public class TitleDisplay {
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> display.displayLoadScreen(frame)); //fieryDragons.playGame(display, window));
-        exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
+        continueGameButton.addActionListener(e -> display.displayLoadScreen(frame));
+        exitGameButton.addActionListener(e -> display.closeGame());
     }
 
     /**

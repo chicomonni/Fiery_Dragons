@@ -38,6 +38,7 @@ public class DisplayManager {
         this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
         this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
         this.loadDisplay = new LoadDisplay(fieryDragons, this, window);
+        this.winnerDisplay = new WinnerDisplay(this, window);
         this.gameDisplay = new GameDisplay(window);
     }
 
@@ -53,7 +54,6 @@ public class DisplayManager {
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
         this.inputDisplay = new InputDisplay(gameDisplay);
-        this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
     /**
@@ -108,9 +108,9 @@ public class DisplayManager {
      *
      * @param player the Player who has won the game
      */
-    public void displayWin(Player player) {
-        winnerDisplay.displayWinner(player);
-        gameDisplay.showWinnerLabel(window.getFrame());
+    public void displayWinScreen(Player player) {
+        winnerDisplay.setWinnerText(player);
+        displayWinScreen(window.getFrame());
     }
 
     /**
@@ -122,6 +122,7 @@ public class DisplayManager {
         gameDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
         loadDisplay.hideScreen(frame);
+        winnerDisplay.hideScreen(frame);
         titleDisplay.showScreen(frame);
     }
 
@@ -134,6 +135,7 @@ public class DisplayManager {
         titleDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
         loadDisplay.hideScreen(frame);
+        winnerDisplay.hideScreen(frame);
         gameDisplay.showScreen(frame);
     }
 
@@ -146,6 +148,7 @@ public class DisplayManager {
         titleDisplay.hideScreen(frame);
         gameDisplay.hideScreen(frame);
         loadDisplay.hideScreen(frame);
+        winnerDisplay.hideScreen(frame);
         settingsDisplay.showScreen(frame);
     }
 
@@ -158,8 +161,26 @@ public class DisplayManager {
         titleDisplay.hideScreen(frame);
         gameDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
+        winnerDisplay.hideScreen(frame);
         loadDisplay.showScreen(frame);
 
     }
 
+    /**
+     * Displays the load game screen.
+     *
+     * @param frame the JFrame representing the game window
+     */
+    public void displayWinScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        loadDisplay.hideScreen(frame);
+        winnerDisplay.showScreen(frame);
+
+    }
+
+    public void closeGame(){
+        window.closeWindow();
+    }
 }

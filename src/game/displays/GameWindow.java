@@ -78,8 +78,8 @@ public class GameWindow {
      * @param button   the JButton to be customized
      * @param fontSize the font size for the button text
      */
-    public void customiseButton(JButton button, float fontSize) {
-        int padding = 15;
+    public void customiseButton(JButton button, float fontSize, int padding) {
+//        int padding = 15;
         button.setFont(font.deriveFont(fontSize));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLACK);

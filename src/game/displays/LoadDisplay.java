@@ -7,20 +7,21 @@ import java.awt.*;
 
 public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
-    private final JLabel titleLabel = new JLabel("SELECT SAVED FILE");
+    private final JLabel titleLabel = new JLabel("SELECT SAVE");
     private final JPanel separator = new JPanel();
-    private final JButton loadGameButton1 = new JButton("LOAD GAME 1");
-    private final JButton loadGameButton2 = new JButton("LOAD GAME 2");
-    private final JButton loadGameButton3 = new JButton("LOAD GAME 3");
+    private final String emptySaveName = "EMPTY SAVE";
+    private final JButton loadGameButton1 = new JButton(emptySaveName);
+    private final JButton loadGameButton2 = new JButton(emptySaveName);
+    private final JButton loadGameButton3 = new JButton(emptySaveName);
     private final JButton backButton = new JButton("BACK");
 
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
-        initialise(display, window);
+        initialise(window);
 
         backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
     }
 
-    private void initialise(DisplayManager display, GameWindow window) {
+    private void initialise(GameWindow window) {
         JFrame frame = window.getFrame();
         loadScreen.setLayout(new GridBagLayout());
         loadScreen.setBackground(Color.BLACK);
@@ -29,7 +30,7 @@ public class LoadDisplay {
         initialiseTitleLabel(window, constraints);
         initialiseSeparator(constraints);
         initialiseLoadButtons(window, constraints);
-        initialiseBridgeButtons(window, constraints);
+        initialiseBackButton(window, constraints);
 
         frame.add(loadScreen);
     }
@@ -44,7 +45,7 @@ public class LoadDisplay {
         // Add title label
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 2;
+        constraints.gridwidth = 1;
         constraints.weightx = 1;
         constraints.insets = new Insets(50, 100, 15, 100);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -64,26 +65,28 @@ public class LoadDisplay {
     }
 
     private void initialiseLoadButtons(GameWindow window, GridBagConstraints constraints) {
+        int padding = 40;
         constraints.gridy++;
         constraints.gridwidth = 1;
-        window.customiseButton(loadGameButton1, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(loadGameButton1, GameWindow.BODY_FONT_SIZE, padding);
         loadScreen.add(loadGameButton1, constraints);
 
         constraints.gridy++;
-        window.customiseButton(loadGameButton2, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(loadGameButton2, GameWindow.BODY_FONT_SIZE, padding);
         loadScreen.add(loadGameButton2, constraints);
 
         constraints.gridy++;
-        window.customiseButton(loadGameButton3, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(loadGameButton3, GameWindow.BODY_FONT_SIZE, padding);
         loadScreen.add(loadGameButton3, constraints);
     }
 
-    private void initialiseBridgeButtons(GameWindow window, GridBagConstraints constraints) {
+    private void initialiseBackButton(GameWindow window, GridBagConstraints constraints) {
+        int padding = 15;
         constraints.gridy++;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(50, 100, 50, 10);
+        constraints.insets = new Insets(20, 400, 50, 400);
 
-        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE, padding);
         loadScreen.add(backButton, constraints);
     }
 
