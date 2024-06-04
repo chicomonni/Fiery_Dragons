@@ -23,7 +23,6 @@ public class Cave extends GameTile {
     public Cave(Chit chit, Square next) {
         super(chit);
         this.next = next;
-        vacant = false;
     }
 
     /**
@@ -79,7 +78,7 @@ public class Cave extends GameTile {
     @Override
     public void move(Player player, int dist) {
         if (player.getPosition() == this) {
-            this.setVacancy(true);
+            this.setOccupiedBy(null);
 
             // The only case where dist can be > 1 is if the player is currently in the cave
             // (i.e. the first move to leave the cave)
@@ -92,7 +91,6 @@ public class Cave extends GameTile {
         // Can only enter a cave by exactly landing on it in the forwards direction
         if (dist == 1) {
             player.setPosition(this);
-            setVacancy(false);
         }
     }
 
@@ -104,7 +102,7 @@ public class Cave extends GameTile {
      */
     @Override
     public boolean canEnter(Player player) {
-        return vacant && canReturn && player == resident;
+        return occupiedBy == null && canReturn && player == resident;
     }
 
     /**
@@ -128,6 +126,16 @@ public class Cave extends GameTile {
     @Override
     public int[] calculateLocation(PlayerDisplay playerDisplay) {
         return playerDisplay.calculateLocation(this);
+    }
+
+    /**
+     * Get the nearest player to this tile
+     *
+     * @return the nearest player, {@code null} if no player is found
+     */
+    @Override
+    public Player getNearestPlayer() {
+        return null;
     }
 
     /**
