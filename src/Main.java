@@ -1,5 +1,4 @@
 import game.FieryDragons;
-import game.MainMenu;
 
 import java.awt.*;
 import java.io.IOException;
