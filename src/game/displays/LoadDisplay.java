@@ -4,6 +4,8 @@ import game.FieryDragons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
@@ -16,9 +18,9 @@ public class LoadDisplay {
     private final JButton backButton = new JButton("BACK");
 
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
-        initialise(window);
+        initialise(display, window);
+        addListeners(fieryDragons, display, window, window.getFrame());
 
-        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
     }
 
     private void initialise(GameWindow window) {
@@ -32,7 +34,30 @@ public class LoadDisplay {
         initialiseLoadButtons(window, constraints);
         initialiseBackButton(window, constraints);
 
+
         frame.add(loadScreen);
+    }
+
+    private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+        // Add action listeners
+        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
+
+        JButton[] buttonList = {loadGameButton1, loadGameButton2, loadGameButton3};
+        File[] fileList = fieryDragons.checkSaveFolder();
+
+        for (int i = 0; i < fileList.length; i++){
+            int finalI = i;
+            buttonList[i].setText("LOAD SAVE FILE " + (i+1));
+            buttonList[i].addActionListener(e -> {
+                try {
+                    fieryDragons.continueGame(display, window, finalI);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (FontFormatException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        }
     }
 
     /**

@@ -56,7 +56,7 @@ public class TitleDisplay {
         initialiseTitlePanel();
         JPanel buttonPanel = initialiseButtons(window);
         addListeners(fieryDragons, display, window, frame);
-        
+
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.getContentPane().add(titleScreen);
@@ -119,6 +119,7 @@ public class TitleDisplay {
      * @param frame the JFrame to add the action listeners to
      */
     private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+        // Add action listeners
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
         //TODO: change to consider current player and current board setup

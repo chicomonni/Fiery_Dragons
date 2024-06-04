@@ -24,6 +24,7 @@ public class DisplayManager {
     private ChitCardDisplay cardDisplay;
     private InputDisplay inputDisplay;
     private WinnerDisplay winnerDisplay;
+    private FieryDragons gameData;
 
     /**
      * Constructor.
@@ -35,6 +36,7 @@ public class DisplayManager {
      */
     public DisplayManager(FieryDragons fieryDragons, GameWindow window) throws IOException, FontFormatException {
         this.window = window;
+        this.gameData = fieryDragons;
         this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
         this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
         this.loadDisplay = new LoadDisplay(fieryDragons, this, window);
@@ -53,7 +55,8 @@ public class DisplayManager {
         this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameDisplay);
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
-        this.inputDisplay = new InputDisplay(gameDisplay);
+        this.inputDisplay = new InputDisplay(gameDisplay, gameData);
+        this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
     /**
@@ -99,6 +102,7 @@ public class DisplayManager {
      * Ends the turn, disabling input and resetting the card display.
      */
     public void endTurn() {
+        gameData.incrementPlayerTurn();
         inputDisplay.disableInput();
         cardDisplay.reset();
     }

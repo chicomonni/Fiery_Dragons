@@ -1,6 +1,7 @@
 package game;
 
 import boardGenerator.BoardGenerator;
+import com.sun.tools.javac.Main;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
@@ -9,26 +10,29 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
+import java.io.*;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.*;
 import java.util.List;
 
 /**
  * The FieryDragons class is responsible for initiating and managing the game.
  * It handles the creation of chits, the game board, players, and the game flow.
  */
-public class FieryDragons {
+public class FieryDragons implements Serializable{
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
-    private final ChitFactory chitFactory = new ChitFactory();
     private String squareSrc;
     private String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
     private String caveSrc;
     private int numPlayers;
+    private ChitFactory chitFactory = new ChitFactory();
     private Player[] players;
     private Board board;
+    private int playerTurn = 0;
 
     /**
      * Creates the chits used in the game with specific strategies.
@@ -103,7 +107,7 @@ public class FieryDragons {
         display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
-        players[0].startTurn(board, display);
+        players[playerTurn].startTurn(board, display);
     }
 
     /**
@@ -153,5 +157,107 @@ public class FieryDragons {
         playGame(display, window);
     }
 
+    public void continueGame(DisplayManager display, GameWindow window, int saveNumber) throws IOException, FontFormatException {
+        FieryDragons data = loadGame(saveNumber);
+
+        this.board = data.getBoard();
+        this.players = data.getPlayers();
+        this.chitFactory = data.getChitFactory();
+        this.playerTurn = data.getPlayerTurn();
+
+        display.displayGameScreen(window.getFrame());
+        display.createGameComponents(window, board, players);
+        players[playerTurn].startTurn(board, display);
+    }
+
+    public void saveGame() {
+        int saveNumber = 0;
+        String saveName = "saveData" + saveNumber + ".ser";
+        File[] listOfFiles = checkSaveFolder();
+        assert listOfFiles != null;
+        if(listOfFiles.length >= 3){
+            saveName = findOldestFile(listOfFiles);
+        } else {
+            for (File file : listOfFiles) {
+                if (file.getName().equals(saveName)) {
+                    saveNumber += 1;
+                    saveName = "saveData" + saveNumber + ".ser";
+                }
+            }
+        }
+        try {
+            System.out.println(this.getBoard());
+            FileOutputStream fileOut = new FileOutputStream("saves/"+saveName);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private FieryDragons loadGame(int saveNumber) {
+        try {
+            FieryDragons data;
+            FileInputStream fileIn = new FileInputStream("saves/saveData"+saveNumber+".ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            data = (FieryDragons) in.readObject();
+            in.close();
+            fileIn.close();
+            return data;
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Game Data not found");
+            c.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public File[] checkSaveFolder() {
+        File folder = new File("saves/");
+        File[] listOfFiles = folder.listFiles();
+        if(listOfFiles != null) {
+            return  listOfFiles;
+        }
+
+        return null;
+    }
+
+    private String findOldestFile(File[] list) {
+        File oldest = list[0];
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].lastModified() < oldest.lastModified()) {
+                oldest = list[i];
+            }
+        }
+
+        return oldest.getName();
+    }
+
+    public void incrementPlayerTurn() {
+        this.playerTurn += 1;
+        if (this.playerTurn > players.length - 1) {
+            this.playerTurn = 0;
+        }
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public ChitFactory getChitFactory() {
+        return chitFactory;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
 
 }

@@ -8,13 +8,14 @@ import game.tiles.GameTile;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Class used to represent a ChitCard in the game.
  */
-public class ChitCard {
+public class ChitCard implements Serializable {
     public static final int CARD_WIDTH = 11;
     public static final int CARD_HEIGHT = 16;
     private final char[][] back;

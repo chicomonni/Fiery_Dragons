@@ -7,17 +7,22 @@ import game.tiles.Cave;
 import game.tiles.Square;
 import game.tiles.Volcano;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.KeyException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Board class represents the game board for Fiery Dragons.
  * It handles the creation of the volcano and chit cards on the board.
  */
-public class Board {
+public class Board implements Serializable {
     private final Volcano volcano;
     private final ChitCardArray chitCards = new ChitCardArray();
 

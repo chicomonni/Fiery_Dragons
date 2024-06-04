@@ -4,9 +4,11 @@ import game.Player;
 import game.tiles.Cave;
 import game.tiles.Square;
 
+import java.io.Serializable;
+
 import static java.lang.Math.abs;
 
-public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
+public class SquareWithCaveMoveStrategy implements SquareMoveStrategy, Serializable {
     private final Square square;
     private final Cave cave;
 

@@ -6,7 +6,9 @@ import game.actions.GameAction;
 import game.actions.SwapPositionGameAction;
 import game.chits.Chit;
 
-public class RascalChitStrategy implements ChitStrategy {
+import java.io.Serializable;
+
+public class RascalChitStrategy implements ChitStrategy, Serializable {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *

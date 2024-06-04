@@ -8,10 +8,12 @@ import game.actions.WinAction;
 import game.chits.Chit;
 import game.displays.PlayerDisplay;
 
+import java.io.Serializable;
+
 /**
  * Represents the abstract base class for all locations the Player can move to (e.g. Square, Cave)
  */
-public abstract class GameTile {
+public abstract class GameTile implements Serializable {
     private final Chit chit;
     protected Player occupiedBy;
 

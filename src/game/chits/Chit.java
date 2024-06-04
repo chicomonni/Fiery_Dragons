@@ -4,10 +4,12 @@ import game.Player;
 import game.actions.GameAction;
 import game.chits.strategies.ChitStrategy;
 
+import java.io.Serializable;
+
 /**
  * Shared flyweight class representing chits
  */
-public class Chit {
+public class Chit implements Serializable {
     private final char displayChar;
     private final String name;
     private final char[][] displayDetail;

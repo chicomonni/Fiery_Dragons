@@ -4,11 +4,13 @@ import game.Player;
 import game.actions.GameAction;
 import game.chits.Chit;
 
+import java.io.Serializable;
+
 /**
  * Concrete strategy class for an animal Chit. Game rule: animal Chits move the Player forward if the Chit they're
  * standing on matches the ChitCard flipped
  */
-public class AnimalChitStrategy implements ChitStrategy {
+public class AnimalChitStrategy implements ChitStrategy, Serializable {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *

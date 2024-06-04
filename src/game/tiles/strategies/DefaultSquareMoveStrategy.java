@@ -3,12 +3,14 @@ package game.tiles.strategies;
 import game.Player;
 import game.tiles.Square;
 
+import java.io.Serializable;
+
 import static java.lang.Math.abs;
 
 /**
  * The default implementation of move for a Square not connected to a Cave
  */
-public class DefaultSquareMoveStrategy implements SquareMoveStrategy {
+public class DefaultSquareMoveStrategy implements SquareMoveStrategy, Serializable {
     private final Square square;
 
     /**

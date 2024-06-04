@@ -1,6 +1,7 @@
 package game.displays;
 
 import game.Board;
+import game.FieryDragons;
 import game.Player;
 import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
@@ -16,13 +17,15 @@ public class InputDisplay {
     private final JTextField inputField = new JTextField();
     private final JPanel promptContainer = new JPanel();
     private final JTextField inputMarker = new JTextField(1);
+    private final FieryDragons gameData;
 
     /**
      * Initializes the InputDisplay and sets it up within the specified GameDisplay.
      *
      * @param gameDisplay the game window to attach this input display to
      */
-    public InputDisplay(GameDisplay gameDisplay) {
+    public InputDisplay(GameDisplay gameDisplay, FieryDragons gameData) {
+        this.gameData = gameData;
         initialise(gameDisplay.getFooter());
     }
 
@@ -149,6 +152,10 @@ public class InputDisplay {
                 return true;
             }
 
+            if (input.toLowerCase().strip().equals("save game")) {
+                return true;
+            }
+
             Integer.parseInt(input);
             return true;
 
@@ -174,6 +181,12 @@ public class InputDisplay {
         if (input.toLowerCase().strip().equals("end turn")) {
             return new EndTurnGameAction(player);
         }
+
+        if (input.toLowerCase().strip().equals("save game")) {
+            gameData.saveGame();
+            return new NextTurnGameAction(player);
+        }
+
 
         return board.getChitCards().getAction(player, Integer.parseInt(input));
     }
