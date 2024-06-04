@@ -151,7 +151,7 @@ public class Square extends GameTile {
 
         while (!queue.isEmpty()) {
             Square current = queue.poll();
-            System.out.println(current);
+
             if (current.getOccupiedBy() != null) {
                 return current.getOccupiedBy();
             }
