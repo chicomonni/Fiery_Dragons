@@ -40,6 +40,7 @@ public class FlipCardGameAction implements GameAction {
         if (card.isMatch(player.getPosition())) {
             return card.getAction(player);
         }
-        return new EndTurnGameAction(player);
+
+        return new DisplayMessageGameAction("NOT A MATCH", true, player);
     }
 }

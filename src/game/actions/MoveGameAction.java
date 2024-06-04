@@ -34,6 +34,11 @@ public class MoveGameAction implements GameAction {
     public GameAction execute(Board board, DisplayManager display) {
         player.getPosition().move(player, dist);
         display.displayMove(player);
-        return new NextTurnGameAction(player);
+
+        int distance = Math.abs(dist - 1);
+        String direction = dist >= 0 ? "FORWARD" : "BACKWARD";
+        String message = player.getName().toUpperCase() + " MOVED " + direction + " " + distance + " TILES";
+
+        return new DisplayMessageGameAction(message, false, player);
     }
 }

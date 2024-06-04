@@ -39,6 +39,8 @@ public class SwapPositionGameAction implements GameAction {
         nearest.setPosition(from);
         display.displayMove(nearest);
 
-        return new NextTurnGameAction(player);
+        String message = player.getName().toUpperCase() + " SWAPPED POSITION WITH " + nearest.getName().toUpperCase();
+
+        return new DisplayMessageGameAction(message, false, player);
     }
 }

@@ -1,7 +1,7 @@
 package game.tiles;
 
 import game.Player;
-import game.actions.EndTurnGameAction;
+import game.actions.DisplayMessageGameAction;
 import game.actions.GameAction;
 import game.actions.MoveGameAction;
 import game.actions.WinAction;
@@ -55,7 +55,7 @@ public abstract class GameTile implements Serializable {
         }
 
         // Otherwise it is the end of their turn
-        return new EndTurnGameAction(player);
+        return new DisplayMessageGameAction("CAN'T MOVE", true, player);
     }
 
     /**
