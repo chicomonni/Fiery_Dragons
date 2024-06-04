@@ -101,21 +101,6 @@ public class TitleDisplay {
         window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
         window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
 
-        // Add action listeners
-        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
-
-        //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> {
-            try {
-                fieryDragons.continueGame(display, window);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (FontFormatException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
-
         buttonPanel.add(newGameButton);
         buttonPanel.add(continueGameButton);
         buttonPanel.add(exitGameButton);
@@ -133,10 +118,19 @@ public class TitleDisplay {
      * @param frame the JFrame to add the action listeners to
      */
     private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+        // Add action listeners
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> fieryDragons.playGame(display, window));
+        continueGameButton.addActionListener(e -> {
+            try {
+                fieryDragons.continueGame(display, window);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
     }
 
