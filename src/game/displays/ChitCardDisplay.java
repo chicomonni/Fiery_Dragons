@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.*;
+
 /**
  * Class used to update the display of the ChitCards
  */
@@ -20,13 +22,24 @@ public class ChitCardDisplay {
     /**
      * Constructor
      *
-     * @param cardArray  the ChitCardArray instance used by the game
+     * @param cardArray   the ChitCardArray instance used by the game
      * @param gameDisplay the GameDisplay instance this class affects
      */
     public ChitCardDisplay(ChitCardArray cardArray, GameDisplay gameDisplay) {
         JPanel cardContainer = gameDisplay.getChitCardsComponent();
-        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, GameWindow.PADDING, GameWindow.PADDING));
-        cardPane.setPreferredSize(cardContainer.getPreferredSize());
+        cardPane.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+        int height = (int) min(ceil(sqrt(cardArray.length())), 5);
+        int width = (int) ceil((double) cardArray.length() / height);
+        System.out.println(cardArray.length());
+        System.out.println("width " + width);
+        System.out.println("height " + height);
+
+
+        cardPane.setPreferredSize(new Dimension(
+                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * (width) + 7),
+                (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * height)
+        ));
         cardPane.setOpaque(false);
 
         cardContainer.add(cardPane);
