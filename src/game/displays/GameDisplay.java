@@ -48,15 +48,13 @@ public class GameDisplay {
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
-        GridBagConstraints constraints = initialiseConstraints();
+        initaliseVolcanoDisplay(container);
 
-        initaliseVolcanoDisplay(container, constraints);
+        initialiseChitCardDisplay(container);
 
-        initialiseChitCardDisplay(container, constraints);
+        initialiseSeparator(container);
 
-        initialiseSeparator(constraints, container);
-
-        initialiseFooter(constraints, container);
+        initialiseFooter(container);
 
         // Initialise and configure the winner label
         winner.setFont(window.getFont().deriveFont(GameWindow.BODY_FONT_SIZE)); // Use the same font
@@ -65,60 +63,44 @@ public class GameDisplay {
     }
 
     /**
-     * Initializes the constraints for the GridBagLayout.
+     * Initialise container for the Volcano and add the component to the window
      *
-     * @return the GridBagConstraints object
+     * @param container the container to add the volcano to
      */
-    private GridBagConstraints initialiseConstraints() {
+    private void initaliseVolcanoDisplay(Container container) {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Configure constraints
-        constraints.insets = new Insets(
-                GameWindow.PADDING,
-                GameWindow.PADDING,
-                0,
-                GameWindow.PADDING / 2
-        );
+        constraints.insets = new Insets(GameWindow.PADDING, GameWindow.PADDING, 0, GameWindow.PADDING / 2);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
-        return constraints;
-    }
 
-    /**
-     * Initialise container for the Volcano and add the component to the window
-     *
-     * @param container   the container to add the volcano to
-     * @param constraints the constraints for the GridBagLayout
-     */
-    private void initaliseVolcanoDisplay(Container container, GridBagConstraints constraints) {
         volcano.setPreferredSize(new Dimension(
                 (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
                 (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
         ));
         container.add(volcano, constraints);
-
-        constraints.insets = new Insets(
-                GameWindow.PADDING,
-                GameWindow.PADDING / 2,
-                0,
-                GameWindow.PADDING + 20
-        );
-        constraints.gridx = 1;
-        constraints.gridy = 0;
     }
 
     /**
      * Initialise container for the Chit Cards and add the component to the window
      *
-     * @param container   the container to add the chit cards to
-     * @param constraints the constraints for the GridBagLayout
+     * @param container the container to add the chit cards to
      */
-    private void initialiseChitCardDisplay(Container container, GridBagConstraints constraints) {
+    private void initialiseChitCardDisplay(Container container) {
+        GridBagConstraints constraints = new GridBagConstraints();
+
+//        TODO: possibly remove 20
+        constraints.insets = new Insets(GameWindow.PADDING, GameWindow.PADDING / 2, 0, GameWindow.PADDING);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
-                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
-                (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
+                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 7 + 7),
+                (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
@@ -127,42 +109,40 @@ public class GameDisplay {
     /**
      * Initialise separator panel and add it to the window
      *
-     * @param constraints the constraints for the GridBagLayout
-     * @param container   the container to add the separator to
+     * @param container the container to add the separator to
      */
-    private void initialiseSeparator(GridBagConstraints constraints, Container container) {
-        // Add a separator panel
+    private void initialiseSeparator(Container container) {
+        GridBagConstraints constraints = new GridBagConstraints();
+
         constraints.insets = new Insets(
-                GameWindow.PADDING,
-                4 * GameWindow.PADDING,
-                GameWindow.PADDING,
-                4 * GameWindow.PADDING
+                GameWindow.PADDING, 4 * GameWindow.PADDING, GameWindow.PADDING, 4 * GameWindow.PADDING
         );
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         container.add(separator, constraints);
-
-        constraints.insets = new Insets(
-                0,
-                4 * GameWindow.PADDING,
-                GameWindow.PADDING,
-                4 * GameWindow.PADDING);
-        constraints.gridy = 2;
     }
 
     /**
      * Initialise container for the input and add the component to the window
      *
-     * @param constraints the constraints for the GridBagLayout
-     * @param container   the container to add the footer to
+     * @param container the container to add the footer to
      */
-    private void initialiseFooter(GridBagConstraints constraints, Container container) {
-        // Initialise container for the input and add the component to the window
+    private void initialiseFooter(Container container) {
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        constraints.insets = new Insets(
+                0, 4 * GameWindow.PADDING, GameWindow.PADDING, 4 * GameWindow.PADDING
+        );
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
+
         footer.setOpaque(false);
-        footer.setBackground(Color.RED);
         footer.setLayout(new GridBagLayout());
         footer.setPreferredSize(new Dimension(1, (int) (GameWindow.BODY_FONT_SIZE * 3 + GameWindow.PADDING)));
         container.add(footer, constraints);
