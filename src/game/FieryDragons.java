@@ -14,6 +14,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The FieryDragons class is responsible for initiating and managing the game.
@@ -21,6 +22,7 @@ import java.util.List;
  */
 public class FieryDragons implements Serializable {
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
+    public static final int MAX_SAVES = 3;
     private static final String CONFIG_SAVES_FILE = "config/saves/";
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
     private static final int CARD_PER_ANIMAL = 3;
@@ -230,20 +232,16 @@ public class FieryDragons implements Serializable {
      * Saves the game state to a file.
      */
     public void saveGame() {
-        int saveNumber = 0;
-        String saveName = "saveData" + saveNumber + ".ser";
+        String saveName;
         File[] listOfFiles = checkSaveFolder();
-        assert listOfFiles != null;
-        if (listOfFiles.length >= 3) {
+
+        Objects.requireNonNull(listOfFiles);
+        if (listOfFiles.length >= MAX_SAVES) {
             saveName = findOldestFile(listOfFiles);
         } else {
-            for (File file : listOfFiles) {
-                if (file.getName().equals(saveName)) {
-                    saveNumber += 1;
-                    saveName = "saveData" + saveNumber + ".ser";
-                }
-            }
+            saveName = "saveData" + listOfFiles.length + ".ser";
         }
+
         try {
             FileOutputStream fileOut = new FileOutputStream(CONFIG_SAVES_FILE + saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -316,10 +314,7 @@ public class FieryDragons implements Serializable {
      * Increments the player turn to the next player in the sequence.
      */
     public void incrementPlayerTurn() {
-        this.playerTurn += 1;
-        if (this.playerTurn > players.length - 1) {
-            this.playerTurn = 0;
-        }
+        playerTurn = (playerTurn + 1) % players.length;
     }
 
     /**
