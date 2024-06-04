@@ -76,12 +76,11 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
     @Override
     public void move(Player player, int dist) {
         if (player.getPosition() == square) {
-            square.setVacancy(true);
+            square.setOccupiedBy(null);
         }
 
         if (abs(dist) == 1) {
             player.setPosition(square);
-            square.setVacancy(false);
 
         } else if (dist > 1) {
             // If they're moving forward, prioritise cave direction
