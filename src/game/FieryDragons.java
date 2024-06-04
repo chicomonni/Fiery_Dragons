@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class FieryDragons implements Serializable {
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
-    private static final String CONFIG_SAVES_FILE= "config/saves/";
+    private static final String CONFIG_SAVES_FILE = "config/saves/";
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
     private static final int CARD_PER_ANIMAL = 3;
     private String squareSrc;
@@ -32,6 +32,56 @@ public class FieryDragons implements Serializable {
     private Player[] players;
     private Board board;
     private int playerTurn = 0;
+
+    private static String makeCaveSrc(int numPlayers) {
+        StringBuilder caves = new StringBuilder(numPlayers);
+
+        for (int i = 0; i < numPlayers; i++) {
+            caves.append(passive_chits[i]);
+        }
+        return caves.toString();
+    }
+
+    private static String makeCardSrc(int numPlayers, boolean isPirateChecked, boolean isRascalChecked) {
+        StringBuilder cards = new StringBuilder();
+
+        for (int i = 0; i < numPlayers; i++) {
+            for (int val = 1; val <= CARD_PER_ANIMAL; val++) {
+                cards.append(passive_chits[i]).append(val).append(',');
+            }
+        }
+
+        if (isPirateChecked) {
+            for (int i = 0; i < numPlayers / 2; i++) {
+                int val = i % 2 + 1;
+                cards.append('P').append(val).append(',');
+            }
+        }
+
+        if (isRascalChecked) {
+            for (int i = 0; i < numPlayers / 2; i++) {
+                cards.append('R').append(0).append(',');
+            }
+        }
+        return cards.toString();
+    }
+
+    private static String makeSquareSrc(int numPlayers, int numSquares) {
+        StringBuilder squares = new StringBuilder(numSquares);
+        int base = numSquares / numPlayers;
+        int extra = numSquares % numPlayers;
+
+        for (int i = 0; i < numPlayers; i++) {
+            char chit = passive_chits[i];
+
+            squares.append(String.valueOf(chit).repeat(base));
+
+            if (i < extra) {
+                squares.append(chit);
+            }
+        }
+        return squares.toString();
+    }
 
     /**
      * Creates the chits used in the game with specific strategies.
@@ -122,50 +172,9 @@ public class FieryDragons implements Serializable {
     public void pickSettings(DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
         this.numPlayers = numPlayers;
 
-        StringBuilder caves = new StringBuilder(numPlayers);
-
-        for (int i = 0; i < numPlayers; i++) {
-            caves.append(passive_chits[i]);
-        }
-
-        StringBuilder squares = new StringBuilder(numSquares);
-        int base = numSquares / numPlayers;
-        int extra = numSquares % numPlayers;
-
-        for (int i = 0; i < caves.length(); i++) {
-            char chit = caves.charAt(i);
-
-            squares.append(String.valueOf(chit).repeat(base));
-
-            if (i < extra) {
-                squares.append(chit);
-            }
-        }
-
-        StringBuilder cards = new StringBuilder();
-
-        for (int i = 0; i < numPlayers; i++) {
-            for (int val = 1; val <= CARD_PER_ANIMAL; val++) {
-                cards.append(passive_chits[i]).append(val).append(',');
-            }
-        }
-
-        if (isPirateChecked) {
-            for (int i = 0; i < numPlayers / 2; i++) {
-                int val = i % 2 + 1;
-                cards.append('P').append(val).append(',');
-            }
-        }
-
-        if (isRascalChecked) {
-            for (int i = 0; i < numPlayers / 2; i++) {
-                cards.append('R').append(0).append(',');
-            }
-        }
-
-        caveSrc = caves.toString();
-        squareSrc = squares.toString();
-        cardSrc = cards.toString();
+        caveSrc = makeCaveSrc(numPlayers);
+        squareSrc = makeSquareSrc(numPlayers, numSquares);
+        cardSrc = makeCardSrc(numPlayers, isPirateChecked, isRascalChecked);
 
         try {
             new BoardGenerator(numSquares, numPlayers).make(VOLCANO_PATH);
@@ -178,9 +187,9 @@ public class FieryDragons implements Serializable {
 
     /**
      * Continues the game from a saved state.
-     * 
-     * @param display the display manager handling game displays
-     * @param window the game window
+     *
+     * @param display    the display manager handling game displays
+     * @param window     the game window
      * @param saveNumber the save file number to load
      * @throws IOException
      * @throws FontFormatException
@@ -229,7 +238,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Loads the game state from a file.
-     * 
+     *
      * @param saveNumber the save file number to load
      * @return the FieryDragons instance representing the game
      */
@@ -253,7 +262,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Checks the save folder for save files.
-     * 
+     *
      * @return the list of save files
      */
     public File[] checkSaveFolder() {
@@ -269,7 +278,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Finds the oldest file in the save folder.
-     * 
+     *
      * @param list the list of files in the save folder
      * @return
      */
@@ -296,7 +305,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the current player turn.
-     * 
+     *
      * @return the player turn
      */
     public int getPlayerTurn() {
@@ -305,7 +314,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the chit factory used in the game.
-     * 
+     *
      * @return the chit factory
      */
     public ChitFactory getChitFactory() {
@@ -314,7 +323,7 @@ public class FieryDragons implements Serializable {
 
     /**
      * Retrieves the game board.
-     * 
+     *
      * @return the game board
      */
     public Board getBoard() {
@@ -322,8 +331,8 @@ public class FieryDragons implements Serializable {
     }
 
     /**
-     * Retrieves the players in the game. 
-     * 
+     * Retrieves the players in the game.
+     *
      * @return the game's players
      */
     public Player[] getPlayers() {
