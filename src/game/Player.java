@@ -3,6 +3,7 @@ package game;
 import game.actions.GameAction;
 import game.chits.Chit;
 import game.displays.DisplayManager;
+import game.tiles.Cave;
 import game.tiles.GameTile;
 
 import javax.swing.*;
@@ -20,21 +21,36 @@ public class Player {
     private final char displayChar = '@';
     private final String name;
     private GameTile position;
+    private Cave cave;
     private Player nextPlayer;
     private Timer playTurnTimer;
-    private Chit chit;
 
     /**
-     * Constructor
+     * Constructor. Initial position is inside the cave.
+     *
+     * @param name the name of the player
+     * @param cave the player's cave
+     * @param hue  the hue of the player's colour
+     */
+    public Player(String name, Cave cave, float hue) {
+        this.name = name;
+        this.position = cave;
+        this.cave = cave;
+        this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
+    }
+
+    /**
+     * Constructor. Player's initial position is passed as a parameter.
      *
      * @param name     the name of the player
+     * @param cave     the player's cave
      * @param position the starting position of the player
      * @param hue      the hue of the player's colour
      */
-    public Player(String name, GameTile position, float hue) {
+    public Player(String name, Cave cave, GameTile position, float hue) {
         this.name = name;
+        this.cave = cave;
         this.position = position;
-        this.chit = position.getChit();
         this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
     }
 
@@ -54,6 +70,7 @@ public class Player {
      */
     public void setPosition(GameTile position) {
         this.position = position;
+        position.setOccupiedBy(this);
     }
 
     /**
@@ -80,7 +97,7 @@ public class Player {
      * @return the Chit associated with this Player
      */
     public Chit getChit() {
-        return chit;
+        return cave.getChit();
     }
 
     /**
