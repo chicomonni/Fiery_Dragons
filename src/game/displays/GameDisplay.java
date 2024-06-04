@@ -117,6 +117,11 @@ public class GameDisplay {
         return constraints;
     }
 
+    /**
+     * Initialise container for the Volcano and add the component to the window
+     * @param container the container to add the volcano to
+     * @param constraints the constraints for the GridBagLayout
+     */
     private void initaliseVolcanoDisplay(Container container, GridBagConstraints constraints){
         volcano.setPreferredSize(new Dimension(
                 (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
