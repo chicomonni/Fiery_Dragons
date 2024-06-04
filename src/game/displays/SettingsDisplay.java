@@ -65,23 +65,8 @@ public class SettingsDisplay {
         GridBagConstraints constraints = initialiseConstraints();
 
         initaliseTitleLabel(window, constraints);
-
-        addSeparator(constraints);
-
-        addPlayerSlider(window, constraints);
-
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 50, 100);
-
-        // Configure slider
-        playerSlider.setMajorTickSpacing(1);
-        playerSlider.setPaintTicks(true);
-        playerSlider.setPaintLabels(true);
-        playerSlider.setSnapToTicks(true);
-        playerSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        playerSlider.setLabelTable(labelSlider(window, 2, 8, 1));
-        playerSlider.setOpaque(false);
-        settingsScreen.add(playerSlider, constraints);
+        initaliseSeparator(constraints);
+        initalisePlayerSlider(window, constraints);
 
         // Add square slider with label
         constraints.gridy++;
@@ -169,7 +154,7 @@ public class SettingsDisplay {
      * Adds a separator to the settings screen.
      * @param constraints the constraints for the layout
      */
-    private void addSeparator(GridBagConstraints constraints) {
+    private void initaliseSeparator(GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 50, 100);
 
@@ -183,7 +168,7 @@ public class SettingsDisplay {
      * @param window the GameWindow instance
      * @param constraints the constraints for the layout
      */
-    private void addPlayerSlider(GameWindow window, GridBagConstraints constraints) {
+    private void initalisePlayerSlider(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
 
@@ -191,6 +176,19 @@ public class SettingsDisplay {
                 "NUMBER OF PLAYERS:",
                 window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
         ), constraints);
+
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 50, 100);
+
+        // Configure slider
+        playerSlider.setMajorTickSpacing(1);
+        playerSlider.setPaintTicks(true);
+        playerSlider.setPaintLabels(true);
+        playerSlider.setSnapToTicks(true);
+        playerSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        playerSlider.setLabelTable(labelSlider(window, 2, 8, 1));
+        playerSlider.setOpaque(false);
+        settingsScreen.add(playerSlider, constraints);
     }
 
     /**
