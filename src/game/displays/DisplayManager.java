@@ -165,7 +165,6 @@ public class DisplayManager {
         settingsDisplay.hideScreen(frame);
         winnerDisplay.hideScreen(frame);
         loadDisplay.showScreen(frame);
-
     }
 
     /**
