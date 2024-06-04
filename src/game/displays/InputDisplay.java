@@ -219,4 +219,15 @@ public class InputDisplay {
         inputField.setText("");
     }
 
+    public void printMessage(String message) {
+        inputField.setText(message);
+        inputField.setEditable(false);
+
+        Timer timer = new Timer(1000, e -> {
+            inputField.setText("");
+            inputField.setEditable(true);
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
 }
