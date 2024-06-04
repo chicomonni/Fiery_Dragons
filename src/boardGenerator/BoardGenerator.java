@@ -1,7 +1,9 @@
 package boardGenerator;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,7 @@ public class BoardGenerator {
         this.dimensions = 2 * (caves.getOffset() + caves.getRadius()) + 1;
     }
 
-    public void make(String fileName) throws FileNotFoundException {
+    public void make(Path fileName) throws IOException {
         Graph board = (x, y) -> {
             List<Graph> gameBoard = new ArrayList<>(Arrays.asList(innerCircle, outerCircle, sqaures, caves));
 
@@ -39,8 +41,12 @@ public class BoardGenerator {
         };
 
         String outS = ASCIIGaussianBlur.graphToASCII(board, dimensions, dimensions, 2);
-        PrintWriter out = new PrintWriter(fileName);
-        out.print(outS);
+        File file = new File(String.valueOf(fileName));
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        FileWriter out = new FileWriter(file);
+        out.write(outS);
         out.close();
     }
 }

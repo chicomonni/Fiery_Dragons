@@ -71,8 +71,8 @@ public class FieryDragons {
      * Creates the game board using predefined sources and the chit factory.
      */
     public void createBoard() {
-        board = new Board("/assets/volcano.txt");
-        board.createBoard(SQUARE_SRC, CAVE_SRC, CARD_SRC, chitFactory);
+        board = new Board(Paths.get("assets/volcano.txt").toAbsolutePath());
+        board.createBoard(squareSrc, caveSrc, cardSrc, chitFactory);
     }
 
     /**
@@ -141,6 +141,11 @@ public class FieryDragons {
         setPlayers(numPlayers);
 
         //TODO: set others
+        try {
+            new BoardGenerator(numSquares, numPlayers).make(Paths.get("assets/volcano.txt").toAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         playGame(display, window);
     }
