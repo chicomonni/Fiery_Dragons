@@ -51,14 +51,7 @@ public class GameDisplay {
 
         initaliseVolcanoDisplay(container, constraints);
 
-        // Initialise container for the Chit Cards and add the component to the window
-        chitCards.setOpaque(false);
-        chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
-                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
-        ));
-        chitCards.setLayout(new GridBagLayout());
-        container.add(chitCards, constraints);
+        initialiseChitCardDisplay(container, constraints);
 
         // Add a separator panel
         constraints.insets = new Insets(
@@ -139,6 +132,16 @@ public class GameDisplay {
         constraints.gridy = 0;
     }
 
+    private void initialiseChitCardDisplay(Container container, GridBagConstraints constraints){
+        chitCards.setOpaque(false);
+        chitCards.setPreferredSize(new Dimension(
+                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
+                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
+        ));
+        chitCards.setLayout(new GridBagLayout());
+        container.add(chitCards, constraints);
+    }
+    
     /**
      * Getter for the swing component that displays the Volcano
      *
