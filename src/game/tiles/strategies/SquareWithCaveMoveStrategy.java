@@ -75,8 +75,11 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
      */
     @Override
     public void move(Player player, int dist) {
+        boolean start = false;
+
         if (player.getPosition() == square) {
             square.setOccupiedBy(null);
+            start = true;
         }
 
         if (abs(dist) == 1) {
@@ -100,7 +103,7 @@ public class SquareWithCaveMoveStrategy implements SquareMoveStrategy {
             if (cave.isResident(player)) {
                 cave.setCanReturn(true);
             }
-        } else if (dist <= -1) {
+        } else if (dist <= -1 && !start) {
             // If correct Player passes Cave backwards, they need to pass forward again to be allowed access
             if (cave.isResident(player)) {
                 cave.setCanReturn(false);
