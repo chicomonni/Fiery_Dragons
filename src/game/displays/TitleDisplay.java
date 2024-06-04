@@ -55,7 +55,7 @@ public class TitleDisplay {
         separator.setBackground(Color.WHITE);
 
         // Create titlePanel and add components to it
-        initaliseTitlePanel();
+        initialiseTitlePanel();
 
         // Initialise buttons
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
@@ -91,7 +91,7 @@ public class TitleDisplay {
          logo.setText(readTitleDisplay());
     }
 
-    private void initaliseTitlePanel() {
+    private void initialiseTitlePanel() {
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
         titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
