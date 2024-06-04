@@ -83,7 +83,7 @@ public class LoadDisplay {
         int padding = 15;
         constraints.gridy++;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(50, 400, 50, 400);
+        constraints.insets = new Insets(20, 400, 50, 400);
 
         window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE, padding);
         loadScreen.add(backButton, constraints);

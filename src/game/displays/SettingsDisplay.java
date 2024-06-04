@@ -283,12 +283,20 @@ public class SettingsDisplay {
 
     }
 
+    private void resetSettings() {
+        playerSlider.setValue(4);
+        squareSlider.setValue(24);
+        dragonPirateCheckbox.setSelected(true);
+        ratRascalCheckbox.setSelected(false);
+    }
+
     /**
      * Shows the settings screen.
      *
      * @param window the JFrame to display the settings screen on
      */
-    public void showScreen(JFrame window) {
+    protected void showScreen(JFrame window) {
+        resetSettings();
         settingsScreen.setVisible(true);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -301,7 +309,7 @@ public class SettingsDisplay {
      *
      * @param window the JFrame to hide the settings screen from
      */
-    public void hideScreen(JFrame window) {
+    protected void hideScreen(JFrame window) {
         settingsScreen.setVisible(false);
         window.revalidate();
         window.repaint();
