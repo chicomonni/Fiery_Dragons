@@ -109,6 +109,16 @@ public class FieryDragons {
         display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
+//        TODO: remove test
+        players[0].setPosition(board.getVolcano().getSquares().get(0));
+        display.displayMove(players[0]);
+
+        players[1].setPosition(board.getVolcano().getSquares().get(10));
+        display.displayMove(players[1]);
+
+        players[2].setPosition(board.getVolcano().getSquares().get(20));
+        display.displayMove(players[2]);
+
         players[0].startTurn(board, display);
     }
 
