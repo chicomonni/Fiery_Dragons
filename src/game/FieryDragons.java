@@ -1,5 +1,7 @@
 package game;
 
+import boardGenerator.BoardGenerator;
+import com.sun.tools.javac.Main;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
@@ -7,9 +9,8 @@ import game.displays.DisplayManager;
 import game.displays.GameWindow;
 import game.tiles.Cave;
 
-import java.io.Serializable;
+import java.io.*;
 import java.awt.*;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class FieryDragons implements Serializable {
     private static String caveSrc = "S*w0";
     private static int NUM_PLAYERS = 4;
     private static Player[] players;
-    private final ChitFactory chitFactory = new ChitFactory();
+    private ChitFactory chitFactory = new ChitFactory();
     private Board board;
 
     /**
@@ -158,16 +159,51 @@ public class FieryDragons implements Serializable {
         playGame(display, window);
     }
 
-    public void continueGame(FieryDragons data) {
+    public void continueGame(DisplayManager display, GameWindow window) throws IOException, FontFormatException {
+        FieryDragons data = loadGame();
+
         this.board = data.getBoard();
         this.players = data.getPlayers();
         this.chitFactory = data.getChitFactory();
 
-        GameWindow gameWindow = new GameWindow();
+        display.createGameComponents(window, board, players);
 
-        DisplayManager display = new DisplayManager(gameWindow, board, players);
+        display.displayGameScreen(window.getFrame());
         players[0].startTurn(board, display);
     }
+
+    public void saveGame() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("gameData.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized data is saved in gameData.ser");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private static FieryDragons loadGame() {
+        try {
+            FieryDragons data;
+            FileInputStream fileIn = new FileInputStream("gameData.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            data = (FieryDragons) in.readObject();
+            in.close();
+            fileIn.close();
+            return data;
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Game Data not found");
+            c.printStackTrace();
+        }
+        return null;
+
+    }
+
 
     public ChitFactory getChitFactory() {
         return chitFactory;

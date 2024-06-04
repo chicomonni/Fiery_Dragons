@@ -79,7 +79,15 @@ public class TitleDisplay {
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> fieryDragons.playGame(display, window));
+        continueGameButton.addActionListener(e -> {
+            try {
+                fieryDragons.continueGame(display, window);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
 
         buttonPanel.add(newGameButton);

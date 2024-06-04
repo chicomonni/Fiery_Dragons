@@ -25,9 +25,6 @@ public class MainMenu {
 
     }
 
-    public void newGame() {
-        fieryDragons.start();
-    }
 
     private void checkName() {
         int count = 0;
@@ -49,14 +46,15 @@ public class MainMenu {
         return false;
     }
 
-    private static FieryDragons loadGame() {
+    public static FieryDragons loadGame() {
         try {
+            FieryDragons data = null;
             FileInputStream fileIn = new FileInputStream("gameData.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            fieryDragons = (FieryDragons) in.readObject();
+            data = (FieryDragons) in.readObject();
             in.close();
             fileIn.close();
-            return fieryDragons;
+            return data;
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
@@ -67,10 +65,6 @@ public class MainMenu {
 
     }
 
-    public static void continueGame() {
-        FieryDragons data = loadGame();
-        fieryDragons.continueGame(data);
-    }
 
 
 }
