@@ -81,6 +81,9 @@ public class TitleDisplay {
          logo.setText(readTitleDisplay());
     }
 
+    /**
+     * Initialises the title panel.
+     */
     private void initaliseTitlePanel() {
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
@@ -90,6 +93,11 @@ public class TitleDisplay {
         titleScreen.add(titlePanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Initialises the buttons.
+     * @param window the GameWindow to add the buttons to
+     * @return the JPanel containing the buttons
+     */
     private JPanel initaliseButtons(GameWindow window) {
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
         buttonPanel.setBackground(Color.BLACK);
