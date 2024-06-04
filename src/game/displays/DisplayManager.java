@@ -17,6 +17,7 @@ public class DisplayManager {
 
     private final TitleDisplay titleDisplay;
     private final SettingsDisplay settingsDisplay;
+    private final LoadDisplay loadDisplay;
     private final GameDisplay gameDisplay;
     private VolcanoDisplay volcanoDisplay;
     private PlayerDisplay playerDisplay;
@@ -36,6 +37,7 @@ public class DisplayManager {
         this.window = window;
         this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
         this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
+        this.loadDisplay = new LoadDisplay(fieryDragons, this, window);
         this.gameDisplay = new GameDisplay(window);
     }
 
@@ -119,6 +121,7 @@ public class DisplayManager {
     public void displayTitleScreen(JFrame frame) {
         gameDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
+        loadDisplay.hideScreen(frame);
         titleDisplay.showScreen(frame);
     }
 
@@ -130,6 +133,7 @@ public class DisplayManager {
     public void displayGameScreen(JFrame frame) {
         titleDisplay.hideScreen(frame);
         settingsDisplay.hideScreen(frame);
+        loadDisplay.hideScreen(frame);
         gameDisplay.showScreen(frame);
     }
 
@@ -141,7 +145,21 @@ public class DisplayManager {
     public void displaySettingsScreen(JFrame frame) {
         titleDisplay.hideScreen(frame);
         gameDisplay.hideScreen(frame);
+        loadDisplay.hideScreen(frame);
         settingsDisplay.showScreen(frame);
+    }
+
+    /**
+     * Displays the load game screen.
+     *
+     * @param frame the JFrame representing the game window
+     */
+    public void displayLoadScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        loadDisplay.showScreen(frame);
+
     }
 
 }
