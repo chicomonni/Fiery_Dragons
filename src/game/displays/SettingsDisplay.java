@@ -67,33 +67,9 @@ public class SettingsDisplay {
         initaliseTitleLabel(window, constraints);
         initaliseSeparator(constraints);
         initalisePlayerSlider(window, constraints);
-
         initaliseSquareSlider(window, constraints);
 
-        // Add checkboxes
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 15, 100);
-
-        settingsScreen.add(createLabel(
-                "INCLUDE:",
-                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
-        ), constraints);
-
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 10, 100);
-
-        dragonPirateCheckbox.setForeground(Color.WHITE);
-        dragonPirateCheckbox.setFocusPainted(false);
-        window.customiseCheckbox(dragonPirateCheckbox, GameWindow.BODY_FONT_SIZE);
-        settingsScreen.add(dragonPirateCheckbox, constraints);
-
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 0, 100);
-
-        ratRascalCheckbox.setForeground(Color.WHITE);
-        ratRascalCheckbox.setFocusPainted(false);
-        window.customiseCheckbox(ratRascalCheckbox, GameWindow.BODY_FONT_SIZE);
-        settingsScreen.add(ratRascalCheckbox, constraints);
+        initaliseCheckboxes(window, constraints);
 
         // Add buttons
         constraints.gridy++;
@@ -209,6 +185,32 @@ public class SettingsDisplay {
         squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
         squareSlider.setOpaque(false);
         settingsScreen.add(squareSlider, constraints);
+    }
+
+    private void initaliseCheckboxes(GameWindow window, GridBagConstraints constraints) {
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 15, 100);
+
+        settingsScreen.add(createLabel(
+                "INCLUDE:",
+                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
+        ), constraints);
+
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 10, 100);
+
+        dragonPirateCheckbox.setForeground(Color.WHITE);
+        dragonPirateCheckbox.setFocusPainted(false);
+        window.customiseCheckbox(dragonPirateCheckbox, GameWindow.BODY_FONT_SIZE);
+        settingsScreen.add(dragonPirateCheckbox, constraints);
+
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 0, 100);
+
+        ratRascalCheckbox.setForeground(Color.WHITE);
+        ratRascalCheckbox.setFocusPainted(false);
+        window.customiseCheckbox(ratRascalCheckbox, GameWindow.BODY_FONT_SIZE);
+        settingsScreen.add(ratRascalCheckbox, constraints);
     }
 
     /**
