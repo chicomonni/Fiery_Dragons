@@ -34,23 +34,6 @@ public class FieryDragons {
     private Board board;
 
     /**
-     * Sets the number of players and adjusts the cave source string accordingly.
-     *
-     * @param numPlayers the number of players
-     */
-    private static void setPlayers(int numPlayers) {
-        NUM_PLAYERS = numPlayers;
-        CAVE_SRC = "";
-        StringBuilder caveSrcBuilder = new StringBuilder();
-
-        for (int i = 0; i < NUM_PLAYERS; i++) {
-            caveSrcBuilder.append(MAX_CAVE_SRC.charAt(i % MAX_CAVE_SRC.length()));
-        }
-        CAVE_SRC = caveSrcBuilder.toString();
-
-    }
-
-    /**
      * Creates the chits used in the game with specific strategies.
      */
     public void createChits() {
