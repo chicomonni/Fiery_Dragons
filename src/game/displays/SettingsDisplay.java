@@ -178,8 +178,12 @@ public class SettingsDisplay {
         settingsScreen.add(separator, constraints);
     }
 
+    /**
+     * Adds the player slider to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
     private void addPlayerSlider(GameWindow window, GridBagConstraints constraints) {
-        // Add player slider with label
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
 
