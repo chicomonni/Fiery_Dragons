@@ -13,6 +13,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
+/**
+ * A display for handling user input during the game.
+ */
 public class InputDisplay {
     private final JTextField inputField = new JTextField();
     private final JPanel promptContainer = new JPanel();
