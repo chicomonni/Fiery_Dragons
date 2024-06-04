@@ -68,28 +68,7 @@ public class SettingsDisplay {
         initaliseSeparator(constraints);
         initalisePlayerSlider(window, constraints);
 
-        // initaliseSquareSlider(window, constraints);
-        // Add square slider with label
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 0, 100);
-
-        settingsScreen.add(createLabel(
-                "VOLCANO SIZE:",
-                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
-        ), constraints);
-
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 50, 100);
-
-        // Configure slider
-        squareSlider.setMajorTickSpacing(1);
-        squareSlider.setPaintTicks(true);
-        squareSlider.setPaintLabels(true);
-        squareSlider.setSnapToTicks(true);
-        squareSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
-        squareSlider.setOpaque(false);
-        settingsScreen.add(squareSlider, constraints);
+        initaliseSquareSlider(window, constraints);
 
         // Add checkboxes
         constraints.gridy++;
@@ -204,6 +183,28 @@ public class SettingsDisplay {
         settingsScreen.add(playerSlider, constraints);
     }
 
+    private void initaliseSquareSlider(GameWindow window, GridBagConstraints constraints) {
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 0, 100);
+
+        settingsScreen.add(createLabel(
+                "VOLCANO SIZE:",
+                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
+        ), constraints);
+
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 50, 100);
+
+        // Configure slider
+        squareSlider.setMajorTickSpacing(1);
+        squareSlider.setPaintTicks(true);
+        squareSlider.setPaintLabels(true);
+        squareSlider.setSnapToTicks(true);
+        squareSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
+        squareSlider.setOpaque(false);
+        settingsScreen.add(squareSlider, constraints);
+    }
 
     /**
      * Creates a label with the specified text and font.
