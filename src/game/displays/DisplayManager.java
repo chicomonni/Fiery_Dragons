@@ -36,7 +36,7 @@ public class DisplayManager {
     public DisplayManager(FieryDragons fieryDragons, GameWindow window) throws IOException, FontFormatException {
         this.window = window;
         this.gameData = fieryDragons;
-        this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
+        this.titleDisplay = new TitleDisplay(this, window);
         this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
         this.loadDisplay = new LoadDisplay(fieryDragons, this, window);
         this.winnerDisplay = new WinnerDisplay(this, window);
