@@ -6,6 +6,7 @@ import game.Player;
 import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
 import game.actions.NextTurnGameAction;
+import game.actions.SaveGameAction;
 import game.utils.Typing;
 
 import javax.swing.*;
@@ -101,7 +102,7 @@ public class InputDisplay {
         name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.BODY_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
 
-        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ") OR 'END TURN'";
+        String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + "), 'END TURN' OR 'SAVE GAME'";
 
         Typing.animateTyping(prompt, promptText, 40);
         inputMarker.setText(">");
@@ -186,8 +187,7 @@ public class InputDisplay {
         }
 
         if (input.toLowerCase().strip().equals("save game")) {
-            gameData.saveGame();
-            return new NextTurnGameAction(player);
+            return new SaveGameAction(gameData, player);
         }
 
 
