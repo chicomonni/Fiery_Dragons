@@ -1,8 +1,9 @@
 package game.chitCards;
 
+import game.Player;
+import game.actions.GameAction;
 import game.chits.Chit;
 import game.tiles.GameTile;
-import game.Player;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -118,33 +119,26 @@ public class ChitCard implements Serializable {
 
 
     /**
-     * Checks if the card matches the Chit of the given Player.
+     * Checks if the card matches the cave Chit of the given Player.
+     *
      * @param player the player to check against
-     * @return
+     * @return if the player's chit matches the card
      */
     public boolean isMatch(Player player) {
         return chit.directValidate(player.getChit());
     }
 
     /**
-     * Retrieves the modified value of the card based on its Chit.
-     *
-     * @return the modified value of the card
-     */
-    public int getValue() {
-        return chit.modifyValue(value);
-    }
-
-    /**
      * Retrieves the modified value of the card based on its Chit and the given player.
+     *
      * @param player the player to check against
-     * @return
+     * @return the value to use for moving
      */
     public int getValue(Player player) {
         if (isMatch(player)) {
-            return chit.modifyValue(value) * 2;
+            return value * 2;
         }
-        return chit.modifyValue(value);
+        return value;
     }
 
     private char[][] clone2D(char[][] array) {
@@ -156,5 +150,9 @@ public class ChitCard implements Serializable {
         }
 
         return clone;
+    }
+
+    public GameAction getAction(Player player) {
+        return chit.getAction(player, getValue(player));
     }
 }

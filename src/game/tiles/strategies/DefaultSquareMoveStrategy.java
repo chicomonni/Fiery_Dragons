@@ -66,12 +66,11 @@ public class DefaultSquareMoveStrategy implements SquareMoveStrategy, Serializab
     @Override
     public void move(Player player, int dist) {
         if (player.getPosition() == square) {
-            square.setVacancy(true);
+            square.setOccupiedBy(null);
         }
 
         if (abs(dist) == 1) {
             player.setPosition(square);
-            square.setVacancy(false);
         } else if (dist > 1) {
             square.getNext().move(player, dist - 1);
         } else {

@@ -38,7 +38,7 @@ public class FlipCardGameAction implements GameAction {
         display.displayFlip(card);
 
         if (card.isMatch(player.getPosition())) {
-            return player.getPosition().getAction(player, card.getValue(player));
+            return card.getAction(player);
         }
         return new EndTurnGameAction(player);
     }

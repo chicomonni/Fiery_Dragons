@@ -1,16 +1,12 @@
 package game.chits.strategies;
 
 import game.Player;
+import game.actions.EndTurnGameAction;
 import game.actions.GameAction;
+import game.actions.SwapPositionGameAction;
 import game.chits.Chit;
 
-import java.io.Serializable;
-
-/**
- * Concrete strategy class for a pirate Chit. Game rule: pirate Chits move the Player backwards no matter the Chit
- * they're standing on
- */
-public class PirateChitStrategy implements ChitStrategy, Serializable {
+public class RascalChitStrategy implements ChitStrategy {
     /**
      * Used to check if Chit on card matches Chit on Volcano
      *
@@ -32,6 +28,10 @@ public class PirateChitStrategy implements ChitStrategy, Serializable {
      */
     @Override
     public GameAction getAction(Player player, int value) {
-        return player.getPosition().getAction(player, -value);
+        Player nearest = player.getPosition().getNearestPlayer();
+        if (nearest == null) {
+            return new EndTurnGameAction(player);
+        }
+        return new SwapPositionGameAction(player, nearest);
     }
 }

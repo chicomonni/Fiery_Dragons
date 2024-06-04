@@ -7,6 +7,11 @@ import game.tiles.strategies.DefaultSquareMoveStrategy;
 import game.tiles.strategies.SquareMoveStrategy;
 import game.tiles.strategies.SquareWithCaveMoveStrategy;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * Class representing a Square on the Volcano
  */
@@ -91,13 +96,14 @@ public class Square extends GameTile {
      */
     @Override
     public boolean canEnter(Player player) {
-        return vacant;
+        return occupiedBy == null;
     }
 
     /**
      * Check if a Player can win with the given number of moves
+     *
      * @param player the Player trying to win
-     * @param dist the number of moves the Player could move along the Volcano
+     * @param dist   the number of moves the Player could move along the Volcano
      * @return {@code true} if the Player can win, {@code false} otherwise
      */
     @Override
@@ -123,5 +129,43 @@ public class Square extends GameTile {
      */
     public void setCave(Cave cave) {
         strategy = new SquareWithCaveMoveStrategy(this, cave);
+    }
+
+    /**
+     * Get the nearest player to this tile
+     *
+     * @return the nearest player, {@code null} if no player is found
+     */
+    @Override
+    public Player getNearestPlayer() {
+        Queue<Square> queue = new LinkedList<>();
+        List<Square> visited = new ArrayList<>();
+
+        visited.add(this);
+
+        visited.add(getNext());
+        queue.add(getNext());
+
+        visited.add(getPrev());
+        queue.add(getPrev());
+
+        while (!queue.isEmpty()) {
+            Square current = queue.poll();
+            System.out.println(current);
+            if (current.getOccupiedBy() != null) {
+                return current.getOccupiedBy();
+            }
+
+            if (!visited.contains(current.getNext())) {
+                visited.add(current.getNext());
+                queue.add(current.getNext());
+            }
+
+            if (!visited.contains(current.getPrev())) {
+                visited.add(current.getPrev());
+                queue.add(current.getPrev());
+            }
+        }
+        return null;
     }
 }

@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public abstract class GameTile implements Serializable {
     private final Chit chit;
-    protected boolean vacant = true;
+    protected Player occupiedBy;
 
     /**
      * Constructor.
@@ -44,12 +44,12 @@ public abstract class GameTile implements Serializable {
      */
     public GameAction getAction(Player player, int dist) {
         dist = dist + Integer.signum(dist);
-        
+
         // If the player can win, return a WinAction immediately
         if (winningMove(player, dist)) {
             return new WinAction(player, dist);
 
-        // Otherwise if the player can move, return a MoveGameAction
+            // Otherwise if the player can move, return a MoveGameAction
         } else if (canMove(player, dist)) {
             return new MoveGameAction(player, dist);
         }
@@ -93,12 +93,21 @@ public abstract class GameTile implements Serializable {
     public abstract boolean winningMove(Player player, int dist);
 
     /**
-     * Sets the vacancy state of this GameTile.
+     * Get the player currently standing on this tile.
      *
-     * @param state {@code true} if the tile should be marked as vacant, {@code false} otherwise
+     * @return the player standing on this tile, {@code null} if no player is here
      */
-    public void setVacancy(boolean state) {
-        vacant = state;
+    public Player getOccupiedBy() {
+        return occupiedBy;
+    }
+
+    /**
+     * Sets the player currently standing on this tile.
+     *
+     * @param player the player standing on this tile, {@code null} if no player is here
+     */
+    public void setOccupiedBy(Player player) {
+        occupiedBy = player;
     }
 
     /**
@@ -108,4 +117,11 @@ public abstract class GameTile implements Serializable {
      * @return an int array containing the coordinates (x, y)
      */
     public abstract int[] calculateLocation(PlayerDisplay playerDisplay);
+
+    /**
+     * Get the nearest player to this tile
+     *
+     * @return the nearest player, {@code null} if no player is found
+     */
+    public abstract Player getNearestPlayer();
 }

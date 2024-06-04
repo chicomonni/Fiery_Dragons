@@ -48,25 +48,51 @@ public class TitleDisplay {
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
 
-        // Initialize and configure the logo label
-        logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
-        logo.setEditable(false);
-        logo.setBackground(Color.BLACK);
-        logo.setForeground(Color.WHITE);
-        logo.setText(readTitleDisplay());
+        initialiseLogo(window);
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
 
-        // Create titlePanel and add components to it
+        initaliseTitlePanel();
+        JPanel buttonPanel = initaliseButtons(window);
+        addListeners(fieryDragons, display, window, frame);
+
+        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.getContentPane().add(titleScreen);
+    }
+
+    /**
+     * Initialises the logo text area.
+     * @param window the GameWindow to add the logo to
+     * @throws IOException
+     */
+    private void initialiseLogo(GameWindow window) throws IOException {
+         logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
+         logo.setEditable(false);
+         logo.setBackground(Color.BLACK);
+         logo.setForeground(Color.WHITE);
+         logo.setText(readTitleDisplay());
+    }
+
+    /**
+     * Initialises the title panel.
+     */
+    private void initaliseTitlePanel() {
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.setBackground(Color.BLACK);
         titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
         titlePanel.add(logo, BorderLayout.CENTER);
         titlePanel.add(separator, BorderLayout.SOUTH);
         titleScreen.add(titlePanel, BorderLayout.CENTER);
+    }
 
-        // Initialise buttons
+    /**
+     * Initialises the buttons.
+     * @param window the GameWindow to add the buttons to
+     * @return the JPanel containing the buttons
+     */
+    private JPanel initaliseButtons(GameWindow window) {
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
@@ -95,9 +121,23 @@ public class TitleDisplay {
         buttonPanel.add(exitGameButton);
 
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 300, 50, 300));
-        titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
-        frame.getContentPane().add(titleScreen);
+        return buttonPanel;
+    }
+
+    /**
+     * Adds action listeners to the buttons.
+     * @param fieryDragons the FieryDragons instance to start the game
+     * @param display the DisplayManager handling game displays
+     * @param window the GameWindow instance this class affects
+     * @param frame the JFrame to add the action listeners to
+     */
+    private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+        newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
+
+        //TODO: change to consider current player and current board setup
+        continueGameButton.addActionListener(e -> fieryDragons.playGame(display, window));
+        exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
     }
 
     /**

@@ -62,6 +62,25 @@ public class SettingsDisplay {
         settingsScreen.setLayout(new GridBagLayout());
         settingsScreen.setBackground(Color.BLACK);
 
+        GridBagConstraints constraints = initialiseConstraints();
+
+        initaliseTitleLabel(window, constraints);
+        initaliseSeparator(constraints);
+        initalisePlayerSlider(window, constraints);
+        initaliseSquareSlider(window, constraints);
+
+        initaliseCheckboxes(window, constraints);
+
+        initaliseButtons(window, constraints);
+
+        frame.add(settingsScreen);
+    }
+
+    /**
+     * Initializes the constraints for the settings screen layout.
+     * @return the constraints for the layout
+     */
+    private GridBagConstraints initialiseConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Add title label
@@ -71,20 +90,40 @@ public class SettingsDisplay {
         constraints.weightx = 1;
         constraints.insets = new Insets(50, 100, 15, 100);
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        return constraints;
+    }
 
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
-        settingsScreen.add(titleLabel, constraints);
-
+    /**
+     * Adds a separator to the settings screen.
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseSeparator(GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 50, 100);
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
         settingsScreen.add(separator, constraints);
+    }
 
-        // Add player slider with label
+    /**
+     * Initializes the title label for the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseTitleLabel(GameWindow window, GridBagConstraints constraints) {
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
+        settingsScreen.add(titleLabel, constraints);
+    }
+
+    /**
+     * Adds the player slider to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initalisePlayerSlider(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
 
@@ -103,9 +142,16 @@ public class SettingsDisplay {
         playerSlider.setSnapToTicks(true);
         playerSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
         playerSlider.setLabelTable(labelSlider(window, 2, 8, 1));
+        playerSlider.setOpaque(false);
         settingsScreen.add(playerSlider, constraints);
+    }
 
-        // Add square slider with label
+    /**
+     * Adds the square slider to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseSquareSlider(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
 
@@ -124,9 +170,16 @@ public class SettingsDisplay {
         squareSlider.setSnapToTicks(true);
         squareSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
         squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
+        squareSlider.setOpaque(false);
         settingsScreen.add(squareSlider, constraints);
+    }
 
-        // Add checkboxes
+    /**
+     * Adds the checkboxes to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseCheckboxes(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 15, 100);
 
@@ -150,8 +203,9 @@ public class SettingsDisplay {
         ratRascalCheckbox.setFocusPainted(false);
         window.customiseCheckbox(ratRascalCheckbox, GameWindow.BODY_FONT_SIZE);
         settingsScreen.add(ratRascalCheckbox, constraints);
+    }
 
-        // Add buttons
+    private void initaliseButtons(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.gridwidth = 1;
         constraints.insets = new Insets(50, 100, 50, 10);
@@ -162,11 +216,8 @@ public class SettingsDisplay {
         constraints.gridx = 1;
         constraints.insets = new Insets(50, 10, 50, 100);
 
-
         window.customiseButton(startButton, GameWindow.BODY_FONT_SIZE);
         settingsScreen.add(startButton, constraints);
-
-        frame.add(settingsScreen);
     }
 
     /**
