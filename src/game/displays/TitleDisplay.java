@@ -49,22 +49,13 @@ public class TitleDisplay {
         titleScreen.setBackground(Color.BLACK);
 
         // Initialize and configure the logo label
-        logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
-        logo.setEditable(false);
-        logo.setBackground(Color.BLACK);
-        logo.setForeground(Color.WHITE);
-        logo.setText(readTitleDisplay());
+        initialiseLogo(window);
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
 
         // Create titlePanel and add components to it
-        JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(Color.BLACK);
-        titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
-        titlePanel.add(logo, BorderLayout.CENTER);
-        titlePanel.add(separator, BorderLayout.SOUTH);
-        titleScreen.add(titlePanel, BorderLayout.CENTER);
+        initaliseTitlePanel();
 
         // Initialise buttons
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
@@ -92,6 +83,22 @@ public class TitleDisplay {
         frame.getContentPane().add(titleScreen);
     }
 
+    private void initialiseLogo(GameWindow window) throws IOException {
+         logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
+         logo.setEditable(false);
+         logo.setBackground(Color.BLACK);
+         logo.setForeground(Color.WHITE);
+         logo.setText(readTitleDisplay());
+    }
+
+    private void initaliseTitlePanel() {
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(Color.BLACK);
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 0, 100));
+        titlePanel.add(logo, BorderLayout.CENTER);
+        titlePanel.add(separator, BorderLayout.SOUTH);
+        titleScreen.add(titlePanel, BorderLayout.CENTER);
+    }
     /**
      * Reads the title display from a file.
      *
