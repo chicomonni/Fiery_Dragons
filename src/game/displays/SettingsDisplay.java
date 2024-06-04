@@ -66,12 +66,7 @@ public class SettingsDisplay {
 
         initaliseTitleLabel(window, constraints);
 
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 50, 100);
-
-        separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
-        separator.setBackground(Color.WHITE);
-        settingsScreen.add(separator, constraints);
+        addSeparator(constraints);
 
         // Add player slider with label
         constraints.gridy++;
@@ -175,6 +170,15 @@ public class SettingsDisplay {
         constraints.insets = new Insets(50, 100, 15, 100);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         return constraints;
+    }
+
+    private void addSeparator(GridBagConstraints constraints) {
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 50, 100);
+
+        separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
+        separator.setBackground(Color.WHITE);
+        settingsScreen.add(separator, constraints);
     }
 
     /**
