@@ -22,9 +22,10 @@ import java.util.List;
 public class FieryDragons {
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
+    private static final int CARD_PER_ANIMAL = 3;
     private final ChitFactory chitFactory = new ChitFactory();
     private String squareSrc;
-    private String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private String cardSrc;
     private String caveSrc;
     private int numPlayers;
     private Player[] players;
@@ -103,6 +104,7 @@ public class FieryDragons {
         display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
+//        TODO: test updated move
         players[0].startTurn(board, display);
     }
 
@@ -140,8 +142,30 @@ public class FieryDragons {
             }
         }
 
+        StringBuilder cards = new StringBuilder();
+
+        for (int i = 0; i < numPlayers; i++) {
+            for (int val = 1; val <= CARD_PER_ANIMAL; val++) {
+                cards.append(passive_chits[i]).append(val).append(',');
+            }
+        }
+
+        if (isPirateChecked) {
+            for (int i = 0; i < numPlayers / 2; i++) {
+                int val = i % 2 + 1;
+                cards.append('P').append(val).append(',');
+            }
+        }
+
+        if (isRascalChecked) {
+            for (int i = 0; i < numPlayers / 2; i++) {
+                cards.append('R').append(0).append(',');
+            }
+        }
+
         caveSrc = caves.toString();
         squareSrc = squares.toString();
+        cardSrc = cards.toString();
 
         //TODO: set others
         try {
