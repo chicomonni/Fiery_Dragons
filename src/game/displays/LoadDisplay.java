@@ -7,6 +7,10 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class responsible for displaying the load screen of the game,
+ * allowing players to restore a previous game state.
+ */
 public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
     private final JLabel titleLabel = new JLabel("SELECT SAVE");
