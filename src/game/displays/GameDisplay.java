@@ -47,18 +47,7 @@ public class GameDisplay {
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
-        GridBagConstraints constraints = new GridBagConstraints();
-
-        // Configure and add the Volcano component to the window
-        constraints.insets = new Insets(
-                GameWindow.PADDING,
-                GameWindow.PADDING,
-                0,
-                GameWindow.PADDING / 2
-        );
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
+        GridBagConstraints constraints = initialiseConstraints();
 
         // Initialise container for the Volcano and add the component to the window
         volcano.setPreferredSize(new Dimension(
@@ -120,6 +109,22 @@ public class GameDisplay {
         winner.setFont(window.getFont().deriveFont(GameWindow.BODY_FONT_SIZE)); // Use the same font
         winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
         winner.setBounds(50, 50, 200, 50);
+    }
+
+    private GridBagConstraints initialiseConstraints(){
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        // Configure constraints
+        constraints.insets = new Insets(
+                GameWindow.PADDING,
+                GameWindow.PADDING,
+                0,
+                GameWindow.PADDING / 2
+        );
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        return constraints;
     }
 
     /**
