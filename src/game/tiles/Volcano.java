@@ -6,6 +6,7 @@ import game.chits.ChitFactory;
 import java.io.Serializable;
 import java.security.KeyException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,8 +19,8 @@ public class Volcano implements Serializable {
 
     /**
      * Constructor
-     * 
-     * @param asciiRep  a 2D char array representing the Volcano
+     *
+     * @param asciiRep a 2D char array representing the Volcano
      */
     public Volcano(char[][] asciiRep) {
         ASCIIRep = asciiRep;
@@ -39,6 +40,8 @@ public class Volcano implements Serializable {
             Chit chit = factory.getChit(src.charAt(i));
             squares.add(new Square(chit));
         }
+
+        Collections.shuffle(squares);
 
         for (int i = 0; i < squares.size(); i++) {
             Square current = squares.get(i);
