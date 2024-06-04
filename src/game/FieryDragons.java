@@ -88,6 +88,11 @@ public class FieryDragons implements Serializable {
         this.board = data.getBoard();
         this.players = data.getPlayers();
         this.chitFactory = data.getChitFactory();
+
+        GameWindow gameWindow = new GameWindow();
+
+        DisplayManager display = new DisplayManager(gameWindow, board, players);
+        players[0].startTurn(board, display);
     }
 
     public ChitFactory getChitFactory() {

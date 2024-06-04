@@ -83,7 +83,7 @@ public class MainMenu {
             fieryDragons = (FieryDragons) in.readObject();
             in.close();
             fileIn.close();
-            System.out.println(fieryDragons);
+//            System.out.println(fieryDragons);
             return fieryDragons;
         } catch (IOException i) {
             i.printStackTrace();
