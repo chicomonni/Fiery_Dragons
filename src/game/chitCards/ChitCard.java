@@ -16,6 +16,8 @@ import java.util.Objects;
  * Class used to represent a ChitCard in the game.
  */
 public class ChitCard implements Serializable {
+    public static final int CARD_WIDTH = 11;
+    public static final int CARD_HEIGHT = 16;
     private final char[][] back;
     private final char[][] front;
     private final Chit chit;

@@ -21,23 +21,15 @@ import java.util.List;
  * The FieryDragons class is responsible for initiating and managing the game.
  * It handles the creation of chits, the game board, players, and the game flow.
  */
-public class FieryDragons implements Serializable {
-    public static final int OUTER_RADIUS = 25;
-    public static final int INNER_RADIUS = 17;
-    public static final int CAVE_RADIUS = 9;
-    public static final int CAVE_OFFSET = 13;
-    public static final int VOLCANO_PADDING = 3;
-    public static final int VOLCANO_SIZE = 2 * (OUTER_RADIUS + CAVE_OFFSET + CAVE_RADIUS) + 1;
-    public static final int CARD_WIDTH = 11;
-    public static final int CARD_HEIGHT = 16;
+public class FieryDragons implements Serializable{
     public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
-    private static String squareSrc = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
-    private static String caveSrc = "S*w0";
-    private static int NUM_PLAYERS = 4;
-    private Player[] players;
+    private String squareSrc;
+    private String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private String caveSrc;
+    private int numPlayers;
     private ChitFactory chitFactory = new ChitFactory();
+    private Player[] players;
     private Board board;
     private int playerTurn = 0;
 
@@ -71,12 +63,12 @@ public class FieryDragons implements Serializable {
      */
     public void createPlayers() {
         List<Cave> caves = board.getCaves();
-        players = new Player[NUM_PLAYERS];
+        players = new Player[numPlayers];
         assert players.length <= caves.size() : "Not enough caves for all players";
 
         // Create Players and assign them to Caves
         for (int i = 0; i < players.length; i++) {
-            players[i] = new Player("Player " + (i + 1), caves.get(i), (float) i / NUM_PLAYERS);
+            players[i] = new Player("Player " + (i + 1), caves.get(i), (float) i / numPlayers);
             caves.get(i).setResident(players[i]);
         }
 
@@ -111,9 +103,9 @@ public class FieryDragons implements Serializable {
         createBoard();
         createPlayers();
 
+        display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
-        display.displayGameScreen(window.getFrame());
         players[playerTurn].startTurn(board, display);
     }
 
@@ -128,7 +120,7 @@ public class FieryDragons implements Serializable {
      * @param isRascalChecked whether the rascal option is selected
      */
     public void pickSettings(DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
-        NUM_PLAYERS = numPlayers;
+        this.numPlayers = numPlayers;
 
         // TODO: randomise
         StringBuilder caves = new StringBuilder(numPlayers);

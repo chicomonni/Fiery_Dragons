@@ -1,6 +1,7 @@
 package game.displays;
 
-import game.FieryDragons;
+import boardGenerator.BoardGenerator;
+import game.chitCards.ChitCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,9 +66,10 @@ public class GameDisplay {
 
     /**
      * Initializes the constraints for the GridBagLayout.
+     *
      * @return the GridBagConstraints object
      */
-    private GridBagConstraints initialiseConstraints(){
+    private GridBagConstraints initialiseConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Configure constraints
@@ -85,13 +87,14 @@ public class GameDisplay {
 
     /**
      * Initialise container for the Volcano and add the component to the window
-     * @param container the container to add the volcano to
+     *
+     * @param container   the container to add the volcano to
      * @param constraints the constraints for the GridBagLayout
      */
-    private void initaliseVolcanoDisplay(Container container, GridBagConstraints constraints){
+    private void initaliseVolcanoDisplay(Container container, GridBagConstraints constraints) {
         volcano.setPreferredSize(new Dimension(
-                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
-                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
+                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
+                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
         ));
         container.add(volcano, constraints);
 
@@ -107,14 +110,15 @@ public class GameDisplay {
 
     /**
      * Initialise container for the Chit Cards and add the component to the window
-     * @param container the container to add the chit cards to
+     *
+     * @param container   the container to add the chit cards to
      * @param constraints the constraints for the GridBagLayout
      */
-    private void initialiseChitCardDisplay(Container container, GridBagConstraints constraints){
+    private void initialiseChitCardDisplay(Container container, GridBagConstraints constraints) {
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
-                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
+                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5 + 14),
+                (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
         container.add(chitCards, constraints);
@@ -122,10 +126,11 @@ public class GameDisplay {
 
     /**
      * Initialise separator panel and add it to the window
+     *
      * @param constraints the constraints for the GridBagLayout
-     * @param container the container to add the separator to
+     * @param container   the container to add the separator to
      */
-    private void initialiseSeparator(GridBagConstraints constraints, Container container){
+    private void initialiseSeparator(GridBagConstraints constraints, Container container) {
         // Add a separator panel
         constraints.insets = new Insets(
                 GameWindow.PADDING,
@@ -150,10 +155,11 @@ public class GameDisplay {
 
     /**
      * Initialise container for the input and add the component to the window
+     *
      * @param constraints the constraints for the GridBagLayout
-     * @param container the container to add the footer to
+     * @param container   the container to add the footer to
      */
-    private void initialiseFooter(GridBagConstraints constraints, Container container){
+    private void initialiseFooter(GridBagConstraints constraints, Container container) {
         // Initialise container for the input and add the component to the window
         footer.setOpaque(false);
         footer.setBackground(Color.RED);

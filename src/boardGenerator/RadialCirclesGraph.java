@@ -8,13 +8,7 @@ public class RadialCirclesGraph implements Graph {
     private final int numCircle;
     private final int numSegment;
     private final int offset;
-    private int radius = 9;
-
-    public RadialCirclesGraph(int numCircle, int numSegment, int offset) {
-        this.numCircle = numCircle;
-        this.numSegment = numSegment;
-        this.offset = offset;
-    }
+    private final int radius;
 
     public RadialCirclesGraph(int radius, int offset, int numCircle, int numSegment) {
         this.radius = radius;
