@@ -19,12 +19,11 @@ public class DisplayManager {
     private final LoadDisplay loadDisplay;
     private final GameDisplay gameDisplay;
     private final WinnerDisplay winnerDisplay;
+    private final FieryDragons gameData;
     private VolcanoDisplay volcanoDisplay;
     private PlayerDisplay playerDisplay;
     private ChitCardDisplay cardDisplay;
     private InputDisplay inputDisplay;
-    private WinnerDisplay winnerDisplay;
-    private FieryDragons gameData;
 
     /**
      * Constructor.
