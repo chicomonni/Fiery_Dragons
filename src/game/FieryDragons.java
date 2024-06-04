@@ -1,5 +1,6 @@
 package game;
 
+import boardGenerator.BoardGenerator;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;
@@ -9,6 +10,7 @@ import game.tiles.Cave;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -24,10 +26,10 @@ public class FieryDragons {
     public static final int VOLCANO_SIZE = 2 * (OUTER_RADIUS + CAVE_OFFSET + CAVE_RADIUS) + 1;
     public static final int CARD_WIDTH = 11;
     public static final int CARD_HEIGHT = 16;
-    private static final String SQUARE_SRC = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static final String MAX_CAVE_SRC = "S*w0f39a";
-    private static final String CARD_SRC = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
-    private static String CAVE_SRC = "S*w0";
+    private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
+    private static String squareSrc = "S0w*SSw**w0*0S0*wS0w0S*w";
+    private static String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
+    private static String caveSrc = "S*w0";
     private static int NUM_PLAYERS = 4;
     private static Player[] players;
     private final ChitFactory chitFactory = new ChitFactory();
@@ -90,7 +92,6 @@ public class FieryDragons {
 
         //start new game
         display.displayTitleScreen(window.getFrame());
-
     }
 
     /**
