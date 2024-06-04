@@ -9,9 +9,10 @@ public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
     private final JLabel titleLabel = new JLabel("SELECT SAVE");
     private final JPanel separator = new JPanel();
-    private final JButton loadGameButton1 = new JButton("NO SAVE FILE");
-    private final JButton loadGameButton2 = new JButton("NO SAVE FILE");
-    private final JButton loadGameButton3 = new JButton("NO SAVE FILE");
+    private final String emptySaveName = "EMPTY SAVE";
+    private final JButton loadGameButton1 = new JButton(emptySaveName);
+    private final JButton loadGameButton2 = new JButton(emptySaveName);
+    private final JButton loadGameButton3 = new JButton(emptySaveName);
     private final JButton backButton = new JButton("BACK");
 
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
@@ -44,7 +45,7 @@ public class LoadDisplay {
         // Add title label
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 2;
+        constraints.gridwidth = 1;
         constraints.weightx = 1;
         constraints.insets = new Insets(50, 100, 15, 100);
         constraints.fill = GridBagConstraints.HORIZONTAL;
