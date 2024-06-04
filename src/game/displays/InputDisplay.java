@@ -219,6 +219,11 @@ public class InputDisplay {
         inputField.setText("");
     }
 
+    /**
+     * Displays a message to the user.
+     *
+     * @param message the message to display
+     */
     public void printMessage(String message) {
         inputField.setText(message);
         inputField.setEditable(false);

@@ -14,7 +14,6 @@ import java.io.IOException;
  */
 public class DisplayManager {
     private final GameWindow window;
-
     private final TitleDisplay titleDisplay;
     private final SettingsDisplay settingsDisplay;
     private final LoadDisplay loadDisplay;
@@ -190,6 +189,11 @@ public class DisplayManager {
         window.closeWindow();
     }
 
+    /**
+     * Displays a message to the user.
+     *
+     * @param message the message to be displayed
+     */
     public void displayMessage(String message) {
         inputDisplay.printMessage(message);
     }

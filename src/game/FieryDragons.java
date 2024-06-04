@@ -33,6 +33,12 @@ public class FieryDragons implements Serializable {
     private Board board;
     private int playerTurn = 0;
 
+    /**
+     * Creates the string sources used to create the Caves.
+     *
+     * @param numPlayers the number of players
+     * @return the string source for the Caves
+     */
     private static String makeCaveSrc(int numPlayers) {
         StringBuilder caves = new StringBuilder(numPlayers);
 
@@ -42,6 +48,14 @@ public class FieryDragons implements Serializable {
         return caves.toString();
     }
 
+    /**
+     * Creates the string sources used to create the Chit Cards.
+     *
+     * @param numPlayers      the number of players
+     * @param isPirateChecked whether the pirate option is selected
+     * @param isRascalChecked whether the rascal option is selected
+     * @return the string source for the Chit Cards
+     */
     private static String makeCardSrc(int numPlayers, boolean isPirateChecked, boolean isRascalChecked) {
         StringBuilder cards = new StringBuilder();
 
@@ -66,6 +80,13 @@ public class FieryDragons implements Serializable {
         return cards.toString();
     }
 
+    /**
+     * Creates the string sources used to create the Squares.
+     *
+     * @param numPlayers the number of players
+     * @param numSquares the number of squares on the board
+     * @return the string source for the Squares
+     */
     private static String makeSquareSrc(int numPlayers, int numSquares) {
         StringBuilder squares = new StringBuilder(numSquares);
         int base = numSquares / numPlayers;
@@ -191,8 +212,6 @@ public class FieryDragons implements Serializable {
      * @param display    the display manager handling game displays
      * @param window     the game window
      * @param saveNumber the save file number to load
-     * @throws IOException
-     * @throws FontFormatException
      */
     public void continueGame(DisplayManager display, GameWindow window, int saveNumber) throws IOException, FontFormatException {
         FieryDragons data = loadGame(saveNumber);
