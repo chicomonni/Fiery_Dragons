@@ -68,14 +68,7 @@ public class SettingsDisplay {
 
         addSeparator(constraints);
 
-        // Add player slider with label
-        constraints.gridy++;
-        constraints.insets = new Insets(0, 100, 0, 100);
-
-        settingsScreen.add(createLabel(
-                "NUMBER OF PLAYERS:",
-                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
-        ), constraints);
+        addPlayerSlider(window, constraints);
 
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 50, 100);
@@ -183,6 +176,17 @@ public class SettingsDisplay {
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
         settingsScreen.add(separator, constraints);
+    }
+
+    private void addPlayerSlider(GameWindow window, GridBagConstraints constraints) {
+        // Add player slider with label
+        constraints.gridy++;
+        constraints.insets = new Insets(0, 100, 0, 100);
+
+        settingsScreen.add(createLabel(
+                "NUMBER OF PLAYERS:",
+                window.getFont().deriveFont(GameWindow.HEADING_FONT_SIZE)
+        ), constraints);
     }
 
     /**
