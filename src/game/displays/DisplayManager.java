@@ -56,7 +56,6 @@ public class DisplayManager {
         this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
         this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
         this.inputDisplay = new InputDisplay(gameDisplay, gameData);
-        this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
     /**
