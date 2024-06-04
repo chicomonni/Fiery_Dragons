@@ -48,19 +48,13 @@ public class TitleDisplay {
         titleScreen.setLayout(new BorderLayout());
         titleScreen.setBackground(Color.BLACK);
 
-        // Initialize and configure the logo label
         initialiseLogo(window);
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
 
-        // Create titlePanel and add components to it
         initaliseTitlePanel();
-
-        // Initialise buttons
         JPanel buttonPanel = initaliseButtons(window);
-
-        // Add action listeners
         addListeners(fieryDragons, display, window, frame);
         
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
