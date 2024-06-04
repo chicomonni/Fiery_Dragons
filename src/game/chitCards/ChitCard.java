@@ -154,6 +154,11 @@ public class ChitCard implements Serializable {
         return clone;
     }
 
+    /**
+     * Retrieves the action to perform for a given player.
+     * @param player the player to get the action for
+     * @return
+     */
     public GameAction getAction(Player player) {
         return chit.getAction(player, getValue(player));
     }

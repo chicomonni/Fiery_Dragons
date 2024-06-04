@@ -9,6 +9,12 @@ public class SwapPositionGameAction implements GameAction {
     private final Player player;
     private final Player nearest;
 
+    /**
+     * Constructor
+     * 
+     * @param player player to swap position
+     * @param nearest nearest player to swap position with
+     */
     public SwapPositionGameAction(Player player, Player nearest) {
         this.player = player;
         this.nearest = nearest;
