@@ -186,7 +186,11 @@ public class DisplayManager {
     /**
      * Closes the game.
      */
-    public void closeGame(){
+    public void closeGame() {
         window.closeWindow();
+    }
+
+    public void displayMessage(String message) {
+        inputDisplay.printMessage(message);
     }
 }
