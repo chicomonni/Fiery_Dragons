@@ -202,7 +202,7 @@ public class FieryDragons implements Serializable{
     private static FieryDragons loadGame(int saveNumber) {
         try {
             FieryDragons data;
-            FileInputStream fileIn = new FileInputStream("saves/saveData"+(saveNumber-1)+".ser");
+            FileInputStream fileIn = new FileInputStream("saves/saveData"+saveNumber+".ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             data = (FieryDragons) in.readObject();
             in.close();
