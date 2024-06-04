@@ -15,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -156,8 +157,8 @@ public class FieryDragons implements Serializable{
         playGame(display, window);
     }
 
-    public void continueGame(DisplayManager display, GameWindow window) throws IOException, FontFormatException {
-        FieryDragons data = loadGame();
+    public void continueGame(DisplayManager display, GameWindow window, int saveNumber) throws IOException, FontFormatException {
+        FieryDragons data = loadGame(saveNumber);
 
         this.board = data.getBoard();
         this.players = data.getPlayers();
@@ -171,14 +172,19 @@ public class FieryDragons implements Serializable{
     }
 
     public void saveGame() {
-        int saveNumber = 1;
+
+        int saveNumber = 0;
         String saveName = "saveData" + saveNumber + ".ser";
         File[] listOfFiles = checkSaveFolder();
         assert listOfFiles != null;
-        for (File file: listOfFiles) {
-            if (file.getName().equals(saveName)) {
-                saveNumber += 1;
-                saveName = "saveData" + saveNumber + ".ser";
+        if(listOfFiles.length >= 3){
+            saveName = findOldestFile(listOfFiles);
+        } else {
+            for (File file : listOfFiles) {
+                if (file.getName().equals(saveName)) {
+                    saveNumber += 1;
+                    saveName = "saveData" + saveNumber + ".ser";
+                }
             }
         }
 
@@ -188,16 +194,15 @@ public class FieryDragons implements Serializable{
             out.writeObject(this);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data is saved in gameData.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    private static FieryDragons loadGame() {
+    private static FieryDragons loadGame(int saveNumber) {
         try {
             FieryDragons data;
-            FileInputStream fileIn = new FileInputStream("saves/saveData1.ser");
+            FileInputStream fileIn = new FileInputStream("saves/saveData"+(saveNumber-1)+".ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             data = (FieryDragons) in.readObject();
             in.close();
@@ -213,19 +218,25 @@ public class FieryDragons implements Serializable{
 
     }
 
-    private File[] checkSaveFolder() {
+    public File[] checkSaveFolder() {
         File folder = new File("saves/");
         File[] listOfFiles = folder.listFiles();
         if(listOfFiles != null) {
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].isFile()) {
-                    System.out.println("File: " + listOfFiles[i].getName());
-                }
-            }
             return  listOfFiles;
         }
 
         return null;
+    }
+
+    private String findOldestFile(File[] list) {
+        File oldest = list[0];
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].lastModified() < oldest.lastModified()) {
+                oldest = list[i];
+            }
+        }
+
+        return oldest.getName();
     }
 
     public void incrementPlayerTurn() {

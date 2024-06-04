@@ -4,6 +4,7 @@ import game.FieryDragons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
@@ -16,8 +17,8 @@ public class LoadDisplay {
 
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
         initialise(display, window);
+        addListeners(fieryDragons, display, window, window.getFrame());
 
-        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
     }
 
     private void initialise(DisplayManager display, GameWindow window) {
@@ -31,7 +32,42 @@ public class LoadDisplay {
         initialiseLoadButtons(window, constraints);
         initialiseBridgeButtons(window, constraints);
 
+
         frame.add(loadScreen);
+    }
+
+    private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
+        // Add action listeners
+        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
+
+
+        loadGameButton1.addActionListener(e -> {
+            try {
+                fieryDragons.continueGame(display, window,1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        loadGameButton2.addActionListener(e -> {
+            try {
+                fieryDragons.continueGame(display, window, 2);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        }); //fieryDragons.playGame(display, window));
+        loadGameButton3.addActionListener(e -> {
+            try {
+                fieryDragons.continueGame(display, window, 3);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (FontFormatException ex) {
+                throw new RuntimeException(ex);
+            }
+        }); //change to exitGame() method??
     }
 
     /**
