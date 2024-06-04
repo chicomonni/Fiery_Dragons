@@ -32,7 +32,7 @@ public class VolcanoDisplay {
         this.volcano = volcano;
         this.volcanoContainer = gameDisplay.getVolcanoComponent();
 
-        initialiseComponent(volcanoPane, volcanoContainer.getPreferredSize());
+        initialiseComponent(volcanoPane, volcanoContainer.getSize());
         volcanoPane.setText(getVolcanoForDisplay());
 
         volcanoContainer.add(volcanoPane, Integer.valueOf(volcanoContainer.highestLayer() + 1));
@@ -126,7 +126,7 @@ public class VolcanoDisplay {
         }
 
         JTextArea textArea = new JTextArea();
-        initialiseComponent(textArea, volcanoContainer.getPreferredSize());
+        initialiseComponent(textArea, volcanoContainer.getSize());
         textArea.setText(ASCIItoString(chars));
         textArea.setForeground(cave.getColour());
 

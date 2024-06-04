@@ -68,7 +68,7 @@ public class PlayerDisplay {
         if (playerPlane == null) {
             playerPlane = new JTextArea();
 
-            Dimension size = volcanoContainer.getPreferredSize();
+            Dimension size = volcanoContainer.getSize();
 
             playerPlane.setBounds(0, 0, size.width, size.height);
             playerPlane.setEditable(false);
