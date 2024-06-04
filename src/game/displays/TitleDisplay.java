@@ -122,8 +122,8 @@ public class TitleDisplay {
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
         //TODO: change to consider current player and current board setup
-        continueGameButton.addActionListener(e -> display.displayLoadScreen(frame)); //fieryDragons.playGame(display, window));
-        exitGameButton.addActionListener(e -> window.closeWindow()); //change to exitGame() method??
+        continueGameButton.addActionListener(e -> display.displayLoadScreen(frame));
+        exitGameButton.addActionListener(e -> display.closeGame());
     }
 
     /**
