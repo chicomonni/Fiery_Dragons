@@ -88,6 +88,11 @@ public class ChitFactory implements Serializable {
         return chits.get(c);
     }
 
+    /**
+     * Method to get all Chits
+     * 
+     * @return an array of all Chits in the game
+     */
     public Chit[] getAll() {
         return chits.values().toArray(Chit[]::new);
     }
