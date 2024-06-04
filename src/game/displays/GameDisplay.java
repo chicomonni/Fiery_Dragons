@@ -49,21 +49,7 @@ public class GameDisplay {
 
         GridBagConstraints constraints = initialiseConstraints();
 
-        // Initialise container for the Volcano and add the component to the window
-        volcano.setPreferredSize(new Dimension(
-                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
-                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
-        ));
-        container.add(volcano, constraints);
-
-        constraints.insets = new Insets(
-                GameWindow.PADDING,
-                GameWindow.PADDING / 2,
-                0,
-                GameWindow.PADDING + 20
-        );
-        constraints.gridx = 1;
-        constraints.gridy = 0;
+        initaliseVolcanoDisplay(container, constraints);
 
         // Initialise container for the Chit Cards and add the component to the window
         chitCards.setOpaque(false);
@@ -129,6 +115,23 @@ public class GameDisplay {
         constraints.gridx = 0;
         constraints.gridy = 0;
         return constraints;
+    }
+
+    private void initaliseVolcanoDisplay(Container container, GridBagConstraints constraints){
+        volcano.setPreferredSize(new Dimension(
+                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
+                (int) (FieryDragons.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
+        ));
+        container.add(volcano, constraints);
+
+        constraints.insets = new Insets(
+                GameWindow.PADDING,
+                GameWindow.PADDING / 2,
+                0,
+                GameWindow.PADDING + 20
+        );
+        constraints.gridx = 1;
+        constraints.gridy = 0;
     }
 
     /**
