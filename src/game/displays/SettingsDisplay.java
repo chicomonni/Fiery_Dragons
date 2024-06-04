@@ -29,7 +29,7 @@ public class SettingsDisplay {
      * @param window       the GameWindow instance this class affects
      */
     public SettingsDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
-        initialise(display, window);
+        initialise(window);
 
         //default values
         playerSlider.setValue(4);
@@ -54,10 +54,9 @@ public class SettingsDisplay {
     /**
      * Initializes the settings screen with title, sliders, checkboxes, and buttons.
      *
-     * @param display the DisplayManager handling game displays
      * @param window  the GameWindow instance this class affects
      */
-    public void initialise(DisplayManager display, GameWindow window) {
+    public void initialise(GameWindow window) {
         JFrame frame = window.getFrame();
         settingsScreen.setLayout(new GridBagLayout());
         settingsScreen.setBackground(Color.BLACK);
@@ -206,17 +205,18 @@ public class SettingsDisplay {
     }
 
     private void initialiseButtons(GameWindow window, GridBagConstraints constraints) {
+        int padding = 15;
         constraints.gridy++;
         constraints.gridwidth = 1;
         constraints.insets = new Insets(50, 100, 50, 10);
 
-        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE, padding);
         settingsScreen.add(backButton, constraints);
 
         constraints.gridx = 1;
         constraints.insets = new Insets(50, 10, 50, 100);
 
-        window.customiseButton(startButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(startButton, GameWindow.BODY_FONT_SIZE, padding);
         settingsScreen.add(startButton, constraints);
     }
 
