@@ -172,6 +172,10 @@ public class SettingsDisplay {
         return constraints;
     }
 
+    /**
+     * Adds a separator to the settings screen.
+     * @param constraints the constraints for the layout
+     */
     private void addSeparator(GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 50, 100);
