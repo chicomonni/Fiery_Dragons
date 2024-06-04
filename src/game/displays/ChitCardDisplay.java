@@ -31,10 +31,6 @@ public class ChitCardDisplay {
 
         int height = (int) min(ceil(sqrt(cardArray.length())), 5);
         int width = (int) ceil((double) cardArray.length() / height);
-        System.out.println(cardArray.length());
-        System.out.println("width " + width);
-        System.out.println("height " + height);
-
 
         cardPane.setPreferredSize(new Dimension(
                 (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * (width) + 7),
