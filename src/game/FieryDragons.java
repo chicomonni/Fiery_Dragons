@@ -32,7 +32,7 @@ public class FieryDragons implements Serializable {
     private static String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
     private static String caveSrc = "S*w0";
     private static int NUM_PLAYERS = 4;
-    private static Player[] players;
+    private Player[] players;
     private ChitFactory chitFactory = new ChitFactory();
     private Board board;
 
