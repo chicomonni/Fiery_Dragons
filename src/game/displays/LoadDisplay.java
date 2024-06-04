@@ -21,12 +21,22 @@ public class LoadDisplay {
     private final JButton loadGameButton3 = new JButton(emptySaveName);
     private final JButton backButton = new JButton("BACK");
 
+    /**
+     * Constructor.
+     * 
+     * @param fieryDragons the FieryDragons instance
+     * @param display     the DisplayManager instance
+     * @param window     the GameWindow instance
+     */
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
         initialise(window);
         addListeners(fieryDragons, display, window, window.getFrame());
-
     }
 
+    /**
+     * Initializes the load screen.
+     * @param window the GameWindow instance
+     */
     private void initialise(GameWindow window) {
         JFrame frame = window.getFrame();
         loadScreen.setLayout(new GridBagLayout());
@@ -42,8 +52,14 @@ public class LoadDisplay {
         frame.add(loadScreen);
     }
 
+    /**
+     * Adds action listeners to the buttons on the load screen.
+     * @param fieryDragons the FieryDragons instance
+     * @param display   the DisplayManager instance
+     * @param window  the GameWindow instance
+     * @param frame  the JFrame instance
+     */
     private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
-        // Add action listeners
         backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
 
         JButton[] buttonList = {loadGameButton1, loadGameButton2, loadGameButton3};
