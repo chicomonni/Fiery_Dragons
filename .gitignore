@@ -8,6 +8,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .vscode/
+/assets/
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -77,5 +78,3 @@ fabric.properties
 .idea
 *.iml
 DS_Store
-
-assets/volcano.txt
