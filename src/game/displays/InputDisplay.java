@@ -82,6 +82,9 @@ public class InputDisplay {
     public void setPromptText(Player player, Board board) {
         promptContainer.removeAll();
 
+        promptContainer.revalidate();
+        promptContainer.repaint();
+
         JTextField prompt = new JTextField();
         initialiseTextField(prompt);
         promptContainer.add(prompt, BorderLayout.CENTER);
@@ -91,7 +94,6 @@ public class InputDisplay {
         name.setForeground(player.getColour());
         name.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, (int) GameWindow.BODY_FONT_SIZE));
         promptContainer.add(name, BorderLayout.WEST);
-        promptContainer.revalidate();
 
         String promptText = "SELECT A CHIT CARD (1 - " + board.getChitCards().length() + ") OR 'END TURN'";
 
