@@ -68,6 +68,7 @@ public class SettingsDisplay {
         initaliseSeparator(constraints);
         initalisePlayerSlider(window, constraints);
 
+        // initaliseSquareSlider(window, constraints);
         // Add square slider with label
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 0, 100);
@@ -164,6 +165,18 @@ public class SettingsDisplay {
     }
 
     /**
+     * Initializes the title label for the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
+    private void initaliseTitleLabel(GameWindow window, GridBagConstraints constraints) {
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
+        settingsScreen.add(titleLabel, constraints);
+    }
+
+    /**
      * Adds the player slider to the settings screen.
      * @param window the GameWindow instance
      * @param constraints the constraints for the layout
@@ -191,17 +204,6 @@ public class SettingsDisplay {
         settingsScreen.add(playerSlider, constraints);
     }
 
-    /**
-     * Initializes the title label for the settings screen.
-     * @param window the GameWindow instance
-     * @param constraints the constraints for the layout
-     */
-    private void initaliseTitleLabel(GameWindow window, GridBagConstraints constraints) {
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(window.getFont().deriveFont(GameWindow.TITLE_FONT_SIZE));
-        settingsScreen.add(titleLabel, constraints);
-    }
 
     /**
      * Creates a label with the specified text and font.
