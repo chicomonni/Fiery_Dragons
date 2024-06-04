@@ -62,9 +62,10 @@ public class TitleDisplay {
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setOpaque(false);
 
-        window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE);
-        window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
-        window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
+        // window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE);
+        // window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
+        // window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
+        customiseButtons(window);
 
         // Add action listeners
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
@@ -98,6 +99,12 @@ public class TitleDisplay {
         titlePanel.add(logo, BorderLayout.CENTER);
         titlePanel.add(separator, BorderLayout.SOUTH);
         titleScreen.add(titlePanel, BorderLayout.CENTER);
+    }
+
+    private void customiseButtons(GameWindow window) {
+        window.customiseButton(newGameButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(continueGameButton, GameWindow.BODY_FONT_SIZE);
+        window.customiseButton(exitGameButton, GameWindow.BODY_FONT_SIZE);
     }
     /**
      * Reads the title display from a file.
