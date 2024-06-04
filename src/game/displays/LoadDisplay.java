@@ -109,6 +109,11 @@ public class LoadDisplay {
         loadScreen.add(titleLabel, constraints);
     }
 
+    /**
+     * Initializes the load buttons for the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
     private void initialiseLoadButtons(GameWindow window, GridBagConstraints constraints) {
         int padding = 40;
         constraints.gridy++;
@@ -125,6 +130,11 @@ public class LoadDisplay {
         loadScreen.add(loadGameButton3, constraints);
     }
 
+    /**
+     * Initializes the back button for the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints  the constraints for the layout
+     */
     private void initialiseBackButton(GameWindow window, GridBagConstraints constraints) {
         int padding = 15;
         constraints.gridy++;
@@ -148,6 +158,10 @@ public class LoadDisplay {
         loadScreen.add(separator, constraints);
     }
 
+    /**
+     * Displays the load screen.
+     * @param window the JFrame instance
+     */
     public void showScreen(JFrame window) {
         loadScreen.setVisible(true);
         window.pack();
@@ -156,6 +170,10 @@ public class LoadDisplay {
         window.repaint();
     }
 
+    /**
+     * Hides the load screen.
+     * @param window the JFrame instance
+     */
     public void hideScreen(JFrame window) {
         loadScreen.setVisible(false);
         window.revalidate();
