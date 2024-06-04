@@ -15,29 +15,31 @@ public class LoadDisplay {
     private final JPanel loadScreen = new JPanel();
     private final JLabel titleLabel = new JLabel("SELECT SAVE");
     private final JPanel separator = new JPanel();
-    private final String emptySaveName = "EMPTY SAVE";
-    private final JButton loadGameButton1 = new JButton(emptySaveName);
-    private final JButton loadGameButton2 = new JButton(emptySaveName);
-    private final JButton loadGameButton3 = new JButton(emptySaveName);
+    private final JButton[] loadGameButtons = new JButton[FieryDragons.MAX_SAVES];
     private final JButton backButton = new JButton("BACK");
+    private final FieryDragons fieryDragons;
 
     /**
      * Constructor.
-     * 
+     *
      * @param fieryDragons the FieryDragons instance
-     * @param display     the DisplayManager instance
-     * @param window     the GameWindow instance
+     * @param display      the DisplayManager instance
+     * @param window       the GameWindow instance
      */
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
-        initialise(window);
-        addListeners(fieryDragons, display, window, window.getFrame());
+        this.fieryDragons = fieryDragons;
+
+        initialise(display, window);
+        addListeners(display, window);
     }
 
     /**
      * Initializes the load screen.
-     * @param window the GameWindow instance
+     *
+     * @param display the DisplayManager instance
+     * @param window  the GameWindow instance
      */
-    private void initialise(GameWindow window) {
+    private void initialise(DisplayManager display, GameWindow window) {
         JFrame frame = window.getFrame();
         loadScreen.setLayout(new GridBagLayout());
         loadScreen.setBackground(Color.BLACK);
@@ -46,7 +48,7 @@ public class LoadDisplay {
         initialiseTitleLabel(window, constraints);
         initialiseSeparator(constraints);
         initialiseLoadButtons(window, constraints);
-        initialiseBackButton(window, constraints);
+        initialiseBackButton(display, window, constraints);
 
 
         frame.add(loadScreen);
@@ -54,26 +56,20 @@ public class LoadDisplay {
 
     /**
      * Adds action listeners to the buttons on the load screen.
-     * @param fieryDragons the FieryDragons instance
-     * @param display   the DisplayManager instance
+     *
+     * @param display the DisplayManager instance
      * @param window  the GameWindow instance
-     * @param frame  the JFrame instance
      */
-    private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
-        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
-
-        JButton[] buttonList = {loadGameButton1, loadGameButton2, loadGameButton3};
+    private void addListeners(DisplayManager display, GameWindow window) {
         File[] fileList = fieryDragons.checkSaveFolder();
 
-        for (int i = 0; i < fileList.length; i++){
+        for (int i = 0; i < fileList.length; i++) {
             int finalI = i;
-            buttonList[i].setText("LOAD SAVE FILE " + (i+1));
-            buttonList[i].addActionListener(e -> {
+            loadGameButtons[i].setText("LOAD SAVE FILE " + (i + 1));
+            loadGameButtons[i].addActionListener(e -> {
                 try {
                     fieryDragons.continueGame(display, window, finalI);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (FontFormatException ex) {
+                } catch (IOException | FontFormatException ex) {
                     throw new RuntimeException(ex);
                 }
             });
@@ -82,6 +78,7 @@ public class LoadDisplay {
 
     /**
      * Initializes the constraints for the settings screen layout.
+     *
      * @return the constraints for the layout
      */
     private GridBagConstraints initialiseConstraints() {
@@ -99,7 +96,8 @@ public class LoadDisplay {
 
     /**
      * Initializes the title label for the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseTitleLabel(GameWindow window, GridBagConstraints constraints) {
@@ -111,42 +109,49 @@ public class LoadDisplay {
 
     /**
      * Initializes the load buttons for the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseLoadButtons(GameWindow window, GridBagConstraints constraints) {
-        int padding = 40;
-        constraints.gridy++;
+        String emptySaveName = "EMPTY SAVE";
+
+        for (int i = 0; i < loadGameButtons.length; i++) {
+            loadGameButtons[i] = new JButton(emptySaveName);
+        }
+
+        int padding = 15;
         constraints.gridwidth = 1;
-        window.customiseButton(loadGameButton1, GameWindow.BODY_FONT_SIZE, padding);
-        loadScreen.add(loadGameButton1, constraints);
+        constraints.insets = new Insets(0, 100, 10, 100);
 
-        constraints.gridy++;
-        window.customiseButton(loadGameButton2, GameWindow.BODY_FONT_SIZE, padding);
-        loadScreen.add(loadGameButton2, constraints);
-
-        constraints.gridy++;
-        window.customiseButton(loadGameButton3, GameWindow.BODY_FONT_SIZE, padding);
-        loadScreen.add(loadGameButton3, constraints);
+        for (JButton loadGameButton : loadGameButtons) {
+            constraints.gridy++;
+            window.customiseButton(loadGameButton, GameWindow.BODY_FONT_SIZE, padding);
+            loadScreen.add(loadGameButton, constraints);
+        }
     }
 
     /**
      * Initializes the back button for the settings screen.
-     * @param window the GameWindow instance
-     * @param constraints  the constraints for the layout
+     *
+     * @param display     the DisplayManager instance
+     * @param window      the GameWindow instance
+     * @param constraints the constraints for the layout
      */
-    private void initialiseBackButton(GameWindow window, GridBagConstraints constraints) {
+    private void initialiseBackButton(DisplayManager display, GameWindow window, GridBagConstraints constraints) {
         int padding = 15;
         constraints.gridy++;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(20, 400, 50, 400);
+        constraints.insets = new Insets(20, 200, 50, 200);
 
         window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE, padding);
+        backButton.addActionListener(e -> display.displayTitleScreen(window.getFrame()));
         loadScreen.add(backButton, constraints);
     }
 
     /**
      * Adds a separator to the settings screen.
+     *
      * @param constraints the constraints for the layout
      */
     private void initialiseSeparator(GridBagConstraints constraints) {
@@ -160,6 +165,7 @@ public class LoadDisplay {
 
     /**
      * Displays the load screen.
+     *
      * @param window the JFrame instance
      */
     public void showScreen(JFrame window) {
@@ -172,6 +178,7 @@ public class LoadDisplay {
 
     /**
      * Hides the load screen.
+     *
      * @param window the JFrame instance
      */
     public void hideScreen(JFrame window) {
