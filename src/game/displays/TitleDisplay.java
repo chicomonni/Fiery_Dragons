@@ -122,7 +122,6 @@ public class TitleDisplay {
         // Add action listeners
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
-        //TODO: change to consider current player and current board setup
         continueGameButton.addActionListener(e -> display.displayLoadScreen(frame));
         exitGameButton.addActionListener(e -> display.closeGame());
     }
