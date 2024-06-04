@@ -121,7 +121,31 @@ public class FieryDragons {
      * @param isRascalChecked whether the rascal option is selected
      */
     public void pickSettings(DisplayManager display, GameWindow window, int numPlayers, int numSquares, boolean isPirateChecked, boolean isRascalChecked) {
-        setPlayers(numPlayers);
+        NUM_PLAYERS = numPlayers;
+
+        // TODO: randomise
+        StringBuilder caves = new StringBuilder(numPlayers);
+
+        for (int i = 0; i < numPlayers; i++) {
+            caves.append(passive_chits[i]);
+        }
+
+        StringBuilder squares = new StringBuilder(numSquares);
+        int base = numSquares / numPlayers;
+        int extra = numSquares % numPlayers;
+
+        for (int i = 0; i < caves.length(); i++) {
+            char chit = caves.charAt(i);
+
+            squares.append(String.valueOf(chit).repeat(base));
+
+            if (i < extra) {
+                squares.append(chit);
+            }
+        }
+
+        caveSrc = caves.toString();
+        squareSrc = squares.toString();
 
         //TODO: set others
         try {
