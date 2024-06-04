@@ -183,6 +183,9 @@ public class DisplayManager {
 
     }
 
+    /**
+     * Closes the game.
+     */
     public void closeGame(){
         window.closeWindow();
     }
