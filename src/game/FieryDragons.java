@@ -249,6 +249,10 @@ public class FieryDragons implements Serializable {
         return null;
     }
 
+    /**
+     * Checks the save folder for save files.
+     * @return
+     */
     public File[] checkSaveFolder() {
         File folder = new File(CONFIG_SAVES_FILE);
         folder.mkdirs();
@@ -260,6 +264,11 @@ public class FieryDragons implements Serializable {
         return null;
     }
 
+    /**
+     * Finds the oldest file in the save folder.
+     * @param list the list of files in the save folder
+     * @return
+     */
     private String findOldestFile(File[] list) {
         File oldest = list[0];
         for (int i = 0; i < list.length; i++) {
@@ -271,6 +280,9 @@ public class FieryDragons implements Serializable {
         return oldest.getName();
     }
 
+    /**
+     * Increments the player turn to the next player in the sequence.
+     */
     public void incrementPlayerTurn() {
         this.playerTurn += 1;
         if (this.playerTurn > players.length - 1) {
@@ -278,18 +290,34 @@ public class FieryDragons implements Serializable {
         }
     }
 
+    /**
+     * Retrieves the current player turn.
+     * @return the player turn
+     */
     public int getPlayerTurn() {
         return playerTurn;
     }
 
+    /**
+     * Retrieves the chit factory used in the game.
+     * @return the chit factory
+     */
     public ChitFactory getChitFactory() {
         return chitFactory;
     }
 
+    /**
+     * Retrieves the game board.
+     * @return the game board
+     */
     public Board getBoard() {
         return board;
     }
 
+    /**
+     * Retrieves the players in the game. 
+     * @return  the players
+     */
     public Player[] getPlayers() {
         return players;
     }
