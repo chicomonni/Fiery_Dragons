@@ -116,6 +116,13 @@ public class TitleDisplay {
         return buttonPanel;
     }
 
+    /**
+     * Adds action listeners to the buttons.
+     * @param fieryDragons the FieryDragons instance to start the game
+     * @param display the DisplayManager handling game displays
+     * @param window the GameWindow instance this class affects
+     * @param frame the JFrame to add the action listeners to
+     */
     private void addListeners(FieryDragons fieryDragons, DisplayManager display, GameWindow window, JFrame frame) {
         newGameButton.addActionListener(e -> display.displaySettingsScreen(frame));
 
