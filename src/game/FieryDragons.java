@@ -165,14 +165,12 @@ public class FieryDragons implements Serializable{
         this.chitFactory = data.getChitFactory();
         this.playerTurn = data.getPlayerTurn();
 
-        display.createGameComponents(window, board, players);
-
         display.displayGameScreen(window.getFrame());
+        display.createGameComponents(window, board, players);
         players[playerTurn].startTurn(board, display);
     }
 
     public void saveGame() {
-
         int saveNumber = 0;
         String saveName = "saveData" + saveNumber + ".ser";
         File[] listOfFiles = checkSaveFolder();
@@ -187,8 +185,8 @@ public class FieryDragons implements Serializable{
                 }
             }
         }
-
         try {
+            System.out.println(this.getBoard());
             FileOutputStream fileOut = new FileOutputStream("saves/"+saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
@@ -199,7 +197,7 @@ public class FieryDragons implements Serializable{
         }
     }
 
-    private static FieryDragons loadGame(int saveNumber) {
+    private FieryDragons loadGame(int saveNumber) {
         try {
             FieryDragons data;
             FileInputStream fileIn = new FileInputStream("saves/saveData"+saveNumber+".ser");

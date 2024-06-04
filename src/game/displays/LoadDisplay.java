@@ -17,8 +17,8 @@ public class LoadDisplay {
     private final JButton backButton = new JButton("BACK");
 
     public LoadDisplay(FieryDragons fieryDragons, DisplayManager display, GameWindow window) {
-        addListeners(fieryDragons, display, window, window.getFrame());
         initialise(display, window);
+        addListeners(fieryDragons, display, window, window.getFrame());
 
     }
 
