@@ -171,8 +171,19 @@ public class FieryDragons implements Serializable{
     }
 
     public void saveGame() {
+        int saveNumber = 1;
+        String saveName = "saveData" + saveNumber + ".ser";
+        File[] listOfFiles = checkSaveFolder();
+        assert listOfFiles != null;
+        for (File file: listOfFiles) {
+            if (file.getName().equals(saveName)) {
+                saveNumber += 1;
+                saveName = "saveData" + saveNumber + ".ser";
+            }
+        }
+
         try {
-            FileOutputStream fileOut = new FileOutputStream("gameData.ser");
+            FileOutputStream fileOut = new FileOutputStream("saves/"+saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();
@@ -186,7 +197,7 @@ public class FieryDragons implements Serializable{
     private static FieryDragons loadGame() {
         try {
             FieryDragons data;
-            FileInputStream fileIn = new FileInputStream("gameData.ser");
+            FileInputStream fileIn = new FileInputStream("saves/saveData1.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             data = (FieryDragons) in.readObject();
             in.close();
@@ -200,6 +211,21 @@ public class FieryDragons implements Serializable{
         }
         return null;
 
+    }
+
+    private File[] checkSaveFolder() {
+        File folder = new File("saves/");
+        File[] listOfFiles = folder.listFiles();
+        if(listOfFiles != null) {
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    System.out.println("File: " + listOfFiles[i].getName());
+                }
+            }
+            return  listOfFiles;
+        }
+
+        return null;
     }
 
     public void incrementPlayerTurn() {
