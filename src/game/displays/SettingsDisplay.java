@@ -103,6 +103,7 @@ public class SettingsDisplay {
         playerSlider.setSnapToTicks(true);
         playerSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
         playerSlider.setLabelTable(labelSlider(window, 2, 8, 1));
+        playerSlider.setOpaque(false);
         settingsScreen.add(playerSlider, constraints);
 
         // Add square slider with label
@@ -124,6 +125,7 @@ public class SettingsDisplay {
         squareSlider.setSnapToTicks(true);
         squareSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
         squareSlider.setLabelTable(labelSlider(window, playerSlider.getValue() * 3, 27, 1));
+        squareSlider.setOpaque(false);
         settingsScreen.add(squareSlider, constraints);
 
         // Add checkboxes

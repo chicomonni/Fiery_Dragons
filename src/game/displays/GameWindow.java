@@ -38,6 +38,7 @@ public class GameWindow {
         // Adjust default font on text components
         UIManager.put("TextArea.font", font.deriveFont(GameWindow.ASCII_FONT_SIZE));
         UIManager.put("TextField.font", font.deriveFont(GameWindow.BODY_FONT_SIZE));
+        UIManager.put("Button.select", Color.BLACK);
 
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -81,6 +82,7 @@ public class GameWindow {
         int padding = 15;
         button.setFont(font.deriveFont(fontSize));
         button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLACK);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Border emptyBorder = BorderFactory.createEmptyBorder(padding, padding, padding, padding);
         button.setBorder(emptyBorder);
@@ -115,6 +117,7 @@ public class GameWindow {
     public void customiseCheckbox(JCheckBox checkbox, float fontSize) {
         checkbox.setFont(font.deriveFont(fontSize));
         checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        checkbox.setOpaque(false);
         checkbox.setForeground(Color.WHITE);
         checkbox.setIcon(createCheckboxIcon(false, fontSize));
         checkbox.setSelectedIcon(createCheckboxIcon(true, fontSize));
