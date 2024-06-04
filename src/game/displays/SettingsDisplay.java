@@ -54,7 +54,7 @@ public class SettingsDisplay {
     /**
      * Initializes the settings screen with title, sliders, checkboxes, and buttons.
      *
-     * @param window  the GameWindow instance this class affects
+     * @param window the GameWindow instance this class affects
      */
     public void initialise(GameWindow window) {
         JFrame frame = window.getFrame();
@@ -77,6 +77,7 @@ public class SettingsDisplay {
 
     /**
      * Initializes the constraints for the settings screen layout.
+     *
      * @return the constraints for the layout
      */
     private GridBagConstraints initialiseConstraints() {
@@ -94,6 +95,7 @@ public class SettingsDisplay {
 
     /**
      * Adds a separator to the settings screen.
+     *
      * @param constraints the constraints for the layout
      */
     private void initialiseSeparator(GridBagConstraints constraints) {
@@ -107,7 +109,8 @@ public class SettingsDisplay {
 
     /**
      * Initializes the title label for the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseTitleLabel(GameWindow window, GridBagConstraints constraints) {
@@ -119,7 +122,8 @@ public class SettingsDisplay {
 
     /**
      * Adds the player slider to the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialisePlayerSlider(GameWindow window, GridBagConstraints constraints) {
@@ -147,7 +151,8 @@ public class SettingsDisplay {
 
     /**
      * Adds the square slider to the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseSquareSlider(GameWindow window, GridBagConstraints constraints) {
@@ -175,7 +180,8 @@ public class SettingsDisplay {
 
     /**
      * Adds the checkboxes to the settings screen.
-     * @param window the GameWindow instance
+     *
+     * @param window      the GameWindow instance
      * @param constraints the constraints for the layout
      */
     private void initialiseCheckboxes(GameWindow window, GridBagConstraints constraints) {
