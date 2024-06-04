@@ -71,20 +71,7 @@ public class SettingsDisplay {
 
         initaliseCheckboxes(window, constraints);
 
-        // Add buttons
-        constraints.gridy++;
-        constraints.gridwidth = 1;
-        constraints.insets = new Insets(50, 100, 50, 10);
-
-        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE);
-        settingsScreen.add(backButton, constraints);
-
-        constraints.gridx = 1;
-        constraints.insets = new Insets(50, 10, 50, 100);
-
-
-        window.customiseButton(startButton, GameWindow.BODY_FONT_SIZE);
-        settingsScreen.add(startButton, constraints);
+        initaliseButtons(window, constraints);
 
         frame.add(settingsScreen);
     }
@@ -187,6 +174,11 @@ public class SettingsDisplay {
         settingsScreen.add(squareSlider, constraints);
     }
 
+    /**
+     * Adds the checkboxes to the settings screen.
+     * @param window the GameWindow instance
+     * @param constraints the constraints for the layout
+     */
     private void initaliseCheckboxes(GameWindow window, GridBagConstraints constraints) {
         constraints.gridy++;
         constraints.insets = new Insets(0, 100, 15, 100);
@@ -211,6 +203,21 @@ public class SettingsDisplay {
         ratRascalCheckbox.setFocusPainted(false);
         window.customiseCheckbox(ratRascalCheckbox, GameWindow.BODY_FONT_SIZE);
         settingsScreen.add(ratRascalCheckbox, constraints);
+    }
+
+    private void initaliseButtons(GameWindow window, GridBagConstraints constraints) {
+        constraints.gridy++;
+        constraints.gridwidth = 1;
+        constraints.insets = new Insets(50, 100, 50, 10);
+
+        window.customiseButton(backButton, GameWindow.BODY_FONT_SIZE);
+        settingsScreen.add(backButton, constraints);
+
+        constraints.gridx = 1;
+        constraints.insets = new Insets(50, 10, 50, 100);
+
+        window.customiseButton(startButton, GameWindow.BODY_FONT_SIZE);
+        settingsScreen.add(startButton, constraints);
     }
 
     /**
