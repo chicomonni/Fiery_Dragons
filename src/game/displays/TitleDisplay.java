@@ -68,6 +68,11 @@ public class TitleDisplay {
         frame.getContentPane().add(titleScreen);
     }
 
+    /**
+     * Initialises the logo text area.
+     * @param window the GameWindow to add the logo to
+     * @throws IOException
+     */
     private void initialiseLogo(GameWindow window) throws IOException {
          logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
          logo.setEditable(false);
