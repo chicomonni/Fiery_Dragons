@@ -111,6 +111,10 @@ public class GameDisplay {
         winner.setBounds(50, 50, 200, 50);
     }
 
+    /**
+     * Initializes the constraints for the GridBagLayout.
+     * @return the GridBagConstraints object
+     */
     private GridBagConstraints initialiseConstraints(){
         GridBagConstraints constraints = new GridBagConstraints();
 
