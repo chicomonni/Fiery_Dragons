@@ -18,6 +18,7 @@ public class DisplayManager {
     private final SettingsDisplay settingsDisplay;
     private final LoadDisplay loadDisplay;
     private final GameDisplay gameDisplay;
+    private final WinnerDisplay winnerDisplay;
     private VolcanoDisplay volcanoDisplay;
     private PlayerDisplay playerDisplay;
     private ChitCardDisplay cardDisplay;
