@@ -186,7 +186,6 @@ public class FieryDragons implements Serializable{
             }
         }
         try {
-            System.out.println(this.getBoard());
             FileOutputStream fileOut = new FileOutputStream("saves/"+saveName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
