@@ -91,7 +91,6 @@ public class GameDisplay {
     private void initialiseChitCardDisplay(Container container) {
         GridBagConstraints constraints = new GridBagConstraints();
 
-//        TODO: possibly remove 20
         constraints.insets = new Insets(GameWindow.PADDING, GameWindow.PADDING / 2, 0, GameWindow.PADDING);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 1;

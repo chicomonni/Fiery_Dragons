@@ -2,7 +2,6 @@ package game.displays;
 
 import javax.swing.*;
 
-import game.FieryDragons;
 import game.Player;
 
 import java.awt.*;
