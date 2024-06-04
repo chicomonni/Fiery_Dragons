@@ -7,15 +7,15 @@ import game.Player;
  * Class used to display the winner of the game
  */
 public class WinnerDisplay {
-    
     private final JLabel winnerPane;
+
     /**
      * Constructor
      *
-     * @param gameWindow the GameWindow instance this class affects
+     * @param gameDisplay the GameDisplay instance this class affects
      */
-    public WinnerDisplay(GameWindow gameWindow) {
-        winnerPane = gameWindow.getWinnerDisplay();
+    public WinnerDisplay(GameDisplay gameDisplay) {
+        winnerPane = gameDisplay.getWinnerDisplay();
     }
 
     /**

@@ -27,13 +27,13 @@ public class PlayerDisplay {
     /**
      * Constructor
      *
-     * @param players    the array of players in the game
-     * @param volcano    the Volcano instance used by the game
-     * @param gameWindow the GameWindow instance this class affects
+     * @param players     the array of players in the game
+     * @param volcano     the Volcano instance used by the game
+     * @param gameDisplay the GameDisplay instance this class affects
      */
-    public PlayerDisplay(Player[] players, Volcano volcano, GameWindow gameWindow) {
+    public PlayerDisplay(Player[] players, Volcano volcano, GameDisplay gameDisplay) {
         this.volcano = volcano;
-        this.volcanoContainer = gameWindow.getVolcanoComponent();
+        this.volcanoContainer = gameDisplay.getVolcanoComponent();
 
         for (Player player : players) {
             update(player);
@@ -68,7 +68,9 @@ public class PlayerDisplay {
         if (playerPlane == null) {
             playerPlane = new JTextArea();
 
-            playerPlane.setBounds(0, 0, volcanoContainer.getWidth(), volcanoContainer.getHeight());
+            Dimension size = volcanoContainer.getPreferredSize();
+
+            playerPlane.setBounds(0, 0, size.width, size.height);
             playerPlane.setEditable(false);
             playerPlane.setOpaque(false);
             playerPlane.setForeground(player.getColour());

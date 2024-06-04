@@ -18,7 +18,7 @@ public class Chit implements Serializable {
      * Constructor used by ChitFactory
      *
      * @param displayChar   the single character representation of the chit, for the Volcano
-     * @param name          the name of this Chit, for the GameWindow
+     * @param name          the name of this Chit, for the GameDisplay
      * @param displayDetail the detailed representation of the chit, for the Caves
      * @param displayCard   the card representation of the chit, for the ChitCards
      * @param strategy      the ChitStrategy which controls the behaviour of the Chit (e.g. moves Player backwards)
@@ -43,9 +43,10 @@ public class Chit implements Serializable {
     }
 
     /**
-     * Used to check if Chit on card matches given Chit
+     * Used to check if Chit on card matches given Chit.
+     *
      * @param other the Chit this is being compared to
-     * @return
+     * @return {@code true} if Chits are the same, {@code false} otherwise
      */
     public boolean directValidate(Chit other) {
         return this == other;
@@ -110,4 +111,5 @@ public class Chit implements Serializable {
     public String getName() {
         return name;
     }
+
 }

@@ -87,4 +87,8 @@ public class ChitFactory implements Serializable {
 
         return chits.get(c);
     }
+
+    public Chit[] getAll() {
+        return chits.values().toArray(Chit[]::new);
+    }
 }

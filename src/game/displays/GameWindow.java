@@ -1,168 +1,161 @@
 package game.displays;
 
-import game.FieryDragons;
-
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
 /**
- * The Fiery Dragon game window
+ * The GameWindow class is responsible for creating and managing the main game window,
+ * including the customization of buttons and checkboxes used in the game interface.
  */
 public class GameWindow {
     public static final float ASCII_FONT_SIZE = 8f;
-    public static final float FOOTER_FONT_SIZE = 16f;
+    public static final float TITLE_FONT_SIZE = 32f;
+    public static final float HEADING_FONT_SIZE = 18f;
+    public static final float BODY_FONT_SIZE = 16f;
+
     public static final int PADDING = 6;
     private static final String GAME_NAME = "Fiery Dragons";
     private static final String FONT_PATH = "/MxPlus_IBM_BIOS.ttf";
-    private final JLayeredPane volcano = new JLayeredPane();
-    private final JPanel chitCards = new JPanel();
-    private final JPanel footer = new JPanel();
     private final JFrame window = new JFrame(GAME_NAME);
-    private final JLabel winner = new JLabel();
+
+    Font font = Font.createFont(
+            Font.TRUETYPE_FONT,
+            Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
+    );
 
     /**
-     * Constructor
-     */
-    public GameWindow() {
-        try {
-            initialise();
-        } catch (IOException | FontFormatException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Method to initialise window and its contents
+     * Constructor for GameWindow.
      *
-     * @throws IOException         if font file cannot be accessed
-     * @throws FontFormatException if font file doesn't contain correct data
+     * @throws IOException         if the font file cannot be read
+     * @throws FontFormatException if the font format is incorrect
      */
-    private void initialise() throws IOException, FontFormatException {
-        Font font = Font.createFont(
-                Font.TRUETYPE_FONT,
-                Objects.requireNonNull(getClass().getResourceAsStream(FONT_PATH))
-        );
-        // TODO: remove colours used for testing
+    public GameWindow() throws IOException, FontFormatException {
         // Adjust default font on text components
-        UIManager.put("TextArea.font", font.deriveFont(ASCII_FONT_SIZE));
-        UIManager.put("TextField.font", font.deriveFont(FOOTER_FONT_SIZE));
+        UIManager.put("TextArea.font", font.deriveFont(GameWindow.ASCII_FONT_SIZE));
+        UIManager.put("TextField.font", font.deriveFont(GameWindow.BODY_FONT_SIZE));
 
-        // Configure the window container
-        Container container = window.getContentPane();
-        container.setLayout(new GridBagLayout());
-        container.setBackground(Color.BLACK);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-
-        // Configure and add the Volcano component to the window
-        constraints.insets = new Insets(PADDING, PADDING, 0, PADDING / 2);
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-
-        // Initialise container for the Volcano and add the component to the window
-        volcano.setPreferredSize(new Dimension(
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE),
-                (int) (FieryDragons.VOLCANO_SIZE * ASCII_FONT_SIZE)
-        ));
-        container.add(volcano, constraints);
-
-        constraints.insets = new Insets(PADDING, PADDING / 2, 0, PADDING + 20);
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-
-        // Initialise container for the Chit Cards and add the component to the window
-        chitCards.setOpaque(false);
-        chitCards.setPreferredSize(new Dimension(
-                (int) (FieryDragons.CARD_WIDTH * ASCII_FONT_SIZE * 4 + PADDING * 5 + 14), // extra padding required for windows
-                (int) (FieryDragons.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 4 + GameWindow.PADDING * 5)
-        ));
-        chitCards.setLayout(new GridBagLayout());
-        container.add(chitCards, constraints);
-
-        // Add a separator panel
-        constraints.insets = new Insets(PADDING, 4 * PADDING, PADDING, 4 * PADDING);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
-
-        JPanel separator = new JPanel();
-        separator.setPreferredSize(new Dimension(0, PADDING / 2));
-        container.add(separator, constraints);
-
-        constraints.insets = new Insets(0, 4 * PADDING, PADDING, 4 * PADDING);
-        constraints.gridy = 2;
-
-        // Initialise container for the input and add the component to the window
-        footer.setOpaque(false);
-        footer.setBackground(Color.RED);
-        footer.setLayout(new GridBagLayout());
-        footer.setPreferredSize(new Dimension(1, (int) (FOOTER_FONT_SIZE * 3 + PADDING)));
-        container.add(footer, constraints);
-
-        // Initialise and configure the winner label
-        winner.setFont(font.deriveFont(FOOTER_FONT_SIZE)); // Use the same font
-        winner.setHorizontalAlignment(JLabel.CENTER); // Center the text
-        winner.setBounds(50, 50, 200, 50);
-
-        // Finalize window setup
         window.pack();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
     }
 
     /**
-     * Getter for the swing component that displays the Volcano
+     * Returns the main game frame.
      *
-     * @return swing component that displays the Volcano
+     * @return the JFrame of the main game window
      */
-    public JLayeredPane getVolcanoComponent() {
-        return volcano;
+    public JFrame getFrame() {
+        return window;
     }
 
     /**
-     * Getter for the swing component that displays the ChitCards
+     * Closes the game window.
+     */
+    public void closeWindow() {
+        window.dispose();
+    }
+
+    /**
+     * Returns the font used in the game.
      *
-     * @return swing component that displays the ChitCards
+     * @return the Font used in the game
      */
-    public JPanel getChitCardsComponent() {
-        return chitCards;
+    public Font getFont() {
+        return font;
     }
 
     /**
-     * Getter for the swing component that holds the input field
+     * Customizes a JButton with the specified font size and appearance settings.
      *
-     * @return swing component that holds the input field
+     * @param button   the JButton to be customized
+     * @param fontSize the font size for the button text
      */
-    public JPanel getFooter() {
-        return footer;
+    public void customiseButton(JButton button, float fontSize) {
+        int padding = 15;
+        button.setFont(font.deriveFont(fontSize));
+        button.setForeground(Color.WHITE);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Border emptyBorder = BorderFactory.createEmptyBorder(padding, padding, padding, padding);
+        button.setBorder(emptyBorder);
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                int thickness = 3;
+                int rem_padding = padding - thickness;
+                Border lineBorder = BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(Color.WHITE, thickness, false),
+                        BorderFactory.createEmptyBorder(rem_padding, rem_padding, rem_padding, rem_padding)
+                );
+                button.setBorder(lineBorder);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                button.setBorder(emptyBorder);
+            }
+        });
     }
 
     /**
-     * Getter for the winner JLabel
+     * Customizes a JCheckBox with the specified font size and appearance settings.
      *
-     * @return the winner JLabel
+     * @param checkbox the JCheckBox to be customized
+     * @param fontSize the font size for the checkbox text
      */
-    public JLabel getWinnerDisplay() {
-        return winner;
+    public void customiseCheckbox(JCheckBox checkbox, float fontSize) {
+        checkbox.setFont(font.deriveFont(fontSize));
+        checkbox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        checkbox.setForeground(Color.WHITE);
+        checkbox.setIcon(createCheckboxIcon(false, fontSize));
+        checkbox.setSelectedIcon(createCheckboxIcon(true, fontSize));
     }
 
     /**
-     * Method to display the winner of the game
+     * Creates an Icon for a checkbox with a custom appearance.
+     *
+     * @param selected  true if the checkbox is selected, false otherwise
+     * @param font_size the font size of the checkbox
+     * @return the customized Icon for the checkbox
      */
-    public void showWinnerLabel() {
-        Container container = window.getContentPane();
-        // Remove all components from the container and add the winner label
-        container.removeAll();
-        container.add(winner);
+    private Icon createCheckboxIcon(boolean selected, float font_size) {
+        return new Icon() {
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics g2 = g.create();
 
-        // Revalidate and repaint the container
-        container.revalidate();
-        container.repaint();
+                g2.setColor(Color.WHITE);
+                g2.setFont(font.deriveFont(font_size));
+
+                if (selected) {
+                    // -2 for visual adjustment
+                    g2.drawString("[X]", x, (int) (y + font_size - 2));
+                } else {
+                    g2.drawString("[ ]", x, (int) (y + font_size - 2));
+                }
+
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return (int) (font_size * 3);
+            }
+
+            @Override
+            public int getIconHeight() {
+                return (int) font_size - 2;
+            }
+        };
     }
+
 }

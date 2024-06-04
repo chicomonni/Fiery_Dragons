@@ -11,12 +11,16 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.KeyException;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Class representing Fiery Dragon Board
+ * The Board class represents the game board for Fiery Dragons.
+ * It handles the creation of the volcano and chit cards on the board.
  */
 public class Board implements Serializable {
     private final Volcano volcano;
@@ -27,10 +31,13 @@ public class Board implements Serializable {
      *
      * @param path path to file containing the ASCII Volcano
      */
-    public Board(String path) {
-        InputStream inputStream = Objects.requireNonNull(getClass().getResourceAsStream(path));
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        List<String> lines = bufferedReader.lines().toList();
+    public Board(Path path) {
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         char[][] chars = new char[lines.size()][];
 

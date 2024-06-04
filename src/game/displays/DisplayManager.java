@@ -1,34 +1,57 @@
 package game.displays;
 
 import game.Board;
+import game.FieryDragons;
 import game.Player;
 import game.chitCards.ChitCard;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 /**
  * A Facade for interacting with the game Displays and Window
  */
 public class DisplayManager {
-    private final GameWindow gameWindow;
-    private final VolcanoDisplay volcanoDisplay;
-    private final PlayerDisplay playerDisplay;
-    private final ChitCardDisplay cardDisplay;
-    private final InputDisplay inputDisplay;
-    private final WinnerDisplay winnerDisplay;
+    private final GameWindow window;
+
+    private final TitleDisplay titleDisplay;
+    private final SettingsDisplay settingsDisplay;
+    private final GameDisplay gameDisplay;
+    private VolcanoDisplay volcanoDisplay;
+    private PlayerDisplay playerDisplay;
+    private ChitCardDisplay cardDisplay;
+    private InputDisplay inputDisplay;
+    private WinnerDisplay winnerDisplay;
 
     /**
-     * Constructor for the DisplayManager.
+     * Constructor.
      *
-     * @param gameWindow the GameWindow instance controlled by the DisplayManager
-     * @param board      the Board instance representing the game board
-     * @param players    an array of Player instances representing the players in the game
+     * @param fieryDragons the FieryDragons instance representing the game
+     * @param window       the GameWindow instance representing the game window
+     * @throws IOException         if there is an error accessing the font file
+     * @throws FontFormatException if the font file does not contain valid data
      */
-    public DisplayManager(GameWindow gameWindow, Board board, Player[] players) {
-        this.gameWindow = gameWindow;
-        this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameWindow);
-        this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameWindow);
-        this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameWindow);
-        this.inputDisplay = new InputDisplay(gameWindow);
-        this.winnerDisplay = new WinnerDisplay(gameWindow);
+    public DisplayManager(FieryDragons fieryDragons, GameWindow window) throws IOException, FontFormatException {
+        this.window = window;
+        this.titleDisplay = new TitleDisplay(fieryDragons, this, window);
+        this.settingsDisplay = new SettingsDisplay(fieryDragons, this, window);
+        this.gameDisplay = new GameDisplay(window);
+    }
+
+    /**
+     * Creates the game components and initializes their displays.
+     *
+     * @param window  the GameWindow instance
+     * @param board   the Board instance
+     * @param players an array of Player instances
+     */
+    public void createGameComponents(GameWindow window, Board board, Player[] players) {
+        this.volcanoDisplay = new VolcanoDisplay(board.getVolcano(), gameDisplay);
+        this.playerDisplay = new PlayerDisplay(players, board.getVolcano(), gameDisplay);
+        this.cardDisplay = new ChitCardDisplay(board.getChitCards(), gameDisplay);
+        this.inputDisplay = new InputDisplay(gameDisplay);
+        this.winnerDisplay = new WinnerDisplay(gameDisplay);
     }
 
     /**
@@ -80,10 +103,45 @@ public class DisplayManager {
 
     /**
      * Displays the winner of the game.
+     *
      * @param player the Player who has won the game
      */
     public void displayWin(Player player) {
         winnerDisplay.displayWinner(player);
-        gameWindow.showWinnerLabel();
+        gameDisplay.showWinnerLabel(window.getFrame());
     }
+
+    /**
+     * Displays the title screen.
+     *
+     * @param frame the JFrame representing the game window
+     */
+    public void displayTitleScreen(JFrame frame) {
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        titleDisplay.showScreen(frame);
+    }
+
+    /**
+     * Displays the game screen.
+     *
+     * @param frame the JFrame representing the game window
+     */
+    public void displayGameScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        settingsDisplay.hideScreen(frame);
+        gameDisplay.showScreen(frame);
+    }
+
+    /**
+     * Displays the settings screen.
+     *
+     * @param frame the JFrame representing the game window
+     */
+    public void displaySettingsScreen(JFrame frame) {
+        titleDisplay.hideScreen(frame);
+        gameDisplay.hideScreen(frame);
+        settingsDisplay.showScreen(frame);
+    }
+
 }

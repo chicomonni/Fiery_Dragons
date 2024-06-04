@@ -12,6 +12,11 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 public class Player implements Serializable {
+/**
+ * Player class represents a player in the game, managing their
+ * position, color, name, and associated game chit. It also handles
+ * the player's turn actions within the game.
+ */
     private final Color colour;
     private final char displayChar = '@';
     private final String name;
@@ -22,9 +27,10 @@ public class Player implements Serializable {
 
     /**
      * Constructor
-     * @param name      the name of the player
-     * @param position  the starting position of the player
-     * @param hue       the hue of the player's colour
+     *
+     * @param name     the name of the player
+     * @param position the starting position of the player
+     * @param hue      the hue of the player's colour
      */
     public Player(String name, GameTile position, float hue) {
         this.name = name;
@@ -114,8 +120,6 @@ public class Player implements Serializable {
      * @param display the display manager handling game displays
      */
     public void playTurn(GameAction action, Board board, DisplayManager display) {
-        //create a timer with delay between characters
-        //for fun :))
         if (playTurnTimer != null && playTurnTimer.isRunning()) {
             playTurnTimer.stop();
         }
@@ -124,7 +128,6 @@ public class Player implements Serializable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //stop timer once whole string is printed
                 if (currentAction == null) {
                     ((Timer) e.getSource()).stop();
                     return;
@@ -136,7 +139,6 @@ public class Player implements Serializable {
 
         //start the timer
         playTurnTimer.start();
-
     }
 
     /**
