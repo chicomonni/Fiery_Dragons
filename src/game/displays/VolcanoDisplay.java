@@ -25,15 +25,16 @@ public class VolcanoDisplay {
     /**
      * Constructor
      *
-     * @param volcano    the Volcano instance used by the game
+     * @param volcano     the Volcano instance used by the game
      * @param gameDisplay the GameDisplay instance this class affects
      */
     public VolcanoDisplay(Volcano volcano, GameDisplay gameDisplay) {
         this.volcano = volcano;
         this.volcanoContainer = gameDisplay.getVolcanoComponent();
 
-        initialiseComponent(volcanoPane, volcanoContainer.getWidth(), volcanoContainer.getHeight());
+        initialiseComponent(volcanoPane, volcanoContainer.getPreferredSize());
         volcanoPane.setText(getVolcanoForDisplay());
+
         volcanoContainer.add(volcanoPane, Integer.valueOf(volcanoContainer.highestLayer() + 1));
     }
 
@@ -56,11 +57,10 @@ public class VolcanoDisplay {
      * Initialize the display component with specified width and height.
      *
      * @param textArea the JTextArea to be initialised
-     * @param width    the width of the component
-     * @param height   the height of the component
+     * @param size     the size of the component
      */
-    private void initialiseComponent(JTextArea textArea, int width, int height) {
-        textArea.setBounds(0, 0, width, height);
+    private void initialiseComponent(JTextArea textArea, Dimension size) {
+        textArea.setBounds(0, 0, size.width, size.height);
         textArea.setEditable(false);
         textArea.setOpaque(false);
         textArea.setForeground(Color.WHITE);
@@ -126,11 +126,14 @@ public class VolcanoDisplay {
         }
 
         JTextArea textArea = new JTextArea();
-        initialiseComponent(textArea, volcanoPane.getWidth(), volcanoPane.getHeight());
+        initialiseComponent(textArea, volcanoContainer.getPreferredSize());
         textArea.setText(ASCIItoString(chars));
         textArea.setForeground(cave.getColour());
 
         volcanoContainer.add(textArea, Integer.valueOf(volcanoContainer.highestLayer() + 1));
+
+        volcanoContainer.revalidate();
+        volcanoContainer.repaint();
     }
 
     /**
