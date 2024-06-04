@@ -49,11 +49,7 @@ public class TitleDisplay {
         titleScreen.setBackground(Color.BLACK);
 
         // Initialize and configure the logo label
-        logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
-        logo.setEditable(false);
-        logo.setBackground(Color.BLACK);
-        logo.setForeground(Color.WHITE);
-        logo.setText(readTitleDisplay());
+        initialiseLogo(window);
 
         separator.setPreferredSize(new Dimension(0, GameWindow.PADDING / 2));
         separator.setBackground(Color.WHITE);
@@ -90,6 +86,14 @@ public class TitleDisplay {
         titleScreen.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.getContentPane().add(titleScreen);
+    }
+
+    private void initialiseLogo(GameWindow window) throws IOException {
+         logo.setFont(window.getFont().deriveFont(GameWindow.ASCII_FONT_SIZE));
+         logo.setEditable(false);
+         logo.setBackground(Color.BLACK);
+         logo.setForeground(Color.WHITE);
+         logo.setText(readTitleDisplay());
     }
 
     /**
