@@ -11,6 +11,7 @@ import game.tiles.Cave;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -27,9 +28,10 @@ public class FieryDragons {
     public static final int VOLCANO_SIZE = 2 * (OUTER_RADIUS + CAVE_OFFSET + CAVE_RADIUS) + 1;
     public static final int CARD_WIDTH = 11;
     public static final int CARD_HEIGHT = 16;
+    public static final Path VOLCANO_PATH = Paths.get("config/volcano.txt").toAbsolutePath();
     private static final char[] passive_chits = new char[]{'w', '0', 'S', '*', 'f', '3', '9', 'a'};
     private static String squareSrc = "S0w*SSw**w0*0S0*wS0w0S*w";
-    private static String cardSrc = "R1";
+    private static String cardSrc = "S1,S2,S3,w1,w2,w3,*1,*2,*3,01,02,03,P1,P1,P2,P2";
     private static String caveSrc = "S*w0";
     private static int NUM_PLAYERS = 4;
     private static Player[] players;
@@ -57,7 +59,7 @@ public class FieryDragons {
      * Creates the game board using predefined sources and the chit factory.
      */
     public void createBoard() {
-        board = new Board(Paths.get("assets/volcano.txt").toAbsolutePath());
+        board = new Board(VOLCANO_PATH);
         board.createBoard(squareSrc, caveSrc, cardSrc, chitFactory);
     }
 
@@ -109,16 +111,6 @@ public class FieryDragons {
         display.displayGameScreen(window.getFrame());
         display.createGameComponents(window, board, players);
 
-//        TODO: remove test
-        players[0].setPosition(board.getVolcano().getSquares().get(0));
-        display.displayMove(players[0]);
-
-        players[1].setPosition(board.getVolcano().getSquares().get(10));
-        display.displayMove(players[1]);
-
-        players[2].setPosition(board.getVolcano().getSquares().get(20));
-        display.displayMove(players[2]);
-
         players[0].startTurn(board, display);
     }
 
@@ -161,7 +153,7 @@ public class FieryDragons {
 
         //TODO: set others
         try {
-            new BoardGenerator(numSquares, numPlayers).make(Paths.get("assets/volcano.txt").toAbsolutePath());
+            new BoardGenerator(numSquares, numPlayers).make(VOLCANO_PATH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
