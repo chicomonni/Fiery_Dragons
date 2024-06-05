@@ -77,7 +77,7 @@ public class GameDisplay {
         constraints.gridy = 0;
 
         volcano.setPreferredSize(new Dimension(
-                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE + 35),
+                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE + 28),
                 (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
         ));
         container.add(volcano, constraints);
