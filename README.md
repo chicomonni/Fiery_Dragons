@@ -7,9 +7,7 @@
 - **Audrey Phommasone:** apho0008@student.monash.edu
 - **Jun Hao Ng:** jngg0122@student.monash.edu
 
-## Files for Sprint 3:
-
-* **Source Code:** /src
+* ## Files for Sprint 3:
 * **Class Diagram:** /docs/Sprint 3 Class Diagram.pdf
 * **Sprint 3 Documentation:** /docs/Sprint 3 Documentation.pdf
     - Contains:
@@ -19,6 +17,9 @@
         - Executable Build Instructions
         - Contributor Analytics
 
+## Files for Sprint 4:
+* **Source Code:** /src
+* **Class Diagram:** /docs/Sprint 4 Class Diagram.pdf
 - **Sprint 4 Documentation:** /docs/Sprint 4 Documentation.pdf
     - Contains:
         - Contributor Analytics
@@ -29,7 +30,7 @@
 
 ## Executable Information:
 
-* Compatible with MacOS and Windows
+* Compatible with MacOS
 * Should be run and created through IntelliJ
 * JDK version of 22 or above
 
