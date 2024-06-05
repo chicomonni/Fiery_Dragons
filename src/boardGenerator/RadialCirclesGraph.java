@@ -6,6 +6,9 @@ import static java.lang.Math.*;
 
 /**
  * Represents a graph of circles arranged radially around the origin, aligned to a number of segments
+ * <p>
+ * See <a href="https://www.desmos.com/calculator/eyjjjfsfnr">Fiery Dragons Game Board</a>
+ * for a visual representation of the board.
  */
 public class RadialCirclesGraph implements Graph {
     private final int numCircle;

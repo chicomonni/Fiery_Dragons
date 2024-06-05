@@ -2,6 +2,9 @@ package boardGenerator;
 
 /**
  * Represents a circle graph, centred at the origin
+ * <p>
+ * See <a href="https://www.desmos.com/calculator/eyjjjfsfnr">Fiery Dragons Game Board</a>
+ * for a visual representation of the board.
  */
 public class CircleGraph implements Graph {
     private final double radius;

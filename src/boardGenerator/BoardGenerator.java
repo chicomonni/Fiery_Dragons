@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * Generates a game board for Fiery Dragons.
+ * <p>
+ * See <a href="https://www.desmos.com/calculator/eyjjjfsfnr">Fiery Dragons Game Board</a>
+ * for a visual representation of the board.
  */
 public class BoardGenerator {
     public static final int INNER_RADIUS = 17;

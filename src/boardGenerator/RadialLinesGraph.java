@@ -6,6 +6,9 @@ import static java.lang.Math.*;
 
 /**
  * Represents a graph of radial lines, bounded by two radii
+ * <p>
+ * See <a href="https://www.desmos.com/calculator/eyjjjfsfnr">Fiery Dragons Game Board</a>
+ * for a visual representation of the board.
  */
 public class RadialLinesGraph implements Graph {
 
