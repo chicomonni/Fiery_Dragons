@@ -41,21 +41,6 @@ public class Player implements Serializable {
     }
 
     /**
-     * Constructor. Player's initial position is passed as a parameter.
-     *
-     * @param name     the name of the player
-     * @param cave     the player's cave
-     * @param position the starting position of the player
-     * @param hue      the hue of the player's colour
-     */
-    public Player(String name, Cave cave, GameTile position, float hue) {
-        this.name = name;
-        this.cave = cave;
-        this.position = position;
-        this.colour = new Color(Color.HSBtoRGB(hue, 1, 1));
-    }
-
-    /**
      * Get this Player's current position
      *
      * @return GameTile currently occupied by this Player
