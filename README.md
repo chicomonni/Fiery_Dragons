@@ -7,7 +7,7 @@
 - **Audrey Phommasone:** apho0008@student.monash.edu
 - **Jun Hao Ng:** jngg0122@student.monash.edu
 
-* ## Files for Sprint 3:
+## Files for Sprint 3:
 * **Class Diagram:** /docs/Sprint 3 Class Diagram.pdf
 * **Sprint 3 Documentation:** /docs/Sprint 3 Documentation.pdf
     - Contains:
