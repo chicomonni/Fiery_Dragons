@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Generates a game board for Fiery Dragons.
+ */
 public class BoardGenerator {
     public static final int INNER_RADIUS = 17;
     public static final int OUTER_RADIUS = 25;
@@ -21,6 +24,12 @@ public class BoardGenerator {
     private final RadialLinesGraph sqaures;
 
 
+    /**
+     * Constructor for BoardGenerator.
+     *
+     * @param numSquare the number of squares to generate
+     * @param numCave   the number of caves to generate
+     */
     public BoardGenerator(int numSquare, int numCave) {
         this.innerCircle = new CircleGraph(INNER_RADIUS);
         this.outerCircle = new CircleGraph(OUTER_RADIUS);
@@ -28,7 +37,14 @@ public class BoardGenerator {
         this.caves = new RadialCirclesGraph(CAVE_RADIUS, OUTER_RADIUS + CAVE_PADDING, numCave, numSquare);
     }
 
+    /**
+     * Generates a game board and saves it to a file.
+     *
+     * @param fileName the file to save the game board to
+     * @throws IOException if the file cannot be created
+     */
     public void make(Path fileName) throws IOException {
+        // Combine the sub-graphs into a single graph
         Graph board = (x, y) -> {
             List<Graph> gameBoard = new ArrayList<>(Arrays.asList(innerCircle, outerCircle, sqaures, caves));
 
@@ -40,7 +56,10 @@ public class BoardGenerator {
             return false;
         };
 
-        String outS = ASCIIGaussianBlur.graphToASCII(board, VOLCANO_SIZE, VOLCANO_SIZE, 2);
+        // Convert the graph to ASCII and save it to a file
+        int sDev = 2;
+        String outS = ASCIIGaussianBlur.graphToASCII(board, VOLCANO_SIZE, VOLCANO_SIZE, sDev);
+
         File file = new File(String.valueOf(fileName));
         file.getParentFile().mkdirs();
         file.createNewFile();
