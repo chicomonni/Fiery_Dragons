@@ -33,7 +33,7 @@ public class ChitCardDisplay {
         int width = (int) ceil((double) cardArray.length() / height);
 
         cardPane.setPreferredSize(new Dimension(
-                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * (width) + 7),
+                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * (width) + 35),
                 (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * height)
         ));
         cardPane.setOpaque(false);

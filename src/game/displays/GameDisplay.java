@@ -77,7 +77,7 @@ public class GameDisplay {
         constraints.gridy = 0;
 
         volcano.setPreferredSize(new Dimension(
-                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE),
+                (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE + 35),
                 (int) (BoardGenerator.VOLCANO_SIZE * GameWindow.ASCII_FONT_SIZE)
         ));
         container.add(volcano, constraints);
@@ -98,7 +98,7 @@ public class GameDisplay {
 
         chitCards.setOpaque(false);
         chitCards.setPreferredSize(new Dimension(
-                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 7 + 7),
+                (int) (ChitCard.CARD_WIDTH * GameWindow.ASCII_FONT_SIZE * 7 + 35),
                 (int) (ChitCard.CARD_HEIGHT * GameWindow.ASCII_FONT_SIZE * 5)
         ));
         chitCards.setLayout(new GridBagLayout());
