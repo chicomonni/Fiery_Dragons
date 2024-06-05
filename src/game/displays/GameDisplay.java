@@ -71,7 +71,7 @@ public class GameDisplay {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Configure constraints
-        constraints.insets = new Insets(GameWindow.PADDING, GameWindow.PADDING, 0, GameWindow.PADDING / 2);
+        constraints.insets = new Insets(GameWindow.PADDING, 0, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -91,7 +91,7 @@ public class GameDisplay {
     private void initialiseChitCardDisplay(Container container) {
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.insets = new Insets(GameWindow.PADDING, GameWindow.PADDING / 2, 0, GameWindow.PADDING);
+        constraints.insets = new Insets(GameWindow.PADDING, 0, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 1;
         constraints.gridy = 0;
