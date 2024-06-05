@@ -32,6 +32,10 @@
     * 'w' represents the Bat
     * '*' represents the Spider
     * '0' represents the Baby Dragon
+    * 'f' represents the Flamingo
+    * '3' represents the Seahorse
+    * '9' represents the Pig
+    * 'a' represents the Cat
 * Turns are entered into the blank space following the '>'
     * After the prompt is printed, refrain from clicking elsewhere on the screen, so that when you begin typing it will
       start inputting into the field
