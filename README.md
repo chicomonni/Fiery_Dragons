@@ -49,6 +49,11 @@
     * After the prompt is printed, refrain from clicking elsewhere on the screen, so that when you begin typing it will
       start inputting into the field
 
+
+- To pick a chit card enter: 1 - number of chit cards
+- To end your turn enter: x or X
+- To save the game file enter: s or S
+
 ## Video Demonstration Link
 
 * https://monash.au.panopto.com/Panopto/Pages/Viewer.aspx?id=ea3b90fb-4066-41db-a99c-b17600cca57c
