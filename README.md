@@ -19,7 +19,7 @@
 
 ## Files for Sprint 4:
 * **Source Code:** /src
-* **Class Diagram:** /docs/Sprint 4 Class Diagram.pdf
+- **Class Diagram:** /docs/Sprint 4 Class Diagram.pdf
 - **Sprint 4 Documentation:** /docs/Sprint 4 Documentation.pdf
     - Contains:
         - Contributor Analytics
