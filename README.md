@@ -19,6 +19,14 @@
         - Executable Build Instructions
         - Contributor Analytics
 
+- **Sprint 4 Documentation:** /docs/Sprint 4 Documentation.pdf
+    - Contains:
+        - Contributor Analytics
+        - Sprint 3 Reflection
+            - Extension Analytics
+        - Class Diagram
+        - Executable Build Instructions
+
 ## Executable Information:
 
 * Compatible with MacOS and Windows
