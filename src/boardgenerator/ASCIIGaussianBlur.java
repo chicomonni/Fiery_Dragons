@@ -1,4 +1,4 @@
-package boardGenerator;
+package boardgenerator;
 
 import java.util.function.BiFunction;
 

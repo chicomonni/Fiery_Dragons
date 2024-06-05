@@ -1,6 +1,6 @@
 package game;
 
-import boardGenerator.BoardGenerator;
+import boardgenerator.BoardGenerator;
 import game.chits.ChitFactory;
 import game.chits.strategies.AnimalChitStrategy;
 import game.chits.strategies.PirateChitStrategy;

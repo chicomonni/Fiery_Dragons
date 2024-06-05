@@ -1,4 +1,4 @@
-package boardGenerator;
+package boardgenerator;
 
 import static java.lang.Math.round;
 

@@ -1,6 +1,6 @@
 package game.displays;
 
-import boardGenerator.BoardGenerator;
+import boardgenerator.BoardGenerator;
 import game.chitCards.ChitCard;
 
 import javax.swing.*;

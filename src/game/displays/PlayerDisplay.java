@@ -1,6 +1,6 @@
 package game.displays;
 
-import boardGenerator.BoardGenerator;
+import boardgenerator.BoardGenerator;
 import game.Player;
 import game.tiles.Cave;
 import game.tiles.GameTile;

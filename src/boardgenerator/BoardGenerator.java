@@ -1,4 +1,4 @@
-package boardGenerator;
+package boardgenerator;
 
 import java.io.File;
 import java.io.FileWriter;

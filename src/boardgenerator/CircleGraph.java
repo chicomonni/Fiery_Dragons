@@ -1,4 +1,4 @@
-package boardGenerator;
+package boardgenerator;
 
 /**
  * Represents a circle graph, centred at the origin
