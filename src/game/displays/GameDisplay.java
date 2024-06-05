@@ -48,7 +48,7 @@ public class GameDisplay {
         container.setLayout(new GridBagLayout());
         container.setBackground(Color.BLACK);
 
-        initaliseVolcanoDisplay(container);
+        initialiseVolcanoDisplay(container);
 
         initialiseChitCardDisplay(container);
 
@@ -67,7 +67,7 @@ public class GameDisplay {
      *
      * @param container the container to add the volcano to
      */
-    private void initaliseVolcanoDisplay(Container container) {
+    private void initialiseVolcanoDisplay(Container container) {
         GridBagConstraints constraints = new GridBagConstraints();
 
         // Configure constraints
